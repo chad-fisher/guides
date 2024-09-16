@@ -1,0 +1,1123 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fast for loops and parallel processing &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'r/04_ParallelProcessingR';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/r/04_ParallelProcessingR.html" />
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="High Performance Computing (HPC) Cluster" href="../hpc/index.html" />
+    <link rel="prev" title="Survey analysis in R" href="03_IntermediateR_2020.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro-r.html">Introduction to R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_r-data-viz-test.html">Data Manipulation and Visualization</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="03_IntermediateR_2020.html">Survey analysis in R</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fast for loops and parallel processing</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">R</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">Fast for loops and...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fast-for-loops-and-parallel-processing">
+<h1>Fast for loops and parallel processing<a class="headerlink" href="#fast-for-loops-and-parallel-processing" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>author: “Kyle Monahan</p></li>
+</ul>
+<p>You may have had the experience of waiting too long for a process to run during your R session. One way that you might have run into this is in for loop. In this walk-through, we will discuss how to speed up for loops in R.</p>
+<p>We will use the following libraries:</p>
+<ul class="simple">
+<li><p>parallel - the base parallel library</p></li>
+<li><p>doParallel - a foreach library</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">parallel</span><span class="p">)</span><span class="w">   </span><span class="c1"># Base parallel library in R, good for general use but not foreach loops. Must worry about exporting the environment from the parallel function, which can be annoying.</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">doParallel</span><span class="p">)</span><span class="w"> </span><span class="c1"># External package, good for foreach and complex loops. Don&#39;t need to worry about exporting the environment, it does it for you. </span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">foreach</span><span class="p">)</span><span class="w">  </span><span class="c1"># Needed for foreach loops</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">parallelly</span><span class="p">)</span><span class="w"> </span><span class="c1"># Good for helper functions in parallel work </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">library</span><span class="p">(</span><span class="n">doParallel</span><span class="p">):</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">package</span> <span class="n">called</span> <span class="err">‘</span><span class="n">doParallel</span><span class="err">’</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">library</span><span class="p">(</span><span class="n">doParallel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="what-is-a-for-loop">
+<h2>What is a <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">loop</span></code>?<a class="headerlink" href="#what-is-a-for-loop" title="Link to this heading">#</a></h2>
+<p>First, let’s say a look at our first for loop. Let’s say we wanted to find the value of the number 1 to 10, and print the results.</p>
+<p>We could write a for loop:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">vector</span><span class="p">()</span><span class="w"> </span><span class="c1"># Create an empty vector, x, to store our results </span>
+<span class="w">              </span><span class="c1"># Note how this is outside the loop </span>
+<span class="nf">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">){</span><span class="w">       </span><span class="c1"># For each value, 1 to 10</span>
+<span class="w">  </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">     </span><span class="c1"># Find the square root, and place inside x</span>
+<span class="w">  </span><span class="p">}</span><span class="w">                   </span><span class="c1"># End loop</span>
+<span class="n">x</span><span class="w">                     </span><span class="c1"># Call x to see the result</span>
+
+<span class="c1"># TODO: Change a more useful example than a square root</span>
+<span class="c1"># TODO: Show race conditions as an example</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how this is appending to a list of values in memory, and then storing those values.</p>
+<p>Imagine if we had a large number of values, and a large number of loops - this could become quite inefficient.</p>
+<p>Additionally, by default, R will use only a <strong>single core</strong>. On my machine, a MacBook Pro 14, let’s see how many cores I have:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">parallel</span><span class="o">::</span><span class="nf">detectCores</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wow, so I have ten cores, but I have been using only one of them. Let’s fix this.</p>
+<p>What to do about it? Let’s start with a new package, <code class="docutils literal notranslate"><span class="pre">foreach</span></code>, to learn more about running things in parallel.</p>
+</section>
+<section id="what-about-for-each">
+<h2>What about <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">each</span></code>?<a class="headerlink" href="#what-about-for-each" title="Link to this heading">#</a></h2>
+<p>We could also implement this loop with <code class="docutils literal notranslate"><span class="pre">foreach</span></code>, to send these individual tasks to separate cores, and then obtain an immediate return of results.</p>
+<p>This is easier as we do not have to call <code class="docutils literal notranslate"><span class="pre">x</span></code> at the end, and this package can also parallelize beyond just a single core.</p>
+<p>However, to use this we have to use the <code class="docutils literal notranslate"><span class="pre">%do</span></code> operator. This is a binary operator that tells <code class="docutils literal notranslate"><span class="pre">foreach</span></code> what we want to run, and runs this sequentially on a single core. We will get into running this on many cores with another operator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">foreach</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">doParallel</span><span class="p">)</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">foreach</span><span class="o">::</span><span class="nf">foreach</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">%do%</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see that it returns separate objects in a list format. It would be nice if we could combine those into a single list.</p>
+<p>Good news, we can.</p>
+</section>
+<section id="combining-a-foreach-loop-into-a-single-list">
+<h2>Combining a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop into a single list<a class="headerlink" href="#combining-a-foreach-loop-into-a-single-list" title="Link to this heading">#</a></h2>
+<p>Within the <code class="docutils literal notranslate"><span class="pre">foreach</span></code> package, we can use the <code class="docutils literal notranslate"><span class="pre">.combine</span></code> argument to combine them using the <code class="docutils literal notranslate"><span class="pre">c()</span></code> base function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span>
+<span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">.combine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;c&#39;</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%do%</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great! This is the type of reports we want.</p>
+<p>So now we can try to run the same command across many cores. To do this, we can use the <code class="docutils literal notranslate"><span class="pre">%dopar</span></code> operator, which is shorthand for “do parallel.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span>
+<span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">.combine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;c&#39;</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%dopar%</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oh no, an error! This is because we need to tell R how many cores we have, and what type of method we want to use to organize and control those control. There are two main types:</p>
+<ul class="simple">
+<li><p>FORK:</p>
+<ul>
+<li><p>Only available via UNIX (Linux and Mac machine), and don’t work on the HPC environment due to the shared nature of the . The separate cores (here called workers) do not have to copy the main environment, and can access the environment in a shared way.</p></li>
+</ul>
+</li>
+<li><p>PSOCK:</p>
+<ul>
+<li><p>The parallel socket cluster (PSOCK) is available for UNIX and Windows systems, but the cores have to each have a copy of the main environment, which can reduce the effectiveness of the results (by about 50% in some cases).</p></li>
+</ul>
+</li>
+</ul>
+<p>Let’s register a <strong>PSOCK cluster</strong>, so it will work anywhere you run it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register a parallel backend for the cluster</span>
+<span class="n">doParallel</span><span class="o">::</span><span class="nf">registerDoParallel</span><span class="p">((</span><span class="n">parallelly</span><span class="o">::</span><span class="nf">availableCores</span><span class="p">()</span><span class="m">-1</span><span class="p">))</span>
+
+<span class="n">parallelly</span><span class="o">::</span><span class="nf">availableCores</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#create the cluster</span>
+
+<span class="n">n.cores</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">parallelly</span><span class="o">::</span><span class="nf">availableCores</span><span class="p">()</span><span class="m">-1</span>
+
+<span class="n">my.cluster</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">parallel</span><span class="o">::</span><span class="nf">makeCluster</span><span class="p">(</span>
+<span class="w">  </span><span class="n">n.cores</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PSOCK&quot;</span>
+<span class="w">  </span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">my.cluster</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register the cluster to be used </span>
+<span class="n">doParallel</span><span class="o">::</span><span class="nf">registerDoParallel</span><span class="p">(</span><span class="n">cl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my.cluster</span><span class="p">)</span>
+
+<span class="c1"># Check if it is registered</span>
+<span class="n">foreach</span><span class="o">::</span><span class="nf">getDoParRegistered</span><span class="p">()</span><span class="w">   </span><span class="c1"># True, means it is registered</span>
+<span class="n">foreach</span><span class="o">::</span><span class="nf">getDoParWorkers</span><span class="p">()</span><span class="w">      </span><span class="c1"># Reporting the number of cores that we have</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can run the code in parallel, finally! Let’s compare the two.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start timer </span>
+<span class="n">t1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">proc.time</span><span class="p">()</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span>
+<span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">.combine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;c&#39;</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%dopar%</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">x</span>
+<span class="c1"># End timer</span>
+<span class="nf">proc.time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compare to the single core.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start timer </span>
+<span class="n">t1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">proc.time</span><span class="p">()</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span>
+<span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">.combine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;c&#39;</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%do%</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">x</span>
+<span class="c1"># End timer</span>
+<span class="nf">proc.time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s… the same time? Or perhaps a little slower! For all that work!</p>
+<p>Well, yes. It’s pretty easy to print 10 square root values, and we don’t really need the speed up.</p>
+<p>Let’s explore why it is slow.</p>
+</section>
+<section id="profiling-in-r">
+<h2>Profiling in R<a class="headerlink" href="#profiling-in-r" title="Link to this heading">#</a></h2>
+<p>Now we can profile in R. Let’s take a look.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start profile</span>
+<span class="nf">Rprof</span><span class="p">(</span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Profile1.out&quot;</span><span class="p">,</span><span class="n">line.profiling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">memory.profiling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span>
+<span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">.combine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;c&#39;</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%dopar%</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nf">Rprof</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summaryRprof</span><span class="p">(</span><span class="s">&quot;Profile1.out&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This normally will provide greater information, but for us it tells us this runs very quickly, and calls few functions. There are many libraries that help you profile code. You can even go to Profile &gt; Start profiling to do the same thing.</p>
+<p>Let’s use another package:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">profr</span><span class="p">)</span>
+<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">profr</span><span class="p">(</span>
+<span class="w">  </span>
+<span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span>
+<span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">.combine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;c&#39;</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%dopar%</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Still, we don’t know why this is slower. Let’s time and run through approaches 100 times, and then see which is faster after iteration.</p>
+<section id="comparing-approaches">
+<h3>Comparing approaches<a class="headerlink" href="#comparing-approaches" title="Link to this heading">#</a></h3>
+<p>Let’s compare a few approaches:</p>
+<ul class="simple">
+<li><p><strong>lapply</strong> - to create a vectorized list and loop over it</p></li>
+<li><p><strong>for loop</strong> - what we saw before, a classic for loop</p></li>
+<li><p><strong>foreach dopar</strong> - foreach loop, <code class="docutils literal notranslate"><span class="pre">%dopar%</span></code> to run in the parallel cluster</p></li>
+<li><p><strong>foreach do</strong> - foreach loop with <code class="docutils literal notranslate"><span class="pre">%do%</span></code> to run only on single core</p></li>
+<li><p><strong>parlapply</strong> - a parallel lapply function</p></li>
+<li><p><strong>parsapply</strong> - a parallel sapply function</p></li>
+</ul>
+<p>TODO: Let’s document and compare the above approaches more.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adapted from: https://liuy12.github.io/2015/08/18/Parallel-processing-in-R-benchmarking.html</span>
+<span class="c1"># Thanks to Yuanhang Liu!</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">rbenchmark</span><span class="p">)</span><span class="w"> </span><span class="c1"># We will benchmark with rbenchmark</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">    </span><span class="c1"># ploting with ggplot2 </span>
+
+
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+
+<span class="n">n.cores</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">parallelly</span><span class="o">::</span><span class="nf">availableCores</span><span class="p">()</span><span class="m">-1</span>
+
+
+<span class="n">cl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">makeCluster</span><span class="p">(</span><span class="n">n.cores</span><span class="p">)</span>
+<span class="nf">registerDoParallel</span><span class="p">(</span><span class="n">cl</span><span class="p">)</span>
+
+<span class="n">FUN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">test1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">benchmark</span><span class="p">(</span><span class="s">&quot;lapply&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FUN</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                   </span><span class="s">&quot;For loop&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">){</span><span class="w"> </span><span class="nf">FUN</span><span class="p">(</span><span class="n">i</span><span class="p">)},</span>
+<span class="w">                   </span><span class="s">&quot;Foreach dopar&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">%dopar%</span><span class="w"> </span><span class="nf">FUN</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+<span class="w">                   </span><span class="s">&quot;Foreach do&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">%do%</span><span class="w"> </span><span class="nf">FUN</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+<span class="w">                   </span><span class="s">&quot;parLapply&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">parLapply</span><span class="p">(</span><span class="n">cl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cl</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FUN</span><span class="p">),</span>
+<span class="w">                   </span><span class="s">&quot;parSapply&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">parSapply</span><span class="p">(</span><span class="n">cl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cl</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FUN</span><span class="p">),</span>
+<span class="w">                   </span><span class="n">columns</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;elapsed&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;replications&#39;</span><span class="p">),</span>
+<span class="w">                   </span><span class="n">replications</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="m">1000</span><span class="p">))</span>
+
+<span class="nf">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">replications</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elapsed</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It looks like for loops and lapply calls were the best here.</p>
+<p>It really depends on what you are doing, though. Remember, it depends on how fast you can get the data outside of the worker as well. Note how we are using a PSOCK loop as well.</p>
+<p>Let’s compare this approach to speeding up models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">FUN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">ind</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">replace</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="w">  </span><span class="n">result1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glm</span><span class="p">(</span><span class="n">Species</span><span class="o">~</span><span class="n">Sepal.Length</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">(</span><span class="n">logit</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iris</span><span class="p">[</span><span class="n">ind</span><span class="p">,])</span>
+<span class="w">  </span><span class="nf">coefficients</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">test5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">benchmark</span><span class="p">(</span><span class="s">&quot;lapply&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FUN</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                   </span><span class="s">&quot;For loop&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">){</span><span class="w"> </span><span class="nf">FUN</span><span class="p">(</span><span class="n">i</span><span class="p">)},</span>
+<span class="w">                   </span><span class="s">&quot;Foreach dopar&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">%dopar%</span><span class="w"> </span><span class="nf">FUN</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+<span class="w">                   </span><span class="s">&quot;Foreach do&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">foreach</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">%do%</span><span class="w"> </span><span class="nf">FUN</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+<span class="w">                   </span><span class="s">&quot;parLapply&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">parLapply</span><span class="p">(</span><span class="n">cl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cl</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FUN</span><span class="p">),</span>
+<span class="w">                   </span><span class="s">&quot;parSapply&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">parSapply</span><span class="p">(</span><span class="n">cl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cl</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FUN</span><span class="p">),</span>
+<span class="w">                   </span><span class="n">columns</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;elapsed&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;replications&#39;</span><span class="p">),</span>
+<span class="w">                   </span><span class="n">replications</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">))</span>
+
+<span class="nf">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">replications</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elapsed</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we see that  parLapply and parSapply were best, and foreach do did poorly.</p>
+</section>
+</section>
+<section id="stop-the-cluster">
+<h2>Stop the cluster<a class="headerlink" href="#stop-the-cluster" title="Link to this heading">#</a></h2>
+<p>Once you’re done, we must stop the cluster to release our cores for other users.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">parallel</span><span class="o">::</span><span class="nf">stopCluster</span><span class="p">(</span><span class="n">cl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my.cluster</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="testing-with-models">
+<h2>Testing with models<a class="headerlink" href="#testing-with-models" title="Link to this heading">#</a></h2>
+<p>Another approach to paralellization is for models. Packages such as <code class="docutils literal notranslate"><span class="pre">lme4</span></code> can be challenging to run on a single core due to computational intensity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1 Set seed for reproducible randomness</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+
+<span class="c1"># Start timer</span>
+<span class="n">ptm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">proc.time</span><span class="p">()</span>
+<span class="n">cake_model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lme4</span><span class="o">::</span><span class="nf">lmer</span><span class="p">(</span><span class="n">angle</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">recipe</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="o">|</span><span class="n">recipe</span><span class="o">:</span><span class="n">replicate</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lme4</span><span class="o">::</span><span class="n">cake</span><span class="p">,</span><span class="w"> </span><span class="n">REML</span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">proc.time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ptm</span><span class="w"> </span><span class="c1"># End timer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2 Create cluster </span>
+<span class="c1"># Register a parallel backend for the cluster</span>
+<span class="n">doParallel</span><span class="o">::</span><span class="nf">registerDoParallel</span><span class="p">((</span><span class="n">parallel</span><span class="o">::</span><span class="nf">detectCores</span><span class="p">()</span><span class="m">-1</span><span class="p">))</span>
+
+<span class="c1"># Start timer</span>
+<span class="n">ptm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">proc.time</span><span class="p">()</span>
+<span class="c1"># 3 Run the model</span>
+<span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lme4</span><span class="o">::</span><span class="nf">lmer</span><span class="p">(</span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cake_model</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">lme4</span><span class="o">::</span><span class="n">cake</span><span class="p">,</span><span class="n">control</span><span class="o">=</span><span class="n">lme4</span><span class="o">::</span><span class="nf">lmerControl</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s">&quot;nloptwrap&quot;</span><span class="p">))</span>
+<span class="nf">proc.time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ptm</span><span class="w"> </span><span class="c1"># End timer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4 Once you&#39;ve moved to lme4, you can pass the model to allFit to check if we really found the most optimal fit</span>
+<span class="c1"># This is where the parallel cluster is used</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">optimx</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">dfoptim</span><span class="p">)</span>
+<span class="n">nCPU</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">detectCores</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>
+<span class="n">ptm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">proc.time</span><span class="p">()</span>
+
+<span class="n">cake_fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lme4</span><span class="o">::</span><span class="nf">allFit</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lme4</span><span class="o">::</span><span class="n">cake</span><span class="p">,</span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="n">parallel</span><span class="o">=</span><span class="s">&#39;multicore&#39;</span><span class="p">,</span><span class="n">ncpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nCPU</span><span class="p">)</span>
+<span class="nf">proc.time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ptm</span><span class="w"> </span><span class="c1"># End timer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">cake_fit</span><span class="o">$</span><span class="n">bobyqa</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Then register a sequential (non-paralell) backend to release the cores</span>
+<span class="nf">registerDoSEQ</span><span class="p">()</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great! So we learned the following things:</p>
+<ul class="simple">
+<li><p>What does it mean when we say running something in parallel?</p></li>
+<li><p>Two ways to run in parallel: PSOCK and FORK</p></li>
+<li><p>The foreach loop, and comparing sequencial %do% and paralell %dopar%</p></li>
+<li><p>Sometimes parallelizing doesn’t help! (e.g. find 10 square roots, I/O bound processes). Other times, it does (e.g. large scale models, slow processes).</p></li>
+<li><p>We can try it out, and learn which method is best for each.</p></li>
+</ul>
+<p>Thank you!</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_IntermediateR_2020.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Survey analysis in R</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../hpc/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">High Performance Computing (HPC) Cluster</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-for-loop">What is a <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">loop</span></code>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-for-each">What about <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">each</span></code>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-a-foreach-loop-into-a-single-list">Combining a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop into a single list</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-in-r">Profiling in R</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-approaches">Comparing approaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-the-cluster">Stop the cluster</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-with-models">Testing with models</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/r/04_ParallelProcessingR.Rmd">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/r/04_ParallelProcessingR.Rmd.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

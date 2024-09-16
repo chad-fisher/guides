@@ -1,0 +1,1121 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Survey analysis in R &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'r/03_IntermediateR_2020';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/r/03_IntermediateR_2020.html" />
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Fast for loops and parallel processing" href="04_ParallelProcessingR.html" />
+    <link rel="prev" title="Data Manipulation and Visualization" href="02_r-data-viz-test.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro-r.html">Introduction to R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_r-data-viz-test.html">Data Manipulation and Visualization</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Survey analysis in R</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_ParallelProcessingR.html">Fast for loops and parallel processing</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">R</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">Survey analysis in R</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="survey-analysis-in-r">
+<h1>Survey analysis in R<a class="headerlink" href="#survey-analysis-in-r" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>author: Kyle Monahan</p></li>
+<li><p>date: April 2020</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="deep-dive-into-surveys-in-r">
+<h1>Deep Dive into Surveys in R<a class="headerlink" href="#deep-dive-into-surveys-in-r" title="Link to this heading">#</a></h1>
+<p>For this workshop, We will be working with the Demographic and Health Surveys (DHS) Children’s Data - Children’s Recode (KR) dataset.</p>
+<section id="background-on-the-data">
+<h2>Background on the data<a class="headerlink" href="#background-on-the-data" title="Link to this heading">#</a></h2>
+<p>This dataset has one record for every child of interviewed women, born in the five years preceding the survey. It contains the information related to the child’s pregnancy and postnatal care and immunization and health.</p>
+<p>The data for the mother of each of these children is included. This file is used to look at child health indicators such as immunization coverage, vitamin A supplementation, and recent occurrences of diarrhea, fever, and cough for young children and treatment of childhood diseases. The unit of analysis (case) in this file is the children of women born in the last 5 years (0-59 months).</p>
+<p>Each record is a <strong>row</strong> (observation), each <strong>column</strong> is a variable.</p>
+</section>
+<section id="applying-what-we-have-learned-explore-the-relationship-between-breastfeeding-among-children-12-23-month-old-and-wasting-weight-for-height-status">
+<h2>Applying what we have learned - Explore the Relationship Between Breastfeeding among Children 12-23 Month-Old and Wasting (Weight-for-Height) Status<a class="headerlink" href="#applying-what-we-have-learned-explore-the-relationship-between-breastfeeding-among-children-12-23-month-old-and-wasting-weight-for-height-status" title="Link to this heading">#</a></h2>
+</section>
+<section id="install-and-load-packages">
+<h2>Install and Load Packages<a class="headerlink" href="#install-and-load-packages" title="Link to this heading">#</a></h2>
+<p>In this part, we will explore the relationship between breastfeeding among children 12-23 months old and wasting (Weight-for-height). We will use a few different packages in this part of the tutorial. Packages add functionality to our R, so we have new functions to access. The general way to denote packages in R is: <code class="docutils literal notranslate"><span class="pre">package::function()</span></code>.</p>
+<p>The packages we will install and load are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> contains <a class="reference external" href="https://cran.r-project.org/web/packages/tidyverse/index.html">https://cran.r-project.org/web/packages/tidyverse/index.html</a> multiple packages in the tidyverse family, including packages used in this tutorial:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dplyr</span></code> for data manipulation/engineering and <code class="docutils literal notranslate"><span class="pre">ggplot</span></code> for data visualization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">haven</span></code> is used for importing and exporting data files,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">survey</span></code> is a package specifically designed for analyzing complex surveys.</p></li>
+</ul>
+<p>Installing packages is an important part of working in R. After install, we then load the package in R with <code class="docutils literal notranslate"><span class="pre">library(packagenamehere)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#Uncomment the line below if you have not installed these.</span>
+<span class="c1">#install.packages(c(&quot;tidyverse&quot;, &quot;haven&quot;, &quot;survey&quot;), repos = &quot;https://cloud.r-project.org&quot;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&quot;haven&quot;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="s">&quot;survey&quot;</span><span class="p">)</span>
+
+<span class="c1"># Note version conflict errors are common here - if you see these, you should use package::filter </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">library</span><span class="p">(</span><span class="s2">&quot;tidyverse&quot;</span><span class="p">):</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">package</span> <span class="n">called</span> <span class="err">‘</span><span class="n">tidyverse</span><span class="err">’</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">library</span><span class="p">(</span><span class="s2">&quot;tidyverse&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-science-pipelines-and-data-cleaning">
+<h2>Data science pipelines and data cleaning<a class="headerlink" href="#data-science-pipelines-and-data-cleaning" title="Link to this heading">#</a></h2>
+<p>The goal for this section is not just to go through an analysis of a survey in R, but rather to prepare you for creating data science “pipelines” to complete an analysis. In general, the workflow for the pipeline is:</p>
+<p>Import -&gt; Tidy -&gt; Understand (Transform &lt;-&gt; Visualize &lt;-&gt; Model) -&gt; Communicate</p>
+<p>We will next import data, clean (or tidy) those data, understand (analyze the survey), model our results, and leave it to you to communicate our results!</p>
+<p>To access these materials please reach out to <a class="reference external" href="mailto:DataLab-Support&#37;&#52;&#48;elist&#46;tufts&#46;edu">DataLab-Support<span>&#64;</span>elist<span>&#46;</span>tufts<span>&#46;</span>edu</a>.</p>
+</section>
+<section id="import-data">
+<h2>Import Data<a class="headerlink" href="#import-data" title="Link to this heading">#</a></h2>
+<p>Once we download the DHS Model Dataset “Children’s Data - Children’s Recode (KR)” from <a class="reference external" href="https://dhsprogram.com/data/Download-Model-Datasets.cfm?flag=1">https://dhsprogram.com/data/Download-Model-Datasets.cfm?flag=1</a>, we will import the data into R. This practice data set uses child as the unit of analysis.
+Note: we will download the Stata format (.DTA) from the website, but you can also download the SAS or SPSS formats and then import into R using the loaded pacakge <code class="docutils literal notranslate"><span class="pre">haven</span></code>.</p>
+</section>
+<section id="data-management">
+<h2>Data Management<a class="headerlink" href="#data-management" title="Link to this heading">#</a></h2>
+<p>Here we will create a subset of selected variables and observations suitable for exploring our research question.
+First, we limit the subset to observations of children aged <strong>between 12 and 23 month-old</strong> whose anthropometric measurements were taken in the model dataset based on hw1 (age of child) and hw13 (whether antropometric measurements taken).</p>
+<p>Then, we will limit the subset to the selected variable list below:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">caseid</span></code> identification number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">m4</span></code> <strong>Primary Independent Variable</strong>: Breastfeeding (93 Ever breastfed, not currently breastfeeding;94 Never breastfed; 95 Still breastfeeding; 97 Inconsistent; 98 Don’t know; 99 Missing) Note that +/- 99 / 999 / 9999 etc. are common missing data values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hw11</span></code>  <strong>Outcome of Interest</strong>: Weight/Height standard deviation (based on WHO growth standards). It needs to be divided by 100 to use as Weight-for-Height Z-scores (WHZ); 9998 should be excluded because it is code for “incosistent”. A WHZ score from -2 to -3 is an an indicator of moderate acute malnutrition and if it is below -3 it is an indicator of severe acute malutrition.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hw1</span></code>    Child’s age in months</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hw13</span></code> Result of measurement - Whether height/weight measurements were taken (0 = measured)</p></li>
+<li><p>A set of variables will be used to construct a new variable on complementary feeding based on reported consumption of appropriate complementary foods in the 24 hours preceding the interview:
+<code class="docutils literal notranslate"><span class="pre">v411</span></code> Gave child tinned, powdered or fresh milk
+<code class="docutils literal notranslate"><span class="pre">v412</span></code> Gave child fresh milk
+<code class="docutils literal notranslate"><span class="pre">v411a</span></code>Gave child baby formula
+<code class="docutils literal notranslate"><span class="pre">v412a</span></code>Gave child fortified baby food (cerelac, etc)
+<code class="docutils literal notranslate"><span class="pre">v414a</span></code>-<code class="docutils literal notranslate"><span class="pre">v414w</span></code>	Gave child complementary foods from a defined range of options including country-specific foods</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v190</span></code> household Wealth index (in quintiles from 1 poorest to 5 richest )</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v149</span></code> Educational attainment of mother (0-5 no education to higher than secondary)</p></li>
+<li><p>A set of variables will be used to construt a new variable on child morbidity based on reported cough, fever and diarrhea symptoms:
+<code class="docutils literal notranslate"><span class="pre">h31</span></code> cough within 2 weeks preceding the survey (0=no, 1=yes within 24 hours, 2= yes within 2 weeks, 8= don’t know)
+<code class="docutils literal notranslate"><span class="pre">h22</span></code> fever within 2 weeks preceding the survey (0=no, 1=yes, 8= don’t know)
+<code class="docutils literal notranslate"><span class="pre">h11</span></code> diarrhea within 2 weeks preceding the survey (1=yes within 24 hours, 2= yes within 2 weeks, 8= don’t know)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v005</span></code> sample weight used for this dataset to make sample data representative of the entire population. Like other variables in DHS datasets, decimal points are not included in the weight variable. We need to divide this variable by 1,000,000 to get the correct sampling weight.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">V021</span></code> primary sampling unit (PSU) for women and children</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v002</span></code> secondary sampling unit (SSU) for women and children</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v023</span></code> stratification variable used to design the sample</p></li>
+</ol>
+</section>
+<section id="note-on-pipes-and-plumbing">
+<h2>Note on pipes and plumbing<a class="headerlink" href="#note-on-pipes-and-plumbing" title="Link to this heading">#</a></h2>
+<p>We will also learn how to use pipe operators %&gt;% to do multiple steps of data manipulation in an efficient way! Pipe operators pass the value from one function to another, without having to explicity call the function!</p>
+<p>final_data &lt;- imported_data %&gt;%
+filter() %&gt;% #Select certain variables
+mutate() %&gt;% #Create a new variable</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">dhs_example</span><span class="o">&lt;-</span><span class="n">dhs_full</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="nf">between</span><span class="p">(</span><span class="n">hw1</span><span class="p">,</span><span class="m">12</span><span class="p">,</span><span class="m">23</span><span class="p">),</span><span class="w"> </span><span class="n">hw13</span><span class="o">==</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">hw11</span><span class="o">!=</span><span class="w"> </span><span class="m">9998</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">hw11</span><span class="p">),</span><span class="w"> </span>
+<span class="w">         </span><span class="n">m4</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">93</span><span class="p">,</span><span class="m">94</span><span class="p">,</span><span class="m">95</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">whz</span><span class="o">=</span><span class="w"> </span><span class="n">hw11</span><span class="o">/</span><span class="m">100</span><span class="p">,</span>
+<span class="w">         </span><span class="n">sample_weight</span><span class="o">=</span><span class="n">v005</span><span class="o">/</span><span class="m">1000000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">caseid</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="o">=</span><span class="n">hw1</span><span class="p">,</span><span class="n">whz</span><span class="p">,</span><span class="w"> </span><span class="n">breastfeed</span><span class="o">=</span><span class="n">m4</span><span class="p">,</span><span class="w"> </span><span class="n">v411</span><span class="p">,</span><span class="w"> </span><span class="n">v411a</span><span class="p">,</span><span class="w"> </span><span class="n">v412</span><span class="p">,</span><span class="w"> </span><span class="n">v412a</span><span class="p">,</span><span class="w"> </span>
+<span class="w">         </span><span class="nf">starts_with</span><span class="p">(</span><span class="s">&quot;v414&quot;</span><span class="p">),</span><span class="w">  </span><span class="n">wealth_index</span><span class="o">=</span><span class="n">v190</span><span class="p">,</span><span class="w"> </span><span class="n">mother_edu</span><span class="o">=</span><span class="n">v149</span><span class="p">,</span><span class="w"> </span><span class="n">h31</span><span class="p">,</span><span class="w"> </span>
+<span class="w">         </span><span class="n">h22</span><span class="p">,</span><span class="n">h11</span><span class="p">,</span><span class="w"> </span><span class="n">sample_weight</span><span class="p">,</span><span class="w"> </span><span class="n">psu</span><span class="o">=</span><span class="n">v021</span><span class="p">,</span><span class="w"> </span><span class="n">ssu</span><span class="o">=</span><span class="n">v002</span><span class="p">,</span><span class="w"> </span><span class="n">strat</span><span class="o">=</span><span class="n">v023</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">dhs_full</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>[TASK] Question for the class: How many observations are there in the new subset? Hint: Where can you find the number of observations?</p>
+</div></blockquote>
+</section>
+<section id="recoding-existing-variables-and-creating-new-variables">
+<h2>Recoding Existing Variables and Creating New Variables<a class="headerlink" href="#recoding-existing-variables-and-creating-new-variables" title="Link to this heading">#</a></h2>
+<p>When working with survey datasets, we commonly would like to create index variables which act as products of multiple variables, or use reasonable cutoffs for previously collected variables. In order to do this, we need to construct additional variables by <strong>recoding existing variables</strong>.</p>
+<p>We will construct two new variables based on existing variables:</p>
+<ol class="arabic simple">
+<li><p>a binary variable <code class="docutils literal notranslate"><span class="pre">mdd</span></code> as the WHO Minimum Dietary Diversity indicator for assessing complementary feeding among children 6-23mo, defined as “consuming foods from &gt;= 4 food groups in the 24 hours preceding the interview. (v412a = 1 or v412b = 1 or any of v414a- v414w = 1 or m39a = 1).</p></li>
+</ol>
+<p>This is based on existing variables using the following rules:
+A minimum dietary diversity of 4 or more of the following food groups:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>      a.Grains, roots and tubers (v412a = 1 or v414e = 1 or v414f = 1)
+
+      b.Legumes and nuts (v414o = 1)
+
+      c.Dairy products (milk, yogurt, cheese) (v411 = 1 or v411a = 1 or or v412=1 or v414v = 1 or v414p = 1)
+
+      d.Flesh foods (meat, fish, poultry and liver/organ meats) (v414h = 1 or v414m = 1 or v414n = 1)
+
+      e.Eggs (v414g = 1)
+
+      f.Vitamin A rich fruits and vegetables (v414i = 1 or v414j = 1 or v414k = 1)
+
+      g. Other fruits and vegetables (v414l = 1)
+</pre></div>
+</div>
+<blockquote>
+<div><blockquote>
+<div><p>Note: another WHO indicator for complementary feeding, minimum meal frequency, can also be derived from DHS variables for our sample’s age group, and it reflects a different dimension of complementary feeding. However, due to time constraints in this workshop, we will only use Minimum Dietary Diversity in this analysis as a proxy to complementary feeding status.</p>
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>a binary variable <code class="docutils literal notranslate"><span class="pre">morbidty</span></code> to classify presence of morbidity within 2 weeks preceding the survey. (h31 or h11= 1 or 2 or h22=1)</p></li>
+</ol>
+<p>At this point, we need to start creating each subset of variables that we outlined above. To do this, the general approach is to recode the variables as common names, and then investigate the detail of data that we have to work with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">##Factor categorical variables</span>
+<span class="n">cfvarname</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="nf">select</span><span class="p">(</span><span class="n">dhs_full</span><span class="p">,</span><span class="w"> </span><span class="nf">starts_with</span><span class="p">(</span><span class="s">&quot;v414&quot;</span><span class="p">)))</span>
+<span class="n">catvar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;breastfeed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cfvarname</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;v411&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;v412&quot;</span><span class="p">,</span><span class="s">&quot;v411a&quot;</span><span class="p">,</span><span class="s">&quot;v412a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;wealth_index&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;h31&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;h22&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;h11&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;psu&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ssu&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;strat&quot;</span><span class="p">)</span>
+<span class="n">dhs_example</span><span class="p">[</span><span class="n">catvar</span><span class="p">]</span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="n">dhs_example</span><span class="p">[</span><span class="n">catvar</span><span class="p">],</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">dhs_example</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But look at the number of observations in breastfeed (v411) for <code class="docutils literal notranslate"><span class="pre">v411</span> <span class="pre">=</span> <span class="pre">94</span></code> (never breastfed). This not a large enough sub-group size. However, we can recode breastfeeding into a binary (0/1) variable. This is more useful for our research question of the role of breastfeeding as well.</p>
+<p>To do this, we use the <code class="docutils literal notranslate"><span class="pre">mutate()</span></code> function in the package <code class="docutils literal notranslate"><span class="pre">dplyr</span></code>.</p>
+<blockquote>
+<div><p>[TASK]: Try to go ahead and look up mutate(), using <code class="docutils literal notranslate"><span class="pre">??dplyr::mutate</span></code> on the Console window.</p>
+</div></blockquote>
+<p>The mutate function adds new variables based on existing variables, and preserves the existing ones. The <code class="docutils literal notranslate"><span class="pre">case_when()</span></code> allows us to use mutliple if statements (if this then that AND if this then that OR if this then that AND if that than this…etc). Note that the new symbol, |, is called OR. For more information on the formal logic in R, feel free to reach out to Kyle directly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">#As shown in the summary descriptive statstics for breastfeed, there are only 5 observations for code 94 (never breastfed) in the model dataset, which is not sufficient to be analyzed as a subgroup. As a result, we will recode breastfeeding status into a binary variable on current breastfeeding status: 1 breastfeeding 2 not breastfeeding (combining 94 with 93)</span>
+
+<span class="n">dhs_example</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dhs_example</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">breastfeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">    </span><span class="n">breastfeed</span><span class="o">==</span><span class="m">93</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">breastfeed</span><span class="o">==</span><span class="m">94</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
+<span class="w">    </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span>
+
+<span class="c1">##Construct a new variable for Minimum Dietary Diversity (MDD) for complementary feeding based on WHO criteria</span>
+<span class="c1">#There are two logical steps invovled in the mutate function below: 1) construct new variables for each food group based on existing variables 2) construct MDD based on counts by summing food group variables</span>
+
+<span class="n">dhs_example</span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dhs_example</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">          </span><span class="nf">mutate</span><span class="p">(</span><span class="w"> </span>
+<span class="w">                    </span><span class="n">grain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                       </span><span class="n">v412a</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="w"> </span><span class="n">v414e</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="w"> </span><span class="n">v414f</span><span class="o">==</span><span class="m">1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">                      </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span>
+<span class="w">                    </span><span class="p">),</span><span class="w"> </span><span class="c1"># Grains, roots and tubers</span>
+<span class="w">                    </span><span class="n">legume</span><span class="w"> </span><span class="o">=</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                       </span><span class="n">v414o</span><span class="o">==</span><span class="m">1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">                      </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span>
+<span class="w">                    </span><span class="p">),</span><span class="w"> </span><span class="c1"># Legumes and nuts</span>
+<span class="w">                    </span><span class="n">dairy</span><span class="o">=</span><span class="w"> </span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                      </span><span class="n">v411</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="n">v411a</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="n">v412</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="n">v414v</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="w"> </span><span class="n">v414p</span><span class="o">==</span><span class="m">1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">                      </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span>
+<span class="w">                    </span><span class="p">),</span><span class="w"> </span><span class="c1"># Dairy products (milk, yogurt, cheese, baby formula)</span>
+<span class="w">                    </span><span class="n">flesh</span><span class="w"> </span><span class="o">=</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                       </span><span class="n">v414h</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="w"> </span><span class="n">v414m</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="w"> </span><span class="n">v414n</span><span class="o">==</span><span class="m">1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">                      </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span>
+<span class="w">                    </span><span class="p">),</span><span class="w"> </span><span class="c1"># Flesh foods (meat, fish, poultry and liver/organ meats)</span>
+<span class="w">                    </span><span class="n">egg</span><span class="w"> </span><span class="o">=</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                      </span><span class="n">v414g</span><span class="o">==</span><span class="m">1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">                      </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span>
+<span class="w">                    </span><span class="p">),</span><span class="w"> </span><span class="c1"># Eggs</span>
+<span class="w">                    </span><span class="n">vavegfru</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                       </span><span class="n">v414i</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="w"> </span><span class="n">v414j</span><span class="o">==</span><span class="m">1</span><span class="o">|</span><span class="w"> </span><span class="n">v414k</span><span class="o">==</span><span class="m">1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">                      </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span>
+<span class="w">                    </span><span class="p">),</span><span class="c1"># Vitamin A rich fruits and vegetables</span>
+<span class="w">                    </span><span class="n">othervegfru</span><span class="o">=</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                       </span><span class="n">v414l</span><span class="o">==</span><span class="m">1</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">                      </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span>
+<span class="w">                    </span><span class="p">),</span><span class="w"> </span><span class="c1"># Other vegtable and fruits</span>
+<span class="w">                    </span>
+<span class="w">                    </span><span class="n">mdd</span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                      </span><span class="n">grain</span><span class="o">+</span><span class="w"> </span><span class="n">legume</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dairy</span><span class="w"> </span><span class="o">+</span><span class="n">flesh</span><span class="o">+</span><span class="n">egg</span><span class="w"> </span><span class="o">+</span><span class="n">vavegfru</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">othervegfru</span><span class="w"> </span><span class="o">&gt;=</span><span class="m">4</span><span class="w"> </span><span class="o">~</span><span class="m">1</span><span class="p">,</span>
+<span class="w">                    </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="m">0</span>
+<span class="w">                    </span><span class="p">))</span><span class="w">  </span><span class="c1">#this is the step to construct mdd based on counts of food groups</span>
+<span class="w">    </span>
+<span class="w">              </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="c1">#close mutate </span>
+<span class="w">        </span><span class="nf">select</span><span class="p">(</span><span class="o">-</span><span class="nf">starts_with</span><span class="p">(</span><span class="s">&quot;v414&quot;</span><span class="p">),</span><span class="o">-</span><span class="n">v412a</span><span class="p">,</span><span class="o">-</span><span class="n">v411</span><span class="p">,</span><span class="o">-</span><span class="n">v411a</span><span class="p">)</span><span class="w"> </span><span class="c1">#we can now remove the DHS existing variables used for constructing complementary feeding status from the dataset</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">dhs_example</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, will you be able to construct the morbidity variable based on presence of cough, diarhea, and fever (h31, h11, and h22)? Think about which functions you might want to use. You would have to use <code class="docutils literal notranslate"><span class="pre">mutate()</span></code> to create the variable and <code class="docutils literal notranslate"><span class="pre">case_when()</span></code> to select all the disease states that are present when morbidity is present (if cough = 1 (yes) | (or) if fever = 1 | if …etc.).</p>
+<p>A few new things:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">|</span></code> symbol means boolean OR, which you can think of as the word OR.</p></li>
+<li><p>We commonly see 1 = yes in datasets, but we can always check the metadata (if it exists)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">## Construct morbidty variable</span>
+<span class="n">dhs_example</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mutate</span><span class="p">(</span><span class="n">dhs_example</span><span class="p">,</span><span class="w"> </span><span class="n">morbidity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                      </span><span class="n">h31</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">h31</span><span class="w"> </span><span class="o">==</span><span class="m">2</span><span class="w"> </span><span class="o">|</span><span class="n">h11</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">|</span><span class="n">h11</span><span class="w"> </span><span class="o">==</span><span class="m">2</span><span class="o">|</span><span class="n">h22</span><span class="o">==</span><span class="m">1</span><span class="w"> </span><span class="o">~</span><span class="m">1</span><span class="p">,</span>
+<span class="w">                      </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="m">0</span>
+<span class="w">                      </span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also need to create another variable for wasting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">## We can also construct a binary variable on wasting based on WHZ&lt;=-2</span>
+<span class="n">dhs_example</span><span class="o">&lt;-</span><span class="nf">mutate</span><span class="p">(</span><span class="n">dhs_example</span><span class="p">,</span><span class="w"> </span><span class="n">wasting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="nf">case_when</span><span class="p">(</span>
+<span class="w">                </span><span class="n">whz</span><span class="o">&lt;=</span><span class="m">-2</span><span class="w"> </span><span class="o">~</span><span class="m">1</span><span class="p">,</span>
+<span class="w">                </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="m">0</span>
+<span class="w">    </span>
+<span class="w">              </span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>##Specifying the Survey Design for Descriptive and Inferential Statstics</p>
+<p>When using the <code class="docutils literal notranslate"><span class="pre">survey</span></code> pacakge, we allow appropriate handling of the DHS survey sample design when analyzing the data.
+Specifically, we set up the survey design object <code class="docutils literal notranslate"><span class="pre">design</span></code> using DHS sampling units(primary and secondary), stratification, and sample weights as specified in the model data set for children. Note that you <strong>must</strong> create the design object before continuing to the analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">design</span><span class="o">&lt;-</span><span class="nf">svydesign</span><span class="p">(</span><span class="n">ids</span><span class="o">=~</span><span class="n">psu</span><span class="o">+</span><span class="n">ssu</span><span class="p">,</span><span class="w"> </span><span class="n">strata</span><span class="o">=~</span><span class="n">strat</span><span class="p">,</span><span class="w"> </span><span class="n">weights</span><span class="o">=~</span><span class="n">sample_weight</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">dhs_example</span><span class="p">)</span><span class="w">  </span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">design</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This output tells us the variables we have added, and the general design of the survey instrument. The variables you see at the end allow us to double check if we have any missing values.</p>
+<p>##Descriptive Statistics</p>
+<p>Just as before, we can use functions in R to extract descriptive statistics on this survey. However, as this is a survey, we need to use functions like <code class="docutils literal notranslate"><span class="pre">svymean()</span></code> to do it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">##Report summary statistics on means and SEs </span>
+<span class="n">vars</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;whz&quot;</span><span class="p">,</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="s">&quot;mother_edu&quot;</span><span class="p">,</span><span class="s">&quot;wealth_index&quot;</span><span class="p">,</span><span class="s">&quot;breastfeed&quot;</span><span class="p">,</span><span class="s">&quot;mdd&quot;</span><span class="p">,</span><span class="s">&quot;grain&quot;</span><span class="p">,</span><span class="s">&quot;legume&quot;</span><span class="p">,</span><span class="s">&quot;dairy&quot;</span><span class="p">,</span><span class="s">&quot;flesh&quot;</span><span class="p">,</span><span class="s">&quot;egg&quot;</span><span class="p">,</span><span class="s">&quot;vavegfru&quot;</span><span class="p">,</span><span class="s">&quot;othervegfru&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;wasting&quot;</span><span class="w"> </span><span class="p">)</span>
+
+<span class="nf">svymean</span><span class="p">(</span><span class="nf">make.formula</span><span class="p">(</span><span class="n">vars</span><span class="p">),</span><span class="n">design</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1">#Note that for categorical variables, frequency is reported for each category.</span>
+
+<span class="c1">##summary statstics by breastfeed status </span>
+<span class="nf">svyby</span><span class="p">(</span><span class="o">~</span><span class="n">whz</span><span class="o">+</span><span class="n">age</span><span class="o">+</span><span class="n">mother_edu</span><span class="o">+</span><span class="n">wealth_index</span><span class="o">+</span><span class="n">mdd</span><span class="o">+</span><span class="n">wasting</span><span class="p">,</span><span class="o">~</span><span class="n">breastfeed</span><span class="p">,</span><span class="n">design</span><span class="p">,</span><span class="w"> </span><span class="n">svymean</span><span class="p">)</span>
+
+<span class="c1">#We can see that some of the covariates vary by breastfeed, further supporting accounting for them in the statstical model.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The last line of code, using the function <code class="docutils literal notranslate"><span class="pre">svyby()</span></code> allows us to stratify (split) the values by our breastfeed variable. We see some differences in mean values among our covariates within an initial look, so we decide to move forward (tentatively) with our model.</p>
+<p>We also might find the weak nature of these differences to suggest that a strong effect may not exist in this sample data for breadfeeding, but we need to know more to claim that. Next, we move into looking at correlations within our variables.</p>
+<p>Note: we are not diving into the assumptions of linear regression here. If you would like to learn more about why investigating and accounting for colinearity is important, please see here: <a class="reference external" href="https://moderndive.com/7-multiple-regression.html">https://moderndive.com/7-multiple-regression.html</a></p>
+<p>##Correlations and Exploratory Analysis</p>
+<p>We need to look at our next outcome: whz and the independent variable: breastfeed and the covariates: age mother_edu wealth_index mdd. These could be correlated, and we must address any potential association.</p>
+<p>First, we load the package <code class="docutils literal notranslate"><span class="pre">jtools</span></code> which has a function called <code class="docutils literal notranslate"><span class="pre">svycor</span></code> in it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment to install jtools if needed</span>
+<span class="c1">#install.packages(&quot;jtools&quot;, repos = &quot;https://cloud.r-project.org&quot;)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">jtools</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">cor_d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">jtools</span><span class="o">::</span><span class="nf">svycor</span><span class="p">(</span><span class="o">~</span><span class="n">whz</span><span class="o">+</span><span class="n">dairy</span><span class="p">,</span><span class="w"> </span><span class="n">design</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">design</span><span class="p">)</span><span class="w"> </span><span class="c1">#Find the survey correlations betweehn whz and dairy</span>
+<span class="n">cor_d</span><span class="o">$</span><span class="n">cors</span><span class="w">                                   </span><span class="c1">#Print the cors values</span>
+<span class="c1">#cor_d$p.values                               #Print the p-value</span>
+<span class="c1">#For more information, see here: https://www.jacob-long.com/post/survey-correlation/</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="statistical-modeling-simple-linear-regression">
+<h2>Statistical Modeling -Simple Linear Regression<a class="headerlink" href="#statistical-modeling-simple-linear-regression" title="Link to this heading">#</a></h2>
+<p>Typically, <code class="docutils literal notranslate"><span class="pre">glm</span></code> is used in R for generalized linear models. The survey package’s <code class="docutils literal notranslate"><span class="pre">svyglm</span></code> functions are written based on <code class="docutils literal notranslate"><span class="pre">glm</span></code>, but are survey-weighted. Remember, everything we do in this analysis has to account for the survey’s structure.</p>
+<p>We will first fit a simple linear regression between breastfeeding and height-for-age z-scores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">slr</span><span class="o">&lt;-</span><span class="nf">svyglm</span><span class="p">(</span><span class="n">whz</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">breastfeed</span><span class="p">,</span><span class="w"> </span><span class="n">design</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">slr</span><span class="p">)</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>You might wonder, how should I interpret this? Look at the help file and select a few things to interpret.</p>
+</div></blockquote>
+<p>??svyglm()</p>
+<blockquote>
+<div><p>You can also look at relevant articles: <a class="reference external" href="https://www.theanalysisfactor.com/r-glm-model-fit/">https://www.theanalysisfactor.com/r-glm-model-fit/</a></p>
+</div></blockquote>
+<p>For a tip on how to find articles, take a look at the Error Troubleshooting Guide: <a class="reference external" href="https://tufts.box.com/v/EffectiveProblemSolving">https://tufts.box.com/v/EffectiveProblemSolving</a></p>
+</section>
+<section id="regression-diagnostics">
+<h2>Regression diagnostics<a class="headerlink" href="#regression-diagnostics" title="Link to this heading">#</a></h2>
+<p>Finally, we can do some diagnostics, to see how much we trust this model. We can look as a histogram and Shapiro Test of the residuals to see if they are normally distrubuted. The right tail is a bit long by visual inspection, and we would not trust this model much.</p>
+<p>This is confirmed with the S-W test, and additionally by our initial inspection of the stratified values. This should make sense, as this is a homogenous model dataset meant for practice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1">##residual diagnostics</span>
+
+<span class="c1">###Check normality of residuals</span>
+<span class="nf">svyhist</span><span class="p">(</span><span class="o">~</span><span class="nf">residuals</span><span class="p">(</span><span class="n">slr</span><span class="p">),</span><span class="w"> </span><span class="n">design</span><span class="p">)</span><span class="w"> </span><span class="c1">#visually examine the distribution using a histogram</span>
+
+<span class="nf">shapiro.test</span><span class="p">(</span><span class="w"> </span><span class="nf">svytable</span><span class="p">(</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="nf">residuals</span><span class="p">(</span><span class="n">slr</span><span class="p">),</span><span class="w"> </span><span class="n">design</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="c1">#test normality via shapiro  </span>
+
+<span class="n">survey</span><span class="o">::</span><span class="nf">svyqqmath</span><span class="p">(</span><span class="o">~</span><span class="nf">residuals</span><span class="p">(</span><span class="n">slr</span><span class="p">),</span><span class="w"> </span><span class="n">design</span><span class="p">)</span>
+<span class="c1">#We could also use svyplot() to plot the residuals, investigate normality, etc. </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-modeling-multiple-linear-regression">
+<h2>Regression Modeling -Multiple Linear Regression<a class="headerlink" href="#regression-modeling-multiple-linear-regression" title="Link to this heading">#</a></h2>
+<p>We will then fit a multiple linear regression between breastfeeding and height-for-age z-score</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mlr</span><span class="o">&lt;-</span><span class="nf">svyglm</span><span class="p">(</span><span class="n">whz</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">breastfeed</span><span class="o">+</span><span class="n">age</span><span class="o">+</span><span class="n">mother_edu</span><span class="w"> </span><span class="o">+</span><span class="n">wealth_index</span><span class="o">+</span><span class="w"> </span><span class="n">mdd</span><span class="p">,</span><span class="w"> </span><span class="n">design</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">mlr</span><span class="p">)</span><span class="w"> </span>
+
+<span class="c1">##check multicollinearity </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The below portion is optional. We may not complete it during our time in the workshop, but it is here to further your knowledge. Thank you very much for attending!</p>
+</section>
+<section id="optional-adding-interaction-terms-between-breastfeed-and-minimum-dietary-diversity">
+<h2>OPTIONAL: Adding Interaction Terms between Breastfeed and Minimum Dietary Diversity<a class="headerlink" href="#optional-adding-interaction-terms-between-breastfeed-and-minimum-dietary-diversity" title="Link to this heading">#</a></h2>
+<p>It is possible that relationship between breastfeeding and WHZ differs by whether the child also met MDD. We will add an interaction term to explore that. An interaction term, at its core, is the product of two variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mlr_int</span><span class="o">&lt;-</span><span class="nf">svyglm</span><span class="p">(</span><span class="n">whz</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">breastfeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mdd</span><span class="w"> </span><span class="o">+</span><span class="n">age</span><span class="o">+</span><span class="n">mother_edu</span><span class="w"> </span><span class="o">+</span><span class="n">wealth_index</span><span class="p">,</span><span class="w"> </span><span class="n">design</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">mlr_int</span><span class="p">)</span><span class="w"> </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="logistical-regression">
+<h1>Logistical Regression<a class="headerlink" href="#logistical-regression" title="Link to this heading">#</a></h1>
+<p>We can also use the wasting variable as the outcome instead of WHZ to build a logit model.</p>
+<p>Of course, these models are not sufficient and we would need to understand more more about the dataset to create a publishable model, but this is a good start!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">logit_bi</span><span class="o">&lt;-</span><span class="nf">svyglm</span><span class="p">(</span><span class="n">wasting</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">breastfeed</span><span class="p">,</span><span class="w"> </span><span class="n">design</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">())</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">logit_bi</span><span class="p">)</span>
+<span class="n">logit</span><span class="o">&lt;-</span><span class="nf">svyglm</span><span class="p">(</span><span class="n">wasting</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">breastfeed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mdd</span><span class="w"> </span><span class="o">+</span><span class="n">age</span><span class="o">+</span><span class="n">mother_edu</span><span class="w"> </span><span class="o">+</span><span class="n">wealth_index</span><span class="p">,</span><span class="w"> </span><span class="n">design</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="o">=</span><span class="nf">binomial</span><span class="p">())</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="n">logit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thank you for attending! I wish you all the best and feel free to reach out to <a class="reference external" href="mailto:DataLab-Support&#37;&#52;&#48;elist&#46;tufts&#46;edu">DataLab-Support<span>&#64;</span>elist<span>&#46;</span>tufts<span>&#46;</span>edu</a> with any questions.</p>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_r-data-viz-test.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Manipulation and Visualization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_ParallelProcessingR.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fast for loops and parallel processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Survey analysis in R</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-dive-into-surveys-in-r">Deep Dive into Surveys in R</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-on-the-data">Background on the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-what-we-have-learned-explore-the-relationship-between-breastfeeding-among-children-12-23-month-old-and-wasting-weight-for-height-status">Applying what we have learned - Explore the Relationship Between Breastfeeding among Children 12-23 Month-Old and Wasting (Weight-for-Height) Status</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-and-load-packages">Install and Load Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-science-pipelines-and-data-cleaning">Data science pipelines and data cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data">Import Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-management">Data Management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#note-on-pipes-and-plumbing">Note on pipes and plumbing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recoding-existing-variables-and-creating-new-variables">Recoding Existing Variables and Creating New Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-modeling-simple-linear-regression">Statistical Modeling -Simple Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-diagnostics">Regression diagnostics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-modeling-multiple-linear-regression">Regression Modeling -Multiple Linear Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-adding-interaction-terms-between-breastfeed-and-minimum-dietary-diversity">OPTIONAL: Adding Interaction Terms between Breastfeed and Minimum Dietary Diversity</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#logistical-regression">Logistical Regression</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/r/03_IntermediateR_2020.Rmd">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/r/03_IntermediateR_2020.Rmd.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

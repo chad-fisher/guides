@@ -1,0 +1,12 @@
+---
+orphan:
+nosearch:
+html_theme.sidebar_secondary.remove: true
+---
+# bioinformatics
+- [](/bio/apps/index.md)
+- [](/bio/databases/index.md)
+- [](/bio/index.md)
+- [](/bio/resources/index.md)
+- [](/bio/tutorials/index.md)
+- [](/bio/workshops/index.md)

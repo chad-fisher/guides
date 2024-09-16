@@ -1,0 +1,2560 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Language Hacking: Using spaCy for Morphosyntactic Analysis &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nlp/tutorials/09_Language_Hacking_workshop';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/nlp/tutorials/09_Language_Hacking_workshop.html" />
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Extracting Ancient Placenames using Named Entity Recognition and spaCy" href="10_NER_with_spaCy_for_geospatial_analysis.html" />
+    <link rel="prev" title="Topic Modeling using Traditional Machine Learning" href="08_Topic_Modelling_using_Traditional_Machine_Learning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_gentleintrotoNLP.html">A Gentle Introduction to Natural Language Process</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="02_PNRegex_Workshop6_28.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Static_Webscraping_with_BeautifulSoup.html">Static Webscraping with BeautifulSoup</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="04_Dynamic_Webscraping_with_Selenium.html">Dynamic Webscraping with Selenium</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="05_Webscraping_III_Scraping_Reddit.html">The Art of Webscraping III: Scraping Reddit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_Search_Engine_workshop.html">Creating a Search Engine for your own data using <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html">Textual Feature Extraction using Traditional Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_Topic_Modelling_using_Traditional_Machine_Learning.html">Topic Modeling using Traditional Machine Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Language Hacking: Using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> for Morphosyntactic Analysis</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="10_NER_with_spaCy_for_geospatial_analysis.html">Extracting Ancient Placenames using Named Entity Recognition and <code class="docutils literal notranslate"><span class="pre">spaCy</span></code></a></li>
+
+
+
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Digital Humanities and NLP</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">Language Hacking:...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>datasets<span class="w"> </span>wiktionaryparser<span class="w"> </span>-Uq
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="language-hacking-using-spacy-for-morphosyntactic-analysis">
+<h1>Language Hacking: Using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> for Morphosyntactic Analysis<a class="headerlink" href="#language-hacking-using-spacy-for-morphosyntactic-analysis" title="Link to this heading">#</a></h1>
+<p>This workshop is inspired by <a class="reference external" href="https://hdsr.mitpress.mit.edu/pub/owxwohyz/release/6">this article</a> written by Tufts professor, Dr. Gregory Crane. Crane teaches in the Classical Studies department, meaning that he studies historical languages like Ancient Greek and Latin, so you might be wondering how natural language processing could be relevent to such a discipline. The answer is in <em>language hacking</em>, the processing of taking a language which you may or may not know and using pretrained language models to give you a deeper understanding of the text.</p>
+<p>Professor Crane is a ‘digital philologist.’ Philology (from φιλολογία, the “love of words”) is the study of language in historical sources, which can include everything from ancient literature to contemporary song lyrics. As a result, philologists are interested in many different languages, especially sources in many languages, but no one, no matter how good a philologist, can learn every language they might be interested in.</p>
+<p>This is where language hacking comes in. Deep learning models like the ones we’ll play around with today offer new opportunities for research, language-learning and cross-cultural exchange.</p>
+<section id="what-is-spacy">
+<h2>What is <code class="docutils literal notranslate"><span class="pre">spaCy</span></code>?<a class="headerlink" href="#what-is-spacy" title="Link to this heading">#</a></h2>
+<p>Above I mentioned that we would be using a language model to tell us about the meaning of words in languages we don’t know. In this lesson, we’ll downlaod these models from a Python package called <code class="docutils literal notranslate"><span class="pre">spaCy</span></code>. <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> is very powerful package with a lot of functionality. We’ll only be using a small part of what they offer: their pretrained language models.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-and-model-preparation">
+<h1>Data and Model Preparation<a class="headerlink" href="#data-and-model-preparation" title="Link to this heading">#</a></h1>
+<p>Before we can start language hacking, we need to set up our texts and models. For this example, I’ll be using the original French version of Alexandre Dumas’ <em>The Three Muskeeters</em> (<em>Les trois mousquetaires</em>). As a result, we’ll also be using the French <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> model, which we’ll need to download.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;pnadel/les_trois_mousquetaires&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating train split:   0%|          | 0/68 [00:00&lt;?, ? examples/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating train split: 100%|██████████| 68/68 [00:00&lt;00:00, 8713.84 examples/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chapter</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>DANS LAQUELLE IL EST ÉTABLI QUE, MALGRÉ LEURS ...</td>
+      <td>Il y a un an à peu près qu’en faisant à la Bib...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LES TROIS PRÉSENTS DE M. D’ARTAGNAN PÈRE</td>
+      <td>Le premier lundi du mois d’avril 1625, le bour...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>L’ANTICHAMBRE DE M. DE TRÉVILLE</td>
+      <td>M. de Troisville, comme s’appelait encore sa f...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>L’AUDIENCE</td>
+      <td>M. de Tréville était pour le moment de fort mé...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>L’ÉPAULE D’ATHOS, LE BAUDRIER DE PORTHOS,</td>
+      <td>D’Artagnan, furieux, avait traversé l’anticham...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>L’HOMME AU MANTEAU ROUGE</td>
+      <td>Le désespoir d’Athos avait fait place à une do...</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>JUGEMENT</td>
+      <td>C’était une nuit orageuse et sombre, de gros n...</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>L’EXÉCUTION</td>
+      <td>Il était minuit à peu près; la lune, échancrée...</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>CONCLUSION</td>
+      <td>Le 6 du mois suivant, le roi, tenant la promes...</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>ÉPILOGUE</td>
+      <td>La Rochelle, privée du secours de la flotte an...</td>
+    </tr>
+  </tbody>
+</table>
+<p>68 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">][:</span><span class="mi">1000</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Il y a un an à peu près qu’en faisant à la Bibliothèque\r\nroyale des recherches pour mon histoire de Louis XIV, je tombai\r\npar hasard sur les Mémoires de M. d’Artagnan, imprimés,—comme\r\nla plus grande partie des ouvrages de cette époque,\r\noù les auteurs tenaient à dire la vérité sans aller faire un tour\r\nplus ou moins long à la Bastille,—à Amsterdam, chez Pierre\r\nXVIII\r\nRouge. Le titre me séduisit: je les emportai chez moi, avec la\r\npermission de M. le conservateur, bien entendu, et je les dévorai.Mon intention n’est pas de faire ici une analyse de ce curieux\r\nouvrage, et je me contenterai d’y renvoyer ceux de mes lecteurs\r\nqui apprécient les tableaux d’époque. Ils y trouveront des portraits\r\ncrayonnés de main de maître; et, quoique ces esquisses\r\nsoient, pour la plupart du temps, tracées sur des portes de caserne\r\net sur des murs de cabaret, ils n’y reconnaîtront pas\r\nmoins, aussi ressemblantes que dans l’histoire de M. Anquetil,\r\nles images de Louis XIII, d’Anne d’Autriche, de Richeli&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># downloading french model from spacy</span>
+<span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>spacy<span class="w"> </span>download<span class="w"> </span>fr_core_news_md
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/guides/bin/python: No module named spacy
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loading the model</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fr_core_news_md&quot;</span><span class="p">)</span>
+<span class="n">nlp</span> <span class="c1"># working!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># loading the model</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">spacy</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fr_core_news_md&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">nlp</span> <span class="c1"># working!</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;spacy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="apply-the-model">
+<h2>Apply the Model<a class="headerlink" href="#apply-the-model" title="Link to this heading">#</a></h2>
+<p>Now that we have our data and our model, we can apply the one to the other. The <code class="docutils literal notranslate"><span class="pre">nlp</span></code> object that we made above can be called like a function with some text. See below with a simple example.</p>
+<section id="introduction-to-morphosyntax">
+<h3>Introduction to Morphosyntax<a class="headerlink" href="#introduction-to-morphosyntax" title="Link to this heading">#</a></h3>
+<p>This section serves as an introduction to some important NLP vocabulary and Python syntax for using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this is spacy `Doc` object</span>
+<span class="n">example</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;Je m&#39;appelle Peter. J&#39;aime les jeux vidéos.&quot;</span><span class="p">)</span> <span class="c1"># &quot;My name is Peter. I like video games&quot;</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>spacy.tokens.doc.Doc
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># .text just gives us the text as a string</span>
+<span class="n">example</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&quot;Je m&#39;appelle Peter. J&#39;aime les jeux vidéos.&quot;, str)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># iterable to acces each sentence in the original text</span>
+<span class="n">example</span><span class="o">.</span><span class="n">sents</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">sents</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;generator at 0x793cd347f880&gt;, generator)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># iterating through each sentence</span>
+<span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">sents</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sent</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Je m&#39;appelle Peter.
+J&#39;aime les jeux vidéos.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># iterating through each token</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">example</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Je
+m&#39;
+appelle
+Peter
+.
+J&#39;
+aime
+les
+jeux
+vidéos
+.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># iterating through each token</span>
+<span class="c1"># AND getting some morphosyntactic information</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">example</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Je		PRON		nsubj		je
+m&#39;		PRON		expl:comp		me
+appelle		VERB		ROOT		appeler
+Peter		PROPN		xcomp		Peter
+.		PUNCT		punct		.
+J&#39;		PRON		nsubj		je
+aime		VERB		ROOT		aimer
+les		DET		det		le
+jeux		NOUN		obj		jeu
+vidéos		PROPN		amod		vidéo
+.		PUNCT		punct		.
+</pre></div>
+</div>
+</div>
+</div>
+<p>See bleow for a glossary of relevant terms for the rest of this notebook.</p>
+<ul class="simple">
+<li><p><em>Lemma</em>: A lemma is the root form of a word. For example, the words “ran”, “running” and “runs” all come from the root “run”. In this case, “run” would be the lemma of “ran”, “running” and “runs” (Accessed through the <code class="docutils literal notranslate"><span class="pre">lemma_</span></code> property).</p></li>
+<li><p><em>Part of speech</em>: You mihgt be familiar with part of speech as the function that a word takes in a sentence, but there couple different standards for representing this information.</p>
+<ul>
+<li><p><em>UPOS</em> or <em>Universal part of speech</em>: This is the “normal” part of speech that you likely saw while learning English (Accessed through the <code class="docutils literal notranslate"><span class="pre">pos_</span></code> property).</p></li>
+<li><p><em>XPOS</em> or <em>Language-specific part of speech</em>: These are part of speech tags that might change depending on language. Oddly, they don’t always change from language to language. In fact, they can be shared between languages but are often much more specific about the part of speech of a word (Accessed through the <code class="docutils literal notranslate"><span class="pre">tag_</span></code> property).</p></li>
+</ul>
+</li>
+<li><p><em>Morphology</em>: To quote the <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> docs, “Inflectional morphology is the process by which a root form of a word is modified by adding prefixes or suffixes that specify its grammatical function but do not change its part-of-speech.” So, where a lemma is the root form of a word, morphological features are what are added to the lemma to create grammatically correct variants of the same lemma (Accessed through the <code class="docutils literal notranslate"><span class="pre">morph</span></code> property).</p></li>
+<li><p><em>Sentence relation</em> or <em>Sentence dependency</em>: Each word, in addition to its part of speech and lemma, can be identified by what words it depends on or what words depend on it (or both). For example, thw word “apple” is a <code class="docutils literal notranslate"><span class="pre">NOUN</span></code> yet it can be used either as a subject (“The apple is red”) or an object (I ate the apple). The UPOS tag would be the same for each, but the sentence relation, that is what the word is doing in the sentence, would be different (Accessed through the <code class="docutils literal notranslate"><span class="pre">dep_</span></code> property). You can find a list of dependencies here: <a class="reference external" href="https://universaldependencies.org/en/index.html">English</a> or <a class="reference external" href="https://universaldependencies.org/fr/index.html">French</a>.</p></li>
+<li><p><em>Treebanks</em>: A sentence is made up of a seires of words which are dependent on one another. This understanding allows us to construct tree-like structures of sentences. This is similar to diagraming sentences, if you have ever done that. It can be quite useful to use this model when language hacking, as it will give you a better idea about how to progress through a sentence. Below you can see the treebank that <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> created for the first sentence.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spacy</span> <span class="kn">import</span> <span class="n">displacy</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">sents</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="fr" id="111d1f62ba034d9b8673161ba4cbc464-0" class="displacy" width="750" height="312.0" direction="ltr" style="max-width: none; height: 312.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">Je</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">m'</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">appelle</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">Peter.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">PROPN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-111d1f62ba034d9b8673161ba4cbc464-0-0" stroke-width="2px" d="M70,177.0 C70,2.0 400.0,2.0 400.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-111d1f62ba034d9b8673161ba4cbc464-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,179.0 L62,167.0 78,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-111d1f62ba034d9b8673161ba4cbc464-0-1" stroke-width="2px" d="M245,177.0 C245,89.5 395.0,89.5 395.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-111d1f62ba034d9b8673161ba4cbc464-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">expl:comp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,179.0 L237,167.0 253,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-111d1f62ba034d9b8673161ba4cbc464-0-2" stroke-width="2px" d="M420,177.0 C420,89.5 570.0,89.5 570.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-111d1f62ba034d9b8673161ba4cbc464-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">xcomp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M570.0,179.0 L578.0,167.0 562.0,167.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>As in all treebanks, the verb (“appelle”) depends on only one thing: root, a placeholder which represents the semantic beginning of the sentence. From here all word depend on the main verb of the sentence. Take a look at the next example to see a variation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># copulative example</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;Je suis fatigué&quot;</span><span class="p">),</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># &quot;I am tired&quot; in English</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="fr" id="214a450ea8b846eb837c1b859ff01fd1-0" class="displacy" width="575" height="312.0" direction="ltr" style="max-width: none; height: 312.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">Je</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">suis</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">AUX</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">fatigué</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">VERB</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-214a450ea8b846eb837c1b859ff01fd1-0-0" stroke-width="2px" d="M70,177.0 C70,2.0 400.0,2.0 400.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-214a450ea8b846eb837c1b859ff01fd1-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj:pass</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,179.0 L62,167.0 78,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-214a450ea8b846eb837c1b859ff01fd1-0-1" stroke-width="2px" d="M245,177.0 C245,89.5 395.0,89.5 395.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-214a450ea8b846eb837c1b859ff01fd1-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">aux:pass</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,179.0 L237,167.0 253,167.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>In this treebank, there is not word with the VERB tag. Instead, the root word is “fatigué” or “tired” in English. This is because the grammatical verb is “suis” or “am” in English is tagged as a <code class="docutils literal notranslate"><span class="pre">cop</span></code> or <em>copulative</em> (this is sometimes called a ‘linking’ verb in English education, as <em>copula</em> &gt; Lat. <em>co-</em>, together and <em>apere</em>, fasten). These verbs only join a subject to an adjective but do not indicate any action. It is for this reason that in many language they are left out (cf. A. Gk. “μακρός ὁ οἴκος”, meaning “the house is large”, but literally “the house large”). Even in English, certian dialects like African American Vernacular English (AAVE) sometimes do not expess copular verbs. For all of these reasons, they are marked differently than other verbs in treebanks.</p>
+</section>
+<section id="using-the-data">
+<h3>Using the Data<a class="headerlink" href="#using-the-data" title="Link to this heading">#</a></h3>
+<p>Now that we havea grasp on the core vocabulary, we can begin to delve into real French literature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_chapter</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
+<span class="n">first_chapter_doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">first_chapter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_sentence</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">first_chapter_doc</span><span class="o">.</span><span class="n">sents</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">first_sentence</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Il y a un an à peu près qu’en faisant à la Bibliothèque\r\nroyale des recherches pour mon histoire de Louis XIV, je tombai\r\npar hasard sur les Mémoires de M. d’Artagnan, imprimés,—comme\r\nla plus grande partie des ouvrages de cette époque,\r\noù les auteurs tenaient à dire la vérité sans aller faire un tour\r\nplus ou moins long à la Bastille,—à Amsterdam, chez Pierre\r\nXVIII\r\nRouge.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In English: A short time ago, while making researches in the Royal Library for my History of Louis XIV., I stumbled by chance upon the Memoirs of M. d’Artagnan, printed—as were most of the works of that period, in which authors could not tell the truth without the risk of a residence, more or less long, in the Bastille—at Amsterdam, by Pierre Rouge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">first_sentence</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="fr" id="83586716aa3e444eb14cb3a2b0e8c106-0" class="displacy" width="13350" height="837.0" direction="ltr" style="max-width: none; height: 837.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">Il</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">y</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">a</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">un</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">an</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">à</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="1100">peu</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="1275">près</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="1450">qu’</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">SCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="1625">en</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="1800">faisant</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1800">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="1975">à</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1975">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="2150">la</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2150">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="2325">Bibliothèque</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2325">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="2500">
+</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2500">SPACE</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="2675">royale</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2675">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="2850">des</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2850">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="3025">recherches</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3025">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="3200">pour</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3200">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="3375">mon</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3375">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="3550">histoire</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3550">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="3725">de</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3725">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="3900">Louis</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3900">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="4075">XIV,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="4075">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="4250">je</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="4250">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="4425">tombai</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="4425">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="4600">
+</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="4600">SPACE</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="4775">par</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="4775">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="4950">hasard</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="4950">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="5125">sur</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="5125">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="5300">les</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="5300">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="5475">Mémoires</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="5475">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="5650">de</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="5650">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="5825">M.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="5825">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="6000">d’</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="6000">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="6175">Artagnan,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="6175">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="6350">imprimés,—comme</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="6350">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="6525">
+</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="6525">SPACE</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="6700">la</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="6700">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="6875">plus</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="6875">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="7050">grande</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="7050">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="7225">partie</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="7225">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="7400">des</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="7400">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="7575">ouvrages</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="7575">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="7750">de</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="7750">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="7925">cette</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="7925">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="8100">époque,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="8100">PUNCT</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="8275">
+</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="8275">SPACE</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="8450">où</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="8450">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="8625">les</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="8625">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="8800">auteurs</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="8800">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="8975">tenaient</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="8975">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="9150">à</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="9150">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="9325">dire</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="9325">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="9500">la</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="9500">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="9675">vérité</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="9675">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="9850">sans</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="9850">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="10025">aller</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="10025">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="10200">faire</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="10200">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="10375">un</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="10375">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="10550">tour</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="10550">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="10725">
+</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="10725">SPACE</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="10900">plus</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="10900">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="11075">ou</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="11075">CCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="11250">moins</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="11250">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="11425">long</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="11425">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="11600">à</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="11600">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="11775">la</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="11775">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="11950">Bastille,—à</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="11950">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="12125">Amsterdam,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="12125">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="12300">chez</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="12300">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="12475">Pierre</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="12475">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="12650">
+</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="12650">SPACE</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="12825">XVIII</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="12825">NUM</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="13000">
+</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="13000">SPACE</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="747.0">
+    <tspan class="displacy-word" fill="currentColor" x="13175">Rouge.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="13175">PROPN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-0" stroke-width="2px" d="M70,702.0 C70,527.0 370.0,527.0 370.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">expl:subj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,704.0 L62,692.0 78,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-1" stroke-width="2px" d="M245,702.0 C245,614.5 365.0,614.5 365.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">expl:comp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,704.0 L237,692.0 253,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-2" stroke-width="2px" d="M595,702.0 C595,614.5 715.0,614.5 715.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,704.0 L587,692.0 603,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-3" stroke-width="2px" d="M420,702.0 C420,527.0 720.0,527.0 720.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M720.0,704.0 L728.0,692.0 712.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-4" stroke-width="2px" d="M420,702.0 C420,439.5 900.0,439.5 900.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M900.0,704.0 L908.0,692.0 892.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-5" stroke-width="2px" d="M1120,702.0 C1120,614.5 1240.0,614.5 1240.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1120,704.0 L1112,692.0 1128,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-6" stroke-width="2px" d="M1295,702.0 C1295,177.0 4415.0,177.0 4415.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">mark</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1295,704.0 L1287,692.0 1303,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-7" stroke-width="2px" d="M1470,702.0 C1470,527.0 1770.0,527.0 1770.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1470,704.0 L1462,692.0 1478,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-8" stroke-width="2px" d="M1645,702.0 C1645,614.5 1765.0,614.5 1765.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">mark</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1645,704.0 L1637,692.0 1653,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-9" stroke-width="2px" d="M1820,702.0 C1820,264.5 4410.0,264.5 4410.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1820,704.0 L1812,692.0 1828,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-10" stroke-width="2px" d="M1995,702.0 C1995,527.0 2295.0,527.0 2295.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-10" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1995,704.0 L1987,692.0 2003,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-11" stroke-width="2px" d="M2170,702.0 C2170,614.5 2290.0,614.5 2290.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-11" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2170,704.0 L2162,692.0 2178,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-12" stroke-width="2px" d="M1820,702.0 C1820,439.5 2300.0,439.5 2300.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-12" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:arg</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2300.0,704.0 L2308.0,692.0 2292.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-13" stroke-width="2px" d="M2345,702.0 C2345,614.5 2465.0,614.5 2465.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-13" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2465.0,704.0 L2473.0,692.0 2457.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-14" stroke-width="2px" d="M2345,702.0 C2345,527.0 2645.0,527.0 2645.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-14" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2645.0,704.0 L2653.0,692.0 2637.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-15" stroke-width="2px" d="M2870,702.0 C2870,614.5 2990.0,614.5 2990.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-15" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2870,704.0 L2862,692.0 2878,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-16" stroke-width="2px" d="M2345,702.0 C2345,439.5 3000.0,439.5 3000.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-16" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3000.0,704.0 L3008.0,692.0 2992.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-17" stroke-width="2px" d="M3220,702.0 C3220,527.0 3520.0,527.0 3520.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-17" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3220,704.0 L3212,692.0 3228,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-18" stroke-width="2px" d="M3395,702.0 C3395,614.5 3515.0,614.5 3515.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-18" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3395,704.0 L3387,692.0 3403,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-19" stroke-width="2px" d="M1820,702.0 C1820,352.0 3530.0,352.0 3530.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-19" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:mod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3530.0,704.0 L3538.0,692.0 3522.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-20" stroke-width="2px" d="M3745,702.0 C3745,614.5 3865.0,614.5 3865.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-20" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3745,704.0 L3737,692.0 3753,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-21" stroke-width="2px" d="M3570,702.0 C3570,527.0 3870.0,527.0 3870.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-21" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3870.0,704.0 L3878.0,692.0 3862.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-22" stroke-width="2px" d="M3920,702.0 C3920,614.5 4040.0,614.5 4040.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-22" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">flat:name</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M4040.0,704.0 L4048.0,692.0 4032.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-23" stroke-width="2px" d="M4270,702.0 C4270,614.5 4390.0,614.5 4390.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-23" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M4270,704.0 L4262,692.0 4278,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-24" stroke-width="2px" d="M420,702.0 C420,89.5 4420.0,89.5 4420.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-24" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">ccomp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M4420.0,704.0 L4428.0,692.0 4412.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-25" stroke-width="2px" d="M4445,702.0 C4445,614.5 4565.0,614.5 4565.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-25" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M4565.0,704.0 L4573.0,692.0 4557.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-26" stroke-width="2px" d="M4795,702.0 C4795,614.5 4915.0,614.5 4915.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-26" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M4795,704.0 L4787,692.0 4803,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-27" stroke-width="2px" d="M4445,702.0 C4445,527.0 4920.0,527.0 4920.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-27" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:mod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M4920.0,704.0 L4928.0,692.0 4912.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-28" stroke-width="2px" d="M5145,702.0 C5145,527.0 5445.0,527.0 5445.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-28" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M5145,704.0 L5137,692.0 5153,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-29" stroke-width="2px" d="M5320,702.0 C5320,614.5 5440.0,614.5 5440.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-29" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M5320,704.0 L5312,692.0 5328,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-30" stroke-width="2px" d="M4445,702.0 C4445,439.5 5450.0,439.5 5450.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-30" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:arg</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M5450.0,704.0 L5458.0,692.0 5442.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-31" stroke-width="2px" d="M5670,702.0 C5670,614.5 5790.0,614.5 5790.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-31" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M5670,704.0 L5662,692.0 5678,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-32" stroke-width="2px" d="M5495,702.0 C5495,527.0 5795.0,527.0 5795.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-32" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M5795.0,704.0 L5803.0,692.0 5787.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-33" stroke-width="2px" d="M6020,702.0 C6020,614.5 6140.0,614.5 6140.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-33" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M6020,704.0 L6012,692.0 6028,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-34" stroke-width="2px" d="M5845,702.0 C5845,527.0 6145.0,527.0 6145.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-34" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M6145.0,704.0 L6153.0,692.0 6137.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-35" stroke-width="2px" d="M4445,702.0 C4445,352.0 6330.0,352.0 6330.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-35" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M6330.0,704.0 L6338.0,692.0 6322.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-36" stroke-width="2px" d="M6370,702.0 C6370,614.5 6490.0,614.5 6490.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-36" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M6490.0,704.0 L6498.0,692.0 6482.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-37" stroke-width="2px" d="M6720,702.0 C6720,527.0 7195.0,527.0 7195.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-37" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M6720,704.0 L6712,692.0 6728,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-38" stroke-width="2px" d="M6895,702.0 C6895,614.5 7015.0,614.5 7015.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-38" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M6895,704.0 L6887,692.0 6903,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-39" stroke-width="2px" d="M7070,702.0 C7070,614.5 7190.0,614.5 7190.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-39" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M7070,704.0 L7062,692.0 7078,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-40" stroke-width="2px" d="M4445,702.0 C4445,264.5 7210.0,264.5 7210.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-40" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M7210.0,704.0 L7218.0,692.0 7202.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-41" stroke-width="2px" d="M7420,702.0 C7420,614.5 7540.0,614.5 7540.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-41" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M7420,704.0 L7412,692.0 7428,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-42" stroke-width="2px" d="M4445,702.0 C4445,177.0 7565.0,177.0 7565.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-42" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:arg</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M7565.0,704.0 L7573.0,692.0 7557.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-43" stroke-width="2px" d="M7770,702.0 C7770,527.0 8070.0,527.0 8070.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-43" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M7770,704.0 L7762,692.0 7778,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-44" stroke-width="2px" d="M7945,702.0 C7945,614.5 8065.0,614.5 8065.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-44" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M7945,704.0 L7937,692.0 7953,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-45" stroke-width="2px" d="M4445,702.0 C4445,89.5 8095.0,89.5 8095.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-45" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">punct</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M8095.0,704.0 L8103.0,692.0 8087.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-46" stroke-width="2px" d="M8120,702.0 C8120,614.5 8240.0,614.5 8240.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-46" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M8240.0,704.0 L8248.0,692.0 8232.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-47" stroke-width="2px" d="M8470,702.0 C8470,527.0 8945.0,527.0 8945.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-47" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">iobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M8470,704.0 L8462,692.0 8478,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-48" stroke-width="2px" d="M8645,702.0 C8645,614.5 8765.0,614.5 8765.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-48" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M8645,704.0 L8637,692.0 8653,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-49" stroke-width="2px" d="M8820,702.0 C8820,614.5 8940.0,614.5 8940.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-49" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M8820,704.0 L8812,692.0 8828,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-50" stroke-width="2px" d="M4445,702.0 C4445,2.0 8975.0,2.0 8975.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-50" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M8975.0,704.0 L8983.0,692.0 8967.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-51" stroke-width="2px" d="M9170,702.0 C9170,614.5 9290.0,614.5 9290.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-51" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">mark</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M9170,704.0 L9162,692.0 9178,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-52" stroke-width="2px" d="M8995,702.0 C8995,527.0 9295.0,527.0 9295.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-52" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">xcomp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M9295.0,704.0 L9303.0,692.0 9287.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-53" stroke-width="2px" d="M9520,702.0 C9520,614.5 9640.0,614.5 9640.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-53" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M9520,704.0 L9512,692.0 9528,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-54" stroke-width="2px" d="M9345,702.0 C9345,527.0 9645.0,527.0 9645.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-54" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M9645.0,704.0 L9653.0,692.0 9637.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-55" stroke-width="2px" d="M9870,702.0 C9870,614.5 9990.0,614.5 9990.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-55" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">mark</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M9870,704.0 L9862,692.0 9878,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-56" stroke-width="2px" d="M9345,702.0 C9345,439.5 10000.0,439.5 10000.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-56" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M10000.0,704.0 L10008.0,692.0 9992.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-57" stroke-width="2px" d="M10045,702.0 C10045,614.5 10165.0,614.5 10165.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-57" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">xcomp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M10165.0,704.0 L10173.0,692.0 10157.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-58" stroke-width="2px" d="M10395,702.0 C10395,614.5 10515.0,614.5 10515.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-58" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M10395,704.0 L10387,692.0 10403,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-59" stroke-width="2px" d="M10220,702.0 C10220,527.0 10520.0,527.0 10520.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-59" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M10520.0,704.0 L10528.0,692.0 10512.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-60" stroke-width="2px" d="M10570,702.0 C10570,614.5 10690.0,614.5 10690.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-60" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M10690.0,704.0 L10698.0,692.0 10682.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-61" stroke-width="2px" d="M10920,702.0 C10920,439.5 11400.0,439.5 11400.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-61" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M10920,704.0 L10912,692.0 10928,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-62" stroke-width="2px" d="M11095,702.0 C11095,614.5 11215.0,614.5 11215.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-62" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">cc</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M11095,704.0 L11087,692.0 11103,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-63" stroke-width="2px" d="M10920,702.0 C10920,527.0 11220.0,527.0 11220.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-63" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">conj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M11220.0,704.0 L11228.0,692.0 11212.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-64" stroke-width="2px" d="M10570,702.0 C10570,352.0 11405.0,352.0 11405.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-64" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M11405.0,704.0 L11413.0,692.0 11397.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-65" stroke-width="2px" d="M11620,702.0 C11620,527.0 11920.0,527.0 11920.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-65" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M11620,704.0 L11612,692.0 11628,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-66" stroke-width="2px" d="M11795,702.0 C11795,614.5 11915.0,614.5 11915.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-66" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M11795,704.0 L11787,692.0 11803,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-67" stroke-width="2px" d="M11445,702.0 C11445,439.5 11925.0,439.5 11925.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-67" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:arg</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M11925.0,704.0 L11933.0,692.0 11917.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-68" stroke-width="2px" d="M11970,702.0 C11970,614.5 12090.0,614.5 12090.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-68" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M12090.0,704.0 L12098.0,692.0 12082.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-69" stroke-width="2px" d="M12320,702.0 C12320,614.5 12440.0,614.5 12440.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-69" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M12320,704.0 L12312,692.0 12328,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-70" stroke-width="2px" d="M10220,702.0 C10220,264.5 12460.0,264.5 12460.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-70" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:mod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M12460.0,704.0 L12468.0,692.0 12452.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-71" stroke-width="2px" d="M12495,702.0 C12495,614.5 12615.0,614.5 12615.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-71" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M12615.0,704.0 L12623.0,692.0 12607.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-72" stroke-width="2px" d="M12845,702.0 C12845,527.0 13145.0,527.0 13145.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-72" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M12845,704.0 L12837,692.0 12853,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-73" stroke-width="2px" d="M12845,702.0 C12845,614.5 12965.0,614.5 12965.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-73" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M12965.0,704.0 L12973.0,692.0 12957.0,692.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-83586716aa3e444eb14cb3a2b0e8c106-0-74" stroke-width="2px" d="M12495,702.0 C12495,439.5 13150.0,439.5 13150.0,702.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-83586716aa3e444eb14cb3a2b0e8c106-0-74" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">flat:name</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M13150.0,704.0 L13158.0,692.0 13142.0,692.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>This tree is very complex, so let’s break it down using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code>’s <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">rights</span></code>, <code class="docutils literal notranslate"><span class="pre">lefts</span></code> and <code class="docutils literal notranslate"><span class="pre">children</span></code> functionalities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># each token has a &quot;head&quot; word</span>
+<span class="c1"># this is the word that it depends on</span>
+<span class="n">first_sentence</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">first_sentence</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">head</span>
+<span class="c1"># the head word of faisant is tombai</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(faisant, tombai)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># picking out the root verb</span>
+<span class="c1"># looking for a token whose head is itself</span>
+<span class="n">root</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">first_sentence</span> <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">head</span> <span class="o">==</span> <span class="n">token</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">root</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">pos_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;a&#39;, &#39;ROOT&#39;, &#39;VERB&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># `lefts` returns a generator of all words to the left of a given token</span>
+<span class="c1"># which have that given token as their head</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LEFTS&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">lefts</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="c1"># `rights` returns a generator of all words to the right of a given token</span>
+<span class="c1"># which have that given token as their head</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RIGHTS&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">rights</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LEFTS
+Il		expl:subj		PRON
+y		expl:comp		PRON
+
+RIGHTS
+an		obj		NOUN
+à		advmod		ADP
+tombai		ccomp		VERB
+.		punct		PUNCT
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># `children` returns a generator of all of the descendants of a given word</span>
+<span class="k">for</span> <span class="n">descendant</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">descendant</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">descendant</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">descendant</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Il		expl:subj		PRON
+y		expl:comp		PRON
+an		obj		NOUN
+à		advmod		ADP
+tombai		ccomp		VERB
+.		punct		PUNCT
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="trying-to-read-in-a-language-we-don-t-know">
+<h3>Trying to Read in a Language We Don’t Know<a class="headerlink" href="#trying-to-read-in-a-language-we-don-t-know" title="Link to this heading">#</a></h3>
+<p>We can now move on to using these morphosyntactic annotations to read text in a language we don’t know.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first let&#39;s apply the model to the whole text</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="n">tqdm</span><span class="o">.</span><span class="n">pandas</span><span class="p">()</span> <span class="c1"># for a progress bar</span>
+
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;spacy_docs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">progress_apply</span><span class="p">(</span><span class="n">nlp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 68/68 [00:51&lt;00:00,  1.32it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># using wiktionary api as our dictionary</span>
+<span class="kn">from</span> <span class="nn">wiktionaryparser</span> <span class="kn">import</span> <span class="n">WiktionaryParser</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">WiktionaryParser</span><span class="p">()</span>
+<span class="n">word</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;hasard&#39;</span><span class="p">,</span> <span class="s1">&#39;french&#39;</span><span class="p">)</span>
+<span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;(usually in the singular) (random) chance&#39;,
+ &#39;a coincidence&#39;,
+ &#39;hazard&#39;,
+ &#39;(golf) hazard&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">look_up_definition</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">WiktionaryParser</span><span class="p">()</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="s1">&#39;french&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;definitions&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;No definition for this word. It is likely a proper noun.&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">example_sentence</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacy_docs</span><span class="o">.</span><span class="n">sents</span><span class="p">)[</span><span class="mi">4</span><span class="p">]</span> <span class="c1"># picking an easy example sentence, but feel free to alter the index to get a more complex sentence</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">example_sentence</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Il entra par le faubourg\r\nSaint-Jacques dans un magnifique apparat.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># treebank</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">example_sentence</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="fr" id="1e5d3a136e9d4b07a03c1bd2c65a7a34-0" class="displacy" width="1975" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">Il</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">entra</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">par</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">le</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">faubourg</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">
+</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">SPACE</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1100">Saint-Jacques</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1275">dans</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1450">un</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1625">magnifique</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1800">apparat.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1800">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-0" stroke-width="2px" d="M70,352.0 C70,264.5 210.0,264.5 210.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,354.0 L62,342.0 78,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-1" stroke-width="2px" d="M420,352.0 C420,177.0 740.0,177.0 740.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M420,354.0 L412,342.0 428,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-2" stroke-width="2px" d="M595,352.0 C595,264.5 735.0,264.5 735.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,354.0 L587,342.0 603,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-3" stroke-width="2px" d="M245,352.0 C245,89.5 745.0,89.5 745.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:arg</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M745.0,354.0 L753.0,342.0 737.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-4" stroke-width="2px" d="M770,352.0 C770,264.5 910.0,264.5 910.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M910.0,354.0 L918.0,342.0 902.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-5" stroke-width="2px" d="M770,352.0 C770,177.0 1090.0,177.0 1090.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1090.0,354.0 L1098.0,342.0 1082.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-6" stroke-width="2px" d="M1295,352.0 C1295,89.5 1795.0,89.5 1795.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1295,354.0 L1287,342.0 1303,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-7" stroke-width="2px" d="M1470,352.0 C1470,177.0 1790.0,177.0 1790.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1470,354.0 L1462,342.0 1478,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-8" stroke-width="2px" d="M1645,352.0 C1645,264.5 1785.0,264.5 1785.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1645,354.0 L1637,342.0 1653,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-9" stroke-width="2px" d="M245,352.0 C245,2.0 1800.0,2.0 1800.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1e5d3a136e9d4b07a03c1bd2c65a7a34-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl:mod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1800.0,354.0 L1808.0,342.0 1792.0,342.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>Steps to get started language hacking:</p>
+<ol class="arabic simple">
+<li><p>Find the root. This will usually be the verb.</p></li>
+<li><p>Look at what directly depends on the root. Begin translation.</p></li>
+<li><p>For each dependant word, look at what depends directly on it. Continue translation.</p></li>
+<li><p>Make observations on word usage and syntax</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find root and look it up</span>
+<span class="n">root</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">example_sentence</span> <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">head</span> <span class="o">==</span> <span class="n">token</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">root</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">morph</span><span class="p">,</span> <span class="n">look_up_definition</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">lemma_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;entra&#39;,
+ &#39;ROOT&#39;,
+ &#39;VERB&#39;,
+ Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin,
+ [&#39;(intransitive) to enter&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>From this information, we can see that the root of tis sentences is “entra”, that it means “enter” and that it is a 3rd person singular, indictative, past tense verb, whihc would translate to “entered” in English. Now we can look at the <code class="docutils literal notranslate"><span class="pre">lefts</span></code> and <code class="docutils literal notranslate"><span class="pre">rights</span></code> to find what depends on the root.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LEFTS: </span><span class="si">{</span><span class="p">[</span><span class="n">r</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">lefts</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">first_dep</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">lefts</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">first_dep</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">first_dep</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">first_dep</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">first_dep</span><span class="o">.</span><span class="n">morph</span><span class="p">,</span> <span class="n">look_up_definition</span><span class="p">(</span><span class="n">first_dep</span><span class="o">.</span><span class="n">lemma_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LEFTS: [Il]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Il&#39;,
+ &#39;nsubj&#39;,
+ &#39;PRON&#39;,
+ Gender=Masc|Number=Sing|Person=3,
+ [&#39;he (third-person singular masculine subject pronoun for human subject)&#39;,
+  &#39;it (third-person singular subject pronoun for grammatically masculine objects)&#39;,
+  &#39;(impersonal pronoun) Impersonal subject; it&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the ‘nsubj’ tag, we can tell that this word is the subject of the verb “entra” and it means “he”. In the context of the story, this “he” refers to King Louis XIII.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RIGHTS: </span><span class="si">{</span><span class="p">[</span><span class="n">r</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">root</span><span class="o">.</span><span class="n">rights</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">next_dep</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">rights</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">next_dep</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">next_dep</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">next_dep</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">next_dep</span><span class="o">.</span><span class="n">morph</span><span class="p">,</span> <span class="n">look_up_definition</span><span class="p">(</span><span class="n">next_dep</span><span class="o">.</span><span class="n">lemma_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RIGHTS: [faubourg, apparat, .]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;faubourg&#39;, &#39;obl:arg&#39;, &#39;NOUN&#39;, Gender=Masc|Number=Sing, [&#39;suburb&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the “obl:arg” tag, we can see that the king entered some kind of suburb. Let’s explore this word’s dependencies to find out more.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">descendant</span> <span class="ow">in</span> <span class="n">next_dep</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">descendant</span><span class="o">.</span><span class="n">dep_</span> <span class="o">!=</span> <span class="s1">&#39;dep&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">descendant</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">descendant</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">descendant</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">look_up_definition</span><span class="p">(</span><span class="n">descendant</span><span class="o">.</span><span class="n">lemma_</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>par		case		ADP		[&#39;through&#39;, &#39;by (used to introduce a means; used to introduce an agent in a passive construction)&#39;, &#39;over (used to express direction)&#39;, &#39;from (used to describe the origin of something, especially a view or movement)&#39;, &#39;around, round (inside of)&#39;, &#39;on (situated on, used in certain phrases)&#39;, &#39;on, at, in (used to denote a time when something occurs)&#39;, &#39;in&#39;, &#39;per, a, an&#39;, &#39;out of (used to describe the reason for something)&#39;, &#39;for&#39;]
+le		det		DET		[&#39;the (definite article)&#39;, &#39;Used before abstract nouns; not translated in English.&#39;, &#39;Used before the names of most countries, many subnational regions, and other geographical names including names of lakes and streets; not translated into English in most cases.&#39;, &#39;(before parts of the body) the; my, your, etc.&#39;, &#39;(before units) a, an, per&#39;, &#39;(before dates) on&#39;]
+Saint-Jacques		nmod		PROPN		[&#39;Santiago, Santiago de Compostela (the capital city of Galicia, Spain)&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>From this information, we can see that “he [the king] entered by the the Saint-Jacques suburb.” We’re almost there!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">last_dep</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">rights</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">last_dep</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">last_dep</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">last_dep</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">last_dep</span><span class="o">.</span><span class="n">morph</span><span class="p">,</span> <span class="n">look_up_definition</span><span class="p">(</span><span class="n">last_dep</span><span class="o">.</span><span class="n">lemma_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;apparat&#39;, &#39;obl:mod&#39;, &#39;NOUN&#39;, Gender=Masc|Number=Sing, [&#39;pomp, ceremony&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">descendant</span> <span class="ow">in</span> <span class="n">last_dep</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">descendant</span><span class="o">.</span><span class="n">dep_</span> <span class="o">!=</span> <span class="s1">&#39;dep&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">descendant</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">descendant</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">descendant</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">look_up_definition</span><span class="p">(</span><span class="n">descendant</span><span class="o">.</span><span class="n">lemma_</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dans		case		ADP		[&#39;(literal, figurative) in, inside (enclosed in a physical space, a group, a state)&#39;, &#39;to (indicates direction towards certain large subdivisions, see usage notes)&#39;, &#39;in, within (a longer period of time)&#39;, &#39;(with respect to time) during&#39;, &#39;out of, from&#39;, &#39;(metonymically) in; in the works of&#39;, &#39;(colloquial) Used in dans les (“about, around”)&#39;]
+un		det		DET		[&#39;an, a&#39;]
+magnifique		amod		ADJ		[&#39;magnificent, splendid, superb&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perfect! Now we have enough to create a translation of the whole sentence:</p>
+<p><strong>“He [the king] entered by the Saint-Jacques suburb in a splendid ceremony.”</strong></p>
+<p>Feel free to go back up and follow the same procedure with a different sentence.</p>
+</section>
+</section>
+<section id="limitations-of-language-hacking">
+<h2>Limitations of Language Hacking<a class="headerlink" href="#limitations-of-language-hacking" title="Link to this heading">#</a></h2>
+<p>Language hacking is a very useful paradigm for reading text in langauges you either don’t know or are learning. It allows scholars to explore traditions and cultures that they would have been excluded from in the past. That said, it comes with some key limitations.</p>
+<ul class="simple">
+<li><p>Dictionaries: As we saw above, we relied heavily on the open source wiktionary as our dictionary. This will work fine for a language like French with millions of speakers. But for languages that no one or very few people speak, a specialized dictioary will be necessary.</p></li>
+<li><p>Available language models: The point above about dictionaries also holds for pretrained language models. <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> has pretrained language models for a number of languages, but there are many, many more langauges that they do not support. Training a new model for a new language is possible, but very time-consuming.</p></li>
+<li><p>Inexact translations: Language hacking is by no means a substitute for a prepared translation. Translators can provide a much more compitent rendering of the original language, but language hacking gives scholars an additional method to interrogate linguistic questions in texts from other languages.</p></li>
+</ul>
+<p>Please contact me at <a class="reference external" href="mailto:peter&#46;nadel&#37;&#52;&#48;tufts&#46;edu">peter<span>&#46;</span>nadel<span>&#64;</span>tufts<span>&#46;</span>edu</a> for any questions.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="08_Topic_Modelling_using_Traditional_Machine_Learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Topic Modeling using Traditional Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="10_NER_with_spaCy_for_geospatial_analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Extracting Ancient Placenames using Named Entity Recognition and <code class="docutils literal notranslate"><span class="pre">spaCy</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Language Hacking: Using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> for Morphosyntactic Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-spacy">What is <code class="docutils literal notranslate"><span class="pre">spaCy</span></code>?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-and-model-preparation">Data and Model Preparation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-the-model">Apply the Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-morphosyntax">Introduction to Morphosyntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-data">Using the Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-to-read-in-a-language-we-don-t-know">Trying to Read in a Language We Don’t Know</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-language-hacking">Limitations of Language Hacking</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/nlp/tutorials/09_Language_Hacking_workshop.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/nlp/tutorials/09_Language_Hacking_workshop.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

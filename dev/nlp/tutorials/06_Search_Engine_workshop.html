@@ -1,0 +1,2114 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Creating a Search Engine for your own data using Whoosh &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nlp/tutorials/06_Search_Engine_workshop';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/nlp/tutorials/06_Search_Engine_workshop.html" />
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Textual Feature Extraction using Traditional Machine Learning" href="07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html" />
+    <link rel="prev" title="The Art of Webscraping III: Scraping Reddit" href="05_Webscraping_III_Scraping_Reddit.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_gentleintrotoNLP.html">A Gentle Introduction to Natural Language Process</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="02_PNRegex_Workshop6_28.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Static_Webscraping_with_BeautifulSoup.html">Static Webscraping with BeautifulSoup</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="04_Dynamic_Webscraping_with_Selenium.html">Dynamic Webscraping with Selenium</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="05_Webscraping_III_Scraping_Reddit.html">The Art of Webscraping III: Scraping Reddit</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Creating a Search Engine for your own data using <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html">Textual Feature Extraction using Traditional Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_Topic_Modelling_using_Traditional_Machine_Learning.html">Topic Modeling using Traditional Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Language_Hacking_workshop.html">Language Hacking: Using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> for Morphosyntactic Analysis</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="10_NER_with_spaCy_for_geospatial_analysis.html">Extracting Ancient Placenames using Named Entity Recognition and <code class="docutils literal notranslate"><span class="pre">spaCy</span></code></a></li>
+
+
+
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Digital Humanities and NLP</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">Creating a Search...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>whoosh<span class="w"> </span>paginate-whoosh<span class="w"> </span>streamlit<span class="w"> </span>-Uq
+<span class="o">!</span>wget<span class="w"> </span>https://tufts.box.com/shared/static/325sgkodnq30ez61ugazvctif6r24hsu.csv<span class="w"> </span>-O<span class="w"> </span>daf.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2024-09-16 16:26:26--  https://tufts.box.com/shared/static/325sgkodnq30ez61ugazvctif6r24hsu.csv
+Resolving tufts.box.com (tufts.box.com)... 74.112.186.157
+Connecting to tufts.box.com (tufts.box.com)|74.112.186.157|:443... connected.
+HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>301 Moved Permanently
+Location: /public/static/325sgkodnq30ez61ugazvctif6r24hsu.csv [following]
+--2024-09-16 16:26:26--  https://tufts.box.com/public/static/325sgkodnq30ez61ugazvctif6r24hsu.csv
+Reusing existing connection to tufts.box.com:443.
+HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>301 Moved Permanently
+Location: https://tufts.app.box.com/public/static/325sgkodnq30ez61ugazvctif6r24hsu.csv [following]
+--2024-09-16 16:26:26--  https://tufts.app.box.com/public/static/325sgkodnq30ez61ugazvctif6r24hsu.csv
+Resolving tufts.app.box.com (tufts.app.box.com)... 74.112.186.157
+Connecting to tufts.app.box.com (tufts.app.box.com)|74.112.186.157|:443... connected.
+HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>302 Found
+Location: https://public.boxcloud.com/d/1/b1!Dee744D_jArn9Fpk_kASgaLg9jZqrTOygtgAttkjjoh7lHI-LsEYAvXYf-b25sM8DE15xq84PYEiQdtJzjqFBng0Cu82uE5qbMgkhjcAWyBxbMOASG5Piw62csRAcn9mle4OKUGxOKa_kT6RXvo59hKhIqCK85vdHaNSE_KtHIfob84iRbcl_OWglqKf3NeXgIff6U7N-_xZGzJ0hZO27jVpr6HAi6PoH6FPsmOdCnIFEA7aR3HxEzxlLK5DhHWRhboEu5OZBYGoAL97MiYohssXQRGQ7wIe-5mBTmDrR1rLeKxrHZq09we1DCuW4HbLbIlkDj5OnHokdKKuVDWxDo11bLnhokhNHAFdXWt-FcQ1YXXGGbu8TiTHkfbsN3LaU1X-xd7fP4_H-dNnv3-69tArFPImeSzm_YnU0AVQcyAEGpmiXVpfIaeNYW41Bo7HB8j1WjTRjn_iKwO1jgC8uanHeUpAnSWug6VTaDMoMrc3pM_aLNmfJsip_FVV2VxEnahK_l3diezYW-1wvIT9bZcrm_8zg1VXL6yZlyAXLa05QYQRX1ZW_qo41o2wbOsjmB38UGaLPT0juZDMpTlLuusEsS-aOQc4TBGIb71N2bZC_0wgBb_8-CZaDlE3V-M1NJi6vswNgigTsrq6dNcOFHaBqJe_mmdCIyw_PBLNUzlJxd9ZQ2W6PqoIaXhAD07b9Op9xou1YNfKnXYDQfiBwfv8VNZHr-eop69Rzz3bDZXNAPoDSCGf0D8asuuua1dummynnX7AZn-THDScEQi0-vHNX7SdW6oZC4u8rrbeaTSFudxW7IoMuch9TsOWqrFXA-mSniTXbPkYYoRwBXCkw7tlZcOfGi2NZwxwOO91s_IwrZ1dgcoqdGQbA4oNn_thSVlYZ_gbyua8_RGhKUKm6jrK29C8AHhZEDM0cBkqIC6w6SsW0UX2AePgWF-Ex8zOaK1cmTK_lFqvG7LYxuDTiEqeTT8cpuu0AMh9L0QZxbXGu96ld66QfBvuMPdoh2PZVAr2nQ1s6Mt5DplFGvXFmbT7siiYrcNiCscl_PWc1fCX-3vGOm60z1bvXQhvR9IA8VqxtW_rVz7YPMaZ-pFJx-n3Tq-luE3Q_RTZLCLxHy_oZFgl_Y2iYSIj-C1ceFVi4S-eLhl1VRBHqEqon5gLCZJY4O3MdEFv_Ga9jUqkBsh9isZ3aqhJk4Sm_ILP410ZV4my2EmbTHkTL8AGrMR8E-g345MQ9C5U1zkAQbi336qVdkPUsQ8JPMSdxhTwDrIXcaD1bI7hLwAzCdYkAA-YKHaC1-4-gyMUCUnS3c-ftByvKjLf9yLnewYAhbOoO69-NU90LnxQepAdc1PIYgKn3KaizG80EtYdu03i/download [following]
+--2024-09-16 16:26:27--  https://public.boxcloud.com/d/1/b1!Dee744D_jArn9Fpk_kASgaLg9jZqrTOygtgAttkjjoh7lHI-LsEYAvXYf-b25sM8DE15xq84PYEiQdtJzjqFBng0Cu82uE5qbMgkhjcAWyBxbMOASG5Piw62csRAcn9mle4OKUGxOKa_kT6RXvo59hKhIqCK85vdHaNSE_KtHIfob84iRbcl_OWglqKf3NeXgIff6U7N-_xZGzJ0hZO27jVpr6HAi6PoH6FPsmOdCnIFEA7aR3HxEzxlLK5DhHWRhboEu5OZBYGoAL97MiYohssXQRGQ7wIe-5mBTmDrR1rLeKxrHZq09we1DCuW4HbLbIlkDj5OnHokdKKuVDWxDo11bLnhokhNHAFdXWt-FcQ1YXXGGbu8TiTHkfbsN3LaU1X-xd7fP4_H-dNnv3-69tArFPImeSzm_YnU0AVQcyAEGpmiXVpfIaeNYW41Bo7HB8j1WjTRjn_iKwO1jgC8uanHeUpAnSWug6VTaDMoMrc3pM_aLNmfJsip_FVV2VxEnahK_l3diezYW-1wvIT9bZcrm_8zg1VXL6yZlyAXLa05QYQRX1ZW_qo41o2wbOsjmB38UGaLPT0juZDMpTlLuusEsS-aOQc4TBGIb71N2bZC_0wgBb_8-CZaDlE3V-M1NJi6vswNgigTsrq6dNcOFHaBqJe_mmdCIyw_PBLNUzlJxd9ZQ2W6PqoIaXhAD07b9Op9xou1YNfKnXYDQfiBwfv8VNZHr-eop69Rzz3bDZXNAPoDSCGf0D8asuuua1dummynnX7AZn-THDScEQi0-vHNX7SdW6oZC4u8rrbeaTSFudxW7IoMuch9TsOWqrFXA-mSniTXbPkYYoRwBXCkw7tlZcOfGi2NZwxwOO91s_IwrZ1dgcoqdGQbA4oNn_thSVlYZ_gbyua8_RGhKUKm6jrK29C8AHhZEDM0cBkqIC6w6SsW0UX2AePgWF-Ex8zOaK1cmTK_lFqvG7LYxuDTiEqeTT8cpuu0AMh9L0QZxbXGu96ld66QfBvuMPdoh2PZVAr2nQ1s6Mt5DplFGvXFmbT7siiYrcNiCscl_PWc1fCX-3vGOm60z1bvXQhvR9IA8VqxtW_rVz7YPMaZ-pFJx-n3Tq-luE3Q_RTZLCLxHy_oZFgl_Y2iYSIj-C1ceFVi4S-eLhl1VRBHqEqon5gLCZJY4O3MdEFv_Ga9jUqkBsh9isZ3aqhJk4Sm_ILP410ZV4my2EmbTHkTL8AGrMR8E-g345MQ9C5U1zkAQbi336qVdkPUsQ8JPMSdxhTwDrIXcaD1bI7hLwAzCdYkAA-YKHaC1-4-gyMUCUnS3c-ftByvKjLf9yLnewYAhbOoO69-NU90LnxQepAdc1PIYgKn3KaizG80EtYdu03i/download
+Resolving public.boxcloud.com (public.boxcloud.com)... 74.112.186.164
+Connecting to public.boxcloud.com (public.boxcloud.com)|74.112.186.164|:443... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connected.
+HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200 OK
+Length: 4643634 (4.4M) [text/csv]
+Saving to: ‘daf.csv’
+
+
+daf.csv               0%[                    ]       0  --.-KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>daf.csv             100%[===================&gt;]   4.43M  --.-KB/s    in 0.1s    
+
+2024-09-16 16:26:27 (35.6 MB/s) - ‘daf.csv’ saved [4643634/4643634]
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="creating-a-search-engine-for-your-own-data-using-whoosh">
+<h1>Creating a Search Engine for your own data using <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code><a class="headerlink" href="#creating-a-search-engine-for-your-own-data-using-whoosh" title="Link to this heading">#</a></h1>
+<p>No matter the discipline, scholars tend to accumulate a vast array of textual sources. Regardless of whether these are primary or seconrdary sources, researchers often need help wading through these sources and finding places where it’s best to start digging into the text.</p>
+<p>In this notebook, we’ll explore how to create and customize your own search engine so that you can easily and quickly search through your data. We will be using a Python library <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code>, which implements indexing, complex logical queries and searching in pure Python, meaning that it doesn’t require a compiler or Java. <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code> is not a search engine itself, but rather a library that allows users to develop their own search engine.</p>
+<section id="setting-up-the-data">
+<h2>Setting up the data<a class="headerlink" href="#setting-up-the-data" title="Link to this heading">#</a></h2>
+<p>In this section I’ll download some data and put it into a form that is to easy index for <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code>. In this notebook, we’ll be searching through Edward Gibbon’s <em>Decline and Fall of the Roman Empire</em>, a notoriously long and difficult book about the history of Europe from ~200 to ~1400 CE.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">daf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;daf.csv&#39;</span><span class="p">)[[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">]]</span>
+<span class="n">daf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>Introduction.       The Extent And Military Fo...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>It was an ancient tradition, that when the Cap...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>The camp of a Roman legion presented the appea...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>The Internal Prosperity In The Age Of The Anto...</td>
+      <td>Of The Union And Internal Prosperity Of The Ro...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>The Internal Prosperity In The Age Of The Anto...</td>
+      <td>Till the privileges of Romans had been progres...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>291</th>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>Never perhaps has the energy and effect of a s...</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>Without drawing his sword, count Pepin restore...</td>
+    </tr>
+    <tr>
+      <th>293</th>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>The royal prerogative of coining money, which ...</td>
+    </tr>
+    <tr>
+      <th>294</th>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+    </tr>
+    <tr>
+      <th>295</th>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>These general observations may be separately a...</td>
+    </tr>
+  </tbody>
+</table>
+<p>296 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>I have this data already in a DataFrame or spreadsheet. However, this is not needed for <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code>. Instead, I’m using this format as an easy way to store and access the data.</p>
+</section>
+<section id="indexing-our-data">
+<h2>Indexing our data<a class="headerlink" href="#indexing-our-data" title="Link to this heading">#</a></h2>
+<p>Now that we have some data to search through, we can begin indexing it. When it indexes text data, <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code> creates a variety of files for us. These files contain tables which relate document names (in our case, the names of the chapters, the <code class="docutils literal notranslate"><span class="pre">title</span></code> column) to vectorized collections of words. Vectorization is the process of turning natural language into long lists of numbers so that we can conduct automated processes. There are a many ways to do this, so if you are interested, I recommend checking out the <code class="docutils literal notranslate"><span class="pre">Textual</span> <span class="pre">Feature</span> <span class="pre">Extraction</span> <span class="pre">using</span> <span class="pre">Traditional</span> <span class="pre">Machine</span> <span class="pre">Learning</span></code> workshop after this one.</p>
+<p>To index data in <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code> we need a couple things in addition to our dawta:</p>
+<ul class="simple">
+<li><p>An empty directory, where we can saved the files that <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code> produces</p></li>
+<li><p>We also need a <strong>schema</strong>, a list of names and data types that we give to <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code> so that the indexer knows how to store our data</p></li>
+</ul>
+<p>See the example below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># designing a schema</span>
+<span class="c1"># we have two fields, title and text, both strings, so this will be a relatively simple schema</span>
+
+<span class="kn">from</span> <span class="nn">whoosh.fields</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">,</span> <span class="n">KEYWORD</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">STORED</span>
+<span class="kn">from</span> <span class="nn">whoosh.analysis</span> <span class="kn">import</span> <span class="n">StemmingAnalyzer</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">ID</span><span class="p">(</span><span class="n">stored</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">TEXT</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="n">StemmingAnalyzer</span><span class="p">(),</span> <span class="n">stored</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># (optional) applies stemming to the text -&gt; run, running, ran are all found when searching for &quot;run&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now that we have a schema we can index our text</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">whoosh</span> <span class="kn">import</span> <span class="n">index</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;daf_index&quot;</span><span class="p">):</span> <span class="c1"># creates an empty directory</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;daf_index&quot;</span><span class="p">)</span>
+
+<span class="n">ix</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">create_in</span><span class="p">(</span><span class="s2">&quot;daf_index&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Nota bene</em>: When you create an index as we have in the last line of the cell above that directory is now classified as an <code class="docutils literal notranslate"><span class="pre">FileIndex</span></code> type object. This means that if you need to start over, you’ll need to <strong>delete this folder and make it again</strong>. Sometimes, this can be confusing, especially because the error doesn’t give you much guidance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">writer</span> <span class="o">=</span> <span class="n">ix</span><span class="o">.</span><span class="n">writer</span><span class="p">()</span> <span class="c1"># allows us to add documents</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">daf</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span> <span class="c1"># looping through our data</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">add_document</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span> <span class="n">text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span> <span class="c1"># adding each row to our index</span>
+
+<span class="n">writer</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span> <span class="c1"># commits the added documents</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="search-our-data">
+<h2>Search our data<a class="headerlink" href="#search-our-data" title="Link to this heading">#</a></h2>
+<p>With our completed index, we can begin searching through our data. <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code> provides many options for searching including boolean operators (AND, OR, NOT) applying the stemmer we used when indexing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">whoosh.qparser</span> <span class="kn">import</span> <span class="n">QueryParser</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="n">qp</span> <span class="o">=</span> <span class="n">QueryParser</span><span class="p">(</span>
+    <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="c1"># field we want to search in</span>
+    <span class="n">schema</span><span class="o">=</span><span class="n">ix</span><span class="o">.</span><span class="n">schema</span>
+<span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;The Crusades&quot;</span><span class="p">)</span>
+
+<span class="c1"># can print out the results below</span>
+<span class="k">with</span> <span class="n">ix</span><span class="o">.</span><span class="n">searcher</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="c1"># list of dictionaries</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span> <span class="c1"># loop through them</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">hit</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span> <span class="c1"># chapter name from our schema</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">hit</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span> <span class="c1"># text</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result 1
+The Crusades.—Part I.
+(&#39;Preservation Of The Greek Empire.—Numbers, Passage, And Event, Of      The &#39;
+ &#39;Second And Third Crusades.—St. Bernard.— Reign Of Saladin In      Egypt And &#39;
+ &#39;Syria.—His Conquest Of Jerusalem.—Naval      Crusades.—Richard The First Of &#39;
+ &#39;England.— Pope Innocent The Third;      And The Fourth And Fifth Crusades.— &#39;
+ &#39;The Emperor Frederic The      Second.—Louis The Ninth Of France; And The Two &#39;
+ &#39;Last      Crusades.—Expulsion Of The Latins Or Franks By The Mamelukes.   In &#39;
+ &#39;a style less grave than that of history, I should perhaps compare the &#39;
+ &#39;emperor Alexius               In the twelfth century, three great &#39;
+ &#39;emigrations marched by land from the West for the relief of Palestine. The &#39;
+ &#39;soldiers and pilgrims of Lombardy, France, and Germany were excited by the &#39;
+ &#39;example and success of the first crusade.       I. Of the swarms that so &#39;
+ &#39;closely trod in the footsteps of the first pilgrims, the chiefs were equal &#39;
+ &#39;in rank, though unequal in fame and merit, to Godfrey of Bouillon and his &#39;
+ &#39;fellow-adventurers. At their head were displayed the banners of the dukes of &#39;
+ &#39;Burgundy, Bavaria, and Aquitain; the first a descendant of Hugh Capet, the &#39;
+ &#39;second, a father of the Brunswick line: the archbishop of Milan, a temporal &#39;
+ &#39;prince, transported, for the benefit of the Turks, the treasures and &#39;
+ &#39;ornaments of his church and palace; and the veteran crusaders, Hugh the &#39;
+ &#39;Great and Stephen of Chartres, returned to consummate their unfinished vow. &#39;
+ &#39;The huge and disorderly bodies of their followers moved forward in two &#39;
+ &#39;columns; and if the first consisted of two hundred and sixty thousand &#39;
+ &#39;persons, the second might possibly amount to sixty thousand horse and one &#39;
+ &#39;hundred thousand foot.             II. The number and character of the &#39;
+ &#39;strangers was an object of terror to the effeminate Greeks, and the &#39;
+ &#39;sentiment of fear is nearly allied to that of hatred. This aversion was &#39;
+ &#39;suspended or softened by the apprehension of the Turkish power; and the &#39;
+ &#39;invectives of the Latins will not bias our more candid belief, that the &#39;
+ &#39;emperor Alexius dissembled their insolence, eluded their hostilities, &#39;
+ &#39;counselled their rashness, and opened to their ardor the road of pilgrimage &#39;
+ &#39;and conquest. But when the Turks had been driven from Nice and the &#39;
+ &#39;sea-coast, when the Byzantine princes no longer dreaded the distant sultans &#39;
+ &#39;of Cogni, they felt with purer indignation the free and frequent passage of &#39;
+ &#39;the western Barbarians, who violated the majesty, and endangered the safety, &#39;
+ &#39;of the empire. The second and third crusades were undertaken under the reign &#39;
+ &#39;of Manuel Comnenus and Isaac Angelus. Of the former, the passions were &#39;
+ &#39;always impetuous, and often malevolent; and the natural union of a cowardly &#39;
+ &#39;and a mischievous temper was exemplified in the latter, who, without merit &#39;
+ &#39;or mercy, could punish a tyrant, and occupy his throne. It was secretly, and &#39;
+ &#39;perhaps tacitly, resolved by the prince and people to destroy, or at least &#39;
+ &#39;to discourage, the pilgrims, by every species of injury and oppression; and &#39;
+ &#39;their want of prudence and discipline continually afforded the pretence or &#39;
+ &#39;the opportunity. The Western monarchs had stipulated a safe passage and fair &#39;
+ &#39;market in the country of their Christian brethren; the treaty had been &#39;
+ &#39;ratified by oaths and hostages; and the poorest soldier of Frederic’s army &#39;
+ &#39;was furnished with three marks of silver to defray his expenses on the road. &#39;
+ &#39;But every engagement was violated by treachery and injustice; and the &#39;
+ &#39;complaints of the Latins are attested by the honest confession of a Greek &#39;
+ &#39;historian, who has dared to prefer truth to his country.           III. The &#39;
+ &#39;swarms that followed the first crusade were destroyed in Anatolia by famine, &#39;
+ &#39;pestilence, and the Turkish arrows; and the princes only escaped with some &#39;
+ &#39;squadrons of horse to accomplish their lamentable pilgrimage. A just opinion &#39;
+ &#39;may be formed of their knowledge and humanity; of their knowledge, from the &#39;
+ &#39;design of subduing Persia and Chorasan in their way to &#39;
+ &#39;Jerusalem;                     The enthusiasm of the first crusade is a &#39;
+ &#39;natural and simple event, while hope was fresh, danger untried, and &#39;
+ &#39;enterprise congenial to the spirit of the times. But the obstinate &#39;
+ &#39;perseverance of Europe may indeed excite our pity and admiration; that no &#39;
+ &#39;instruction should have been drawn from constant and adverse experience; &#39;
+ &#39;that the same confidence should have repeatedly grown from the same &#39;
+ &#39;failures; that six succeeding generations should have rushed headlong down &#39;
+ &#39;the precipice that was open before them; and that men of every condition &#39;
+ &#39;should have staked their public and private fortunes on the desperate &#39;
+ &#39;adventure of possessing or recovering a tombstone two thousand miles from &#39;
+ &#39;their country. In a period of two centuries after the council of Clermont, &#39;
+ &#39;each spring and summer produced a new emigration of pilgrim warriors for the &#39;
+ &#39;defence of the Holy Land; but the seven great armaments or crusades were &#39;
+ &#39;excited by some impending or recent calamity: the nations were moved by the &#39;
+ &#39;authority of their pontiffs, and the example of their kings: their zeal was &#39;
+ &#39;kindled, and their reason was silenced, by the voice of their holy orators; &#39;
+ &#39;and among these, Bernard,                     Omnipotence itself cannot &#39;
+ &#39;escape the murmurs of its discordant votaries; since the same dispensation &#39;
+ &#39;which was applauded as a deliverance in Europe, was deplored, and perhaps &#39;
+ &#39;arraigned, as a calamity in Asia. After the loss of Jerusalem, the Syrian &#39;
+ &#39;fugitives diffused their consternation and sorrow; Bagdad mourned in the &#39;
+ &#39;dust; the cadhi Zeineddin of Damascus tore his beard in the caliph’s &#39;
+ &#39;presence; and the whole divan shed tears at his melancholy tale.           &#39;)
+----------------------------------------
+Result 2
+The Crusades.—Part III.
+(&#39;Philip Augustus, and Richard the First, are the only kings of France and &#39;
+ &#39;England who have fought under the same banners; but the holy service in &#39;
+ &#39;which they were enlisted was incessantly disturbed by their national &#39;
+ &#39;jealousy; and the two factions, which they protected in Palestine, were more &#39;
+ &#39;averse to each other than to the common enemy. In the eyes of the Orientals; &#39;
+ &#39;the French monarch was superior in dignity and power; and, in the emperor’s &#39;
+ &#39;absence, the Latins revered him as their temporal chief.                 &#39;
+ &#39;During these hostilities, a languid and tedious negotiation         The &#39;
+ &#39;noblest monument of a conqueror’s fame, and of the terror which he inspired, &#39;
+ &#39;is the Saladine tenth, a general tax which was imposed on the laity, and &#39;
+ &#39;even the clergy, of the Latin church, for the service of the holy war. The &#39;
+ &#39;practice was too lucrative to expire with the occasion: and this tribute &#39;
+ &#39;became the foundation of all the tithes and tenths on ecclesiastical &#39;
+ &#39;benefices, which have been granted by the Roman pontiffs to Catholic &#39;
+ &#39;sovereigns, or reserved for the immediate use of the apostolic &#39;
+ &#39;see.           The persons, the families, and estates of the pilgrims, were &#39;
+ &#39;under the immediate protection of the popes; and these spiritual patrons &#39;
+ &#39;soon claimed the prerogative of directing their operations, and enforcing, &#39;
+ &#39;by commands and censures, the accomplishment of their vow. Frederic the &#39;
+ &#39;Second,           Of the seven crusades, the two last were undertaken by &#39;
+ &#39;Louis the Ninth, king of France; who lost his liberty in Egypt, and his life &#39;
+ &#39;on the coast of Africa. Twenty-eight years after his death, he was canonized &#39;
+ &#39;at Rome; and sixty-five miracles were readily found, and solemnly attested, &#39;
+ &#39;to justify the claim of the royal saint.         In complete armor, the &#39;
+ &#39;oriflamme waving before him, Louis leaped foremost on the beach; and the &#39;
+ &#39;strong city of Damietta, which had cost his predecessors a siege of sixteen &#39;
+ &#39;months, was abandoned on the first assault by the trembling Moslems. But &#39;
+ &#39;Damietta was the first and the last of his conquests; and in the fifth and &#39;
+ &#39;sixth crusades, the same causes, almost on the same ground, were productive &#39;
+ &#39;of similar calamities.         The memory of his defeat excited Louis, after &#39;
+ &#39;sixteen years of wisdom and repose, to undertake the seventh and last of the &#39;
+ &#39;crusades. His finances were restored, his kingdom was enlarged; a new &#39;
+ &#39;generation of warriors had arisen, and he advanced with fresh confidence at &#39;
+ &#39;the head of six thousand horse and thirty thousand foot. The loss of Antioch &#39;
+ &#39;had provoked the enterprise; a wild hope of baptizing the king of Tunis &#39;
+ &#39;tempted him to steer for the African coast; and the report of an immense &#39;
+ &#39;treasure reconciled his troops to the delay of their voyage to the Holy &#39;
+ &#39;Land. Instead of a proselyte, he found a siege: the French panted and died &#39;
+ &#39;on the burning sands: St. Louis expired in his tent; and no sooner had he &#39;
+ &#39;closed his eyes, than his son and successor gave the signal of the &#39;
+ &#39;retreat.     A more unjust and absurd constitution cannot be devised than &#39;
+ &#39;that which condemns the natives of a country to perpetual servitude, under &#39;
+ &#39;the arbitrary dominion of strangers and slaves. Yet such has been the state &#39;
+ &#39;of Egypt above five hundred years. The most illustrious sultans of the &#39;
+ &#39;Baharite and Borgite dynasties                 After the loss of Jerusalem, &#39;
+ &#39;Acre,   &#39;)
+----------------------------------------
+Result 3
+The First Crusade.—Part II.
+(&#39;Of the chiefs and soldiers who marched to the holy sepulchre, I will dare to &#39;
+ &#39;affirm, that all were prompted by the spirit of enthusiasm; the belief of &#39;
+ &#39;merit, the hope of reward, and the assurance of divine aid. But I am equally &#39;
+ &#39;persuaded, that in many it was not the sole, that in some it was not the &#39;
+ &#39;leading, principle of action. The use and abuse of religion are feeble to &#39;
+ &#39;stem, they are strong and irresistible to impel, the stream of national &#39;
+ &#39;manners. Against the private wars of the Barbarians, their bloody &#39;
+ &#39;tournaments, licentious love, and judicial duels, the popes and synods might &#39;
+ &#39;ineffectually thunder. It is a more easy task to provoke the metaphysical &#39;
+ &#39;disputes of the Greeks, to drive into the cloister the victims of anarchy or &#39;
+ &#39;despotism, to sanctify the patience of slaves and cowards, or to assume the &#39;
+ &#39;merit of the humanity and benevolence of modern Christians. War and exercise &#39;
+ &#39;were the reigning passions of the Franks or Latins; they were enjoined, as a &#39;
+ &#39;penance, to gratify those passions, to visit distant lands, and to draw &#39;
+ &#39;their swords against the nation of the East. Their victory, or even their &#39;
+ &#39;attempt, would immortalize the names of the intrepid heroes of the cross; &#39;
+ &#39;and the purest piety could not be insensible to the most splendid prospect &#39;
+ &#39;of military glory. In the petty quarrels of Europe, they shed the blood of &#39;
+ &#39;their friends and countrymen, for the acquisition perhaps of a castle or a &#39;
+ &#39;village. They could march with alacrity against the distant and hostile &#39;
+ &#39;nations who were devoted to their arms; their fancy already grasped the &#39;
+ &#39;golden sceptres of Asia; and the conquest of Apulia and Sicily by the &#39;
+ &#39;Normans might exalt to royalty the hopes of the most private adventurer. &#39;
+ &#39;Christendom, in her rudest state, must have yielded to the climate and &#39;
+ &#39;cultivation of the Mahometan countries; and their natural and artificial &#39;
+ &#39;wealth had been magnified by the tales of pilgrims, and the gifts of an &#39;
+ &#39;imperfect commerce. The vulgar, both the great and small, were taught to &#39;
+ &#39;believe every wonder, of lands flowing with milk and honey, of mines and &#39;
+ &#39;treasures, of gold and diamonds, of palaces of marble and jasper, and of &#39;
+ &#39;odoriferous groves of cinnamon and frankincense. In this earthly paradise, &#39;
+ &#39;each warrior depended on his sword to carve a plenteous and honorable &#39;
+ &#39;establishment, which he measured only by the extent of his wishes.       &#39;
+ &#39;These motives were potent and numerous: when we have singly computed their &#39;
+ &#39;weight on the mind of each individual, we must add the infinite series, the &#39;
+ &#39;multiplying powers, of example and fashion. The first proselytes became the &#39;
+ &#39;warmest and most effectual missionaries of the cross: among their friends &#39;
+ &#39;and countrymen they preached the duty, the merit, and the recompense, of &#39;
+ &#39;their holy vow; and the most reluctant hearers were insensibly drawn within &#39;
+ &#39;the whirlpool of persuasion and authority. The martial youths were fired by &#39;
+ &#39;the reproach or suspicion of cowardice; the opportunity of visiting with an &#39;
+ &#39;army the sepulchre of Christ was embraced by the old and infirm, by women &#39;
+ &#39;and children, who consulted rather their zeal than their strength; and those &#39;
+ &#39;who in the evening had derided the folly of their companions, were the most &#39;
+ &#39;eager, the ensuing day, to tread in their footsteps. The ignorance, which &#39;
+ &#39;magnified the hopes, diminished the perils, of the enterprise. Since the &#39;
+ &#39;Turkish conquest, the paths of pilgrimage were obliterated; the chiefs &#39;
+ &#39;themselves had an imperfect notion of the length of the way and the state of &#39;
+ &#39;their enemies; and such was the stupidity of the people, that, at the sight &#39;
+ &#39;of the first city or castle beyond the limits of their knowledge, they were &#39;
+ &#39;ready to ask whether that was not the Jerusalem, the term and object of &#39;
+ &#39;their labors. Yet the more prudent of the crusaders, who were not sure that &#39;
+ &#39;they should be fed from heaven with a shower of quails or manna, provided &#39;
+ &#39;themselves with those precious metals, which, in every country, are the &#39;
+ &#39;representatives of every commodity. To defray, according to their rank, the &#39;
+ &#39;expenses of the road, princes alienated their provinces, nobles their lands &#39;
+ &#39;and castles, peasants their cattle and the instruments of husbandry. The &#39;
+ &#39;value of property was depreciated by the eager competition of multitudes; &#39;
+ &#39;while the price of arms and horses was raised to an exorbitant height by the &#39;
+ &#39;wants and impatience of the buyers.     The fifteenth of August had been &#39;
+ &#39;fixed in the council of Clermont for the departure of the pilgrims; but the &#39;
+ &#39;day was anticipated by the thoughtless and needy crowd of plebeians, and I &#39;
+ &#39;shall briefly despatch the calamities which they inflicted and suffered, &#39;
+ &#39;before I enter on the more serious and successful enterprise of the chiefs. &#39;
+ &#39;Early in the spring, from the confines of France and Lorraine, above sixty &#39;
+ &#39;thousand of the populace of both sexes flocked round the first missionary of &#39;
+ &#39;the crusade, and pressed him with clamorous importunity to lead them to the &#39;
+ &#39;holy sepulchre. The hermit, assuming the character, without the talents or &#39;
+ &#39;authority, of a general, impelled or obeyed the forward impulse of his &#39;
+ &#39;votaries along the banks of the Rhine and Danube. Their wants and numbers &#39;
+ &#39;soon compelled them to separate, and his lieutenant, Walter the Penniless, a &#39;
+ &#39;valiant though needy soldier, conducted a van guard of pilgrims, whose &#39;
+ &#39;condition may be determined from the proportion of eight horsemen to fifteen &#39;
+ &#39;thousand foot. The example and footsteps of Peter were closely pursued by &#39;
+ &#39;another fanatic, the monk Godescal, whose sermons had swept away fifteen or &#39;
+ &#39;twenty thousand peasants from the villages of Germany. Their rear was again &#39;
+ &#39;pressed by a herd of two hundred thousand, the most stupid and savage refuse &#39;
+ &#39;of the people, who mingled with their devotion a brutal license of rapine, &#39;
+ &#39;prostitution, and drunkenness. Some counts and gentlemen, at the head of &#39;
+ &#39;three thousand horse, attended the motions of the multitude to partake in &#39;
+ &#39;the spoil; but their genuine leaders (may we credit such folly?) were a &#39;
+ &#39;goose and a goat, who were carried in the front, and to whom these worthy &#39;
+ &#39;Christians ascribed an infusion of the divine spirit.       Between the &#39;
+ &#39;frontiers of Austria and the seat of the Byzantine monarchy, the crusaders &#39;
+ &#39;were compelled to traverse as interval of six hundred miles; the wild and &#39;
+ &#39;desolate countries of Hungary             “To save time and space, I shall &#39;
+ &#39;represent, in a short table, the particular references to the great events &#39;
+ &#39;of the first crusade.”      [See Table                         &#39;)
+----------------------------------------
+Result 4
+Schism Of The Greeks And Latins.—Part I.
+(&#39;Schism Of The Greeks And Latins.—Reign And Character Of Amurath      The &#39;
+ &#39;Second.—Crusade Of Ladislaus, King Of Hungary.— His Defeat And      &#39;
+ &#39;Death.—John Huniades.—Scanderbeg.— Constantine Palæologus, Last      Emperor &#39;
+ &#39;Of The East.  The respective merits of Rome and Constantinople are compared &#39;
+ &#39;and celebrated by an eloquent Greek, the father of the Italian &#39;
+ &#39;schools.         The last hope of the falling city and empire was placed in &#39;
+ &#39;the harmony of the mother and daughter, in the maternal tenderness of Rome, &#39;
+ &#39;and the filial obedience of Constantinople. In the synod of Florence, the &#39;
+ &#39;Greeks and Latins had embraced, and subscribed, and promised; but these &#39;
+ &#39;signs of friendship were perfidious or fruitless;     The schism was not &#39;
+ &#39;confined to the narrow limits of the Byzantine empire. Secure under the &#39;
+ &#39;Mamaluke sceptre, the three patriarchs of Alexandria, Antioch, and &#39;
+ &#39;Jerusalem, assembled a numerous synod; disowned their representatives at &#39;
+ &#39;Ferrara and Florence; condemned the creed and council of the Latins; and &#39;
+ &#39;threatened the emperor of Constantinople with the censures of the Eastern &#39;
+ &#39;church. Of the sectaries of the Greek communion, the Russians were the most &#39;
+ &#39;powerful, ignorant, and superstitious. Their primate, the cardinal Isidore, &#39;
+ &#39;hastened from Florence to Moscow,         “Sultan Murad, or Amurath, lived &#39;
+ &#39;forty-nine, and reigned thirty years, six months, and eight days. He was a &#39;
+ &#39;just and valiant prince, of a great soul, patient of labors, learned, &#39;
+ &#39;merciful, religious, charitable; a lover and encourager of the studious, and &#39;
+ &#39;of all who excelled in any art or science; a good emperor and a great &#39;
+ &#39;general. No man obtained more or greater victories than Amurath; Belgrade &#39;
+ &#39;alone withstood his attacks.       But the most striking feature in the life &#39;
+ &#39;and character of Amurath is the double abdication of the Turkish throne; &#39;
+ &#39;and, were not his motives debased by an alloy of superstition, we must &#39;
+ &#39;praise the royal philosopher,         After the departure of his Greek &#39;
+ &#39;brethren, Eugenius had not been unmindful of their temporal interest; and &#39;
+ &#39;his tender regard for the Byzantine empire was animated by a just &#39;
+ &#39;apprehension of the Turks, who approached, and might soon invade, the &#39;
+ &#39;borders of Italy. But the spirit of the crusades had expired; and the &#39;
+ &#39;coldness of the Franks was not less unreasonable than their headlong &#39;
+ &#39;passion. In the eleventh century, a fanatic monk could precipitate Europe on &#39;
+ &#39;Asia for the recovery of the holy sepulchre; but in the fifteenth, the most &#39;
+ &#39;pressing motives of religion and policy were insufficient to unite the &#39;
+ &#39;Latins in the defence of Christendom. Germany was an inexhaustible &#39;
+ &#39;storehouse of men and arms:             Of the Polish and Hungarian diets, a &#39;
+ &#39;religious war was the unanimous cry; and Ladislaus, after passing the &#39;
+ &#39;Danube, led an army of his confederate subjects as far as Sophia, the &#39;
+ &#39;capital of the Bulgarian kingdom. In this expedition they obtained two &#39;
+ &#39;signal victories, which were justly ascribed to the valor and conduct of &#39;
+ &#39;Huniades. In the first, with a vanguard of ten thousand men, he surprised &#39;
+ &#39;the Turkish camp; in the second, he vanquished and made prisoner the most &#39;
+ &#39;renowned of their generals, who possessed the double advantage of ground and &#39;
+ &#39;numbers. The approach of winter, and the natural and artificial obstacles of &#39;
+ &#39;Mount Hæmus, arrested the progress of the hero, who measured a narrow &#39;
+ &#39;interval of six days’ march from the foot of the mountains to the hostile &#39;
+ &#39;towers of Adrianople, and the friendly capital of the Greek empire. The &#39;
+ &#39;retreat was undisturbed; and the entrance into Buda was at once a military &#39;
+ &#39;and religious triumph. An ecclesiastical procession was followed by the king &#39;
+ &#39;and his warriors on foot: he nicely balanced the merits and rewards of the &#39;
+ &#39;two nations; and the pride of conquest was blended with the humble temper of &#39;
+ &#39;Christianity. Thirteen bashaws, nine standards, and four thousand captives, &#39;
+ &#39;were unquestionable trophies; and as all were willing to believe, and none &#39;
+ &#39;were present to contradict, the crusaders multiplied, with unblushing &#39;
+ &#39;confidence, the myriads of Turks whom they had left on the field of &#39;
+ &#39;battle.     During the whole transaction, the cardinal legate had observed a &#39;
+ &#39;sullen silence, unwilling to approve, and unable to oppose, the consent of &#39;
+ &#39;the king and people. But the diet was not dissolved before Julian was &#39;
+ &#39;fortified by the welcome intelligence, that Anatolia was invaded by the &#39;
+ &#39;Caramanian, and Thrace by the Greek emperor; that the fleets of Genoa, &#39;
+ &#39;Venice, and Burgundy, were masters of the Hellespont; and that the allies, &#39;
+ &#39;informed of the victory, and ignorant of the treaty, of Ladislaus, &#39;
+ &#39;impatiently waited for the return of his victorious army. “And is it thus,” &#39;
+ &#39;exclaimed the cardinal,   &#39;)
+----------------------------------------
+Result 5
+Partition Of The Empire By The French And Venetians.—Part III.
+(&#39;But in this abject distress, the emperor and empire were still possessed of &#39;
+ &#39;an ideal treasure, which drew its fantastic value from the superstition of &#39;
+ &#39;the Christian world. The merit of the true cross was somewhat impaired by &#39;
+ &#39;its frequent division; and a long captivity among the infidels might shed &#39;
+ &#39;some suspicion on the fragments that were produced in the East and West. But &#39;
+ &#39;another relic of the Passion was preserved in the Imperial chapel of &#39;
+ &#39;Constantinople; and the crown of thorns which had been placed on the head of &#39;
+ &#39;Christ was equally precious and authentic. It had formerly been the practice &#39;
+ &#39;of the Egyptian debtors to deposit, as a security, the mummies of their &#39;
+ &#39;parents; and both their honor and religion were bound for the redemption of &#39;
+ &#39;the pledge. In the same manner, and in the absence of the emperor, the &#39;
+ &#39;barons of Romania borrowed the sum of thirteen thousand one hundred and &#39;
+ &#39;thirty-four pieces of gold           The Latins of Constantinople       &#39;
+ &#39;Intent on his great object, the emperor Michael visited in person and &#39;
+ &#39;strengthened the troops and fortifications of Thrace. The remains of the &#39;
+ &#39;Latins were driven from their last possessions: he assaulted without success &#39;
+ &#39;the suburb of Galata; and corresponded with a perfidious baron, who proved &#39;
+ &#39;unwilling, or unable, to open the gates of the metropolis. The next spring, &#39;
+ &#39;his favorite general, Alexius Strategopulus, whom he had decorated with the &#39;
+ &#39;title of Cæsar, passed the Hellespont with eight hundred horse and some &#39;
+ &#39;infantry,             After this narrative of the expeditions of the Latins &#39;
+ &#39;to Palestine and Constantinople, I cannot dismiss the subject without &#39;
+ &#39;resolving the general consequences on the countries that were the scene, and &#39;
+ &#39;on the nations that were the actors, of these memorable crusades.     If we &#39;
+ &#39;compare the æra of the crusades, the Latins of Europe with the Greeks and &#39;
+ &#39;Arabians, their respective degrees of knowledge, industry, and art, our rude &#39;
+ &#39;ancestors must be content with the third rank in the scale of nations. Their &#39;
+ &#39;successive improvement and present superiority may be ascribed to a peculiar &#39;
+ &#39;energy of character, to an active and imitative spirit, unknown to their &#39;
+ &#39;more polished rivals, who at that time were in a stationary or retrograde &#39;
+ &#39;state. With such a disposition, the Latins should have derived the most &#39;
+ &#39;early and essential benefits from a series of events which opened to their &#39;
+ &#39;eyes the prospect of the world, and introduced them to a long and frequent &#39;
+ &#39;intercourse with the more cultivated regions of the East. The first and most &#39;
+ &#39;obvious progress was in trade and manufactures, in the arts which are &#39;
+ &#39;strongly prompted by the thirst of wealth, the calls of necessity, and the &#39;
+ &#39;gratification of the sense or vanity. Among the crowd of unthinking &#39;
+ &#39;fanatics, a captive or a pilgrim might sometimes observe the superior &#39;
+ &#39;refinements of Cairo and Constantinople: the first importer of &#39;
+ &#39;windmills     &#39;)
+----------------------------------------
+Result 6
+The First Crusade.—Part I.
+(&#39;Origin And Numbers Of The First Crusade.—Characters Of The Latin      &#39;
+ &#39;Princes.—Their March To Constantinople.—Policy Of The Greek      Emperor &#39;
+ &#39;Alexius.—Conquest Of Nice, Antioch, And Jerusalem, By The      &#39;
+ &#39;Franks.—Deliverance Of The Holy Sepulchre.— Godfrey Of Bouillon,      First &#39;
+ &#39;King Of Jerusalem.—Institutions Of The French Or Latin      Kingdom.  About &#39;
+ &#39;twenty years after the conquest of Jerusalem by the Turks, the holy &#39;
+ &#39;sepulchre was visited by a hermit of the name of Peter, a native of Amiens, &#39;
+ &#39;in the province of Picardy         The magnanimous spirit of Gregory the &#39;
+ &#39;Seventh had already embraced the design of arming Europe against Asia; the &#39;
+ &#39;ardor of his zeal and ambition still breathes in his epistles: from either &#39;
+ &#39;side of the Alps, fifty thousand Catholics had enlisted under the banner of &#39;
+ &#39;St. Peter;                 It may occasion some surprise that the Roman &#39;
+ &#39;pontiff should erect, in the heart of France, the tribunal from whence he &#39;
+ &#39;hurled his anathemas against the king; but our surprise will vanish so soon &#39;
+ &#39;as we form a just estimate of a king of France of the eleventh &#39;
+ &#39;century.                   So familiar, and as it were so natural to man, is &#39;
+ &#39;the practice of violence, that our indulgence allows the slightest &#39;
+ &#39;provocation, the most disputable right, as a sufficient ground of national &#39;
+ &#39;hostility. But the name and nature of a holy war demands a more rigorous &#39;
+ &#39;scrutiny; nor can we hastily believe, that the servants of the Prince of &#39;
+ &#39;Peace would unsheathe the sword of destruction, unless the motive were pure, &#39;
+ &#39;the quarrel legitimate, and the necessity inevitable. The policy of an &#39;
+ &#39;action may be determined from the tardy lessons of experience; but, before &#39;
+ &#39;we act, our conscience should be satisfied of the justice and propriety of &#39;
+ &#39;our enterprise. In the age of the crusades, the Christians, both of the East &#39;
+ &#39;and West, were persuaded of their lawfulness and merit; their arguments are &#39;
+ &#39;clouded by the perpetual abuse of Scripture and rhetoric; but they seem to &#39;
+ &#39;insist on the right of natural and religious defence, their peculiar title &#39;
+ &#39;to the Holy Land, and the impiety of their Pagan and Mahometan foes.     II. &#39;
+ &#39;Palestine could add nothing to the strength or safety of the Latins; and &#39;
+ &#39;fanaticism alone could pretend to justify the conquest of that distant and &#39;
+ &#39;narrow province. The Christians affirmed that their inalienable title to the &#39;
+ &#39;promised land had been sealed by the blood of their divine Savior; it was &#39;
+ &#39;their right and duty to rescue their inheritance from the unjust possessors, &#39;
+ &#39;who profaned his sepulchre, and oppressed the pilgrimage of his disciples. &#39;
+ &#39;Vainly would it be alleged that the preeminence of Jerusalem, and the &#39;
+ &#39;sanctity of Palestine, have been abolished with the Mosaic law; that the God &#39;
+ &#39;of the Christians is not a local deity, and that the recovery of Bethlem or &#39;
+ &#39;Calvary, his cradle or his tomb, will not atone for the violation of the &#39;
+ &#39;moral precepts of the gospel. Such arguments glance aside from the leaden &#39;
+ &#39;shield of superstition; and the religious mind will not easily relinquish &#39;
+ &#39;its hold on the sacred ground of mystery and miracle.  III. But the holy &#39;
+ &#39;wars which have been waged in every climate of the globe, from Egypt to &#39;
+ &#39;Livonia, and from Peru to Hindostan, require the support of some more &#39;
+ &#39;general and flexible tenet. It has been often supposed, and sometimes &#39;
+ &#39;affirmed, that a difference of religion is a worthy cause of hostility; that &#39;
+ &#39;obstinate unbelievers may be slain or subdued by the champions of the cross; &#39;
+ &#39;and that grace is the sole fountain of dominion as well as of mercy.     As &#39;
+ &#39;the manners of the Christians were relaxed, their discipline of &#39;
+ &#39;penance               &#39;)
+----------------------------------------
+Result 7
+The First Crusade.—Part IV.
+(&#39;I have expiated with pleasure on the first steps of the crusaders, as they &#39;
+ &#39;paint the manners and character of Europe: but I shall abridge the tedious &#39;
+ &#39;and uniform narrative of their blind achievements, which were performed by &#39;
+ &#39;strength and are described by ignorance. From their first station in the &#39;
+ &#39;neighborhood of Nicomedia, they advanced in successive divisions; passed the &#39;
+ &#39;contracted limit of the Greek empire; opened a road through the hills, and &#39;
+ &#39;commenced, by the siege of his capital, their pious warfare against the &#39;
+ &#39;Turkish sultan. His kingdom of Roum extended from the Hellespont to the &#39;
+ &#39;confines of Syria, and barred the pilgrimage of Jerusalem, his name was &#39;
+ &#39;Kilidge-Arslan, or Soliman,           Soliman was rather provoked than &#39;
+ &#39;dismayed by the loss of his capital: he admonished his subjects and allies &#39;
+ &#39;of this strange invasion of the Western Barbarians; the Turkish emirs obeyed &#39;
+ &#39;the call of loyalty or religion; the Turkman hordes encamped round his &#39;
+ &#39;standard; and his whole force is loosely stated by the Christians at two &#39;
+ &#39;hundred, or even three hundred and sixty thousand horse. Yet he patiently &#39;
+ &#39;waited till they had left behind them the sea and the Greek frontier; and &#39;
+ &#39;hovering on the flanks, observed their careless and confident progress in &#39;
+ &#39;two columns beyond the view of each other. Some miles before they could &#39;
+ &#39;reach Dorylaeum in Phrygia, the left, and least numerous, division was &#39;
+ &#39;surprised, and attacked, and almost oppressed, by the Turkish &#39;
+ &#39;cavalry.         To improve the general consternation, the cousin of &#39;
+ &#39;Bohemond and the brother of Godfrey were detached from the main army with &#39;
+ &#39;their respective squadrons of five, and of seven, hundred knights. They &#39;
+ &#39;overran in a rapid career the hills and sea-coast of Cilicia, from Cogni to &#39;
+ &#39;the Syrian gates: the Norman standard was first planted on the walls of &#39;
+ &#39;Tarsus and Malmistra; but the proud injustice of Baldwin at length provoked &#39;
+ &#39;the patient and generous Italian; and they turned their consecrated swords &#39;
+ &#39;against each other in a private and profane quarrel. Honor was the motive, &#39;
+ &#39;and fame the reward, of Tancred; but fortune smiled on the more selfish &#39;
+ &#39;enterprise of his rival.     Before the Franks could enter Syria, the &#39;
+ &#39;summer, and even the autumn, were completely wasted: the siege of Antioch, &#39;
+ &#39;or the separation and repose of the army during the winter season, was &#39;
+ &#39;strongly debated in their council: the love of arms and the holy sepulchre &#39;
+ &#39;urged them to advance; and reason perhaps was on the side of resolution, &#39;
+ &#39;since every hour of delay abates the fame and force of the invader, and &#39;
+ &#39;multiplies the resources of defensive war. The capital of Syria was &#39;
+ &#39;protected by the River Orontes; and the iron bridge,               In the &#39;
+ &#39;eventful period of the siege and defence of Antioch, the crusaders were &#39;
+ &#39;alternately exalted by victory or sunk in despair; either swelled with &#39;
+ &#39;plenty or emaciated with hunger. A speculative reasoner might suppose, that &#39;
+ &#39;their faith had a strong and serious influence on their practice; and that &#39;
+ &#39;the soldiers of the cross, the deliverers of the holy sepulchre, prepared &#39;
+ &#39;themselves by a sober and virtuous life for the daily contemplation of &#39;
+ &#39;martyrdom. Experience blows away this charitable illusion; and seldom does &#39;
+ &#39;the history of profane war display such scenes of intemperance and &#39;
+ &#39;prostitution as were exhibited under the walls of Antioch. The grove of &#39;
+ &#39;Daphne no longer flourished; but the Syrian air was still impregnated with &#39;
+ &#39;the same vices; the Christians were seduced by every temptation           &#39;
+ &#39;For their salvation and victory, they were indebted to the same fanaticism &#39;
+ &#39;which had led them to the brink of ruin. In such a cause, and in such an &#39;
+ &#39;army, visions, prophecies, and miracles, were frequent and familiar. In the &#39;
+ &#39;distress of Antioch, they were repeated with unusual energy and success: St. &#39;
+ &#39;Ambrose had assured a pious ecclesiastic, that two years of trial must &#39;
+ &#39;precede the season of deliverance and grace; the deserters were stopped by &#39;
+ &#39;the presence and reproaches of Christ himself; the dead had promised to &#39;
+ &#39;arise and combat with their brethren; the Virgin had obtained the pardon of &#39;
+ &#39;their sins; and their confidence was revived by a visible sign, the &#39;
+ &#39;seasonable and splendid discovery of the Holy Lance. The policy of their &#39;
+ &#39;chiefs has on this occasion been admired, and might surely be excused; but a &#39;
+ &#39;pious fraud is seldom produced by the cool conspiracy of many persons; and a &#39;
+ &#39;voluntary impostor might depend on the support of the wise and the credulity &#39;
+ &#39;of the people. Of the diocese of Marseilles, there was a priest of low &#39;
+ &#39;cunning and loose manners, and his name was Peter Bartholemy. He presented &#39;
+ &#39;himself at the door of the council-chamber, to disclose an apparition of St. &#39;
+ &#39;Andrew, which had been thrice reiterated in his sleep with a dreadful &#39;
+ &#39;menace, if he presumed to suppress the commands of Heaven. “At Antioch,” &#39;
+ &#39;said the apostle, “in the church of my brother St. Peter, near the high &#39;
+ &#39;altar, is concealed the steel head of the lance that pierced the side of our &#39;
+ &#39;Redeemer. In three days that instrument of eternal, and now of temporal, &#39;
+ &#39;salvation, will be manifested to his disciples. Search, and ye shall find: &#39;
+ &#39;bear it aloft in battle; and that mystic weapon shall penetrate the souls of &#39;
+ &#39;the miscreants.” The pope’s legate, the bishop of Puy, affected to listen &#39;
+ &#39;with coldness and distrust; but the revelation was eagerly accepted by Count &#39;
+ &#39;Raymond, whom his faithful subject, in the name of the apostle, had chosen &#39;
+ &#39;for the guardian of the holy lance. The experiment was resolved; and on the &#39;
+ &#39;third day after a due preparation of prayer and fasting, the priest of &#39;
+ &#39;Marseilles introduced twelve trusty spectators, among whom were the count &#39;
+ &#39;and his chaplain; and the church doors were barred against the impetuous &#39;
+ &#39;multitude. The ground was opened in the appointed place; but the workmen, &#39;
+ &#39;who relieved each other, dug to the depth of twelve feet without discovering &#39;
+ &#39;the object of their search. In the evening, when Count Raymond had withdrawn &#39;
+ &#39;to his post, and the weary assistants began to murmur, Bartholemy, in his &#39;
+ &#39;shirt, and without his shoes, boldly descended into the pit; the darkness of &#39;
+ &#39;the hour and of the place enabled him to secrete and deposit the head of a &#39;
+ &#39;Saracen lance; and the first sound, the first gleam, of the steel was &#39;
+ &#39;saluted with a devout rapture. The holy lance was drawn from its recess, &#39;
+ &#39;wrapped in a veil of silk and gold, and exposed to the veneration of the &#39;
+ &#39;crusaders; their anxious suspense burst forth in a general shout of joy and &#39;
+ &#39;hope, and the desponding troops were again inflamed with the enthusiasm of &#39;
+ &#39;valor. Whatever had been the arts, and whatever might be the sentiments of &#39;
+ &#39;the chiefs, they skilfully improved this fortunate revolution by every aid &#39;
+ &#39;that discipline and devotion could afford. The soldiers were dismissed to &#39;
+ &#39;their quarters with an injunction to fortify their minds and bodies for the &#39;
+ &#39;approaching conflict, freely to bestow their last pittance on themselves and &#39;
+ &#39;their horses, and to expect with the dawn of day the signal of victory. On &#39;
+ &#39;the festival of St. Peter and St. Paul, the gates of Antioch were thrown &#39;
+ &#39;open: a martial psalm, “Let the Lord arise, and let his enemies be &#39;
+ &#39;scattered!” was chanted by a procession of priests and monks; the battle &#39;
+ &#39;array was marshalled in twelve divisions, in honor of the twelve apostles; &#39;
+ &#39;and the holy lance, in the absence of Raymond, was intrusted to the hands of &#39;
+ &#39;his chaplain. The influence of his relic or trophy, was felt by the &#39;
+ &#39;servants, and perhaps by the enemies, of Christ;         The prudence or &#39;
+ &#39;fortune of the Franks had delayed their invasion till the decline of the &#39;
+ &#39;Turkish empire.       Yet this attack, when they were within the view and &#39;
+ &#39;reach of their glorious prize, was suspended above ten months after the &#39;
+ &#39;defeat of Kerboga. The zeal and courage of the crusaders were chilled in the &#39;
+ &#39;moment of victory; and instead of marching to improve the consternation, &#39;
+ &#39;they hastily dispersed to enjoy the luxury, of Syria. The causes of this &#39;
+ &#39;strange delay may be found in the want of strength and subordination. In the &#39;
+ &#39;painful and various service of Antioch, the cavalry was annihilated; many &#39;
+ &#39;thousands of every rank had been lost by famine, sickness, and desertion: &#39;
+ &#39;the same abuse of plenty had been productive of a third famine; and the &#39;
+ &#39;alternative of intemperance and distress had generated a pestilence, which &#39;
+ &#39;swept away above fifty thousand of the pilgrims. Few were able to command, &#39;
+ &#39;and none were willing to obey; the domestic feuds, which had been stifled by &#39;
+ &#39;common fear, were again renewed in acts, or at least in sentiments, of &#39;
+ &#39;hostility; the fortune of Baldwin and Bohemond excited the envy of their &#39;
+ &#39;companions; the bravest knights were enlisted for the defence of their new &#39;
+ &#39;principalities; and Count Raymond exhausted his troops and treasures in an &#39;
+ &#39;idle expedition into the heart of Syria.     &#39;)
+----------------------------------------
+Result 8
+The First Crusade.—Part V.
+(&#39;Jerusalem has derived some reputation from the number and importance of her &#39;
+ &#39;memorable sieges. It was not till after a long and obstinate contest that &#39;
+ &#39;Babylon and Rome could prevail against the obstinacy of the people, the &#39;
+ &#39;craggy ground that might supersede the necessity of fortifications, and the &#39;
+ &#39;walls and towers that would have fortified the most accessible &#39;
+ &#39;plain.                     Eight days after this memorable event, which Pope &#39;
+ &#39;Urban did not live to hear, the Latin chiefs proceeded to the election of a &#39;
+ &#39;king, to guard and govern their conquests in Palestine. Hugh the Great, and &#39;
+ &#39;Stephen of Chartres, had retired with some loss of reputation, which they &#39;
+ &#39;strove to regain by a second crusade and an honorable death. Baldwin was &#39;
+ &#39;established at Edessa, and Bohemond at Antioch; and two Roberts, the duke of &#39;
+ &#39;Normandy             Without this indulgence, the conqueror would have &#39;
+ &#39;almost been stripped of his infant kingdom, which consisted only of &#39;
+ &#39;Jerusalem and Jaffa, with about twenty villages and towns of the adjacent &#39;
+ &#39;country.                             The spirit of freedom, which pervades &#39;
+ &#39;the feudal institutions, was felt in its strongest energy by the volunteers &#39;
+ &#39;of the cross, who elected for their chief the most deserving of his peers. &#39;
+ &#39;Amidst the slaves of Asia, unconscious of the lesson or example, a model of &#39;
+ &#39;political liberty was introduced; and the laws of the French kingdom are &#39;
+ &#39;derived from the purest source of equality and justice. Of such laws, the &#39;
+ &#39;first and indispensable condition is the assent of those whose obedience &#39;
+ &#39;they require, and for whose benefit they are designed. No sooner had Godfrey &#39;
+ &#39;of Bouillon accepted the office of supreme magistrate, than he solicited the &#39;
+ &#39;public and private advice of the Latin pilgrims, who were the best skilled &#39;
+ &#39;in the statutes and customs of Europe. From these materials, with the &#39;
+ &#39;counsel and approbation of the patriarch and barons, of the clergy and &#39;
+ &#39;laity, Godfrey composed the Assise of Jerusalem,           The justice and &#39;
+ &#39;freedom of the constitution were maintained by two tribunals of unequal &#39;
+ &#39;dignity, which were instituted by Godfrey of Bouillon after the conquest of &#39;
+ &#39;Jerusalem. The king, in person, presided in the upper court, the court of &#39;
+ &#39;the barons. Of these the four most conspicuous were the prince of Galilee, &#39;
+ &#39;the lord of Sidon and Caesarea, and the counts of Jaffa and Tripoli, who, &#39;
+ &#39;perhaps with the constable and marshal,     The trial by battle was &#39;
+ &#39;established in all criminal cases which affected the life, or limb, or &#39;
+ &#39;honor, of any person; and in all civil transactions, of or above the value &#39;
+ &#39;of one mark of silver. It appears that in criminal cases the combat was the &#39;
+ &#39;privilege of the accuser, who, except in a charge of treason, avenged his &#39;
+ &#39;personal injury, or the death of those persons whom he had a right to &#39;
+ &#39;represent; but wherever, from the nature of the charge, testimony could be &#39;
+ &#39;obtained, it was necessary for him to produce witnesses of the fact. In &#39;
+ &#39;civil cases, the combat was not allowed as the means of establishing the &#39;
+ &#39;claim of the demandant; but he was obliged to produce witnesses who had, or &#39;
+ &#39;assumed to have, knowledge of the fact. The combat was then the privilege of &#39;
+ &#39;the defendant; because he charged the witness with an attempt by perjury to &#39;
+ &#39;take away his right. He came therefore to be in the same situation as the &#39;
+ &#39;appellant in criminal cases. It was not then as a mode of proof that the &#39;
+ &#39;combat was received, nor as making negative evidence, (according to the &#39;
+ &#39;supposition of Montesquieu;     Among the causes which enfranchised the &#39;
+ &#39;plebeians from the yoke of feudal tyranny, the institution of cities and &#39;
+ &#39;corporations is one of the most powerful; and if those of Palestine are &#39;
+ &#39;coeval with the first crusade, they may be ranked with the most ancient of &#39;
+ &#39;the Latin world. Many of the pilgrims had escaped from their lords under the &#39;
+ &#39;banner of the cross; and it was the policy of the French princes to tempt &#39;
+ &#39;their stay by the assurance of the rights and privileges of freemen. It is &#39;
+ &#39;expressly declared in the Assise of Jerusalem, that after instituting, for &#39;
+ &#39;his knights and barons, the court of peers, in which he presided himself, &#39;
+ &#39;Godfrey of Bouillon established a second tribunal, in which his person was &#39;
+ &#39;represented by his viscount. The jurisdiction of this inferior court &#39;
+ &#39;extended over the burgesses of the kingdom; and it was composed of a select &#39;
+ &#39;number of the most discreet and worthy citizens, who were sworn to judge, &#39;
+ &#39;according to the laws of the actions and fortunes of their equals.          &#39;
+ &#39;VOLUME SIX&#39;)
+----------------------------------------
+Result 9
+Partition Of The Empire By The French And Venetians.—Part I.
+(&#39;Partition Of The Empire By The French And Venetians,—Five Latin      &#39;
+ &#39;Emperors Of The Houses Of Flanders And Courtenay.— Their Wars      Against &#39;
+ &#39;The Bulgarians And Greeks.—Weakness And Poverty Of The      Latin &#39;
+ &#39;Empire.—Recovery Of Constantinople By The Greeks.—General      Consequences &#39;
+ &#39;Of The Crusades.  After the death of the lawful princes, the French and &#39;
+ &#39;Venetians, confident of justice and victory, agreed to divide and regulate &#39;
+ &#39;their future possessions.             In the division of the Greek &#39;
+ &#39;provinces,                     Two fugitives, who had reigned at &#39;
+ &#39;Constantinople, still asserted the title of emperor; and the subjects of &#39;
+ &#39;their fallen throne might be moved to pity by the misfortunes of the elder &#39;
+ &#39;Alexius, or excited to revenge by the spirit of Mourzoufle. A domestic &#39;
+ &#39;alliance, a common interest, a similar guilt, and the merit of extinguishing &#39;
+ &#39;his enemies, a brother and a nephew, induced the more recent usurper to &#39;
+ &#39;unite with the former the relics of his power. Mourzoufle was received with &#39;
+ &#39;smiles and honors in the camp of his father Alexius; but the wicked can &#39;
+ &#39;never love, and should rarely trust, their fellow-criminals; he was seized &#39;
+ &#39;in the bath, deprived of his eyes, stripped of his troops and treasures, and &#39;
+ &#39;turned out to wander an object of horror and contempt to those who with more &#39;
+ &#39;propriety could hate, and with more justice could punish, the assassin of &#39;
+ &#39;the emperor Isaac and his son. As the tyrant, pursued by fear or remorse, &#39;
+ &#39;was stealing over to Asia, he was seized by the Latins of Constantinople, &#39;
+ &#39;and condemned, after an open trial, to an ignominious death. His judges &#39;
+ &#39;debated the mode of his execution, the axe, the wheel, or the stake; and it &#39;
+ &#39;was resolved that Mourzoufle                     The Latin conquerors had &#39;
+ &#39;been saluted with a solemn and early embassy from John, or Joannice, or &#39;
+ &#39;Calo-John, the revolted chief of the Bulgarians and Walachians. He deemed &#39;
+ &#39;himself their brother, as the votary of the Roman pontiff, from whom he had &#39;
+ &#39;received the regal title and a holy banner; and in the subversion of the &#39;
+ &#39;Greek monarchy, he might aspire to the name of their friend and accomplice. &#39;
+ &#39;But Calo-John was astonished to find, that the Count of Flanders had assumed &#39;
+ &#39;the pomp and pride of the successors of Constantine; and his ambassadors &#39;
+ &#39;were dismissed with a haughty message, that the rebel must deserve a pardon, &#39;
+ &#39;by touching with his forehead the footstool of the Imperial throne. His &#39;
+ &#39;resentment     Alarmed by this sudden and growing danger, the emperor &#39;
+ &#39;despatched a swift messenger to recall Count Henry and his troops; and had &#39;
+ &#39;Baldwin expected the return of his gallant brother, with a supply of twenty &#39;
+ &#39;thousand Armenians, he might have encountered the invader with equal numbers &#39;
+ &#39;and a decisive superiority of arms and discipline. But the spirit of &#39;
+ &#39;chivalry could seldom discriminate caution from cowardice; and the emperor &#39;
+ &#39;took the field with a hundred and forty knights, and their train of archers &#39;
+ &#39;and sergeants. The marshal, who dissuaded and obeyed, led the vanguard in &#39;
+ &#39;their march to Adrianople; the main body was commanded by the count of &#39;
+ &#39;Blois; the aged doge of Venice followed with the rear; and their scanty &#39;
+ &#39;numbers were increased from all sides by the fugitive Latins. They undertook &#39;
+ &#39;to besiege the rebels of Adrianople; and such was the pious tendency of the &#39;
+ &#39;crusades that they employed the holy week in pillaging the country for their &#39;
+ &#39;subsistence, and in framing engines for the destruction of their &#39;
+ &#39;fellow-Christians. But the Latins were soon interrupted and alarmed by the &#39;
+ &#39;light cavalry of the Comans, who boldly skirmished to the edge of their &#39;
+ &#39;imperfect lines: and a proclamation was issued by the marshal of Romania, &#39;
+ &#39;that, on the trumpet’s sound, the cavalry should mount and form; but that &#39;
+ &#39;none, under pain of death, should abandon themselves to a desultory and &#39;
+ &#39;dangerous pursuit. This wise injunction was first disobeyed by the count of &#39;
+ &#39;Blois, who involved the emperor in his rashness and ruin. The Comans, of the &#39;
+ &#39;Parthian or Tartar school, fled before their first charge; but after a &#39;
+ &#39;career of two leagues, when the knights and their horses were almost &#39;
+ &#39;breathless, they suddenly turned, rallied, and encompassed the heavy &#39;
+ &#39;squadrons of the Franks. The count was slain on the field; the emperor was &#39;
+ &#39;made prisoner; and if the one disdained to fly, if the other refused to &#39;
+ &#39;yield, their personal bravery made a poor atonement for their ignorance, or &#39;
+ &#39;neglect, of the duties of a general. &#39;)
+----------------------------------------
+Result 10
+The First Crusade.—Part III.
+(&#39;Between the age of Charlemagne and that of the crusades, a revolution had &#39;
+ &#39;taken place among the Spaniards, the Normans, and the French, which was &#39;
+ &#39;gradually extended to the rest of Europe. The service of the infantry was &#39;
+ &#39;degraded to the plebeians; the cavalry formed the strength of the armies, &#39;
+ &#39;and the honorable name of miles, or soldier, was confined to the &#39;
+ &#39;gentlemen         Such were the troops, and such the leaders, who assumed &#39;
+ &#39;the cross for the deliverance of the holy sepulchre. As soon as they were &#39;
+ &#39;relieved by the absence of the plebeian multitude, they encouraged each &#39;
+ &#39;other, by interviews and messages, to accomplish their vow, and hasten their &#39;
+ &#39;departure. Their wives and sisters were desirous of partaking the danger and &#39;
+ &#39;merit of the pilgrimage: their portable treasures were conveyed in bars of &#39;
+ &#39;silver and gold; and the princes and barons were attended by their equipage &#39;
+ &#39;of hounds and hawks to amuse their leisure and to supply their table. The &#39;
+ &#39;difficulty of procuring subsistence for so many myriads of men and horses &#39;
+ &#39;engaged them to separate their forces: their choice or situation determined &#39;
+ &#39;the road; and it was agreed to meet in the neighborhood of Constantinople, &#39;
+ &#39;and from thence to begin their operations against the Turks. From the banks &#39;
+ &#39;of the Meuse and the Moselle, Godfrey of Bouillon followed the direct way of &#39;
+ &#39;Germany, Hungary, and Bulgaria; and, as long as he exercised the sole &#39;
+ &#39;command every step afforded some proof of his prudence and virtue. On the &#39;
+ &#39;confines of Hungary he was stopped three weeks by a Christian people, to &#39;
+ &#39;whom the name, or at least the abuse, of the cross was justly odious. The &#39;
+ &#39;Hungarians still smarted with the wounds which they had received from the &#39;
+ &#39;first pilgrims: in their turn they had abused the right of defence and &#39;
+ &#39;retaliation; and they had reason to apprehend a severe revenge from a hero &#39;
+ &#39;of the same nation, and who was engaged in the same cause. But, after &#39;
+ &#39;weighing the motives and the events, the virtuous duke was content to pity &#39;
+ &#39;the crimes and misfortunes of his worthless brethren; and his twelve &#39;
+ &#39;deputies, the messengers of peace, requested in his name a free passage and &#39;
+ &#39;an equal market. To remove their suspicions, Godfrey trusted himself, and &#39;
+ &#39;afterwards his brother, to the faith of Carloman,               In some &#39;
+ &#39;oriental tale I have read the fable of a shepherd, who was ruined by the &#39;
+ &#39;accomplishment of his own wishes: he had prayed for water; the Ganges was &#39;
+ &#39;turned into his grounds, and his flock and cottage were swept away by the &#39;
+ &#39;inundation. Such was the fortune, or at least the apprehension of the Greek &#39;
+ &#39;emperor Alexius Comnenus, whose name has already appeared in this history, &#39;
+ &#39;and whose conduct is so differently represented by his daughter &#39;
+ &#39;Anne,         The same arms which threatened Europe might deliver Asia, and &#39;
+ &#39;repel the Turks from the neighboring shores of the Bosphorus and Hellespont. &#39;
+ &#39;The fair provinces from Nice to Antioch were the recent patrimony of the &#39;
+ &#39;Roman emperor; and his ancient and perpetual claim still embraced the &#39;
+ &#39;kingdoms of Syria and Egypt. In his enthusiasm, Alexius indulged, or &#39;
+ &#39;affected, the ambitious hope of leading his new allies to subvert the &#39;
+ &#39;thrones of the East; but the calmer dictates of reason and temper dissuaded &#39;
+ &#39;him from exposing his royal person to the faith of unknown and lawless &#39;
+ &#39;Barbarians. His prudence, or his pride, was content with extorting from the &#39;
+ &#39;French princes an oath of homage and fidelity, and a solemn promise, that &#39;
+ &#39;they  would either restore, or hold, their Asiatic conquests as the humble &#39;
+ &#39;and loyal vassals of the Roman empire. Their independent spirit was fired at &#39;
+ &#39;the mention of this foreign and voluntary servitude: they successively &#39;
+ &#39;yielded to the dexterous application of gifts and flattery; and the first &#39;
+ &#39;proselytes became the most eloquent and effectual missionaries to multiply &#39;
+ &#39;the companions of their shame. The pride of Hugh of Vermandois was soothed &#39;
+ &#39;by the honors of his captivity; and in the brother of the French king, the &#39;
+ &#39;example of submission was prevalent and weighty. In the mind of Godfrey of &#39;
+ &#39;Bouillon every human consideration was subordinate to the glory of God and &#39;
+ &#39;the success of the crusade. He had firmly resisted the temptations of &#39;
+ &#39;Bohemond and Raymond, who urged the attack and conquest of Constantinople. &#39;
+ &#39;Alexius esteemed his virtues, deservedly named him the champion of the &#39;
+ &#39;empire, and dignified his homage with the filial name and the rights of &#39;
+ &#39;adoption.         Private or public interest suppressed the murmurs of the &#39;
+ &#39;dukes and counts; but a French baron (he is supposed to be Robert of &#39;
+ &#39;Paris     The conquest of Asia was undertaken and achieved by Alexander, &#39;
+ &#39;with thirty-five thousand Macedonians and Greeks;             &#39;)
+----------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<p>Yay! Our search engine worked! But there’s more than we can do. To start, we’re only seeing the first 10 results. This is by default, as this <code class="docutils literal notranslate"><span class="pre">results</span></code> list is <em>paginated</em> meaning that in the searcher method we could specify what “page” of ten results we want to see at a particular time. This will be useful a bit later, but for now we can set the keyword argument <code class="docutils literal notranslate"><span class="pre">limit</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;The Crusades&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ix</span><span class="o">.</span><span class="n">searcher</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># logical operators</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;The Crusades AND Bohemond&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ix</span><span class="o">.</span><span class="n">searcher</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;The Crusades OR Bohemond&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ix</span><span class="o">.</span><span class="n">searcher</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;The Crusades NOT Bohemond&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ix</span><span class="o">.</span><span class="n">searcher</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(text:crusad AND text:bohemond) 3
+(text:crusad OR text:bohemond) 25
+(text:crusad AND NOT text:bohemond) 22
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># can also filter by chapter</span>
+<span class="kn">from</span> <span class="nn">whoosh</span> <span class="kn">import</span> <span class="n">query</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;The Crusades&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">ix</span><span class="o">.</span><span class="n">searcher</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">allow_q</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">Term</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;The Crusades.—Part I.&quot;</span><span class="p">)</span> <span class="c1"># query.Term takes a schema field (title) and something from that field</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">allow_q</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span> <span class="c1"># only return results from that chapter</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">hit</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">hit</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Crusades.—Part I.
+(&#39;Preservation Of The Greek Empire.—Numbers, Passage, And Event, Of      The &#39;
+ &#39;Second And Third Crusades.—St. Bernard.— Reign Of Saladin In      Egypt And &#39;
+ &#39;Syria.—His Conquest Of Jerusalem.—Naval      Crusades.—Richard The First Of &#39;
+ &#39;England.— Pope Innocent The Third;      And The Fourth And Fifth Crusades.— &#39;
+ &#39;The Emperor Frederic The      Second.—Louis The Ninth Of France; And The Two &#39;
+ &#39;Last      Crusades.—Expulsion Of The Latins Or Franks By The Mamelukes.   In &#39;
+ &#39;a style less grave than that of history, I should perhaps compare the &#39;
+ &#39;emperor Alexius               In the twelfth century, three great &#39;
+ &#39;emigrations marched by land from the West for the relief of Palestine. The &#39;
+ &#39;soldiers and pilgrims of Lombardy, France, and Germany were excited by the &#39;
+ &#39;example and success of the first crusade.       I. Of the swarms that so &#39;
+ &#39;closely trod in the footsteps of the first pilgrims, the chiefs were equal &#39;
+ &#39;in rank, though unequal in fame and merit, to Godfrey of Bouillon and his &#39;
+ &#39;fellow-adventurers. At their head were displayed the banners of the dukes of &#39;
+ &#39;Burgundy, Bavaria, and Aquitain; the first a descendant of Hugh Capet, the &#39;
+ &#39;second, a father of the Brunswick line: the archbishop of Milan, a temporal &#39;
+ &#39;prince, transported, for the benefit of the Turks, the treasures and &#39;
+ &#39;ornaments of his church and palace; and the veteran crusaders, Hugh the &#39;
+ &#39;Great and Stephen of Chartres, returned to consummate their unfinished vow. &#39;
+ &#39;The huge and disorderly bodies of their followers moved forward in two &#39;
+ &#39;columns; and if the first consisted of two hundred and sixty thousand &#39;
+ &#39;persons, the second might possibly amount to sixty thousand horse and one &#39;
+ &#39;hundred thousand foot.             II. The number and character of the &#39;
+ &#39;strangers was an object of terror to the effeminate Greeks, and the &#39;
+ &#39;sentiment of fear is nearly allied to that of hatred. This aversion was &#39;
+ &#39;suspended or softened by the apprehension of the Turkish power; and the &#39;
+ &#39;invectives of the Latins will not bias our more candid belief, that the &#39;
+ &#39;emperor Alexius dissembled their insolence, eluded their hostilities, &#39;
+ &#39;counselled their rashness, and opened to their ardor the road of pilgrimage &#39;
+ &#39;and conquest. But when the Turks had been driven from Nice and the &#39;
+ &#39;sea-coast, when the Byzantine princes no longer dreaded the distant sultans &#39;
+ &#39;of Cogni, they felt with purer indignation the free and frequent passage of &#39;
+ &#39;the western Barbarians, who violated the majesty, and endangered the safety, &#39;
+ &#39;of the empire. The second and third crusades were undertaken under the reign &#39;
+ &#39;of Manuel Comnenus and Isaac Angelus. Of the former, the passions were &#39;
+ &#39;always impetuous, and often malevolent; and the natural union of a cowardly &#39;
+ &#39;and a mischievous temper was exemplified in the latter, who, without merit &#39;
+ &#39;or mercy, could punish a tyrant, and occupy his throne. It was secretly, and &#39;
+ &#39;perhaps tacitly, resolved by the prince and people to destroy, or at least &#39;
+ &#39;to discourage, the pilgrims, by every species of injury and oppression; and &#39;
+ &#39;their want of prudence and discipline continually afforded the pretence or &#39;
+ &#39;the opportunity. The Western monarchs had stipulated a safe passage and fair &#39;
+ &#39;market in the country of their Christian brethren; the treaty had been &#39;
+ &#39;ratified by oaths and hostages; and the poorest soldier of Frederic’s army &#39;
+ &#39;was furnished with three marks of silver to defray his expenses on the road. &#39;
+ &#39;But every engagement was violated by treachery and injustice; and the &#39;
+ &#39;complaints of the Latins are attested by the honest confession of a Greek &#39;
+ &#39;historian, who has dared to prefer truth to his country.           III. The &#39;
+ &#39;swarms that followed the first crusade were destroyed in Anatolia by famine, &#39;
+ &#39;pestilence, and the Turkish arrows; and the princes only escaped with some &#39;
+ &#39;squadrons of horse to accomplish their lamentable pilgrimage. A just opinion &#39;
+ &#39;may be formed of their knowledge and humanity; of their knowledge, from the &#39;
+ &#39;design of subduing Persia and Chorasan in their way to &#39;
+ &#39;Jerusalem;                     The enthusiasm of the first crusade is a &#39;
+ &#39;natural and simple event, while hope was fresh, danger untried, and &#39;
+ &#39;enterprise congenial to the spirit of the times. But the obstinate &#39;
+ &#39;perseverance of Europe may indeed excite our pity and admiration; that no &#39;
+ &#39;instruction should have been drawn from constant and adverse experience; &#39;
+ &#39;that the same confidence should have repeatedly grown from the same &#39;
+ &#39;failures; that six succeeding generations should have rushed headlong down &#39;
+ &#39;the precipice that was open before them; and that men of every condition &#39;
+ &#39;should have staked their public and private fortunes on the desperate &#39;
+ &#39;adventure of possessing or recovering a tombstone two thousand miles from &#39;
+ &#39;their country. In a period of two centuries after the council of Clermont, &#39;
+ &#39;each spring and summer produced a new emigration of pilgrim warriors for the &#39;
+ &#39;defence of the Holy Land; but the seven great armaments or crusades were &#39;
+ &#39;excited by some impending or recent calamity: the nations were moved by the &#39;
+ &#39;authority of their pontiffs, and the example of their kings: their zeal was &#39;
+ &#39;kindled, and their reason was silenced, by the voice of their holy orators; &#39;
+ &#39;and among these, Bernard,                     Omnipotence itself cannot &#39;
+ &#39;escape the murmurs of its discordant votaries; since the same dispensation &#39;
+ &#39;which was applauded as a deliverance in Europe, was deplored, and perhaps &#39;
+ &#39;arraigned, as a calamity in Asia. After the loss of Jerusalem, the Syrian &#39;
+ &#39;fugitives diffused their consternation and sorrow; Bagdad mourned in the &#39;
+ &#39;dust; the cadhi Zeineddin of Damascus tore his beard in the caliph’s &#39;
+ &#39;presence; and the whole divan shed tears at his melancholy tale.           &#39;)
+----------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="c1"># can also highlight where a keyword appears</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">qp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;The Crusades&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">ix</span><span class="o">.</span><span class="n">searcher</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">fragmenter</span><span class="o">.</span><span class="n">maxchars</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># increasing context of the highlight</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">fragmenter</span><span class="o">.</span><span class="n">surround</span> <span class="o">=</span> <span class="mi">250</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">hit</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">hit</span><span class="o">.</span><span class="n">highlights</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)))</span> <span class="c1"># highlights are given bold html (&lt;b&gt;&lt;/b&gt;) tags, using IPython to display this</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result 1
+The Crusades.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">Preservation Of The Greek Empire.—Numbers, Passage, And Event, Of      The Second And Third <b class="match term0">Crusades</b>.—St. Bernard.— Reign Of Saladin In      Egypt And Syria.—His Conquest Of Jerusalem.—Naval      <b class="match term0">Crusades</b>.—Richard The First Of England.— Pope Innocent The Third;      And The Fourth And Fifth <b class="match term0">Crusades</b>.— The Emperor Frederic The      Second.—Louis The Ninth Of France; And The Two Last      <b class="match term0">Crusades</b>.—Expulsion Of The Latins Or Franks By The Mamelukes.   In a style less grave than that of history, I should perhaps compare the emperor Alexius               In the twelfth century, three great emigrations marched by land from the West for the relief of Palestine. The soldiers and pilgrims of Lombardy, France, and...of Hugh Capet, the second, a father of the Brunswick line: the archbishop of Milan, a temporal prince, transported, for the benefit of the Turks, the treasures and ornaments of his church and palace; and the veteran <b class="match term1">crusaders</b>, Hugh the Great and Stephen of Chartres, returned to consummate their unfinished vow. The huge and disorderly bodies of their followers moved forward in two columns; and if the first consisted of two hundred and sixty thousand persons, the second might possibly amount to sixty thousand horse...But every engagement was violated by treachery and injustice; and the complaints of the Latins are attested by the honest confession of a Greek historian, who has dared to prefer truth to his country.           III. The swarms that followed the first <b class="match term2">crusade</b> were destroyed in Anatolia by famine, pestilence, and the Turkish arrows; and the princes only escaped with some squadrons of horse to accomplish their lamentable pilgrimage. A just opinion may be formed of their knowledge and humanity; of their knowledge, from the design of subduing Persia and</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 2
+The Crusades.—Part III.
+</pre></div>
+</div>
+<div class="output text_html">under the immediate protection of the popes; and these spiritual patrons soon claimed the prerogative of directing their operations, and enforcing, by commands and censures, the accomplishment of their vow. Frederic the Second,           Of the seven <b class="match term3">crusades</b>, the two last were undertaken by Louis the Ninth, king of France; who lost his liberty in Egypt, and his life on the coast of Africa. Twenty-eight years after his death, he was canonized at Rome; and sixty-five miracles were readily found, and solemnly attested, to justify the claim of the royal saint.         In complete...the beach; and the strong city of Damietta, which had cost his predecessors a siege of sixteen months, was abandoned on the first assault by the trembling Moslems. But Damietta was the first and the last of his conquests; and in the fifth and sixth <b class="match term3">crusades</b>, the same causes, almost on the same ground, were productive of similar calamities.         The memory of his defeat excited Louis, after sixteen years of wisdom and repose, to undertake the seventh and last of the <b class="match term3">crusades</b>. His finances were restored, his kingdom was enlarged; a new generation of warriors had arisen, and he advanced with fresh confidence at the head of six thousand horse and thirty thousand foot. The loss of Antioch had provoked the enterprise; a wild hope of baptizing the king of Tunis tempted him to</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 3
+The First Crusade.—Part II.
+</pre></div>
+</div>
+<div class="output text_html">and such was the stupidity of the people, that, at the sight of the first city or castle beyond the limits of their knowledge, they were ready to ask whether that was not the Jerusalem, the term and object of their labors. Yet the more prudent of the <b class="match term1">crusaders</b>, who were not sure that they should be fed from heaven with a shower of quails or manna, provided themselves with those precious metals, which, in every country, are the representatives of every commodity. To defray, according to their rank, the expenses of the road, princes alienated their provinces...and suffered, before I enter on the more serious and successful enterprise of the chiefs. Early in the spring, from the confines of France and Lorraine, above sixty thousand of the populace of both sexes flocked round the first missionary of the <b class="match term2">crusade</b>, and pressed him with clamorous importunity to lead them to the holy sepulchre. The hermit, assuming the character, without the talents or authority, of a general, impelled or obeyed the forward impulse of his votaries along the banks of the Rhine and Danube. Their wants and numbers soon compelled...may we credit such folly?) were a goose and a goat, who were carried in the front, and to whom these worthy Christians ascribed an infusion of the divine spirit.       Between the frontiers of Austria and the seat of the Byzantine monarchy, the <b class="match term1">crusaders</b> were compelled to traverse as interval of six hundred miles; the wild and desolate countries of Hungary             “To save time and space, I shall represent, in a short table, the particular references to the great events of the first <b class="match term2">crusade</b>.”      [See Table</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 4
+Schism Of The Greeks And Latins.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">Schism Of The Greeks And Latins.—Reign And Character Of Amurath      The Second.—<b class="match term4">Crusade</b> Of Ladislaus, King Of Hungary.— His Defeat And      Death.—John Huniades.—Scanderbeg.— Constantine Palæologus, Last      Emperor Of The East.  The respective merits of Rome and Constantinople are compared and celebrated by an eloquent Greek, the father of the Italian schools.         The last hope of the falling city and...brethren, Eugenius had not been unmindful of their temporal interest; and his tender regard for the Byzantine empire was animated by a just apprehension of the Turks, who approached, and might soon invade, the borders of Italy. But the spirit of the <b class="match term3">crusades</b> had expired; and the coldness of the Franks was not less unreasonable than their headlong passion. In the eleventh century, a fanatic monk could precipitate Europe on Asia for the recovery of the holy sepulchre; but in the fifteenth, the most pressing motives of religion and policy were insufficient...and the pride of conquest was blended with the humble temper of Christianity. Thirteen bashaws, nine standards, and four thousand captives, were unquestionable trophies; and as all were willing to believe, and none were present to contradict, the <b class="match term1">crusaders</b> multiplied, with unblushing confidence, the myriads of Turks whom they had left on the field of battle.     During the whole transaction, the cardinal legate had observed a sullen silence, unwilling to approve, and unable to oppose, the consent of the king and people. But the diet was not dissolved before</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 5
+Partition Of The Empire By The French And Venetians.—Part III.
+</pre></div>
+</div>
+<div class="output text_html">this narrative of the expeditions of the Latins to Palestine and Constantinople, I cannot dismiss the subject without resolving the general consequences on the countries that were the scene, and on the nations that were the actors, of these memorable <b class="match term3">crusades</b>.     If we compare the æra of the <b class="match term3">crusades</b>, the Latins of Europe with the Greeks and Arabians, their respective degrees of knowledge, industry, and art, our rude ancestors must be content with the third rank in the scale of nations. Their successive improvement and present superiority may be ascribed to a peculiar energy of character, to</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 6
+The First Crusade.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">Origin And Numbers Of The First <b class="match term4">Crusade</b>.—Characters Of The Latin      Princes.—Their March To Constantinople.—Policy Of The Greek      Emperor Alexius.—Conquest Of Nice, Antioch, And Jerusalem, By The      Franks.—Deliverance Of The Holy Sepulchre.— Godfrey Of Bouillon,      First King Of Jerusalem.—Institutions Of The French Or Latin      Kingdom.  About twenty years...quarrel legitimate, and the necessity inevitable. The policy of an action may be determined from the tardy lessons of experience; but, before we act, our conscience should be satisfied of the justice and propriety of our enterprise. In the age of the <b class="match term3">crusades</b>, the Christians, both of the East and West, were persuaded of their lawfulness and merit; their arguments are clouded by the perpetual abuse of Scripture and rhetoric; but they seem to insist on the right of natural and religious defence, their peculiar title to the Holy Land, and the impiety of their</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 7
+The First Crusade.—Part IV.
+</pre></div>
+</div>
+<div class="output text_html">I have expiated with pleasure on the first steps of the <b class="match term1">crusaders</b>, as they paint the manners and character of Europe: but I shall abridge the tedious and uniform narrative of their blind achievements, which were performed by strength and are described by ignorance. From their first station in the neighborhood of Nicomedia, they advanced in successive divisions...delay abates the fame and force of the invader, and multiplies the resources of defensive war. The capital of Syria was protected by the River Orontes; and the iron bridge,               In the eventful period of the siege and defence of Antioch, the <b class="match term1">crusaders</b> were alternately exalted by victory or sunk in despair; either swelled with plenty or emaciated with hunger. A speculative reasoner might suppose, that their faith had a strong and serious influence on their practice; and that the soldiers of the cross, the deliverers of the holy sepulchre, prepared...Franks had delayed their invasion till the decline of the Turkish empire.       Yet this attack, when they were within the view and reach of their glorious prize, was suspended above ten months after the defeat of Kerboga. The zeal and courage of the <b class="match term1">crusaders</b> were chilled in the moment of victory; and instead of marching to improve the consternation, they hastily dispersed to enjoy the luxury, of Syria. The causes of this strange delay may be found in the want of strength and subordination. In the painful and various service of Antioch, the cavalry was</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 8
+The First Crusade.—Part V.
+</pre></div>
+</div>
+<div class="output text_html">did not live to hear, the Latin chiefs proceeded to the election of a king, to guard and govern their conquests in Palestine. Hugh the Great, and Stephen of Chartres, had retired with some loss of reputation, which they strove to regain by a second <b class="match term2">crusade</b> and an honorable death. Baldwin was established at Edessa, and Bohemond at Antioch; and two Roberts, the duke of Normandy             Without this indulgence, the conqueror would have almost been stripped of his infant kingdom, which consisted only of Jerusalem and Jaffa, with about twenty villages and towns...to the supposition of Montesquieu;     Among the causes which enfranchised the plebeians from the yoke of feudal tyranny, the institution of cities and corporations is one of the most powerful; and if those of Palestine are coeval with the first <b class="match term2">crusade</b>, they may be ranked with the most ancient of the Latin world. Many of the pilgrims had escaped from their lords under the banner of the cross; and it was the policy of the French princes to tempt their stay by the assurance of the rights and privileges of freemen. It is expressly declared in the Assise</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 9
+Partition Of The Empire By The French And Venetians.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">Venetians,—Five Latin      Emperors Of The Houses Of Flanders And Courtenay.— Their Wars      Against The Bulgarians And Greeks.—Weakness And Poverty Of The      Latin Empire.—Recovery Of Constantinople By The Greeks.—General      Consequences Of The <b class="match term0">Crusades</b>.  After the death of the lawful princes, the French and Venetians, confident of justice and victory, agreed to divide and regulate their future possessions.             In the division of the Greek provinces,                     Two fugitives, who had reigned at Constantinople, still asserted the title of emperor; and the subjects...commanded by the count of Blois; the aged doge of Venice followed with the rear; and their scanty numbers were increased from all sides by the fugitive Latins. They undertook to besiege the rebels of Adrianople; and such was the pious tendency of the <b class="match term3">crusades</b> that they employed the holy week in pillaging the country for their subsistence, and in framing engines for the destruction of their fellow-Christians. But the Latins were soon interrupted and alarmed by the light cavalry of the Comans, who boldly skirmished to the edge of their imperfect lines</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 10
+The First Crusade.—Part III.
+</pre></div>
+</div>
+<div class="output text_html">Between the age of Charlemagne and that of the <b class="match term3">crusades</b>, a revolution had taken place among the Spaniards, the Normans, and the French, which was gradually extended to the rest of Europe. The service of the infantry was degraded to the plebeians; the cavalry formed the strength of the armies, and the honorable name of miles, or soldier, was confined to the...by the honors of his captivity; and in the brother of the French king, the example of submission was prevalent and weighty. In the mind of Godfrey of Bouillon every human consideration was subordinate to the glory of God and the success of the <b class="match term2">crusade</b>. He had firmly resisted the temptations of Bohemond and Raymond, who urged the attack and conquest of Constantinople. Alexius esteemed his virtues, deservedly named him the champion of the empire, and dignified his homage with the filial name and the rights of adoption.         Private or public interest</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 11
+The Fourth Crusade.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">Schism Of The Greeks And Latins.—State Of Constantinople.— Revolt      Of The Bulgarians.—Isaac Angelus Dethroned By His Brother      Alexius.—Origin Of The Fourth <b class="match term4">Crusade</b>.—Alliance Of The French And      Venetians With The Son Of Isaac.—Their Naval Expedition To      Constantinople.—The Two Sieges And Final Conquest Of The City By      The Latins.  The restoration of the Western empire by Charlemagne was speedily followed by the separation of the Greek and Latin churches.   In the course...and infidel: instead of being loved for the general conformity of faith and worship, they were abhorred for some rules of discipline, some questions of theology, in which themselves or their teachers might differ from the Oriental church. In the <b class="match term2">crusade</b> of Louis the Seventh, the Greek clergy washed and purified the altars which had been defiled by the sacrifice of a French priest. The companions of Frederic Barbarossa deplore the injuries which they endured, both in word and deed, from the peculiar rancor of the bishops and monks. Their prayers and</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 12
+Greek Emperors Of Nice And Constantinople.—Part II.
+</pre></div>
+</div>
+<div class="output text_html">were stained with cruelty and fraud.   I. The Vatican was the most natural refuge of a Latin emperor, who had been driven from his throne; and Pope Urban the Fourth appeared to pity the misfortunes, and vindicate the cause, of the fugitive Baldwin. A <b class="match term2">crusade</b>, with plenary indulgence, was preached by his command against the schismatic Greeks: he excommunicated their allies and adherents; solicited Louis the Ninth in favor of his kinsman; and demanded a tenth of the ecclesiastical revenues of France and England for the service of the holy war.           But they...and active prince, was sufficiently employed in the defence of his throne: his proscription by successive popes had separated Mainfroy from the common cause of the Latins; and the forces that might have besieged Constantinople were detained in a <b class="match term2">crusade</b> against the domestic enemy of Rome. The prize of her avenger, the crown of the Two Sicilies, was won and worn by the brother of St Louis, by Charles count of Anjou and Provence, who led the chivalry of France on this holy expedition.       Among the proscribed adherents of the house of Swabia, John of Procida forfeited</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 13
+Moguls, Ottoman Turks.—Part IV.
+</pre></div>
+</div>
+<div class="output text_html">At length, the ambition of the victorious sultan pointed to the conquest of Constantinople; but he listened to the advice of his vizier, who represented that such an enterprise might unite the powers of Christendom in a second and more formidable <b class="match term2">crusade</b>. His epistle to the emperor was conceived in these words: “By the divine clemency, our invincible cimeter has reduced to our obedience almost all Asia, with many and large countries in Europe, excepting only the city of Constantinople; for beyond the walls thou hast nothing left. Resign that city; stipulate</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 14
+Union Of The Greek And Latin Churches.—Part II.
+</pre></div>
+</div>
+<div class="output text_html">During the period of the <b class="match term3">crusades</b>, the Greeks beheld with astonishment and terror the perpetual stream of emigration that flowed, and continued to flow, from the unknown climates of their West. The visits of their last emperors removed the veil of separation, and they disclosed to their eyes the powerful nations of Europe, whom</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 15
+Fate Of The Eastern Empire.—Part III.
+</pre></div>
+</div>
+<div class="output text_html">by Leo the philosopher.     Whatever titles a despot may assume, whatever claims he may assert, it is on the sword that he must ultimately depend to guard him against his foreign and domestic enemies. From the age of Charlemagne to that of the <b class="match term0">Crusades</b>, the world (for I overlook the remote monarchy of China) was occupied and disputed by the three great empires or nations of the Greeks, the Saracens, and the Franks. Their military strength may be ascertained by a comparison of their courage, their arts and riches, and their obedience to a supreme head</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 16
+Prospect Of The Ruins Of Rome In The Fifteenth Century.—Part II
+</pre></div>
+</div>
+<div class="output text_html">invasion and settlements of the Barbarians of Germany and Scythia; the institutions of the civil law; the character and religion of Mahomet; the temporal sovereignty of the popes; the restoration and decay of the Western empire of Charlemagne; the <b class="match term3">crusades</b> of the Latins in the East: the conquests of the Saracens and Turks; the ruin of the Greek empire; the state and revolutions of Rome in the middle age. The historian may applaud the importance and variety of his subject; but while he is conscious of his own imperfections, he must often accuse the deficiency</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 17
+Schism Of The Greeks And Latins.—Part II.
+</pre></div>
+</div>
+<div class="output text_html">decline and fall of the Roman empire, I have reached at length the last reign of the princes of Constantinople, who so feebly sustained the name and majesty of the Cæsars. On the decease of John Palæologus, who survived about four years the Hungarian <b class="match term2">crusade</b>,     The _protovestiare_, or great chamberlain, Phranza sailed from Constantinople as the minister of a bridegroom; and the relics of wealth and luxury were applied to his pompous appearance. His numerous retinue consisted of nobles and guards, of physicians and monks: he was attended by a band of music</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 18
+Partition Of The Empire By The French And Venetians.—Part II.
+</pre></div>
+</div>
+<div class="output text_html">a law of succession, the guardian both of the prince and people, was gradually defined and confirmed in the hereditary monarchies of Europe. In the support of the Eastern empire, Henry was gradually left without an associate, as the heroes of the <b class="match term2">crusade</b> retired from the world or from the war. The doge of Venice, the venerable Dandolo, in the fulness of years and glory, sunk into the grave. The marquis of Montferrat was slowly recalled from the Peloponnesian war to the revenge of Baldwin and the defence of Thessalonica. Some nice disputes of feudal homage...by the Latins to assume the empire of the East. The royal birth of his father, the noble origin of his mother, recommended to the barons of France the first cousin of their king. His reputation was fair, his possessions were ample, and in the bloody <b class="match term2">crusade</b> against the Albigeois, the soldiers and the priests had been abundantly satisfied of his zeal and valor. Vanity might applaud the elevation of a French emperor of Constantinople; but prudence must pity, rather than envy, his treacherous and imaginary greatness. To assert and adorn his title, he was</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 19
+The Turks.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">Minor And Syria.—State And Oppression Of Jerusalem.—Pilgrimages To      The Holy Sepulchre.  From the Isle of Sicily, the reader must transport himself beyond the Caspian Sea, to the original seat of the Turks or Turkmans, against whom the first <b class="match term2">crusade</b> was principally directed. Their Scythian empire of the sixth century was long since dissolved; but the name was still famous among the Greeks and Orientals; and the fragments of the nation, each a powerful and independent people, were scattered over the desert from China to the Oxus and the Danube</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 20
+Union Of The Greek And Latin Churches.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">to Avignon, on the banks of the Rhône, during a period of seventy years: they represented the hard necessity which had urged him to embrace the alliance of the miscreants, and pronounced by his command the specious and edifying sounds of union and <b class="match term2">crusade</b>. Pope Clement the Sixth,       Yet of all the Byzantine princes, that pupil, John Palæologus, was the best disposed to embrace, to believe, and to obey, the shepherd of the West. His mother, Anne of Savoy, was baptized in the bosom of the Latin church: her marriage with Andronicus imposed a change of name, of apparel</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 21
+Reign Of Mahomet The Second, Extinction Of Eastern Empire.—Part IV.
+</pre></div>
+</div>
+<div class="output text_html">felt and magnified in its loss: the pontificate of Nicholas the Fifth, however peaceful and prosperous, was dishonored by the fall of the Eastern empire; and the grief and terror of the Latins revived, or seemed to revive, the old enthusiasm of the <b class="match term3">crusades</b>. In one of the most distant countries of the West, Philip duke of Burgundy entertained, at Lisle in Flanders, an assembly of his nobles; and the pompous pageants of the feast were skilfully adapted to their fancy and feelings</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 22
+The Fourth Crusade.—Part II.
+</pre></div>
+</div>
+<div class="output text_html">banquet, he thrice discomfited the Barbarians of the West. These Barbarians had been justly terrified by the report of his naval power; and the sixteen hundred fishing boats of Constantinople     On the tenth day of their encampment at Scutari, the <b class="match term1">crusaders</b> prepared themselves, as soldiers and as Catholics, for the passage of the Bosphorus. Perilous indeed was the adventure; the stream was broad and rapid: in a calm the current of the Euxine might drive down the liquid and unextinguishable fires of the Greeks; and the opposite shores of Europe were</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 23
+State Of Rome From The Twelfth Century.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">successors,               The Jews had rejected the Christ when he appeared among them in a plebeian character; and the Romans might plead their ignorance of his vicar when he assumed the pomp and pride of a temporal sovereign. In the busy age of the <b class="match term3">crusades</b>, some sparks of curiosity and reason were rekindled in the Western world: the heresy of Bulgaria, the Paulician sect, was successfully transplanted into the soil of Italy and France; the Gnostic visions were mingled with the simplicity of the gospel; and the enemies of the clergy reconciled their</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 24
+Succession And Characters Of The Greek Emperors.—Part I.
+</pre></div>
+</div>
+<div class="output text_html">the banner of the cross for the recovery or relief of the holy sepulchre. The Greek emperors were terrified and preserved by the myriads of pilgrims who marched to Jerusalem with Godfrey of Bouillon and the peers of Christendom. The second and third <b class="match term3">crusades</b> trod in the footsteps of the first: Asia and Europe were mingled in a sacred war of two hundred years; and the Christian powers were bravely resisted, and finally expelled by Saladin and the Mamelukes of Egypt. In these memorable <b class="match term3">crusades</b>, a fleet and army of French and Venetians were diverted from Syria to the Thracian Bosphorus: they assaulted the capital, they subverted the Greek monarchy: and a dynasty of Latin princes was seated near threescore years on the throne of Constantine. VII. The Greeks themselves, during this period...Othman, discriminate the two successive dynasties of the nation, which emerged in the eleventh century from the Scythian wilderness. The former established a splendid and potent kingdom from the banks of the Oxus to Antioch and Nice; and the first <b class="match term2">crusade</b> was provoked by the violation of Jerusalem and the danger of Constantinople. From an humble origin, the Ottomans arose, the scourge and terror of Christendom. Constantinople was besieged and taken by Mahomet II., and his triumph annihilates the remnant, the image, the title, of the Roman empire in the</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+Result 25
+Succession And Characters Of The Greek Emperors.—Part IV.
+</pre></div>
+</div>
+<div class="output text_html">with the Latins, Alexius was patient and artful: his discerning eye pervaded the new system of an unknown world and I shall hereafter describe the superior policy with which he balanced the interests and passions of the champions of the first <b class="match term2">crusade</b>. In a long reign of thirty-seven years, he subdued and pardoned the envy of his equals: the laws of public and private order were restored: the arts of wealth and science were cultivated: the limits of the empire were enlarged in Europe and Asia; and the Comnenian sceptre was transmitted to his children</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-a-search-interface">
+<h2>Creating a search interface<a class="headerlink" href="#creating-a-search-interface" title="Link to this heading">#</a></h2>
+<p>Searching our data is great, but we can go one step further and put a simple graphical interface in front of the search engine. I’ll use a Python-based web app framework called <code class="docutils literal notranslate"><span class="pre">streamlit</span></code>. This notebook won’t go into depth about how this app is created, but if you are interested, please check out our <code class="docutils literal notranslate"><span class="pre">Introduction</span> <span class="pre">to</span> <span class="pre">Streamlit</span></code> workshop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Load all of the code</span>
+
+<span class="c1">#@markdown Run this cell to get all of the code needed for the application. You need to run this cell only once.</span>
+<span class="o">%%writefile</span> app.py
+
+<span class="kn">from</span> <span class="nn">whoosh.index</span> <span class="kn">import</span> <span class="n">open_dir</span>
+<span class="kn">from</span> <span class="nn">whoosh</span> <span class="kn">import</span> <span class="n">query</span>
+<span class="kn">from</span> <span class="nn">whoosh.qparser</span> <span class="kn">import</span> <span class="n">QueryParser</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">clear_output</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+
+<span class="nd">@st</span><span class="o">.</span><span class="n">cache_data</span>
+<span class="k">def</span> <span class="nf">get_index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">open_dir</span><span class="p">(</span><span class="s2">&quot;daf_index&quot;</span><span class="p">)</span>
+
+<span class="n">ix</span> <span class="o">=</span> <span class="n">get_index</span><span class="p">()</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gibbon&#39;s *Decline and Fall of the Roman Empire* Simple Search&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">expander</span><span class="p">(</span><span class="s2">&quot;Searching tips&quot;</span><span class="p">):</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    * If you&#39;d like to search for just a single term, you can enter it in the box below.</span>
+<span class="s2">    * If you&#39;d like to search for a phrase, you can enclose it in quotations, such as &quot;serious complications&quot;.</span>
+<span class="s2">    * A query like &quot;serious complications&quot;~5 would return results where &quot;serious&quot; and &quot;complications&quot; are at most 5 words away from each other.</span>
+<span class="s2">    * AND can be used as a boolean operator and will return results where two terms are both in a passage. AND is automatically placed in a query of two words, so &#39;latent syphilis&#39; is internally represented as latent AND syphilis.</span>
+<span class="s2">    * OR can be used as a boolean operator and will return results where either one of two terms are in a passage.</span>
+<span class="s2">    * NOT can be used as a boolean operator and will return results which do not include the term following the NOT.</span>
+<span class="s2">    * From these boolean operators, one can construct complex queries like: syphilis AND hospitals NOT &quot;serious complications&quot;. This query would return results that have both syphilis and hospitals in them, but do not have &quot;serious complications&quot;.</span>
+<span class="s2">    * Parentheses can be used to group boolean statements. For example, the query syphilis AND (&quot;serious complications&quot; OR  hospitals) would return results that have syphilis and either serious complications or hispitals in them.</span>
+<span class="s2">    * If you&#39;d like to search in a specific date range, you can specify it with the date: field. For example, year:[19500101 TO 19600101] syphilis would return results between January 1st, 1950 and January 1st, 1960 that have syphilis in them.</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="s1">&#39;page_count&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="s1">&#39;to_see&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;to_see&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">if</span> <span class="s1">&#39;pages&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;pages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">clear_session_state</span><span class="p">():</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;to_see&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;pages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">query_str</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">&quot;Search&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="n">on_change</span><span class="o">=</span><span class="n">clear_session_state</span><span class="p">)</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">toggle</span><span class="p">(</span><span class="s1">&#39;Use stemming&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;If selected, the search will use stemming to find words with the same root. For example, &quot;running&quot; will match &quot;run&quot; and &quot;ran&quot;.&#39;</span><span class="p">,</span> <span class="n">on_change</span><span class="o">=</span><span class="n">clear_session_state</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">stemmer</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">QueryParser</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">ix</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span> <span class="n">termclass</span><span class="o">=</span><span class="n">query</span><span class="o">.</span><span class="n">Variations</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">QueryParser</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">ix</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">query_str</span><span class="p">)</span>
+
+<span class="n">html_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;p&gt;</span><span class="si">{hit}</span><span class="s2">&lt;/p&gt;</span>
+<span class="s2">&lt;hr/&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Page</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">pageno</span><span class="p">,</span> <span class="n">items_per_page</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pageno</span> <span class="o">=</span> <span class="n">pageno</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items_per_page</span> <span class="o">=</span> <span class="n">items_per_page</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">):</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;small&gt;Document </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/small&gt;&quot;</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">hit</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;h4&gt;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&lt;/h4&gt;&quot;</span><span class="p">,</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\w\.\.\.\w&#39;</span><span class="p">,</span> <span class="n">hit</span><span class="o">.</span><span class="n">highlights</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hit</span><span class="o">=</span><span class="n">h</span><span class="p">),</span> <span class="n">unsafe_allow_html</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">query_str</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;pages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="n">ix</span><span class="o">.</span><span class="n">searcher</span><span class="p">()</span> <span class="k">as</span> <span class="n">searcher</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">spinner</span><span class="p">(</span><span class="s2">&quot;Searching...&quot;</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">searcher</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">fragmenter</span><span class="o">.</span><span class="n">maxchars</span> <span class="o">=</span> <span class="mi">1000</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">fragmenter</span><span class="o">.</span><span class="n">surround</span> <span class="o">=</span> <span class="mi">250</span>
+            <span class="n">pages</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">//</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;to_see&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pages</span><span class="p">):</span>
+                <span class="n">page</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;to_see&#39;</span><span class="p">]</span><span class="o">-</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;to_see&#39;</span><span class="p">]:</span><span class="n">i</span><span class="o">*</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;to_see&#39;</span><span class="p">]]</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">Page</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;to_see&#39;</span><span class="p">])</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;pages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;# Page Navigation&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s1">&#39;See next page&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;next&#39;</span><span class="p">):</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s1">&#39;See previous page&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;prev&#39;</span><span class="p">):</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">page_swap</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;What page do you want to visit?&#39;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;pages&#39;</span><span class="p">]),</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s1">&#39;Go to page&#39;</span><span class="p">):</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_swap</span><span class="o">-</span><span class="mi">1</span>
+
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Page </span><span class="si">{</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">pages</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;pages&#39;</span><span class="p">]):</span>
+            <span class="n">selected_page</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;pages&#39;</span><span class="p">][</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]]</span>
+            <span class="n">selected_page</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s1">&#39;page_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;No more pages!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>UsageError: Line magic function `%%writefile` not found.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Start the application</span>
+
+<span class="c1">#@markdown Run this cell and then wait for the URL to printed below.</span>
+<span class="c1">#@markdown</span>
+<span class="c1">#@markdown Click on it and use the password/Endpoint IP for the password.</span>
+
+<span class="o">!</span>npm<span class="w"> </span>install<span class="w"> </span>localtunnel
+<span class="o">!</span>streamlit<span class="w"> </span>run<span class="w"> </span>/content/app.py<span class="w"> </span><span class="p">&amp;</span>&gt;/content/logs.txt<span class="w"> </span><span class="p">&amp;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Password/Endpoint IP for localtunnel is:&quot;</span><span class="p">,</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;https://ipv4.icanhazip.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Copy and paste this in the box in the link below.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Click on the link below.&quot;</span><span class="p">)</span>
+<span class="o">!</span>npx<span class="w"> </span>localtunnel<span class="w"> </span>--port<span class="w"> </span><span class="m">8501</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h
+added 22 packages, and audited 23 packages in 3s
+
+3 packages are looking for funding
+  run `npm fund` for details
+
+2 <span class=" -Color -Color-Bold -Color-Bold-Yellow">moderate</span> severity vulnerabilities
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+
+
+
+Password/Endpoint IP for localtunnel is: 34.148.103.234
+Copy and paste this in the box in the link below.
+
+
+
+
+Click on the link below.
+your url is: https://chubby-paws-fail.loca.lt
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_Webscraping_III_Scraping_Reddit.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The Art of Webscraping III: Scraping Reddit</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Textual Feature Extraction using Traditional Machine Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-data">Setting up the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-our-data">Indexing our data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#search-our-data">Search our data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-search-interface">Creating a search interface</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/nlp/tutorials/06_Search_Engine_workshop.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/nlp/tutorials/06_Search_Engine_workshop.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

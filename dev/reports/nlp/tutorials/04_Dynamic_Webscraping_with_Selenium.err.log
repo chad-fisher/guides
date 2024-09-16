@@ -1,0 +1,69 @@
+Traceback (most recent call last):
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+## installing all of the dependencies as well as the selenium package
+%%shell
+
+# Add debian buster
+cat > /etc/apt/sources.list.d/debian.list <<'EOF'
+deb [arch=amd64 signed-by=/usr/share/keyrings/debian-buster.gpg] http://deb.debian.org/debian buster main
+deb [arch=amd64 signed-by=/usr/share/keyrings/debian-buster-updates.gpg] http://deb.debian.org/debian buster-updates main
+deb [arch=amd64 signed-by=/usr/share/keyrings/debian-security-buster.gpg] http://deb.debian.org/debian-security buster/updates main
+EOF
+
+# Add keys
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DCC9EFBF77E11517
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A
+
+apt-key export 77E11517 | gpg --dearmour -o /usr/share/keyrings/debian-buster.gpg
+apt-key export 22F3D138 | gpg --dearmour -o /usr/share/keyrings/debian-buster-updates.gpg
+apt-key export E562B32A | gpg --dearmour -o /usr/share/keyrings/debian-security-buster.gpg
+
+# Prefer debian repo for chromium* packages only
+# Note the double-blank lines between entries
+cat > /etc/apt/preferences.d/chromium.pref << 'EOF'
+Package: *
+Pin: release a=eoan
+Pin-Priority: 500
+
+
+Package: *
+Pin: origin "deb.debian.org"
+Pin-Priority: 300
+
+
+Package: chromium*
+Pin: origin "deb.debian.org"
+Pin-Priority: 700
+EOF
+
+# Install chromium and chromium-driver
+apt-get update
+apt-get install chromium chromium-driver
+
+# Install selenium
+pip install selenium
+------------------
+
+
+[0;36m  Cell [0;32mIn[3], line 13[0;36m[0m
+[0;31m    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138[0m
+[0m                                                               ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid decimal literal
+
+

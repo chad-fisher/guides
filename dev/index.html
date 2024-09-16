@@ -1,0 +1,1281 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tufts University Research Technology Guides &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/index.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python" href="python/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tufts-university-research-technology-guides">
+<h1>Tufts University Research Technology Guides<a class="headerlink" href="#tufts-university-research-technology-guides" title="Link to this heading">#</a></h1>
+<p>Welcome! In this collection, you’ll discover a variety of resources and tutorials to enable research. Whether you’re a beginner or seeking to deepen your skills, all materials are asynchronous, allowing you to learn  at your own pace.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-3 sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fab fa-python pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>Python</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Learn more about the programming language Python.</p>
+</div>
+<a class="sd-stretched-link reference external" href="python/index.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fab fa-r-project pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>R</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Enhance your R skills from data analysis to visualization.</p>
+</div>
+<a class="sd-stretched-link reference external" href="r/index.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-server pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>High-Performance Computing</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Learn the basics of using Tufts HPC Cluster, from compute cores to GPUs.</p>
+</div>
+<a class="sd-stretched-link reference external" href="hpc/index.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-terminal pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>Command Line Interfaces</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Learn the fundamentals of terminal, shell, and Command Prompt to streamline your workflows and automate tasks.</p>
+</div>
+<a class="sd-stretched-link reference external" href="cli/index.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-dna pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>Bioinformatics</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Explore bioinformatics applications and tutorials to analyze biological data.</p>
+</div>
+<a class="sd-stretched-link reference external" href="bio/index.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-globe pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>Geospatial &amp; GIS</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Get started with Geographic Information Systems (GIS), web mapping, cartography, GPS, remote sensing, drones, and ESRI applications.</p>
+</div>
+<a class="sd-stretched-link reference external" href="gis/index.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-book pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>Digital Humanities and NLP</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Dive into computational text analysis and Natural Language Processing.</p>
+</div>
+<a class="sd-stretched-link reference external" href="nlp/index.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-chart-simple pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>Data Science in the Cloud</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Learn about data science and machine learning, applying skills locally and in the cloud.</p>
+</div>
+<a class="sd-stretched-link reference external" href="ds/index.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-tags pst-color-text-muted"></span> <strong><span style='font-size: 0.98em ; color:#4295D0'>Subject Tags</span></strong></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Want to sort by tag? You can explore the documentation by topic. Click here.</p>
+</div>
+<a class="sd-stretched-link reference external" href="tags/index.html"></a></div>
+</div>
+</div>
+</div>
+<img src="https://tufts.box.com/shared/static/2z09fuil5ub4o7rhp62m2yqk1s8nh948.png" alt="Photo of students at computers in the Data Lab." width="98%" class="center"/>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html">Get started with Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#what-is-python">What is Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#the-basics">The basics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#the-technical-stuff">The technical stuff</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#why-use-python">Why use Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#id1">The basics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#id2">The Technical Stuff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#where-to-use-python-at-tufts">Where to use Python at Tufts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#what-is-that-called-terminology-related-to-python">What is that called? Terminology related to Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#how-to-get-started-with-python">How to get started with Python:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#how-to-install-python">How to install Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#how-to-run-python-script">How to run Python script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#a-summary-of-comparing-the-four-options">A summary of comparing the four options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0000_Getting_started_with_Python.html#workflow-for-preparing-each-python-notebook">Workflow for preparing each Python notebook</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python/tutorials/0001_intro_python.html">Introduction to Programming with Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#introduction-to-python-notebooks">Introduction to Python Notebooks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#understanding-how-outputs-work">Understanding how Outputs Work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#hands-on-exercise">Hands-On Exercise</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#lists">Lists</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#functions-and-methods">Functions and methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#strings-as-lists">Strings as Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#string-methods">String Methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#exercises-involving-lists-and-strings">Exercises involving Lists and Strings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#dictionaries">Dictionaries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#exercises-involving-dictionaries">Exercises involving Dictionaries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#exercises-involving-functions">Exercises involving Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#loops">Loops</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#sidenote-tuples">Sidenote: Tuples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#exercises-involving-loops">Exercises involving Loops</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#advanced-alternatives-to-loops">Advanced: Alternatives to Loops</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#lambda-functions-and-mapping">Lambda Functions and Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#list-comprehension">List Comprehension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#exercises-involving-map-lambda-and-list-comprehensions">Exercises involving Map, Lambda, and List Comprehensions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#conditionals">Conditionals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0001_intro_python.html#exercises-involving-conditionals">Exercises involving Conditionals</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#advanced-copy-vs-view">Advanced: Copy vs View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#working-with-libraries">Working with Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0001_intro_python.html#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html">Scientific Computing with Python using NumPy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#introduction-to-numpy">Introduction to NumPy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#importing-numpy">Importing NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#numpy-arrays">NumPy Arrays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#array-attributes">Array Attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#other-ways-of-creating-arrays">Other ways of Creating Arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#creating-random-arrays">Creating Random Arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#basic-operations">Basic Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#broadcasting">Broadcasting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#modifying-arrays-in-place">Modifying Arrays In-Place</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#universal-functions">Universal Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#aggregation-functions">Aggregation Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#indexing-and-slicing">Indexing and Slicing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#boolean-indexing">Boolean Indexing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#iterating">Iterating</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#row-major-vs-column-major">Row-Major vs Column-Major</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#advanced-mapping">Advanced: Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#copy-vs-view">Copy vs View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#shape-manipulation">Shape Manipulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#bonus-file-i-o-with-numpy">Bonus: File I/O with NumPy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#writing-a-numpy-array-to-a-file">Writing a NumPy Array to a File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#reading-a-numpy-array-from-a-file">Reading a NumPy Array from a File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#advanced-file-i-o-with-python">Advanced: File I/O With Python</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#quick-overview-of-matplotlib">Quick Overview of Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0002_intro_numpy.html#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html">Python for Data Analysis and Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#importing-libraries">Importing Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#quick-overview-of-matplotlib">Quick Overview of Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#working-with-messy-data">Working with Messy Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#cleaning-column-names">Cleaning Column Names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#indexing-and-datatypes">Indexing and Datatypes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#assigning-values-and-working-with-missing-data">Assigning Values and Working with Missing Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#aggregating-data">Aggregating Data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#a-better-way-of-working-with-messy-data">A Better Way of Working with Messy Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#working-with-real-data">Working with Real Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#subsetting-data-using-boolean-indexing">Subsetting Data using Boolean Indexing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#creating-plots">Creating Plots</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0003_python-data-analysis.html#combining-datasets-and-long-vs-wide-data">Combining Datasets and Long vs Wide Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python/tutorials/0004-spatial-python.html">Introduction to Geospatial Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0004-spatial-python.html#reading-data-with-geographic-coordinates">Reading Data with Geographic Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0004-spatial-python.html#coordinate-reference-systems">Coordinate Reference Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0004-spatial-python.html#creating-static-maps">Creating Static Maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0004-spatial-python.html#creating-interactive-maps">Creating Interactive Maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0004-spatial-python.html#exploring-shapely-objects">Exploring Shapely Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0004-spatial-python.html#geocoding-with-geopy">Geocoding with GeoPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python/tutorials/0004-spatial-python.html#exercise">Exercise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">R</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="r/index.html">R</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="r/index.html#what-is-r">What is R?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r/index.html#how-to-install">How to install?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r/01_intro-r.html">Introduction to R</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#getting-started">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#set-working-directory">Set working directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#comments">Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#assigning-variables">Assigning Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#console-window">Console Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#functions-and-vectors">Functions and Vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#operators">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#running-from-history">Running from History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#the-environment">The Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#modifying-a-vector">Modifying a Vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#saving-variables-and-creating-tables">Saving Variables and Creating Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#working-with-real-data">Working with Real Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#working-directory">Working Directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#importing-data">Importing Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#exploring-data">Exploring Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#working-with-data-frames">Working with Data Frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#selecting-data-based-on-conditions">Selecting Data Based on Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#data-cleaning-dates-strings">Data Cleaning: Dates &amp; Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#making-a-simple-scatter-plot">Making a Simple Scatter Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#data-cleaning-missing-data">Data Cleaning: Missing Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#sampling-the-data">Sampling the Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#customizing-the-scatter-plot">Customizing the Scatter Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#base-r-and-the-tidyverse">Base R and the Tidyverse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#checking-installed-packages">Checking Installed Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#installing-packages">Installing Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#calling-a-library">Calling a Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#advanced-package-management-using-librarian">ADVANCED: Package Management Using Librarian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#rewriting-the-analysis-using-tidyverse">Rewriting the Analysis using Tidyverse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#alternate-better-data-visualizations">Alternate (Better) Data Visualizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#advanced-piping-and-grouping">ADVANCED: Piping and Grouping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#exercise-fix-the-analysis">EXERCISE: Fix the Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#optional-interactive-graphics">OPTIONAL: Interactive Graphics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#bonus-defining-functions">BONUS: Defining Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/01_intro-r.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="r/02_r-data-viz-test.html">Data Manipulation and Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="r/02_r-data-viz-test.html#installing-and-attaching-packages">Installing and Attaching Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="r/02_r-data-viz-test.html#reading-and-cleaning-data">Reading and Cleaning Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="r/02_r-data-viz-test.html#long-vs-wide-data">Long vs Wide Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="r/02_r-data-viz-test.html#joining-tables">Joining Tables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="r/02_r-data-viz-test.html#defining-functions">Defining Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/02_r-data-viz-test.html#row-filtering-and-static-line-graphs">Row Filtering and Static Line Graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/02_r-data-viz-test.html#visualizing-distributions-and-correlations">Visualizing Distributions and Correlations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/02_r-data-viz-test.html#creating-interactive-visualizations">Creating Interactive Visualizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/02_r-data-viz-test.html#creating-animatied-visualizations">Creating Animatied Visualizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="r/03_IntermediateR_2020.html">Survey analysis in R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r/03_IntermediateR_2020.html#deep-dive-into-surveys-in-r">Deep Dive into Surveys in R</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#background-on-the-data">Background on the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#applying-what-we-have-learned-explore-the-relationship-between-breastfeeding-among-children-12-23-month-old-and-wasting-weight-for-height-status">Applying what we have learned - Explore the Relationship Between Breastfeeding among Children 12-23 Month-Old and Wasting (Weight-for-Height) Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#install-and-load-packages">Install and Load Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#data-science-pipelines-and-data-cleaning">Data science pipelines and data cleaning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#import-data">Import Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#data-management">Data Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#note-on-pipes-and-plumbing">Note on pipes and plumbing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#recoding-existing-variables-and-creating-new-variables">Recoding Existing Variables and Creating New Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#statistical-modeling-simple-linear-regression">Statistical Modeling -Simple Linear Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#regression-diagnostics">Regression diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#regression-modeling-multiple-linear-regression">Regression Modeling -Multiple Linear Regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/03_IntermediateR_2020.html#optional-adding-interaction-terms-between-breastfeed-and-minimum-dietary-diversity">OPTIONAL: Adding Interaction Terms between Breastfeed and Minimum Dietary Diversity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="r/03_IntermediateR_2020.html#logistical-regression">Logistical Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r/04_ParallelProcessingR.html">Fast for loops and parallel processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="r/04_ParallelProcessingR.html#what-is-a-for-loop">What is a <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">loop</span></code>?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/04_ParallelProcessingR.html#what-about-for-each">What about <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">each</span></code>?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/04_ParallelProcessingR.html#combining-a-foreach-loop-into-a-single-list">Combining a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop into a single list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/04_ParallelProcessingR.html#profiling-in-r">Profiling in R</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="r/04_ParallelProcessingR.html#comparing-approaches">Comparing approaches</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="r/04_ParallelProcessingR.html#stop-the-cluster">Stop the cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="r/04_ParallelProcessingR.html#testing-with-models">Testing with models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">High-Performance Computing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hpc/index.html">HPC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Access/AccountRequest.html">Tufts HPC Cluster Account Request</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/AccountRequest.html#prerequisites">Prerequisites:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/AccountRequest.html#cluster-account-request">Cluster Account Request</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/StorageRequest.html#prerequisites">Prerequisites:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/StorageRequest.html#check-if-you-already-access-to-a-research-storage-share">Check if you already access to a research storage share</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/StorageRequest.html#new-storage-request">New Storage Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/StorageRequest.html#existing-storage-increase">Existing Storage Increase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Access/cli.html">Command Line Interface (CLI) via SSH</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/cli.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/cli.html#mac-osx-linux">Mac OSX &amp; Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/cli.html#windows">Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Access/index.html">Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/ondemand.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Access/ondemand.html#easy-hpc-access-with-ondemand">Easy HPC Access with OnDemand</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/condaenv.html">Conda Environment on Tufts HPC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/condaenv.html#allocate-resources">Allocate Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/condaenv.html#configure-your-conda">Configure your conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/condaenv.html#create-your-conda-environment">Create your conda environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/condaenv.html#additional-information-for-jupyter-users">Additional Information for Jupyter Users:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hpc/Application/condaenv.html#run-conda-env-as-a-kernel-in-jupyter">Run conda env as a kernel in Jupyter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/index.html">Software Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/modules.html">Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/modules.html#what-are-modules">What are modules?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/modules.html#why-use-modules">Why Use Modules?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/modules.html#how-to-use-modules">How to use modules?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hpc/Application/modules.html#example-using-gcc-compiler">Example: Using <code class="docutils literal notranslate"><span class="pre">gcc</span></code> Compiler</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/modules.html#private-modules">Private Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/portforward.html">Port Forwarding on HPC Cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/portforward.html#login-to-the-cluster-from-terminal-with-ssh">1. Login to the Cluster from terminal with SSH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/portforward.html#optional-start-a-tmux-session-on-the-login-node">2. (Optional) Start a tmux session on the login node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/portforward.html#start-interactive-session">3. Start interactive session</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hpc/Application/portforward.html#before-we-can-run-jupyter-make-sure-to-be-in-the-directory-you-need-to-be-and-know-the-node-name-of-your-compute-node">Before we can run <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code>, make sure to be in the directory you need to be and know the node name of your compute node</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/portforward.html#start-jupyter-notebook-or-jupyter-lab">4. Start <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> or <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Lab</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/portforward.html#port-forwarding-from-the-terminal">5. Port Forwarding from the terminal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/portforward.html#using-the-application">6. Using the application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/portforward.html#enjoy">Enjoy!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/privatemodule.html">Private Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/privatemodule.html#have-the-software-installed">1. Have the Software Installed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/privatemodule.html#create-your-module-file">2. Create Your Module File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/privatemodule.html#load-your-own-module">3. Load Your Own Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/r.html">R</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/r.html#id1"></a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/r.html#r-interactive-session">R Interactive Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/r.html#r-batch-jobs">R batch jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/rstudio.html">RStudio from OnDemand</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/rstudio.html#launch-rstudio">Launch RStudio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/rstudio.html#debug-ondemand-rstudio-pax">Debug OnDemand RStudio Pax</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/tmux.html">Tmux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/tmux.html#load-tmux-module">Load tmux module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/tmux.html#start-your-tmux-session">Start your tmux session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/tmux.html#start-your-interactive-session-inside-the-tmux-session-and-run-your-programs">Start your Interactive session inside the tmux session, and run your programs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/tmux.html#detach-your-tmux-session-or-lose-connection">Detach your tmux session OR lose connection…</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/tmux.html#get-your-work-session-back">Get your work session back</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/tmux.html#check-tmux-sessions">Check tmux sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/tmux.html#pick-your-session-and-reattach-it">Pick your session and reattach it</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Application/vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/vscode.html#local-extensions-optional">Local Extensions (Optional)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hpc/Application/vscode.html#example-extensions">Example extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/vscode.html#ssh-keyless-access-optional">SSH Keyless Access (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Application/vscode.html#tunnels">Tunnels:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Compute/GPU.html">GPU</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/GPU.html#available-gpus-in-gpu-partition-p-gpu">Available GPUs in <code class="docutils literal notranslate"><span class="pre">gpu</span></code> partition<code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">gpu</span></code>:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/GPU.html#available-gpus-inpreempt-partition-p-preempt">Available GPUs in<code class="docutils literal notranslate"><span class="pre">preempt</span></code> partition <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">preempt</span></code>:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Compute/index.html">Computing Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Compute/partition.html">Tufts HPC Partitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/partition.html#partitions">Partitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/partition.html#time-limit">Time limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/partition.html#resource-usage-limit">Resource Usage limit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Compute/terminology.html">Terminology</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/terminology.html#what-is-cluster">What is “Cluster”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/terminology.html#cores-vs-node">Cores vs Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/terminology.html#cpu-and-gpu">CPU and GPU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/terminology.html#memory-and-storage">Memory and Storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Compute/terminology.html#what-to-expect-on-tufts-hpc-cluster">What to Expect on Tufts HPC Cluster?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Slurm/batchjob.html">Batch Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Slurm/batchjob.html#cpu-batch-job">CPU Batch Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Slurm/batchjob.html#gpu-batch-job">GPU Batch Job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Slurm/index.html">Slurm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Slurm/interactive.html">Interactive Sessions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Slurm/interactive.html#cpu-job">CPU Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Slurm/interactive.html#gpu-job">GPU Job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Slurm/monitor.html">Job Monitoring and Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Slurm/monitor.html#check-active-jobs">Check Active Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Slurm/monitor.html#cancel-jobs">Cancel Jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Slurm/utilization.html">Job Resource Utilization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Slurm/utilization.html#check-your-finished-jobs">Check your <strong>finished</strong> jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Storage/globus.html">Globus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Storage/index.html">Tufts HPC Cluster Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Storage/quota.html#policy">Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Storage/quota.html#home-directory">Home Directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Storage/quota.html#lab-research-project-storage">Lab Research Project Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Storage/snapshots.html#important-note">Important Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Storage/snapshots.html#example-scenario">Example Scenario</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hpc/Storage/snapshots.html#find-snapshots">Find Snapshots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hpc/Storage/snapshots.html#locate-missing-files-directories">Locate Missing Files/Directories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hpc/Storage/snapshots.html#recovery-files-directories">Recovery Files/Directories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hpc/Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Storage/xfer.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Storage/xfer.html#ondemand">OnDemand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hpc/Storage/xfer.html#command-line-scp-rsync">Command Line - scp &amp; rsync</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Command Line Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli/index.html">CLI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli/index.html#what-is-the-command-line">What is the Command Line?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli/index.html#how-to-use-the-command-line">How to use the Command Line</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cli/index.html#windows">Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cli/index.html#macos">MacOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cli/index.html#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cli/index.html#the-shell">The Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli/index.html#next-steps-for-learning-the-command-line">Next steps for learning the Command Line</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bioinformatics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bio/index.html">Bioinformatics</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial &amp; GIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gis/index.html">GIS</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Digital Humanities and Natural Language Processing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="nlp/index.html">DH+NLP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html">A Gentle Introduction to Natural Language Process</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#our-overall-task">Our overall task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#goals">Goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#general-methods">General methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#read-in-our-data">Read in our data</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#the-requests-library">The requests library</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#tokenization">Tokenization</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#sentence-level-tokenization">Sentence-level tokenization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#word-level-tokenization">Word-level tokenization</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#visualization">Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#generalizing">Generalizing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#specific-application">Specific Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#reviewing-what-we-learned">Reviewing what we learned</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/01_gentleintrotoNLP.html#thanks-for-reading">Thanks for reading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/02_PNRegex_Workshop6_28.html">Regular Expressions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/02_PNRegex_Workshop6_28.html#what-are-regular-expressions">What are regular expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/02_PNRegex_Workshop6_28.html#the-data">The data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/02_PNRegex_Workshop6_28.html#the-simplest-patterns">The simplest patterns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/02_PNRegex_Workshop6_28.html#re-methods"><code class="docutils literal notranslate"><span class="pre">re</span></code> Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/02_PNRegex_Workshop6_28.html#more-complex-patterns">More complex patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/02_PNRegex_Workshop6_28.html#cleaing-the-text-with-regular-expressions">Cleaing the text with regular expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/02_PNRegex_Workshop6_28.html#some-example-analysis">Some example analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/03_Static_Webscraping_with_BeautifulSoup.html">Static Webscraping with BeautifulSoup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/03_Static_Webscraping_with_BeautifulSoup.html#our-task-in-this-notebook">Our task in this notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/03_Static_Webscraping_with_BeautifulSoup.html#goals">Goals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/03_Static_Webscraping_with_BeautifulSoup.html#requests"><code class="docutils literal notranslate"><span class="pre">requests</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/03_Static_Webscraping_with_BeautifulSoup.html#beautifulsoup"><code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/03_Static_Webscraping_with_BeautifulSoup.html#reviewing-what-we-learned">Reviewing what we learned</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/03_Static_Webscraping_with_BeautifulSoup.html#thanks-for-reading">Thanks for reading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/04_Dynamic_Webscraping_with_Selenium.html">Dynamic Webscraping with Selenium</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/04_Dynamic_Webscraping_with_Selenium.html#our-task-in-this-notebook">Our Task in this notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/04_Dynamic_Webscraping_with_Selenium.html#goals">Goals:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/04_Dynamic_Webscraping_with_Selenium.html#what-is-a-dynamic-website">What is a dynamic website</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/04_Dynamic_Webscraping_with_Selenium.html#selenium-what-is-it-and-how-does-it-works"><code class="docutils literal notranslate"><span class="pre">Selenium</span></code>: what is it and how does it works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/04_Dynamic_Webscraping_with_Selenium.html#application">Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/04_Dynamic_Webscraping_with_Selenium.html#reviewing-what-we-learned">Reviewing what we learned</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/04_Dynamic_Webscraping_with_Selenium.html#thanks-for-reading">Thanks for reading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/05_Webscraping_III_Scraping_Reddit.html">The Art of Webscraping III: Scraping Reddit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/05_Webscraping_III_Scraping_Reddit.html#collecting-submissions-posts">Collecting Submissions (Posts)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/05_Webscraping_III_Scraping_Reddit.html#collecting-comments">Collecting Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/05_Webscraping_III_Scraping_Reddit.html#thw-whole-process">Thw whole process</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/06_Search_Engine_workshop.html">Creating a Search Engine for your own data using <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/06_Search_Engine_workshop.html#setting-up-the-data">Setting up the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/06_Search_Engine_workshop.html#indexing-our-data">Indexing our data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/06_Search_Engine_workshop.html#search-our-data">Search our data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/06_Search_Engine_workshop.html#creating-a-search-interface">Creating a search interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html">Textual Feature Extraction using Traditional Machine Learning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#imports-and-data">Imports and data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#bag-of-words">Bag of Words</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#tokenization">Tokenization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#counting-words">Counting words</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#removing-stop-words">Removing stop words</a></li>
+<li class="toctree-l5"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#counting-words-without-stop-words">Counting words without stop words</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#count-vectorization">Count Vectorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#term-frequency-inverse-document-frequency-tf-idf">Term frequency - inverse document frequency (TF-IDF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html#what-can-you-do-with-tf-idf">What can you do with TF-IDF?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html">Topic Modeling using Traditional Machine Learning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html#non-negative-matrix-factorization-nmf">Non-negative Matrix Factorization (NMF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html#latent-dirichlet-allocation-lda">Latent Dirichlet Allocation (LDA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html#visualizing-topic-models">Visualizing Topic Models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html#visualizing-topic-probability">Visualizing topic probability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html#visualizing-topics-over-time">Visualizing topics over time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html#interpretation">Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/09_Language_Hacking_workshop.html">Language Hacking: Using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> for Morphosyntactic Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/09_Language_Hacking_workshop.html#what-is-spacy">What is <code class="docutils literal notranslate"><span class="pre">spaCy</span></code>?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/09_Language_Hacking_workshop.html#data-and-model-preparation">Data and Model Preparation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/09_Language_Hacking_workshop.html#apply-the-model">Apply the Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/09_Language_Hacking_workshop.html#introduction-to-morphosyntax">Introduction to Morphosyntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/09_Language_Hacking_workshop.html#using-the-data">Using the Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/09_Language_Hacking_workshop.html#trying-to-read-in-a-language-we-don-t-know">Trying to Read in a Language We Don’t Know</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/09_Language_Hacking_workshop.html#limitations-of-language-hacking">Limitations of Language Hacking</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html">Extracting Ancient Placenames using Named Entity Recognition and <code class="docutils literal notranslate"><span class="pre">spaCy</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#what-is-ner-and-why-does-it-matter">What is NER and why does it matter?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#scraping">Scraping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#task-1">TASK 1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#answer">Answer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#completing-our-training-data">Completing our training data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#training">Training</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#task-2">TASK 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#inference">Inference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nlp/tutorials/10_NER_with_spaCy_for_geospatial_analysis.html#evaluation">Evaluation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Science and Cloud Computing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ds/index.html">DS+Cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ds/index.html#what-is-data-science">What is Data science</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ds/index.html#what-is-the-process-of-data-science">What is the process of Data Science</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ds/index.html#what-is-the-difference-data-science-vs-machine-learning">What is the difference: Data science vs. machine learning:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ds/index.html#what-is-clound-computing-in-data-science">What is Clound Computing in Data Science?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ds/index.html#glossary-of-ai-ml-data-science-and-cloud-computing">Glossary of AI, ML, Data Science and Cloud Computing:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ds/index.html#databricks-and-apache-spark">Databricks and Apache Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ds/index.html#resources-at-tufts">Resources at Tufts</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="python/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

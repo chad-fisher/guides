@@ -1,0 +1,135 @@
+Traceback (most recent call last):
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/miniconda3/envs/guides/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+#@title Load all of the code
+
+#@markdown Run this cell to get all of the code needed for the application. You need to run this cell only once.
+%%writefile app.py
+
+from whoosh.index import open_dir
+from whoosh import query
+from whoosh.qparser import QueryParser
+from IPython.display import display, HTML, clear_output
+import re
+import streamlit as st
+
+@st.cache_data
+def get_index():
+    return open_dir("daf_index")
+
+ix = get_index()
+
+st.title("Gibbon's *Decline and Fall of the Roman Empire* Simple Search")
+with st.expander("Searching tips"):
+    st.write("""
+    * If you'd like to search for just a single term, you can enter it in the box below.
+    * If you'd like to search for a phrase, you can enclose it in quotations, such as "serious complications".
+    * A query like "serious complications"~5 would return results where "serious" and "complications" are at most 5 words away from each other.
+    * AND can be used as a boolean operator and will return results where two terms are both in a passage. AND is automatically placed in a query of two words, so 'latent syphilis' is internally represented as latent AND syphilis.
+    * OR can be used as a boolean operator and will return results where either one of two terms are in a passage.
+    * NOT can be used as a boolean operator and will return results which do not include the term following the NOT.
+    * From these boolean operators, one can construct complex queries like: syphilis AND hospitals NOT "serious complications". This query would return results that have both syphilis and hospitals in them, but do not have "serious complications".
+    * Parentheses can be used to group boolean statements. For example, the query syphilis AND ("serious complications" OR  hospitals) would return results that have syphilis and either serious complications or hispitals in them.
+    * If you'd like to search in a specific date range, you can specify it with the date: field. For example, year:[19500101 TO 19600101] syphilis would return results between January 1st, 1950 and January 1st, 1960 that have syphilis in them.
+    """)
+
+if 'page_count' not in st.session_state:
+    st.session_state['page_count'] = 0
+
+if 'to_see' not in st.session_state:
+    st.session_state['to_see'] = 10
+
+if 'pages' not in st.session_state:
+    st.session_state['pages'] = []
+
+def clear_session_state():
+    st.session_state['page_count'] = 0
+    st.session_state['to_see'] = 10
+    st.session_state['pages'] = []
+
+query_str = st.text_input("Search", key="search", on_change=clear_session_state)
+stemmer = st.toggle('Use stemming', help='If selected, the search will use stemming to find words with the same root. For example, "running" will match "run" and "ran".', on_change=clear_session_state)
+
+if stemmer:
+    parser = QueryParser("text", ix.schema, termclass=query.Variations)
+else:
+    parser = QueryParser("text", ix.schema)
+
+query = parser.parse(query_str)
+
+html_template = """
+<p>{hit}</p>
+<hr/>
+""".strip()
+
+class Page:
+    def __init__(self, results, pageno, items_per_page):
+        self.results = results
+        self.pageno = pageno
+        self.items_per_page = items_per_page
+
+    def __len__(self):
+        return len(self.results)
+
+    def __call__(self):
+        for i, hit in enumerate(self.results):
+            st.write(f"<small>Document {i+1} of {len(self.results)}</small>", unsafe_allow_html=True)
+            title = hit['title']
+            st.write(f"<h4>{title}</h4>", unsafe_allow_html=True)
+            r = re.split('\w\.\.\.\w', hit.highlights("text").replace("\n\n", ""))
+            for h in r:
+                st.write(html_template.format(hit=h), unsafe_allow_html=True)
+
+if query_str:
+    st.session_state['pages'] = []
+    with ix.searcher() as searcher:
+        with st.spinner("Searching..."):
+            res = searcher.search(query, limit=None)
+            res.fragmenter.maxchars = 1000
+            res.fragmenter.surround = 250
+            pages = (len(res) // st.session_state['to_see']) + 1
+            for i in range(1, pages):
+                page = res[i*st.session_state['to_see']-st.session_state['to_see']:i*st.session_state['to_see']]
+                p = Page(page, i, st.session_state['to_see'])
+                st.session_state['pages'].append(p)
+
+        with st.sidebar:
+            st.markdown("# Page Navigation")
+            if st.button('See next page', key='next'):
+                st.session_state['page_count'] += 1
+            if st.button('See previous page', key='prev'):
+                st.session_state['page_count'] -= 1
+            page_swap = st.number_input('What page do you want to visit?', min_value=1, max_value=len(st.session_state['pages']), value=1)
+            if st.button('Go to page'):
+                st.session_state['page_count'] = page_swap-1
+
+        st.write(f"Page {st.session_state['page_count']+1} of {pages-1}")
+        if st.session_state['page_count'] < len(st.session_state['pages']):
+            selected_page = st.session_state['pages'][st.session_state['page_count']]
+            selected_page()
+        elif st.session_state['page_count'] < 1:
+            st.session_state['page_count'] = 0
+        else:
+            st.write("No more pages!")
+------------------
+
+----- stderr -----
+UsageError: Line magic function `%%writefile` not found.
+------------------
+
+
+

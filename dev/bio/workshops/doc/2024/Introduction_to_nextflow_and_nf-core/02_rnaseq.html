@@ -1,0 +1,964 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>nf-core/rnaseq &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../../../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bio/workshops/doc/2024/Introduction_to_nextflow_and_nf-core/02_rnaseq';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/bio/workshops/doc/2024/Introduction_to_nextflow_and_nf-core/02_rnaseq.html" />
+    <link rel="icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../../../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">nf-core/rnaseq</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nf-core-rnaseq">
+<h1>nf-core/rnaseq<a class="headerlink" href="#nf-core-rnaseq" title="Link to this heading">#</a></h1>
+<p>nf-core/rnaseq is a bioinformatics pipeline that can be used to analyse RNA sequencing data obtained from organisms with a reference genome and annotation. It takes a samplesheet and FASTQ files as input, performs quality control (QC), trimming and (pseudo-)alignment, and produces a gene expression matrix and extensive QC report.</p>
+<img src="https://raw.githubusercontent.com/nf-core/rnaseq/3.14.0//docs/images/nf-core-rnaseq_metro_map_grey.png" alt="nf-core/rnaseq" width="100%">
+<section id="create-the-working-directory">
+<h2>Create the working directory<a class="headerlink" href="#create-the-working-directory" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">UTLN</span><span class="o">/</span><span class="n">rnaseq</span>  <span class="c1">## Replace UTLN with your own UTLN</span>
+</pre></div>
+</div>
+</section>
+<section id="prepare-the-input-samplesheet">
+<h2>Prepare the input samplesheet<a class="headerlink" href="#prepare-the-input-samplesheet" title="Link to this heading">#</a></h2>
+<section id="samplesheet-generated-by-fetchngs">
+<h3>Samplesheet generated by fetchngs<a class="headerlink" href="#samplesheet-generated-by-fetchngs" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">UTLN</span><span class="o">/</span><span class="n">fetchngs</span><span class="o">/</span><span class="n">fetchngsOut</span><span class="o">/</span><span class="n">samplesheet</span>
+<span class="n">ls</span>
+</pre></div>
+</div>
+<p>You should see the below output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">id_mappings</span><span class="o">.</span><span class="n">csv</span>  <span class="n">multiqc_config</span><span class="o">.</span><span class="n">yml</span>  <span class="n">samplesheet</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">samplesheet.csv</span></code> directly for RNAseq analysis, but I prefer creating a simpler samplesheet.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">3</span> <span class="n">samplesheet</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;sample&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_1&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_2&quot;</span><span class="p">,</span><span class="s2">&quot;strandedness&quot;</span><span class="p">,</span><span class="s2">&quot;run_accession&quot;</span><span class="p">,</span><span class="s2">&quot;experiment_accession&quot;</span><span class="p">,</span><span class="s2">&quot;sample_accession&quot;</span><span class="p">,</span><span class="s2">&quot;secondary_sample_accession&quot;</span><span class="p">,</span><span class="s2">&quot;study_accession&quot;</span><span class="p">,</span><span class="s2">&quot;secondary_study_accession&quot;</span><span class="p">,</span><span class="s2">&quot;submission_accession&quot;</span><span class="p">,</span><span class="s2">&quot;run_alias&quot;</span><span class="p">,</span><span class="s2">&quot;experiment_alias&quot;</span><span class="p">,</span><span class="s2">&quot;sample_alias&quot;</span><span class="p">,</span><span class="s2">&quot;study_alias&quot;</span><span class="p">,</span><span class="s2">&quot;library_layout&quot;</span><span class="p">,</span><span class="s2">&quot;library_selection&quot;</span><span class="p">,</span><span class="s2">&quot;library_source&quot;</span><span class="p">,</span><span class="s2">&quot;library_strategy&quot;</span><span class="p">,</span><span class="s2">&quot;library_name&quot;</span><span class="p">,</span><span class="s2">&quot;instrument_model&quot;</span><span class="p">,</span><span class="s2">&quot;instrument_platform&quot;</span><span class="p">,</span><span class="s2">&quot;base_count&quot;</span><span class="p">,</span><span class="s2">&quot;read_count&quot;</span><span class="p">,</span><span class="s2">&quot;tax_id&quot;</span><span class="p">,</span><span class="s2">&quot;scientific_name&quot;</span><span class="p">,</span><span class="s2">&quot;sample_title&quot;</span><span class="p">,</span><span class="s2">&quot;experiment_title&quot;</span><span class="p">,</span><span class="s2">&quot;study_title&quot;</span><span class="p">,</span><span class="s2">&quot;sample_description&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_md5&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_bytes&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_ftp&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_galaxy&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_aspera&quot;</span>
+<span class="s2">&quot;SRX1693951&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693951_SRR3362661_1.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693951_SRR3362661_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span><span class="s2">&quot;SRR3362661&quot;</span><span class="p">,</span><span class="s2">&quot;SRX1693951&quot;</span><span class="p">,</span><span class="s2">&quot;SAMN04639576&quot;</span><span class="p">,</span><span class="s2">&quot;SRS1386868&quot;</span><span class="p">,</span><span class="s2">&quot;PRJNA318251&quot;</span><span class="p">,</span><span class="s2">&quot;SRP073189&quot;</span><span class="p">,</span><span class="s2">&quot;SRA409858&quot;</span><span class="p">,</span><span class="s2">&quot;GSM2114336_r1&quot;</span><span class="p">,</span><span class="s2">&quot;GSM2114336&quot;</span><span class="p">,</span><span class="s2">&quot;GSM2114336&quot;</span><span class="p">,</span><span class="s2">&quot;GSE80182&quot;</span><span class="p">,</span><span class="s2">&quot;PAIRED&quot;</span><span class="p">,</span><span class="s2">&quot;cDNA&quot;</span><span class="p">,</span><span class="s2">&quot;TRANSCRIPTOMIC&quot;</span><span class="p">,</span><span class="s2">&quot;RNA-Seq&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;Illumina HiSeq 2500&quot;</span><span class="p">,</span><span class="s2">&quot;ILLUMINA&quot;</span><span class="p">,</span><span class="s2">&quot;9527214600&quot;</span><span class="p">,</span><span class="s2">&quot;31757382&quot;</span><span class="p">,</span><span class="s2">&quot;9606&quot;</span><span class="p">,</span><span class="s2">&quot;Homo sapiens&quot;</span><span class="p">,</span><span class="s2">&quot;A549_GFPkd_1&quot;</span><span class="p">,</span><span class="s2">&quot;Illumina HiSeq 2500 sequencing: GSM2114336: A549_GFPkd_1 Homo sapiens RNA-Seq&quot;</span><span class="p">,</span><span class="s2">&quot;A TGFbeta-PRMT5-MEP50 Axis Regulates Cancer Cell Invasion through Histone H3 and H4 Arginine Methylation Coupled Transcriptional Activation and Repression&quot;</span><span class="p">,</span><span class="s2">&quot;A549_GFPkd_1&quot;</span><span class="p">,</span><span class="s2">&quot;d2da6755e6219a091e0a84e9fc63a6fa;ac0e3cd5d59ef55aa3c6d3bb0c31a10c&quot;</span><span class="p">,</span><span class="s2">&quot;3720225514;3596832711&quot;</span><span class="p">,</span><span class="s2">&quot;ftp.sra.ebi.ac.uk/vol1/fastq/SRR336/001/SRR3362661/SRR3362661_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR336/001/SRR3362661/SRR3362661_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;ftp.sra.ebi.ac.uk/vol1/fastq/SRR336/001/SRR3362661/SRR3362661_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR336/001/SRR3362661/SRR3362661_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fasp.sra.ebi.ac.uk:/vol1/fastq/SRR336/001/SRR3362661/SRR3362661_1.fastq.gz;fasp.sra.ebi.ac.uk:/vol1/fastq/SRR336/001/SRR3362661/SRR3362661_2.fastq.gz&quot;</span>
+<span class="s2">&quot;SRX1693952&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693952_SRR3362662_1.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693952_SRR3362662_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span><span class="s2">&quot;SRR3362662&quot;</span><span class="p">,</span><span class="s2">&quot;SRX1693952&quot;</span><span class="p">,</span><span class="s2">&quot;SAMN04639580&quot;</span><span class="p">,</span><span class="s2">&quot;SRS1386867&quot;</span><span class="p">,</span><span class="s2">&quot;PRJNA318251&quot;</span><span class="p">,</span><span class="s2">&quot;SRP073189&quot;</span><span class="p">,</span><span class="s2">&quot;SRA409858&quot;</span><span class="p">,</span><span class="s2">&quot;GSM2114337_r1&quot;</span><span class="p">,</span><span class="s2">&quot;GSM2114337&quot;</span><span class="p">,</span><span class="s2">&quot;GSM2114337&quot;</span><span class="p">,</span><span class="s2">&quot;GSE80182&quot;</span><span class="p">,</span><span class="s2">&quot;PAIRED&quot;</span><span class="p">,</span><span class="s2">&quot;cDNA&quot;</span><span class="p">,</span><span class="s2">&quot;TRANSCRIPTOMIC&quot;</span><span class="p">,</span><span class="s2">&quot;RNA-Seq&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;Illumina HiSeq 2500&quot;</span><span class="p">,</span><span class="s2">&quot;ILLUMINA&quot;</span><span class="p">,</span><span class="s2">&quot;11198386200&quot;</span><span class="p">,</span><span class="s2">&quot;37327954&quot;</span><span class="p">,</span><span class="s2">&quot;9606&quot;</span><span class="p">,</span><span class="s2">&quot;Homo sapiens&quot;</span><span class="p">,</span><span class="s2">&quot;A549_GFPkd_2&quot;</span><span class="p">,</span><span class="s2">&quot;Illumina HiSeq 2500 sequencing: GSM2114337: A549_GFPkd_2 Homo sapiens RNA-Seq&quot;</span><span class="p">,</span><span class="s2">&quot;A TGFbeta-PRMT5-MEP50 Axis Regulates Cancer Cell Invasion through Histone H3 and H4 Arginine Methylation Coupled Transcriptional Activation and Repression&quot;</span><span class="p">,</span><span class="s2">&quot;A549_GFPkd_2&quot;</span><span class="p">,</span><span class="s2">&quot;152754e5004274d7e0d8f56ea481e2d7;f2290b266571d98c782e7614528ab3c9&quot;</span><span class="p">,</span><span class="s2">&quot;4367522067;4230444730&quot;</span><span class="p">,</span><span class="s2">&quot;ftp.sra.ebi.ac.uk/vol1/fastq/SRR336/002/SRR3362662/SRR3362662_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR336/002/SRR3362662/SRR3362662_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;ftp.sra.ebi.ac.uk/vol1/fastq/SRR336/002/SRR3362662/SRR3362662_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR336/002/SRR3362662/SRR3362662_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fasp.sra.ebi.ac.uk:/vol1/fastq/SRR336/002/SRR3362662/SRR3362662_1.fastq.gz;fasp.sra.ebi.ac.uk:/vol1/fastq/SRR336/002/SRR3362662/SRR3362662_2.fastq.gz&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="reformating-samplesheet">
+<h3>Reformating samplesheet<a class="headerlink" href="#reformating-samplesheet" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">awk</span> <span class="o">-</span><span class="sa">F</span><span class="s2">&quot;,&quot;</span> <span class="s1">&#39;OFS=&quot;,&quot;{print $27,$2,$3,$4}&#39;</span> <span class="n">samplesheet</span><span class="o">.</span><span class="n">csv</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">&#39;s/A549_//g&#39;</span> <span class="o">|</span> <span class="n">sed</span> <span class="s1">&#39;s/sample_title/sample/g&#39;</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">UTLN</span><span class="o">/</span><span class="n">rnaseq</span><span class="o">/</span><span class="n">samplesheet</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p>We can clearly see that the samplesheet we generated is simple to read. And it only has 4 columns: <code class="docutils literal notranslate"><span class="pre">sample</span></code>, <code class="docutils literal notranslate"><span class="pre">fastq_1</span></code>, <code class="docutils literal notranslate"><span class="pre">fastq_2</span></code>, and <code class="docutils literal notranslate"><span class="pre">strandness</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">UTLN</span><span class="o">/</span><span class="n">rnaseq</span><span class="o">/</span><span class="n">samplesheet</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;sample&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_1&quot;</span><span class="p">,</span><span class="s2">&quot;fastq_2&quot;</span><span class="p">,</span><span class="s2">&quot;strandedness&quot;</span>
+<span class="s2">&quot;GFPkd_1&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693951_SRR3362661_1.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693951_SRR3362661_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;auto&quot;</span>
+<span class="s2">&quot;GFPkd_2&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693952_SRR3362662_1.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693952_SRR3362662_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;auto&quot;</span>
+<span class="s2">&quot;GFPkd_3&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693953_SRR3362663_1.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693953_SRR3362663_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;auto&quot;</span>
+<span class="s2">&quot;PRMT5kd_1&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693954_SRR3362664_1.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693954_SRR3362664_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;auto&quot;</span>
+<span class="s2">&quot;PRMT5kd_2&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693955_SRR3362665_1.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693955_SRR3362665_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;auto&quot;</span>
+<span class="s2">&quot;PRMT5kd_3&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693956_SRR3362666_1.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;fetchngsOut/fastq/SRX1693956_SRR3362666_2.fastq.gz&quot;</span><span class="p">,</span><span class="s2">&quot;auto&quot;</span>
+</pre></div>
+</div>
+<p>!!! note
+Please note that the <code class="docutils literal notranslate"><span class="pre">fastq_1</span></code> and <code class="docutils literal notranslate"><span class="pre">fastq_2</span></code> columns in the data contain the location of fastq files. However, these paths are <strong>relative</strong> rather than <strong>absolute</strong>. To ensure the <code class="docutils literal notranslate"><span class="pre">rnaseq</span></code> pipeline can locate these fastq files, we can create a soft link for <code class="docutils literal notranslate"><span class="pre">fetchngsOut</span></code> in the working directory of <code class="docutils literal notranslate"><span class="pre">rnaseq</span></code> pipeline.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">UTLN</span><span class="o">/</span><span class="n">rnaseq</span><span class="o">/</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">UTLN</span><span class="o">/</span><span class="n">fetchngs</span><span class="o">/</span><span class="n">fetchngsOut</span> <span class="o">.</span>
+<span class="n">ls</span> <span class="o">-</span><span class="n">l</span>
+</pre></div>
+</div>
+<p>Please verify that we have successfully linked <code class="docutils literal notranslate"><span class="pre">fetchngsOut</span></code> to the current directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lrwxrwxrwx</span> <span class="mi">1</span> <span class="n">yzhang85</span> <span class="n">workshop</span>  <span class="mi">53</span> <span class="n">Apr</span>  <span class="mi">2</span> <span class="mi">18</span><span class="p">:</span><span class="mi">19</span> <span class="n">fetchngsOut</span> <span class="o">-&gt;</span> <span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">workshop</span><span class="o">/</span><span class="n">yzhang85</span><span class="o">/</span><span class="n">fetchngs</span><span class="o">/</span><span class="n">fetchngsOut</span><span class="o">/</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">rw</span><span class="o">----</span> <span class="mi">1</span> <span class="n">yzhang85</span> <span class="n">workshop</span> <span class="mi">788</span> <span class="n">Apr</span>  <span class="mi">2</span> <span class="mi">18</span><span class="p">:</span><span class="mi">18</span> <span class="n">samplesheet</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="rnaseq-on-open-ondemand">
+<h2>rnaseq on Open OnDemand<a class="headerlink" href="#rnaseq-on-open-ondemand" title="Link to this heading">#</a></h2>
+<p>We have already downloaded the raw fastq files for RNAseq using <code class="docutils literal notranslate"><span class="pre">fetchngs</span></code>. However, for conducting RNAseq analysis, we also need the reference genome <code class="docutils literal notranslate"><span class="pre">fasta</span></code> file and <code class="docutils literal notranslate"><span class="pre">gtf</span></code> annotation file. Since these are human samples, we require the human reference genome.</p>
+<p>There are two ways to obtain the human reference genome:</p>
+<ol class="arabic simple">
+<li><p>Choose <code class="docutils literal notranslate"><span class="pre">GRCh38</span></code> in <code class="docutils literal notranslate"><span class="pre">iGenomes</span></code>. This method is simple, and the <code class="docutils literal notranslate"><span class="pre">iGenomes</span></code> have been set up for users. You only need to select the reference to use. However, this method is <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">recommended</span></code> because the annotation files in <code class="docutils literal notranslate"><span class="pre">iGenomes</span></code> have not been updated in some years, making them out of date. We advise against using them for your research and recommend them for classroom/workshop purposes only.</p></li>
+<li><p>Download the latest version of genomes from public databases such as <code class="docutils literal notranslate"><span class="pre">Ensembl</span></code> or <code class="docutils literal notranslate"><span class="pre">NCBI</span></code>.</p></li>
+</ol>
+<p>In this workshop, we will guide you on how to download your own reference genomes from <a class="reference external" href="https://useast.ensembl.org/index.html">Ensemble database</a>.</p>
+<section id="open-ondemand-arguments">
+<h3>Open OnDemand Arguments<a class="headerlink" href="#open-ondemand-arguments" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Number of hours: 24</p></li>
+<li><p>Select cpu partition: batch</p></li>
+<li><p>Reservation for class, training, workshop: Default</p></li>
+<li><p>Version: 3.14.0</p></li>
+<li><p>Working Directory: <code class="docutils literal notranslate"><span class="pre">/cluster/tufts/workshop/UTLN/rnaseq/</span></code> ## Replace UTLN with your own UTLN</p></li>
+<li><p>outdir: rnaseqOut</p></li>
+<li><p>input: samplesheet.csv</p></li>
+<li><p>multiqc_title: PRMT5kd vs. GFPkd</p></li>
+<li><p>iGenomes: None</p></li>
+<li><p>fasta: <a class="reference external" href="https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz">https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz</a></p></li>
+<li><p>gtf: <a class="reference external" href="https://ftp.ensembl.org/pub/release-111/gtf/homo_sapiens/Homo_sapiens.GRCh38.111.gtf.gz">https://ftp.ensembl.org/pub/release-111/gtf/homo_sapiens/Homo_sapiens.GRCh38.111.gtf.gz</a></p></li>
+<li><p>trimmer: trimgalore</p></li>
+<li><p>extra_fastp_args: -q 35 –paired</p></li>
+<li><p>aligner: star_salmon</p></li>
+<li><p>save_reference: true</p></li>
+<li><p>skip_umi_extract: true</p></li>
+<li><p>skip_pseudo_alignment: true</p></li>
+<li><p>skip_stringtie: true</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~&#39;
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,&#39;
+  nf-core/rnaseq v3.14.0
+------------------------------------------------------
+Core Nextflow options
+  runName                   : irreverent_watson
+  containerEngine           : singularity
+  launchDir                 : /cluster/tufts/workshop/UTLN/rnaseq
+  workDir                   : /cluster/tufts/workshop/UTLN/rnaseq/work
+  projectDir                : /cluster/tufts/biocontainers/nf-core/pipelines/nf-core-rnaseq/3.14.0/3_14_0
+  userName                  : yzhang85
+  profile                   : tufts
+  configFiles               : 
+
+Input/output options
+  input                     : samplesheet.csv
+  outdir                    : rnaseqOut
+  multiqc_title             : PRMT5kd vs. GFPkd
+
+Reference genome options
+  fasta                     : https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+  gtf                       : https://ftp.ensembl.org/pub/release-111/gtf/homo_sapiens/Homo_sapiens.GRCh38.111.gtf.gz
+  igenomes_base             : /cluster/tufts/biocontainers/datasets/igenomes/
+
+Read trimming options
+  extra_trimgalore_args     : -q 35 --paired
+
+Optional outputs
+  save_reference            : true
+
+Process skipping options
+  skip_umi_extract          : true
+  skip_pseudo_alignment     : true
+  skip_stringtie            : true
+
+Institutional config options
+  config_profile_description: The Tufts University HPC cluster profile provided by nf-core/configs.
+  config_profile_contact    : Yucheng Zhang
+  config_profile_url        : https://it.tufts.edu/high-performance-computing
+
+Max job request options
+  max_cpus                  : 72
+  max_memory                : 120 GB
+  max_time                  : 7d
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+------------------------------------------------------
+If you use nf-core/rnaseq for your analysis please cite:
+
+* The pipeline
+  https://doi.org/10.5281/zenodo.1400710
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/nf-core/rnaseq/blob/master/CITATIONS.md
+
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:CAT_FASTQ -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:FASTQ_... -
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:FASTQ_... -
+
+.
+.
+.
+
+Monitor the execution with Nextflow Tower using this URL: https://tower.nf/user/yucheng-zhang/watch/5di71eyYto2FH9
+executor &gt;  slurm (209)
+[d1/517f0f] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... [100%] 1 of 1 ✔
+[29/eb99ef] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... [100%] 1 of 1 ✔
+[eb/937d34] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... [100%] 1 of 1 ✔
+[30/ba7437] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... [100%] 1 of 1 ✔
+[f8/be5fd5] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... [100%] 1 of 1 ✔
+[b8/092179] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... [100%] 1 of 1 ✔
+[c1/7d9c49] process &gt; NFCORE_RNASEQ:RNASEQ:PREPAR... [100%] 1 of 1 ✔
+[-        ] process &gt; NFCORE_RNASEQ:RNASEQ:CAT_FASTQ -
+[2e/e95ccb] process &gt; NFCORE_RNASEQ:RNASEQ:FASTQ_... [100%] 6 of 6 ✔
+[d3/24f617] process &gt; NFCORE_RNASEQ:RNASEQ:FASTQ_... [100%] 6 of 6 ✔
+[97/2bb6ec] process &gt; NFCORE_RNASEQ:RNASEQ:FASTQ_... [100%] 1 of 1 ✔
+[49/f116ce] process &gt; NFCORE_RNASEQ:RNASEQ:FASTQ_... [100%] 6 of 6 ✔
+[66/7832b0] process &gt; NFCORE_RNASEQ:RNASEQ:FASTQ_... [100%] 6 of 6 ✔
+[df/7eb1ea] process &gt; NFCORE_RNASEQ:RNASEQ:ALIGN_... [100%] 6 of 6 ✔
+[6a/857d7c] process &gt; NFCORE_RNASEQ:RNASEQ:ALIGN_... [100%] 6 of 6 ✔
+[46/65e709] process &gt; NFCORE_RNASEQ:RNASEQ:ALIGN_... [100%] 6 of 6 ✔
+[06/684719] process &gt; NFCORE_RNASEQ:RNASEQ:ALIGN_... [100%] 6 of 6 ✔
+[01/2fc01d] process &gt; NFCORE_RNASEQ:RNASEQ:ALIGN_... [100%] 6 of 6 ✔
+[0f/f9bf31] process &gt; NFCORE_RNASEQ:RNASEQ:ALIGN_... [100%] 6 of 6 ✔
+[81/eaf8db] process &gt; NFCORE_RNASEQ:RNASEQ:QUANTI... [100%] 6 of 6 ✔
+[d5/12a872] process &gt; NFCORE_RNASEQ:RNASEQ:QUANTI... [100%] 1 of 1 ✔
+[17/ceb58b] process &gt; NFCORE_RNASEQ:RNASEQ:QUANTI... [100%] 1 of 1 ✔
+[f7/3dcf2d] process &gt; NFCORE_RNASEQ:RNASEQ:QUANTI... [100%] 1 of 1 ✔
+[4b/2991d1] process &gt; NFCORE_RNASEQ:RNASEQ:QUANTI... [100%] 1 of 1 ✔
+[9d/1204f5] process &gt; NFCORE_RNASEQ:RNASEQ:QUANTI... [100%] 1 of 1 ✔
+[14/249750] process &gt; NFCORE_RNASEQ:RNASEQ:QUANTI... [100%] 1 of 1 ✔
+[76/2d571a] process &gt; NFCORE_RNASEQ:RNASEQ:DESEQ2... [100%] 1 of 1 ✔
+[b7/1658e4] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_MA... [100%] 6 of 6 ✔
+[64/31c31b] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_MA... [100%] 6 of 6 ✔
+[c6/9ff3a9] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_MA... [100%] 6 of 6 ✔
+[36/df1dd9] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_MA... [100%] 6 of 6 ✔
+[f4/fb9e0d] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_MA... [100%] 6 of 6 ✔
+[42/28fcdb] process &gt; NFCORE_RNASEQ:RNASEQ:SUBREA... [100%] 6 of 6 ✔
+[68/b06f5c] process &gt; NFCORE_RNASEQ:RNASEQ:MULTIQ... [100%] 6 of 6 ✔
+[ce/7d55f5] process &gt; NFCORE_RNASEQ:RNASEQ:BEDTOO... [100%] 6 of 6 ✔
+[24/45057e] process &gt; NFCORE_RNASEQ:RNASEQ:BEDGRA... [100%] 6 of 6 ✔
+[36/194966] process &gt; NFCORE_RNASEQ:RNASEQ:BEDGRA... [100%] 6 of 6 ✔
+[de/70fc07] process &gt; NFCORE_RNASEQ:RNASEQ:BEDGRA... [100%] 6 of 6 ✔
+[be/a747c3] process &gt; NFCORE_RNASEQ:RNASEQ:BEDGRA... [100%] 6 of 6 ✔
+[2b/25dca2] process &gt; NFCORE_RNASEQ:RNASEQ:QUALIM... [100%] 6 of 6 ✔
+[21/ebcfd0] process &gt; NFCORE_RNASEQ:RNASEQ:DUPRAD... [100%] 6 of 6 ✔
+[91/91276e] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_RS... [100%] 6 of 6 ✔
+[18/b555d7] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_RS... [100%] 6 of 6 ✔
+[8c/a1307b] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_RS... [100%] 6 of 6 ✔
+[5f/d7cac7] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_RS... [100%] 6 of 6 ✔
+[c7/ce1ec3] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_RS... [100%] 6 of 6 ✔
+[78/10ee50] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_RS... [100%] 6 of 6 ✔
+[44/7c4656] process &gt; NFCORE_RNASEQ:RNASEQ:BAM_RS... [100%] 6 of 6 ✔
+[56/57e6ac] process &gt; NFCORE_RNASEQ:RNASEQ:CUSTOM... [100%] 1 of 1 ✔
+[6b/f6514d] process &gt; NFCORE_RNASEQ:RNASEQ:MULTIQ... [100%] 1 of 1 ✔
+-[nf-core/rnaseq] Pipeline completed successfully -
+Completed at: 26-Mar-2024 14:57:46
+Duration    : 6h 45m 41s
+CPU hours   : 109.2
+Succeeded   : 209
+
+
+Cleaning up...
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-pipeline-on-the-command-line">
+<h2>Running pipeline on the command line<a class="headerlink" href="#running-pipeline-on-the-command-line" title="Link to this heading">#</a></h2>
+<p>If you prefer to run the pipelines using the command line interface, you can submit a slurm jobscript with the following code.</p>
+<section id="run-the-pipeline-directly">
+<h3>Run the pipeline directly<a class="headerlink" href="#run-the-pipeline-directly" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">nf</span><span class="o">-</span><span class="n">core</span>
+<span class="n">export</span> <span class="n">NXF_SINGULARITY_CACHEDIR</span><span class="o">=/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">biocontainers</span><span class="o">/</span><span class="n">nf</span><span class="o">-</span><span class="n">core</span><span class="o">/</span><span class="n">singularity</span><span class="o">-</span><span class="n">images</span>
+
+<span class="n">nextflow</span> <span class="n">run</span> <span class="o">/</span><span class="n">cluster</span><span class="o">/</span><span class="n">tufts</span><span class="o">/</span><span class="n">biocontainers</span><span class="o">/</span><span class="n">nf</span><span class="o">-</span><span class="n">core</span><span class="o">/</span><span class="n">pipelines</span><span class="o">/</span><span class="n">nf</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">rnaseq</span><span class="o">/</span><span class="mf">3.14.0</span><span class="o">/</span><span class="mi">3_14_0</span>
+  <span class="o">-</span><span class="n">profile</span> <span class="n">tufts</span> \
+  <span class="o">--</span><span class="nb">input</span>  <span class="n">samplesheet</span><span class="o">.</span><span class="n">csv</span> \
+  <span class="o">--</span><span class="n">outdir</span> <span class="n">rnaseqOut</span> \
+  <span class="o">--</span><span class="n">gtf</span> <span class="s2">&quot;https://ftp.ensembl.org/pub/release-111/gtf/homo_sapiens/Homo_sapiens.GRCh38.111.gtf.gz&quot;</span> \
+  <span class="o">--</span><span class="n">fasta</span> <span class="s2">&quot;https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz&quot;</span> \
+  <span class="o">--</span><span class="n">extra_trimgalore_args</span> <span class="s2">&quot;-q 35 --paired&quot;</span> \
+  <span class="o">--</span><span class="n">skip_pseudo_alignment</span> \
+  <span class="o">--</span><span class="n">save_reference</span>
+</pre></div>
+</div>
+</section>
+<section id="another-easier-way">
+<h3>Another easier way<a class="headerlink" href="#another-easier-way" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">nf</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">rnaseq</span><span class="o">/</span><span class="mf">3.14.0</span>
+<span class="n">rnaseq</span> <span class="o">-</span><span class="n">profile</span> <span class="n">tufts</span> \
+  <span class="o">--</span><span class="nb">input</span>  <span class="n">samplesheet</span><span class="o">.</span><span class="n">csv</span> \
+  <span class="o">--</span><span class="n">outdir</span> <span class="n">rnaseqOut</span> \
+  <span class="o">--</span><span class="n">gtf</span> <span class="s2">&quot;https://ftp.ensembl.org/pub/release-111/gtf/homo_sapiens/Homo_sapiens.GRCh38.111.gtf.gz&quot;</span> \
+  <span class="o">--</span><span class="n">fasta</span> <span class="s2">&quot;https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz&quot;</span> \
+  <span class="o">--</span><span class="n">extra_trimgalore_args</span> <span class="s2">&quot;-q 35 --paired&quot;</span> \
+  <span class="o">--</span><span class="n">skip_pseudo_alignment</span> \
+  <span class="o">--</span><span class="n">save_reference</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="nextflow-clean">
+<h2>Nextflow clean<a class="headerlink" href="#nextflow-clean" title="Link to this heading">#</a></h2>
+<section id="clean-the-work">
+<h3>Clean the work<a class="headerlink" href="#clean-the-work" title="Link to this heading">#</a></h3>
+<p>You can clean the <code class="docutils literal notranslate"><span class="pre">work</span></code> directory, by mannualy run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">work</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="03_differentialabundance.html"><span class="std std-doc">Next: Differentialabuandance</span></a></p>
+<p><a class="reference internal" href="01_fetchngs.html"><span class="std std-doc">Previous: fetchngs</span></a></p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-working-directory">Create the working directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-input-samplesheet">Prepare the input samplesheet</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#samplesheet-generated-by-fetchngs">Samplesheet generated by fetchngs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reformating-samplesheet">Reformating samplesheet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rnaseq-on-open-ondemand">rnaseq on Open OnDemand</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-ondemand-arguments">Open OnDemand Arguments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-pipeline-on-the-command-line">Running pipeline on the command line</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-pipeline-directly">Run the pipeline directly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-easier-way">Another easier way</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nextflow-clean">Nextflow clean</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-the-work">Clean the work</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/bio/workshops/doc/2024/Introduction_to_nextflow_and_nf-core/02_rnaseq.md">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../../../_sources/bio/workshops/doc/2024/Introduction_to_nextflow_and_nf-core/02_rnaseq.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

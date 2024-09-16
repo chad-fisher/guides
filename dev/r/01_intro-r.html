@@ -1,0 +1,1841 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to R &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'r/01_intro-r';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/r/01_intro-r.html" />
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Manipulation and Visualization" href="02_r-data-viz-test.html" />
+    <link rel="prev" title="R" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_r-data-viz-test.html">Data Manipulation and Visualization</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="03_IntermediateR_2020.html">Survey analysis in R</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_ParallelProcessingR.html">Fast for loops and parallel processing</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">R</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">Introduction to R</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-r">
+<h1>Introduction to R<a class="headerlink" href="#introduction-to-r" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>author: Uku-Kaspar Uustalu &amp; Kyle Monahan</p></li>
+<li><p>date: 2024-02-16</p></li>
+</ul>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<p>R is a statistical platform similar to Stata, SAS, and SPSS. This software allows you to manipulate data, perform descriptive statistics, recoding variables, and bringing in your own data. If you’re reading this, you’ve opened RStudio (the development environment for R) and you’re on the way! We will walk through this document together in the workshop.</p>
+<p>If you see code that looks like this: <code class="docutils literal notranslate"><span class="pre">code</span></code>, this refers to code that you could write in the R console.</p>
+</section>
+<section id="set-working-directory">
+<h2>Set working directory<a class="headerlink" href="#set-working-directory" title="Link to this heading">#</a></h2>
+<p>The first thing we need to do is to set a working directory. Go to Session &gt; Set Working Directory &gt; To Source File location. This is always good practice!</p>
+</section>
+<section id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Link to this heading">#</a></h2>
+<p>You write a comment by adding a # to the start of a line in an R script or the code section in R markdown. Or you could select the lines you wish to comment and press Ctrl/Cmd+Shift+C. We will not be writing a script, only running one, but the idea is the same. The text in GREEN (if you are using the default theme) is a comment.</p>
+</section>
+<section id="assigning-variables">
+<h2>Assigning Variables<a class="headerlink" href="#assigning-variables" title="Link to this heading">#</a></h2>
+<p>The first thing we can do is assign a variable. This looks like an arrow placing a value into a variable. Like this: ‘n &lt;- 200’.</p>
+<p>To assign the variable, we need to run the code below. Click the “Run” button below to assign a variable <code class="docutils literal notranslate"><span class="pre">n</span></code> equal to the value two-hundred. The run button looks like a small play button.</p>
+<p>The box below is called an <strong>R code chunk</strong>, and it lets us run R code inside this R markdown notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">200</span>
+<span class="c1"># The variable n is set equal to 200. </span>
+
+<span class="c1"># You can write a comment in an RScript by writing a &quot;#&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This created a variable <code class="docutils literal notranslate"><span class="pre">n</span></code> which we can access in R. The value appears in the Environment tab, on the upper right-hand side of the window.</p>
+<blockquote>
+<div><p>Tip: If you can’t see the console window, just click on the word “Console” below. The <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> tells you that R is waiting for your input! The engine is running, and we can either control it with the Run button or the Console directly.</p>
+</div></blockquote>
+<p>Now if you call n, you will see the console report its value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">200</div></div>
+</div>
+</section>
+<section id="console-window">
+<h2>Console Window<a class="headerlink" href="#console-window" title="Link to this heading">#</a></h2>
+<p>YOUR TURN: Try setting ‘n &lt;- 300’ in the Console Window! After you are done, print ‘n’.</p>
+<p>If you cannot see the Console Window, click on the word “Console” below.</p>
+<p>Try typing ‘N’ in the Console Window. What happens? The variable ‘N’ is not found, because ‘n’ is the name of the variable, not ‘N’. R is case-sensitive!</p>
+</section>
+<section id="functions-and-vectors">
+<h2>Functions and Vectors<a class="headerlink" href="#functions-and-vectors" title="Link to this heading">#</a></h2>
+<p>What if you have multiple numbers to set as a variable? For example, what if we wanted to store the scores we got on exams? These include 94, 96, 72, and 92. (The third test was really hard.)</p>
+<p>We use the combine function, which is ‘c(n, n, n, … n)’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">94</span><span class="p">,</span><span class="w"> </span><span class="m">96</span><span class="p">,</span><span class="w"> </span><span class="m">72</span><span class="p">,</span><span class="w"> </span><span class="m">92</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This assigns our scores to the variable “scores” in the Environment. If we call the variable…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>94</li><li>96</li><li>72</li><li>92</li></ol>
+</div></div>
+</div>
+<p>We see the values are printed. This is called a vector. One can access the values within a vector by using square braces ‘[]’. To get the second score, we use…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">96</div></div>
+</div>
+<p>Note that R is one-indexed. To get the first score, we use ‘[1]’, not ‘[0]’.</p>
+</section>
+<section id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Link to this heading">#</a></h2>
+<p>To check if a vector contains an element, we can use the %in% operator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">96</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">TRUE</div></div>
+</div>
+<p>It returns TRUE if the vector contains the element…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">100</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">FALSE</div></div>
+</div>
+<p>and FALSE if it does not. TRUE and FALSE are boolean datatypes, also known as logical datatypes in R. These are commonly used to denote binary variables.</p>
+</section>
+<section id="descriptive-statistics">
+<h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Link to this heading">#</a></h2>
+<p>The best thing about having multiple values to work with is that we can calculate various statistics. Most statistical functions in R easily take a whole vector as input. Let us see what our final semester score would be!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="w">    </span><span class="c1"># mean</span>
+<span class="nf">median</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="w">  </span><span class="c1"># median</span>
+<span class="nf">sd</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="w">      </span><span class="c1"># standard deviation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">88.5</div><div class="output text_html">93</div><div class="output text_html">11.1205515450749</div></div>
+</div>
+</section>
+<section id="running-from-history">
+<h2>Running from History<a class="headerlink" href="#running-from-history" title="Link to this heading">#</a></h2>
+<p>Take a look at the History tab on the right next to the Environment tab.
+This is where you will find commands you have run in the past.If you double click one, it will auto fill in the Console below.</p>
+<p>Select a command from the History tab and double-click on it.
+Then select the console window and press Enter/Return to run the command.</p>
+</section>
+<section id="the-environment">
+<h2>The Environment<a class="headerlink" href="#the-environment" title="Link to this heading">#</a></h2>
+<p>Now click on the Environment tab. We see two objects, labeled as Values. These include scores and n.</p>
+<p>If you ever forget objects and do not want to click on the Environment tab, you can always call the function objects() for a list of all object names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">objects</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'n'</li><li>'scores'</li></ol>
+</div></div>
+</div>
+</section>
+<section id="modifying-a-vector">
+<h2>Modifying a Vector<a class="headerlink" href="#modifying-a-vector" title="Link to this heading">#</a></h2>
+<p>Suddenly, we were able to retake a test. Great!
+Now we have to replace the value of 72 (the lowest score) with our new score of 85. We can assign the new value to the specific index we want to replace.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span><span class="p">[</span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">85</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="saving-variables-and-creating-tables">
+<h2>Saving Variables and Creating Tables<a class="headerlink" href="#saving-variables-and-creating-tables" title="Link to this heading">#</a></h2>
+<p>Re-calculate stats given our retake and create new values to store them.
+In R you can store almost anything as a variable, and you should take advantage of that. Always save anything that you might need going forward.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="n">scores_median</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">median</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="n">scores_sd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sd</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="c1"># To store the values, remember to assign them to variables.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can create a table with a function called rbind():</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">Mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores_mean</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">Median</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores_median</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">SD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores_sd</span><span class="p">)</span>
+<span class="n">scores_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<tbody>
+	<tr><th scope=row>Mean</th><td>91.750000</td></tr>
+	<tr><th scope=row>Median</th><td>93.000000</td></tr>
+	<tr><th scope=row>SD</th><td> 4.787136</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>When creating the table, we save it as an object (scores_table).
+This allows us to refer back to this table at any point later in the script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">class</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'matrix'</li><li>'array'</li></ol>
+</div></div>
+</div>
+<p>We can see that our scores_table is a matrix. Matrices are the most primitive form of table supported in R. Although matrices support both row and column names, they are not best structure to use for working with tabular data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rownames</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'Mean'</li><li>'Median'</li><li>'SD'</li></ol>
+</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NULL
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how our column is unnamed. We can easily fix this as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">scores_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Value</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mean</th><td>91.750000</td></tr>
+	<tr><th scope=row>Median</th><td>93.000000</td></tr>
+	<tr><th scope=row>SD</th><td> 4.787136</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>You can round values to the nearest whole number using the round() function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">round</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Value</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mean</th><td>92</td></tr>
+	<tr><th scope=row>Median</th><td>93</td></tr>
+	<tr><th scope=row>SD</th><td> 5</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>But what if we wanted to keep a certain number of decimal places?
+We can use help() to pull up the function’s documentation and investigate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">help</span><span class="p">(</span><span class="n">round</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Looks like we can specify an additional argument named “digits” to do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">round</span><span class="p">(</span><span class="n">scores_table</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Value</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mean</th><td>91.75</td></tr>
+	<tr><th scope=row>Median</th><td>93.00</td></tr>
+	<tr><th scope=row>SD</th><td> 4.79</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Omitting the name of the argument is allowed and does not change the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">scores_table</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="n">scores_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Value</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mean</th><td>91.75</td></tr>
+	<tr><th scope=row>Median</th><td>93.00</td></tr>
+	<tr><th scope=row>SD</th><td> 4.79</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Do you think omitting the names of optional arguments is good practice? Why?
+Also note how on code above, we first rounded every score in scores_table to two decimal places, creating a new table. Then we assigned this table to the variable scores_table, replacing the previous table.</p>
+</section>
+<section id="working-with-real-data">
+<h2>Working with Real Data<a class="headerlink" href="#working-with-real-data" title="Link to this heading">#</a></h2>
+<p>Now you have mastered the basics of R. But we really want to learn how to import data! So let us do that.</p>
+<p>We have a CSV file of the Atlantic Hurricane Database (HURDAT2) 1851-2022. The data is released by the National Hurricane Center (NHC) at NOAA.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">download.file</span><span class="p">(</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="s">&quot;https://tufts.box.com/shared/static/gdqc9tdv7334622tkco37oyg9t2fyeaf.csv&quot;</span><span class="p">,</span><span class="n">destfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;atlantic.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But how do we import this data so we can use it in R?</p>
+</section>
+<section id="working-directory">
+<h2>Working Directory<a class="headerlink" href="#working-directory" title="Link to this heading">#</a></h2>
+<p>All relative file paths in R are relative to the current working directory, which might or might not be the location of the R script, depending on how RStudio was originally launched. If RStudio was launched by double-clicking on the R script or by right-clicking on the R script and then selecting Open With &gt; RStudio, the default working directory will be the location of the R script. Otherwise the default working directory will either be your Documents directory (Windows) or your home directory (macOS and Linux).</p>
+<p>We can use getwd() and dir() to explore the current working directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">getwd</span><span class="p">()</span><span class="w">     </span><span class="c1"># The current location of the working directory.</span>
+<span class="nf">dir</span><span class="p">()</span><span class="w">       </span><span class="c1"># The files in the working directory.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">'/home/runner/work/guides/guides/source/source/r'</div><div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'01_intro-r.Rmd'</li><li>'02_r-data-viz-test.md'</li><li>'03_IntermediateR_2020.Rmd'</li><li>'04_ParallelProcessingR.Rmd'</li><li>'animation.gif'</li><li>'atlantic.csv'</li><li>'index.md'</li><li>'r_data_dataviz'</li><li>'r-data-viz_files'</li></ol>
+</div></div>
+</div>
+<p>Your working directory should be the “intro-r-workshop” directory and it should contain both the current script (intro-r.R) and the data file (atlantic.csv). You can use the %in% operator to ensure this is the case.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;atlantic.csv&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">dir</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">TRUE</div></div>
+</div>
+<p>If the statement above returns TRUE, you are all set. But if it returns FALSE, you need to change your working directory. The intro-r.R script and the atlantic.csv data file should have been downloaded to the same location. Ensure that they are both right next to each other in the same folder and then set the working directory to the folder containing your script via Session &gt; Set Working Directory &gt; To Source File Location.</p>
+<p>We can ensure the working directory is set correctly by either re-running the commands from above or clicking on the Files tab in the lower-right panel and then selecting More &gt; Go To Working Directory and exploring the results.</p>
+</section>
+<section id="importing-data">
+<h2>Importing Data<a class="headerlink" href="#importing-data" title="Link to this heading">#</a></h2>
+<p>The atlantic.csv data file is in comma-separated values (CSV) format. (Note that the specifics of this format are outlined in standard RFC 4180.) This is a very common data format and you can easily import it in R as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;atlantic.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The read.csv() function has numerous additional optional arguments that we can use to specify how exactly a data file should be read in and interpreted.</p>
+<p>To investigate those, we can use the help() function or the ? operator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="o">?</span><span class="n">read.csv</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that CSV files are different from Excel spreadsheets (XLS or XLSX files) and R does not contain the functionality to import the latter by default. An external community-developed package must be used to import Excel files. Installing and loading external packages is discussed later in this script.</p>
+</section>
+<section id="exploring-data">
+<h2>Exploring Data<a class="headerlink" href="#exploring-data" title="Link to this heading">#</a></h2>
+<p>We see that a new variable “hurrdata” has been added to the environment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">hurrdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A data.frame: 6 × 23</caption>
+<thead>
+	<tr><th></th><th scope=col>ID</th><th scope=col>Name</th><th scope=col>Date</th><th scope=col>Time</th><th scope=col>Event</th><th scope=col>Status</th><th scope=col>Latitude</th><th scope=col>Longitude</th><th scope=col>Maximum.Wind</th><th scope=col>Minimum.Pressure</th><th scope=col>⋯</th><th scope=col>Radii.NW.34kt</th><th scope=col>Radii.NE.50kt</th><th scope=col>Radii.SE.50kt</th><th scope=col>Radii.SW.50kt</th><th scope=col>Radii.NW.50kt</th><th scope=col>Radii.NE.64kt</th><th scope=col>Radii.SE.64kt</th><th scope=col>Radii.SW.64kt</th><th scope=col>Radii.NW.64kt</th><th scope=col>Maximum.Wind.Radius</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>⋯</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>AL011851</td><td>UNNAMED</td><td>18510625</td><td>   0</td><td> </td><td>HU</td><td>28.0N</td><td>94.8W</td><td>80</td><td>-999</td><td>⋯</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td></tr>
+	<tr><th scope=row>2</th><td>AL011851</td><td>UNNAMED</td><td>18510625</td><td> 600</td><td> </td><td>HU</td><td>28.0N</td><td>95.4W</td><td>80</td><td>-999</td><td>⋯</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td></tr>
+	<tr><th scope=row>3</th><td>AL011851</td><td>UNNAMED</td><td>18510625</td><td>1200</td><td> </td><td>HU</td><td>28.0N</td><td>96.0W</td><td>80</td><td>-999</td><td>⋯</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td></tr>
+	<tr><th scope=row>4</th><td>AL011851</td><td>UNNAMED</td><td>18510625</td><td>1800</td><td> </td><td>HU</td><td>28.1N</td><td>96.5W</td><td>80</td><td>-999</td><td>⋯</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td></tr>
+	<tr><th scope=row>5</th><td>AL011851</td><td>UNNAMED</td><td>18510625</td><td>2100</td><td>L</td><td>HU</td><td>28.2N</td><td>96.8W</td><td>80</td><td>-999</td><td>⋯</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td></tr>
+	<tr><th scope=row>6</th><td>AL011851</td><td>UNNAMED</td><td>18510626</td><td>   0</td><td> </td><td>HU</td><td>28.2N</td><td>97.0W</td><td>70</td><td>-999</td><td>⋯</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td><td>-999</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>This shows us a preview of the fist couple rows of the file.
+You can also click on the data table under Environment &gt; Data.</p>
+<p>We can use summary() to get descriptive statistics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">hurrdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      ID                Name                Date               Time       
+ Length:53976       Length:53976       Min.   :18510625   Min.   :   0.0  
+ Class :character   Class :character   1st Qu.:19180804   1st Qu.: 600.0  
+ Mode  :character   Mode  :character   Median :19640609   Median :1200.0  
+                                       Mean   :19554281   Mean   : 910.8  
+                                       3rd Qu.:19961020   3rd Qu.:1800.0  
+                                       Max.   :20221111   Max.   :2330.0  
+    Event              Status            Latitude          Longitude        
+ Length:53976       Length:53976       Length:53976       Length:53976      
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+  Maximum.Wind    Minimum.Pressure Radii.NE.34kt    Radii.SE.34kt   
+ Min.   :-99.00   Min.   :-999.0   Min.   :-999.0   Min.   :-999.0  
+ 1st Qu.: 35.00   1st Qu.:-999.0   1st Qu.:-999.0   1st Qu.:-999.0  
+ Median : 45.00   Median :-999.0   Median :-999.0   Median :-999.0  
+ Mean   : 52.57   Mean   :-149.4   Mean   :-795.1   Mean   :-796.4  
+ 3rd Qu.: 70.00   3rd Qu.: 995.0   3rd Qu.:-999.0   3rd Qu.:-999.0  
+ Max.   :165.00   Max.   :1024.0   Max.   : 780.0   Max.   : 720.0  
+ Radii.SW.34kt    Radii.NW.34kt  Radii.NE.50kt    Radii.SE.50kt   
+ Min.   :-999.0   Min.   :-999   Min.   :-999.0   Min.   :-999.0  
+ 1st Qu.:-999.0   1st Qu.:-999   1st Qu.:-999.0   1st Qu.:-999.0  
+ Median :-999.0   Median :-999   Median :-999.0   Median :-999.0  
+ Mean   :-801.4   Mean   :-799   Mean   :-806.1   Mean   :-806.4  
+ 3rd Qu.:-999.0   3rd Qu.:-999   3rd Qu.:-999.0   3rd Qu.:-999.0  
+ Max.   : 660.0   Max.   : 600   Max.   : 360.0   Max.   : 300.0  
+ Radii.SW.50kt    Radii.NW.50kt    Radii.NE.64kt    Radii.SE.64kt   
+ Min.   :-999.0   Min.   :-999.0   Min.   :-999.0   Min.   :-999.0  
+ 1st Qu.:-999.0   1st Qu.:-999.0   1st Qu.:-999.0   1st Qu.:-999.0  
+ Median :-999.0   Median :-999.0   Median :-999.0   Median :-999.0  
+ Mean   :-807.7   Mean   :-807.1   Mean   :-809.2   Mean   :-809.3  
+ 3rd Qu.:-999.0   3rd Qu.:-999.0   3rd Qu.:-999.0   3rd Qu.:-999.0  
+ Max.   : 360.0   Max.   : 390.0   Max.   : 180.0   Max.   : 250.0  
+ Radii.SW.64kt    Radii.NW.64kt    Maximum.Wind.Radius
+ Min.   :-999.0   Min.   :-999.0   Min.   :-999.0     
+ 1st Qu.:-999.0   1st Qu.:-999.0   1st Qu.:-999.0     
+ Median :-999.0   Median :-999.0   Median :-999.0     
+ Mean   :-809.7   Mean   :-809.5   Mean   :-973.2     
+ 3rd Qu.:-999.0   3rd Qu.:-999.0   3rd Qu.:-999.0     
+ Max.   : 180.0   Max.   : 300.0   Max.   : 400.0     
+</pre></div>
+</div>
+</div>
+</div>
+<p>We might wonder - what type of data is hurrdata?
+We imported it from csv, but how is it stored?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">class</span><span class="p">(</span><span class="n">hurrdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">'data.frame'</div></div>
+</div>
+<p>We can see that it is a “data.frame”, commonly referred to as a data frame.
+A data frame is a table where you have observations as rows and variables as columns. Data frames have some great features for working with data and are the go-to for R data storage. You can think of them almost as spreadsheets.</p>
+</section>
+<section id="working-with-data-frames">
+<h2>Working with Data Frames<a class="headerlink" href="#working-with-data-frames" title="Link to this heading">#</a></h2>
+<p>Let us say we want to access the maximum wind speed of the sixth observation.
+We can do this in multiple ways.
+Knowing that “Maximum.Wind” is the ninth column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="p">[[</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">9</span><span class="p">]]</span><span class="w">    </span><span class="c1"># [[row, column]]</span>
+<span class="n">hurrdata</span><span class="p">[[</span><span class="m">9</span><span class="p">]][</span><span class="m">6</span><span class="p">]</span><span class="w">    </span><span class="c1"># [[column]][row]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">70</div><div class="output text_html">70</div></div>
+</div>
+<p>NOTE: When using a data frame, we must use [[]] to access variable values.
+[] will just give us a subset of the data frame, not the values themselves.</p>
+<p>Alternatively, we could use the column name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="p">[[</span><span class="s">&quot;Maximum.Wind&quot;</span><span class="p">]][</span><span class="m">6</span><span class="p">]</span>
+<span class="n">hurrdata</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="p">[</span><span class="m">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">70</div><div class="output text_html">70</div></div>
+</div>
+<p>Note the dollar sign ($). This is a special operator that allows us to access data.frame variables (columns) based on their name.</p>
+<p>The “$” operator is the preferred way of accessing data.frame variables based on their name, as it removes the complexity of when to use [[]] vs [] and does not require quotation marks … given your column names do not contain spaces.</p>
+<p>Note how the read.csv() function automatically replaced spaces with periods in the column names to accommodate this. Underscores are also an acceptable alternative to spaces and other functions might use those instead of periods.</p>
+</section>
+<section id="selecting-data-based-on-conditions">
+<h2>Selecting Data Based on Conditions<a class="headerlink" href="#selecting-data-based-on-conditions" title="Link to this heading">#</a></h2>
+<p>Note how the summary() function from before did not provide much information on the columns containing textual (character/string) data. These columns can be analyzed further using the table() function. Can you guess what it does?</p>
+<div class="cell tag_remove_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">table</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It creates a frequency table of all the unique values in the column!
+But what if we wanted to analyze hurricanes only with a specific name?</p>
+<p>We can select rows based on a condition by combining logical operators with [] to subset all the rows where the logical operator returns TRUE. For example, all the hurricanes named Nicole can be extracted as follows.</p>
+<div class="cell tag_remove_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="p">[</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;NICOLE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we leave the column index blank to select all the columns.</p>
+<p>Alternatively, we could extract values from one column based on the values of another column. For example, the maximum wind speed for all the hurricanes named Nicole could be obtained as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">max</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="p">[</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;NICOLE&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">120</div></div>
+</div>
+</section>
+<section id="data-cleaning-dates-strings">
+<h2>Data Cleaning: Dates &amp; Strings<a class="headerlink" href="#data-cleaning-dates-strings" title="Link to this heading">#</a></h2>
+<p>Let us say we want to analyze maximum wind speed by year.
+Note how the date is stored as a number in YYYYMMDD format.
+This notation is great for sorting but very inconvenient for analysis.</p>
+<p>We can use the “$” operator to easily extract the Data column as follows.</p>
+<div class="cell tag_remove_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Date</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Passing this column to the as.character() function will convert all the numbers into text (character data). Note the quotes around the new values.</p>
+<div class="cell tag_remove_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">as.character</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Date</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us store these new character (string) representations of the dates in a new variable and use the substr() function to extract the year and the month.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">date_strings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Date</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Extract the year from the date string (position 1-4).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">substr</span><span class="p">(</span><span class="n">date_strings</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Extract the month from the date string (position 5-6).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Month</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">substr</span><span class="p">(</span><span class="n">date_strings</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convert both new variables to numeric to accommodate further analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Month</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Month</span><span class="p">)</span>
+<span class="n">hurrdata</span><span class="o">$</span><span class="n">Year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Year</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that this is a somewhat hack-y way of dealing with dates. It is suitable for simple conversions like this, but it is highly encouraged to use external packages specifically designed to work with dates for more complex tasks.</p>
+</section>
+<section id="making-a-simple-scatter-plot">
+<h2>Making a Simple Scatter Plot<a class="headerlink" href="#making-a-simple-scatter-plot" title="Link to this heading">#</a></h2>
+<p>Let us say we would like to explore how the maximum wind speed of hurricanes has changed over time. A good visual tool to explore the relationship between two numerical variables is a scatter plot. We can use the built-in plot() function to create a quick and dirty scatter plot examining the relationship between time (denoted by the hurricane year) and hurricane maximum wind speed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Year</span><span class="p">,</span><span class="w"> </span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../_images/9c9ac70009d4fcc517ee3ace5d3b562f8e8a7c2fbeba3f4fa0223685ec8a2eb3.png"><img alt="../_images/9c9ac70009d4fcc517ee3ace5d3b562f8e8a7c2fbeba3f4fa0223685ec8a2eb3.png" src="../_images/9c9ac70009d4fcc517ee3ace5d3b562f8e8a7c2fbeba3f4fa0223685ec8a2eb3.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+<p>Wow, this plot looks quite horrible! Let us try to improve on it…</p>
+</section>
+<section id="data-cleaning-missing-data">
+<h2>Data Cleaning: Missing Data<a class="headerlink" href="#data-cleaning-missing-data" title="Link to this heading">#</a></h2>
+<p>Why are some wind speeds negative? If we looked into the metadata, we would find that we should have removed these! We can check on the negative data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">min</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">-99</div></div>
+</div>
+<p>We can combine [] with logical operators like before to find all the values less than zero (&lt; 0) and replace them with “NA”, which means “No Data” in R.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="p">[</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NA</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could also delete the whole observation, but this is bad practice!
+Let’s check on the results. It should print “NA”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">min</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">&lt;NA&gt;</div></div>
+</div>
+<p>To get the minimum wind speed excluding the NA values, we must call the min() function with na.rm = TRUE to instruct the function to ignore the NA values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">min</span><span class="p">(</span><span class="n">hurrdata</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">10</div></div>
+</div>
+</section>
+<section id="sampling-the-data">
+<h2>Sampling the Data<a class="headerlink" href="#sampling-the-data" title="Link to this heading">#</a></h2>
+<p>We can also sample the data.frame to de-clutter the scatter plot. This is a two-step process in base R. First we use the sample() function to randomly select a desired quantity of row indexes/numbers for our data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sample</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">hurrdata</span><span class="p">),</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>17866</li><li>38730</li><li>50055</li><li>32304</li><li>50215</li><li>33510</li><li>13994</li><li>3906</li><li>15952</li><li>28121</li><li>41560</li><li>21119</li><li>40110</li><li>45198</li><li>42247</li><li>22226</li><li>29403</li><li>43209</li><li>17699</li><li>13038</li><li>45285</li><li>15313</li><li>831</li><li>46814</li><li>33513</li><li>18758</li><li>51634</li><li>1430</li><li>14946</li><li>16137</li><li>23529</li><li>44750</li><li>1621</li><li>30322</li><li>35622</li><li>46543</li><li>8799</li><li>26177</li><li>41389</li><li>36959</li><li>15881</li><li>22576</li><li>1366</li><li>36920</li><li>15300</li><li>9252</li><li>263</li><li>14803</li><li>36796</li><li>21388</li><li>46599</li><li>34164</li><li>9011</li><li>5842</li><li>15041</li><li>23928</li><li>48046</li><li>26219</li><li>37391</li><li>8883</li><li>25458</li><li>46906</li><li>20766</li><li>2461</li><li>7595</li><li>33215</li><li>1381</li><li>10740</li><li>6211</li><li>23594</li><li>27446</li><li>36744</li><li>15970</li><li>33599</li><li>51569</li><li>3961</li><li>28846</li><li>53670</li><li>21912</li><li>8005</li><li>50674</li><li>46561</li><li>33984</li><li>31726</li><li>7907</li><li>5465</li><li>12546</li><li>35835</li><li>49919</li><li>7933</li><li>40540</li><li>25626</li><li>19826</li><li>21370</li><li>3922</li><li>2813</li><li>50427</li><li>11852</li><li>18407</li><li>2661</li><li>3003</li><li>3964</li><li>10428</li><li>45007</li><li>32268</li><li>44701</li><li>2120</li><li>7615</li><li>25701</li><li>18875</li><li>32860</li><li>9058</li><li>40965</li><li>29085</li><li>29545</li><li>18977</li><li>53800</li><li>28086</li><li>5617</li><li>44328</li><li>46645</li><li>26804</li><li>37035</li><li>41980</li><li>46136</li><li>37057</li><li>45098</li><li>825</li><li>35917</li><li>31584</li><li>21554</li><li>37148</li><li>31944</li><li>12851</li><li>21625</li><li>2445</li><li>7034</li><li>20911</li><li>37459</li><li>22446</li><li>41297</li><li>19859</li><li>472</li><li>13054</li><li>28138</li><li>49530</li><li>18468</li><li>35551</li><li>27887</li><li>35197</li><li>14251</li><li>52207</li><li>26978</li><li>15923</li><li>13606</li><li>7973</li><li>22232</li><li>8864</li><li>12053</li><li>3700</li><li>26208</li><li>34287</li><li>36266</li><li>26590</li><li>17146</li><li>6456</li><li>44506</li><li>48204</li><li>49820</li><li>25717</li><li>35875</li><li>34343</li><li>17069</li><li>2224</li><li>44282</li><li>33046</li><li>45315</li><li>17340</li><li>21946</li><li>31339</li><li>9804</li><li>50076</li><li>44176</li><li>2250</li><li>1771</li><li>17248</li><li>27238</li><li>50414</li><li>40158</li><li>35393</li><li>20044</li><li>28984</li><li>107</li><li>39122</li><li>23800</li><li>17028</li><li>47712</li><li>44726</li><li>39647</li><li>34764</li><li>⋯</li><li>10741</li><li>97</li><li>722</li><li>40390</li><li>25462</li><li>47332</li><li>28365</li><li>21210</li><li>52175</li><li>9943</li><li>24298</li><li>26054</li><li>23128</li><li>34509</li><li>6435</li><li>1373</li><li>8599</li><li>14269</li><li>26557</li><li>33394</li><li>18122</li><li>17459</li><li>19347</li><li>30375</li><li>46820</li><li>9632</li><li>51680</li><li>29256</li><li>42321</li><li>48982</li><li>9637</li><li>27219</li><li>4040</li><li>38764</li><li>46717</li><li>13989</li><li>22857</li><li>38359</li><li>9736</li><li>51164</li><li>10471</li><li>2701</li><li>9648</li><li>5324</li><li>52280</li><li>47361</li><li>18009</li><li>9135</li><li>49220</li><li>15033</li><li>53674</li><li>17744</li><li>45409</li><li>25337</li><li>13357</li><li>37752</li><li>32843</li><li>32114</li><li>34141</li><li>30483</li><li>5345</li><li>3062</li><li>30406</li><li>53044</li><li>10576</li><li>33328</li><li>48376</li><li>43653</li><li>25763</li><li>45758</li><li>35232</li><li>29419</li><li>28754</li><li>6131</li><li>16710</li><li>20440</li><li>9026</li><li>51121</li><li>3951</li><li>13454</li><li>13077</li><li>53557</li><li>53886</li><li>30538</li><li>22954</li><li>46535</li><li>47770</li><li>48178</li><li>3914</li><li>34367</li><li>25677</li><li>22307</li><li>16707</li><li>35177</li><li>7560</li><li>4326</li><li>49258</li><li>52069</li><li>37662</li><li>1576</li><li>51255</li><li>44111</li><li>42829</li><li>1977</li><li>20479</li><li>53209</li><li>11649</li><li>32382</li><li>31526</li><li>34781</li><li>44117</li><li>11138</li><li>25178</li><li>42340</li><li>3757</li><li>25782</li><li>39610</li><li>2906</li><li>37509</li><li>50600</li><li>9160</li><li>37889</li><li>24924</li><li>13062</li><li>5158</li><li>51571</li><li>47830</li><li>32097</li><li>23443</li><li>6700</li><li>23413</li><li>2670</li><li>10668</li><li>53190</li><li>22631</li><li>34353</li><li>21213</li><li>30294</li><li>8582</li><li>16982</li><li>48616</li><li>13327</li><li>13137</li><li>42631</li><li>4030</li><li>44494</li><li>37855</li><li>31066</li><li>22722</li><li>6999</li><li>20116</li><li>44853</li><li>4316</li><li>25150</li><li>2668</li><li>24482</li><li>12799</li><li>36105</li><li>5899</li><li>45828</li><li>3271</li><li>41900</li><li>26012</li><li>40306</li><li>32799</li><li>25198</li><li>34460</li><li>46210</li><li>36023</li><li>5069</li><li>28959</li><li>16866</li><li>25139</li><li>20511</li><li>13372</li><li>32449</li><li>10107</li><li>12781</li><li>28805</li><li>45217</li><li>27060</li><li>53127</li><li>32966</li><li>28612</li><li>36158</li><li>3893</li><li>16967</li><li>12481</li><li>9621</li><li>9003</li><li>29993</li><li>30059</li><li>9678</li><li>38461</li><li>9900</li><li>38007</li><li>48846</li><li>1455</li><li>47506</li><li>2689</li></ol>
+</div></div>
+</div>
+<p>And then we use [] to extract those rows from the data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hurrdata</span><span class="p">[</span><span class="nf">sample</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">hurrdata</span><span class="p">),</span><span class="w"> </span><span class="m">1000</span><span class="p">),</span><span class="w"> </span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="customizing-the-scatter-plot">
+<h2>Customizing the Scatter Plot<a class="headerlink" href="#customizing-the-scatter-plot" title="Link to this heading">#</a></h2>
+<p>We can now plot the sampled data and use various additional arguments to add a title, axis labels, and customize the visualization to our liking.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hurrdata2</span><span class="o">$</span><span class="n">Year</span><span class="p">,</span>
+<span class="w">     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hurrdata2</span><span class="o">$</span><span class="n">Maximum.Wind</span><span class="p">,</span>
+<span class="w">     </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Selected Annual Hurricane Data, 1851-2022&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Year&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Maximum Wind Speed (knots)&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">21</span><span class="p">,</span><span class="w">          </span><span class="c1"># type of symbol to use (see ?points for options)</span>
+<span class="w">     </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w">      </span><span class="c1"># symbol line color</span>
+<span class="w">     </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lightblue&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1"># symbol fill color</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../_images/aff2f3ae8cfd62db45fcc05a2cb649a4ecff06794bf61dbedd1fe598cbee979b.png"><img alt="../_images/aff2f3ae8cfd62db45fcc05a2cb649a4ecff06794bf61dbedd1fe598cbee979b.png" src="../_images/aff2f3ae8cfd62db45fcc05a2cb649a4ecff06794bf61dbedd1fe598cbee979b.png" style="width: 420px; height: 420px;" />
+</a>
+</div>
+</div>
+<p>We can also add a regression line by combining the abline() function with the linear model function. Note the special syntax used to define the formula.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">abline</span><span class="p">(</span><span class="n">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Maximum.Wind</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Year</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hurrdata2</span><span class="p">),</span>
+<span class="w">       </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">,</span><span class="w">     </span><span class="c1"># line color</span>
+<span class="w">       </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dashed&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># line type</span>
+<span class="w">       </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">         </span><span class="c1"># line width</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">int_abline</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="p">,</span> <span class="n">untf</span> <span class="o">=</span> <span class="n">untf</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span> <span class="n">plot</span><span class="o">.</span><span class="n">new</span> <span class="n">has</span> <span class="ow">not</span> <span class="n">been</span> <span class="n">called</span> <span class="n">yet</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">abline</span><span class="p">(</span><span class="n">reg</span> <span class="o">=</span> <span class="n">lm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">Maximum</span><span class="o">.</span><span class="n">Wind</span> <span class="o">~</span> <span class="n">Year</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">hurrdata2</span><span class="p">),</span> 
+ <span class="o">.</span>     <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">int_abline</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="p">,</span> <span class="n">untf</span> <span class="o">=</span> <span class="n">untf</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="base-r-and-the-tidyverse">
+<h2>Base R and the Tidyverse<a class="headerlink" href="#base-r-and-the-tidyverse" title="Link to this heading">#</a></h2>
+<p>Thus far we have been working with what is called base R, that is R withoutany community-developed packages installed. Base R has a lot of built-in functionality and can easily do most things, but you may have noticed how some of the code has been a little clunky. Community-developed packages often provide alternative functions that produce the same result using less or more streamlined code and add new functions that do things base R simply cannot.</p>
+<p>The most popular collection of R packages is called the Tidyverse, which is specifically designed for data science and often preferred by professionals. Tidyverse is a collection of several different packages, the following of which could be used to recreate our previous analysis using less code.</p>
+<p>‘readr’ is a package used for reading and writing tabular data
+‘lubridate’ is a package specifically designed to work with times and dates
+‘dplyr’ is a package that allows for easy modification of data frames
+‘ggplot2’ is a streamlined and user-friendly data visualization package</p>
+</section>
+<section id="checking-installed-packages">
+<h2>Checking Installed Packages<a class="headerlink" href="#checking-installed-packages" title="Link to this heading">#</a></h2>
+<p>Depending on what system you are running this script on, you might already have tidyverse installed. This can be easily verified using the Packages tab to the right. Click on the Packages tab to view a list of installed packages. There is also a search bar that allows you to search for a specific package. Try searching for tidyverse to check whether you have it installed or not.</p>
+<p>Alternatively we could use the installed.packages() function to see which packages are installed on our system. That function outputs a list of all installed packages. Using the %in% operator from before, we can check whether tidyverse appears in the list of installed packages or not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;tidyverse&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">installed.packages</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This will return TRUE if you have tidyverse installed and FALSE if you do not.</p>
+</section>
+<section id="installing-packages">
+<h2>Installing Packages<a class="headerlink" href="#installing-packages" title="Link to this heading">#</a></h2>
+<p>We can install new packages using the install.packages() function. However, this function does not check if a package is already installed and will overwrite and re-install the specified package if it is already installed.</p>
+<p>Hence you should only use install.packages() to install packages you do not already have installed or to update previously installed packages if needed.</p>
+<p>The code block below first checks whether the tidyverse is installed or not.
+If it is installed, a message stating so is displayed. Otherwise the function
+install.packages() is called to install all of the packages in the tidyverse.
+Note that the installation process could take several minutes to complete.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">if </span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">installed.packages</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">message</span><span class="p">(</span><span class="s">&quot;Tidyverse already installed!&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="n">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You only need to install packages on your machine once. The next time you use R on your computer, all of the tidyverse packages will already be installed.</p>
+<p>You can also install packages via the Packages tab by clicking “Install”.</p>
+</section>
+<section id="calling-a-library">
+<h2>Calling a Library<a class="headerlink" href="#calling-a-library" title="Link to this heading">#</a></h2>
+<p>Before we can use a package, we need to add it to our library. This can be done using the library() command. Using the tidyverse meta-package, we can easily add all of the tidyverse packages into our library at once.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how multiple different packages were attached to our library. Also note the reported conflicts. This means that some of the packages currently loaded into R have functions that share the same name. One of those functions masks the other one and gets called by default. To ensure a specific function from a specific package gets called, use the package::function() notation.</p>
+<p>If you received an error stating that there is no package called “tidyverse”,please follow the instructions in the previous section to install the package.</p>
+<p>You can also include a package in your library by checking the box next to the corresponding package in the Packages tab.</p>
+</section>
+<section id="advanced-package-management-using-librarian">
+<h2>ADVANCED: Package Management Using Librarian<a class="headerlink" href="#advanced-package-management-using-librarian" title="Link to this heading">#</a></h2>
+<p>Keeping track of which packages you have installed could be quite tiresome and continuously re-installing packages is a waste of time. Luckily there are some R packages that make package management in R significantly easier.</p>
+<p>One of those packages is librarian. The shelf() command from the librarian package ensures that the package you want is loaded into your library and also installed if needed. This allows you to easily run the same script on different machines without having to worry about installing packages.But be warned that librarian does not display conflict warnings! Hence it is recommended to use the package::function() syntax when using librarian.</p>
+<p>Let us install librarian if it is not present and then use it to both install and load a package called janitor that is useful for data cleaning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="w"> </span><span class="s">&quot;librarian&quot;</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">installed.packages</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;librarian&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">librarian</span><span class="o">::</span><span class="nf">shelf</span><span class="p">(</span><span class="n">janitor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rewriting-the-analysis-using-tidyverse">
+<h2>Rewriting the Analysis using Tidyverse<a class="headerlink" href="#rewriting-the-analysis-using-tidyverse" title="Link to this heading">#</a></h2>
+<p>Now let us recreate our previous analysis using packages from the Tidyverse!
+First we use read_csv() from the readr package to import the CSV data file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readr</span><span class="o">::</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">&quot;atlantic.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The readr::read_csv() function is much faster than read.csv() from base R but it does not reformat the column names. Luckily we can use the clean_names() function from the janitor package to convert the column names to snake_case.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">janitor</span><span class="o">::</span><span class="nf">clean_names</span><span class="p">(</span><span class="n">hurrdata3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The date column can be converted to a date format using lubridate functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">lubridate</span><span class="o">::</span><span class="nf">ymd</span><span class="p">(</span><span class="n">hurrdata3</span><span class="o">$</span><span class="n">date</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Combining this with mutate() from dplyr allows for easy overwriting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">mutate</span><span class="p">(</span><span class="n">hurrdata3</span><span class="p">,</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="nf">ymd</span><span class="p">(</span><span class="n">date</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can combine the mutate() function from dplyr with the lubridate year() and month() functions to easily create new columns for the year and month.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">mutate</span><span class="p">(</span><span class="n">hurrdata3</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="nf">year</span><span class="p">(</span><span class="n">date</span><span class="p">),</span>
+<span class="w">                           </span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="nf">month</span><span class="p">(</span><span class="n">date</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dplyr can also easily convert values to NA and sample rows from a table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">mutate</span><span class="p">(</span><span class="n">hurrdata3</span><span class="p">,</span>
+<span class="w">                           </span><span class="n">maximum_wind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">na_if</span><span class="p">(</span><span class="n">maximum_wind</span><span class="p">,</span><span class="w"> </span><span class="m">-99</span><span class="p">))</span>
+
+<span class="n">hurrdata4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">sample_n</span><span class="p">(</span><span class="n">hurrdata3</span><span class="p">,</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="alternate-better-data-visualizations">
+<h2>Alternate (Better) Data Visualizations<a class="headerlink" href="#alternate-better-data-visualizations" title="Link to this heading">#</a></h2>
+<p>Now we can use the popular ggplot2 graphing library to visualize our data.The ggplot2 library is included in the tidyverse and follows a layered logic.</p>
+<p>First you specify the data frame of interest using the ggplot() function and then you create a mapping between variables (columns) and axes using the aes() function. This defines the plotting environment and we can add layers to the plot using the + operator. For example, geom_point() will generate a point for each x and y combination as specified with ggplot() and aes().</p>
+<p>The plot object can be saved in a variable and then displayed by calling it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrgraph</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hurrdata4</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maximum_wind</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrgraph</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how the default plot looks slightly better than what the plot() function produces, but it is still quite bad. Luckily ggplot2 provides us with several customization options and we can tailor the visualization to our needs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrgraph2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hurrdata4</span><span class="p">,</span>
+<span class="w">                     </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maximum_wind</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maximum_wind</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1"># add the initial points</span>
+<span class="w">  </span><span class="nf">scale_color_gradient</span><span class="p">(</span><span class="n">low</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">high</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1"># generate color scheme</span>
+<span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bottom&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1"># put the legend on the bottom</span>
+<span class="w">  </span><span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Maximum Wind Speed (knots)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1"># change the y-label</span>
+<span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Selected Annual Hurricane Data, 1851-2022&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1"># add a title</span>
+<span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">lineheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bold&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1"># format</span>
+<span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">45</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">vjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrgraph2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>While ggplot2 might appear to be more complicated to use than the built-in plot() function, it is actually much easier to create complex (and beautiful) data visualizations using ggplot2 than built-in graphing functionality. Many professionals also prefer ggplot2 and it is prevalent in various guides.</p>
+</section>
+<section id="advanced-piping-and-grouping">
+<h2>ADVANCED: Piping and Grouping<a class="headerlink" href="#advanced-piping-and-grouping" title="Link to this heading">#</a></h2>
+<p>Was it correct of us to sample the data given our hypothesis?
+A closer look at it reveals that the data contains several entries for each hurricane at different points of intensity. Hence our approach was wrong.</p>
+<p>To see how the maximum wind speed of hurricanes has changed over time, we should be looking at the maximum wind speed of each hurricane at its highest point of intensity. We can use functions from dplyr to extract those.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hurrdata3</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">group_by</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">year</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">summarize</span><span class="p">(</span><span class="n">maximum_wind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">maximum_wind</span><span class="p">),</span>
+<span class="w">                   </span><span class="n">.groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;drop&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The pipe operator %&gt;% from the magrittr library is often used to combine several functions into a data analysis pipeline. The pipeline above finds the maximum value of the maximum_wind column for each unique hurricane name and year combination. The pipe operator takes whatever is passed to it and feeds it into the next function as the first argument. Tidyverse functions are built to work with the pipe operator but other functions might not be.</p>
+<p>Now we can correctly visualize the change in maximum wind speed over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrgraph3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hurrdata5</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maximum_wind</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lm</span><span class="p">,</span><span class="w"> </span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1"># add a linear trend line</span>
+<span class="w">  </span><span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Maximum Wind Speed (knots)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Hurricane Wind Speeds at Highest Intensity 1851-2021&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrgraph3</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-fix-the-analysis">
+<h2>EXERCISE: Fix the Analysis<a class="headerlink" href="#exercise-fix-the-analysis" title="Link to this heading">#</a></h2>
+<p>Do you think we made a good graph that tells an accurate story?
+Take a look at the year 1950. What do you think causes this sudden change?
+Are we correctly extracting the maximum wind speed for each unique hurricane?
+Is it fair to be comparing all the recorded hurricanes from 1850 until 2022?
+Should we instead be looking at the most intensive hurricane from each year?</p>
+<p>Fix the analysis above and produce a graph that answers the question:
+How has the intensity of hurricanes changed over time?</p>
+</section>
+<section id="optional-interactive-graphics">
+<h2>OPTIONAL: Interactive Graphics<a class="headerlink" href="#optional-interactive-graphics" title="Link to this heading">#</a></h2>
+<p>We can easily create interactive data visualization in R using the plotly package. Plotly is not included in the tidyverse, so we have to install it (unless it is already installed) and load it into our library. We can use the shelf() function from the librarian package to easily do this as before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">librarian</span><span class="o">::</span><span class="nf">shelf</span><span class="p">(</span><span class="n">plotly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrdata6</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hurrdata3</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">group_by</span><span class="p">(</span><span class="n">year</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">summarize</span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">n_distinct</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">                   </span><span class="n">.groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;drop&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrgraph4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plotly</span><span class="o">::</span><span class="nf">plot_ly</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hurrdata6</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">year</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">count</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bar&quot;</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">marker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="o">::</span><span class="nf">list</span><span class="p">(</span>
+<span class="w">                                </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lightblue&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="o">::</span><span class="nf">list</span><span class="p">(</span>
+<span class="w">                                  </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">plotly</span><span class="o">::</span><span class="nf">layout</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Number of Hurricanes 1851 - 2022&quot;</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">xaxis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="o">::</span><span class="nf">list</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Year&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tickangle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">45</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">yaxis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="o">::</span><span class="nf">list</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Recorded Number of Hurricanes&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">hurrgraph4</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bonus-defining-functions">
+<h2>BONUS: Defining Functions<a class="headerlink" href="#bonus-defining-functions" title="Link to this heading">#</a></h2>
+<p>(Un)likely scenario: Suddenly you need to work with parametric equations.</p>
+<p>For those of you who do not know, a parametric equation is where the x and y coordinates are both written in terms of another variable. This variable is called a parameter and is usually denoted with the letter t.</p>
+<p>Let us say we were given the following parametric equation…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="o">*</span><span class="nf">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">^</span><span class="m">3</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">13</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">5</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="m">3</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="m">4</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>…and asked to solve it for t ranging from 0 to 2*pi.</p>
+<p>We can easily define our parameter as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kc">pi</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, calculating all the x and y values would be extremely tedious if we had to do it manually. Luckily we can use R to make our computer do it for us. All we need to do is just tell R how to calculate these values by defining functions that take t as input and return the value of either x or y.</p>
+<p>We can define the one for x as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">get_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">^</span><span class="m">3</span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alternatively, we could also define it in one one line. We will do this for y. A one-line function like this is sometimes also called a lambda function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">get_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="m">13</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">5</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">2</span><span class="o">*</span><span class="nf">cos</span><span class="p">(</span><span class="m">3</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">cos</span><span class="p">(</span><span class="m">4</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can easily store all of our t, x, and y values into a data frame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">parameq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">)</span>
+<span class="n">parameq</span><span class="o">$</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">get_x</span><span class="p">(</span><span class="n">parameq</span><span class="o">$</span><span class="n">t</span><span class="p">)</span>
+<span class="n">parameq</span><span class="o">$</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">get_y</span><span class="p">(</span><span class="n">parameq</span><span class="o">$</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, let us plot the results of our parametric equation.
+What do you think it will look like? Try to guess.</p>
+<p>Note that this whole section on parametric equations was added for a very special version of this workshop that ran on February 14. Does that help?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">finalplot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parameq</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_polygon</span><span class="p">(</span><span class="n">linetype</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;solid&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span>
+<span class="w">               </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;black&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">finalplot</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Link to this heading">#</a></h2>
+<p>You might wonder what is the difference between “=” and “&lt;-“?
+Well, that is a good question and beyond the scope of this tutorial.But it is all about scope.</p>
+<p>When you create a variable, it is always within some area that limits from where it is accessible, commonly called a scope.</p>
+<p>“&lt;-” puts a value in the user’s workspace, which makes it accessible by said user anywhere, whereas “=” declares it in the scope of a function.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">R</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_r-data-viz-test.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Manipulation and Visualization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-working-directory">Set working directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comments">Comments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-variables">Assigning Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#console-window">Console Window</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-vectors">Functions and Vectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-from-history">Running from History</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-environment">The Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-a-vector">Modifying a Vector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-variables-and-creating-tables">Saving Variables and Creating Tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-real-data">Working with Real Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-directory">Working Directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data">Importing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-data">Exploring Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-data-frames">Working with Data Frames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-data-based-on-conditions">Selecting Data Based on Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-dates-strings">Data Cleaning: Dates &amp; Strings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-simple-scatter-plot">Making a Simple Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-missing-data">Data Cleaning: Missing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-the-data">Sampling the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-scatter-plot">Customizing the Scatter Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-r-and-the-tidyverse">Base R and the Tidyverse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-installed-packages">Checking Installed Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-packages">Installing Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-library">Calling a Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-package-management-using-librarian">ADVANCED: Package Management Using Librarian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rewriting-the-analysis-using-tidyverse">Rewriting the Analysis using Tidyverse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternate-better-data-visualizations">Alternate (Better) Data Visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-piping-and-grouping">ADVANCED: Piping and Grouping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-fix-the-analysis">EXERCISE: Fix the Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-interactive-graphics">OPTIONAL: Interactive Graphics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-defining-functions">BONUS: Defining Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#faq">FAQ</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/r/01_intro-r.Rmd">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/r/01_intro-r.Rmd.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

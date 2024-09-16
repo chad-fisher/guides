@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>R &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'r/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/r/index.html" />
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to R" href="01_intro-r.html" />
+    <link rel="prev" title="Introduction to Geospatial Python" href="../python/tutorials/0004-spatial-python.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro-r.html">Introduction to R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_r-data-viz-test.html">Data Manipulation and Visualization</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="03_IntermediateR_2020.html">Survey analysis in R</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_ParallelProcessingR.html">Fast for loops and parallel processing</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">R</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="r">
+<h1>R<a class="headerlink" href="#r" title="Link to this heading">#</a></h1>
+<section id="what-is-r">
+<h2>What is R?<a class="headerlink" href="#what-is-r" title="Link to this heading">#</a></h2>
+<p>R is a free and open-source programming language well-suited for statistical analysis and data visualization. Various community-developed packages support a wide range of data science applications, including but not limited to machine learning, bioinformatics, geospatial analysis, and natural language processing.</p>
+</section>
+<section id="how-to-install">
+<h2>How to install?<a class="headerlink" href="#how-to-install" title="Link to this heading">#</a></h2>
+<p>Please follow the <a class="reference external" href="https://sites.tufts.edu/datalab/installing-r-and-rstudio/">instructions here</a> provided by the Data Lab to download and install R and R studio to your computer.</p>
+</section>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01_intro-r.html">Introduction to R</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#set-working-directory">Set working directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#comments">Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#assigning-variables">Assigning Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#console-window">Console Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#functions-and-vectors">Functions and Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#operators">Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#running-from-history">Running from History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#the-environment">The Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#modifying-a-vector">Modifying a Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#saving-variables-and-creating-tables">Saving Variables and Creating Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#working-with-real-data">Working with Real Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#working-directory">Working Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#importing-data">Importing Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#exploring-data">Exploring Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#working-with-data-frames">Working with Data Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#selecting-data-based-on-conditions">Selecting Data Based on Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#data-cleaning-dates-strings">Data Cleaning: Dates &amp; Strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#making-a-simple-scatter-plot">Making a Simple Scatter Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#data-cleaning-missing-data">Data Cleaning: Missing Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#sampling-the-data">Sampling the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#customizing-the-scatter-plot">Customizing the Scatter Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#base-r-and-the-tidyverse">Base R and the Tidyverse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#checking-installed-packages">Checking Installed Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#installing-packages">Installing Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#calling-a-library">Calling a Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#advanced-package-management-using-librarian">ADVANCED: Package Management Using Librarian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#rewriting-the-analysis-using-tidyverse">Rewriting the Analysis using Tidyverse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#alternate-better-data-visualizations">Alternate (Better) Data Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#advanced-piping-and-grouping">ADVANCED: Piping and Grouping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#exercise-fix-the-analysis">EXERCISE: Fix the Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#optional-interactive-graphics">OPTIONAL: Interactive Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#bonus-defining-functions">BONUS: Defining Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_intro-r.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_r-data-viz-test.html">Data Manipulation and Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_r-data-viz-test.html#installing-and-attaching-packages">Installing and Attaching Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_r-data-viz-test.html#reading-and-cleaning-data">Reading and Cleaning Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_r-data-viz-test.html#long-vs-wide-data">Long vs Wide Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_r-data-viz-test.html#joining-tables">Joining Tables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_r-data-viz-test.html#defining-functions">Defining Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_r-data-viz-test.html#row-filtering-and-static-line-graphs">Row Filtering and Static Line Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_r-data-viz-test.html#visualizing-distributions-and-correlations">Visualizing Distributions and Correlations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_r-data-viz-test.html#creating-interactive-visualizations">Creating Interactive Visualizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_r-data-viz-test.html#creating-animatied-visualizations">Creating Animatied Visualizations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_IntermediateR_2020.html">Survey analysis in R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_IntermediateR_2020.html#deep-dive-into-surveys-in-r">Deep Dive into Surveys in R</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#background-on-the-data">Background on the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#applying-what-we-have-learned-explore-the-relationship-between-breastfeeding-among-children-12-23-month-old-and-wasting-weight-for-height-status">Applying what we have learned - Explore the Relationship Between Breastfeeding among Children 12-23 Month-Old and Wasting (Weight-for-Height) Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#install-and-load-packages">Install and Load Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#data-science-pipelines-and-data-cleaning">Data science pipelines and data cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#import-data">Import Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#data-management">Data Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#note-on-pipes-and-plumbing">Note on pipes and plumbing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#recoding-existing-variables-and-creating-new-variables">Recoding Existing Variables and Creating New Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#statistical-modeling-simple-linear-regression">Statistical Modeling -Simple Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#regression-diagnostics">Regression diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#regression-modeling-multiple-linear-regression">Regression Modeling -Multiple Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_IntermediateR_2020.html#optional-adding-interaction-terms-between-breastfeed-and-minimum-dietary-diversity">OPTIONAL: Adding Interaction Terms between Breastfeed and Minimum Dietary Diversity</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_IntermediateR_2020.html#logistical-regression">Logistical Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_ParallelProcessingR.html">Fast for loops and parallel processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_ParallelProcessingR.html#what-is-a-for-loop">What is a <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">loop</span></code>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_ParallelProcessingR.html#what-about-for-each">What about <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">each</span></code>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_ParallelProcessingR.html#combining-a-foreach-loop-into-a-single-list">Combining a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop into a single list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_ParallelProcessingR.html#profiling-in-r">Profiling in R</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="04_ParallelProcessingR.html#comparing-approaches">Comparing approaches</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="04_ParallelProcessingR.html#stop-the-cluster">Stop the cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_ParallelProcessingR.html#testing-with-models">Testing with models</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../python/tutorials/0004-spatial-python.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Geospatial Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="01_intro-r.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to R</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-r">What is R?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install">How to install?</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+<div class="tocsection tags-label">
+    <i class="fa-solid fa-tags"></i> Tags
+</div>
+<ul class="tocsection tags-list">
+    <li class="tag-item">
+        <a href="../tags/r.html" class="tag-link">r</a>
+    </li>
+</ul>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/r/index.md">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/r/index.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

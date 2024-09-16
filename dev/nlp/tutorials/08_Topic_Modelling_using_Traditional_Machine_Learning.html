@@ -1,0 +1,3775 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Topic Modeling using Traditional Machine Learning &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.html" />
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Language Hacking: Using spaCy for Morphosyntactic Analysis" href="09_Language_Hacking_workshop.html" />
+    <link rel="prev" title="Textual Feature Extraction using Traditional Machine Learning" href="07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Sep 16, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_gentleintrotoNLP.html">A Gentle Introduction to Natural Language Process</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="02_PNRegex_Workshop6_28.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Static_Webscraping_with_BeautifulSoup.html">Static Webscraping with BeautifulSoup</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="04_Dynamic_Webscraping_with_Selenium.html">Dynamic Webscraping with Selenium</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="05_Webscraping_III_Scraping_Reddit.html">The Art of Webscraping III: Scraping Reddit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_Search_Engine_workshop.html">Creating a Search Engine for your own data using <code class="docutils literal notranslate"><span class="pre">Whoosh</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html">Textual Feature Extraction using Traditional Machine Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Topic Modeling using Traditional Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Language_Hacking_workshop.html">Language Hacking: Using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> for Morphosyntactic Analysis</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="10_NER_with_spaCy_for_geospatial_analysis.html">Extracting Ancient Placenames using Named Entity Recognition and <code class="docutils literal notranslate"><span class="pre">spaCy</span></code></a></li>
+
+
+
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Digital Humanities and NLP</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">Topic Modeling using...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>https://tufts.box.com/shared/static/325sgkodnq30ez61ugazvctif6r24hsu.csv<span class="w"> </span>-O<span class="w"> </span>daf.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2024-09-16 16:26:34--  https://tufts.box.com/shared/static/325sgkodnq30ez61ugazvctif6r24hsu.csv
+Resolving tufts.box.com (tufts.box.com)... 74.112.186.157
+Connecting to tufts.box.com (tufts.box.com)|74.112.186.157|:443... connected.
+HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>301 Moved Permanently
+Location: /public/static/325sgkodnq30ez61ugazvctif6r24hsu.csv [following]
+--2024-09-16 16:26:34--  https://tufts.box.com/public/static/325sgkodnq30ez61ugazvctif6r24hsu.csv
+Reusing existing connection to tufts.box.com:443.
+HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>301 Moved Permanently
+Location: https://tufts.app.box.com/public/static/325sgkodnq30ez61ugazvctif6r24hsu.csv [following]
+--2024-09-16 16:26:34--  https://tufts.app.box.com/public/static/325sgkodnq30ez61ugazvctif6r24hsu.csv
+Resolving tufts.app.box.com (tufts.app.box.com)... 74.112.186.157
+Connecting to tufts.app.box.com (tufts.app.box.com)|74.112.186.157|:443... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connected.
+HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>302 Found
+Location: https://public.boxcloud.com/d/1/b1!ZYW6oqGyWvHFezOBXezE2TFZPpe2IWKGnnv8Ga1U-mtiCWbN1skSkrUXXfqnYuHXGNJRQz8kOfbhnMzMcJPP7Rrmdufh3YkzH3hPIWF-HCE84pahBFIB-VrOusnCtTPBY9kXijboLrFk-PSXoM-LAUSQiWGt0nhHuQegc-_RGGhVED1-wqHq6RzLiNNqHLCRnD7o5M1tX4fkP7DgqNT6pXygQFuiV0GEz7iy4vHqnncUddDq-N5dUhdeP8uIz79SUwwI6o2Fmz7k4HSSqXCqwcmL3lOH7uXumwqPIwKVoPi3fkSY7E6IVmOKf7AG81pvXdTp8l--ZbnLUHtnErX8gE_Ih6t-JAsKupJ3WlUaar4JVK3D5HE1N07B7A92y22V7MTN39UPI41GVaeAo9RJMTESsk_tIfmKqh5vG7tLiwYsIh1EibdRsA6h8fXRG-m5NeoaOZkdfqShmVDodrHavhOgPoO2T1Y72hs2bEEMnTbu3XDAM5oqXZCqyhANP1n2iVhPK8iJeauE7zQMLICKamqhp0rJtVL3RWyafrXDwoh5QcaHrl895VeFpGCgJx8zqZ1iLruw0ptGQGvLUGz_-w8qEeriaykdM8dkZKcKJX3qKp-6aiq2un7QUpXciEJG1jFxKUvy1_Y5hDmqr3T53fAgOdtMHxgf5lEJzAkhCmyk_AvKKFIXi8L48apitYWWf7Tpg3_qKbl4gZaUFl1jZKDkDCAul7UZp6nIFur2kj5tnShsWRHM19r83ABdK7wTKHHAmCG--vdYcC_VyJ78UrkVbT288ikyH-Jl1EYqJzUaalvw35KfbbhX9bZIA5mpfnhOUIomm0yg8oAaChMfWIrekemn8MPx0FmhHnZo8ZXaChL9AjZdm6RbnuKxJj1LFxWit0hXxKo0Ix07kf9_LBDFZpLkwxm8draFEblIlGL-3TLintqeinV06AGtRDgHWpoHPOA-LVE6r60GRV0OcM-kRQz4uA-rut6PmvYIMTIZkfwe0McVGRt656dDSbc8Klto4G6BdZkmFRJCLgvbKv1_pdUD6iiMz2eJn_RTs9LsYC8zdFjJw_F23Mb6-ApB7E92Y1fCk0F8b_2h8D6BNC4tfs1tBV_g54cH89w2xdc516RVBOPoluQwZ5moLMB-h8zx7YuwkMO8qBpPBdrN0uIFWbXWnd49stRziNT7DtPTALkcLX9AIEgO9LssZXf5Pbft8HLZ7hZW49YKe1Yav7RJMl6cbhFzbRVQtd2sY2-pssM058IN7S6oha-SGif-Q31ww-ReuSqIOH6ZaxwaMEW_otrJGDhQOwylz_LjK4ieGvajEnTOvIJb-vXT7hzby5e6sDR3FKc8Hgpr_kIu2ps5xYUSgrNVzfTX/download [following]
+--2024-09-16 16:26:35--  https://public.boxcloud.com/d/1/b1!ZYW6oqGyWvHFezOBXezE2TFZPpe2IWKGnnv8Ga1U-mtiCWbN1skSkrUXXfqnYuHXGNJRQz8kOfbhnMzMcJPP7Rrmdufh3YkzH3hPIWF-HCE84pahBFIB-VrOusnCtTPBY9kXijboLrFk-PSXoM-LAUSQiWGt0nhHuQegc-_RGGhVED1-wqHq6RzLiNNqHLCRnD7o5M1tX4fkP7DgqNT6pXygQFuiV0GEz7iy4vHqnncUddDq-N5dUhdeP8uIz79SUwwI6o2Fmz7k4HSSqXCqwcmL3lOH7uXumwqPIwKVoPi3fkSY7E6IVmOKf7AG81pvXdTp8l--ZbnLUHtnErX8gE_Ih6t-JAsKupJ3WlUaar4JVK3D5HE1N07B7A92y22V7MTN39UPI41GVaeAo9RJMTESsk_tIfmKqh5vG7tLiwYsIh1EibdRsA6h8fXRG-m5NeoaOZkdfqShmVDodrHavhOgPoO2T1Y72hs2bEEMnTbu3XDAM5oqXZCqyhANP1n2iVhPK8iJeauE7zQMLICKamqhp0rJtVL3RWyafrXDwoh5QcaHrl895VeFpGCgJx8zqZ1iLruw0ptGQGvLUGz_-w8qEeriaykdM8dkZKcKJX3qKp-6aiq2un7QUpXciEJG1jFxKUvy1_Y5hDmqr3T53fAgOdtMHxgf5lEJzAkhCmyk_AvKKFIXi8L48apitYWWf7Tpg3_qKbl4gZaUFl1jZKDkDCAul7UZp6nIFur2kj5tnShsWRHM19r83ABdK7wTKHHAmCG--vdYcC_VyJ78UrkVbT288ikyH-Jl1EYqJzUaalvw35KfbbhX9bZIA5mpfnhOUIomm0yg8oAaChMfWIrekemn8MPx0FmhHnZo8ZXaChL9AjZdm6RbnuKxJj1LFxWit0hXxKo0Ix07kf9_LBDFZpLkwxm8draFEblIlGL-3TLintqeinV06AGtRDgHWpoHPOA-LVE6r60GRV0OcM-kRQz4uA-rut6PmvYIMTIZkfwe0McVGRt656dDSbc8Klto4G6BdZkmFRJCLgvbKv1_pdUD6iiMz2eJn_RTs9LsYC8zdFjJw_F23Mb6-ApB7E92Y1fCk0F8b_2h8D6BNC4tfs1tBV_g54cH89w2xdc516RVBOPoluQwZ5moLMB-h8zx7YuwkMO8qBpPBdrN0uIFWbXWnd49stRziNT7DtPTALkcLX9AIEgO9LssZXf5Pbft8HLZ7hZW49YKe1Yav7RJMl6cbhFzbRVQtd2sY2-pssM058IN7S6oha-SGif-Q31ww-ReuSqIOH6ZaxwaMEW_otrJGDhQOwylz_LjK4ieGvajEnTOvIJb-vXT7hzby5e6sDR3FKc8Hgpr_kIu2ps5xYUSgrNVzfTX/download
+Resolving public.boxcloud.com (public.boxcloud.com)... 74.112.186.164
+Connecting to public.boxcloud.com (public.boxcloud.com)|74.112.186.164|:443... connected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200 OK
+Length: 4643634 (4.4M) [text/csv]
+Saving to: ‘daf.csv’
+
+
+daf.csv               0%[                    ]       0  --.-KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>daf.csv              91%[=================&gt;  ]   4.07M  20.4MB/s               
+daf.csv             100%[===================&gt;]   4.43M  21.7MB/s    in 0.2s    
+
+2024-09-16 16:26:36 (21.7 MB/s) - ‘daf.csv’ saved [4643634/4643634]
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="topic-modeling-using-traditional-machine-learning">
+<h1>Topic Modeling using Traditional Machine Learning<a class="headerlink" href="#topic-modeling-using-traditional-machine-learning" title="Link to this heading">#</a></h1>
+<p>In this workshop, we’ll be learning how to conduct topic modelling on text using <code class="docutils literal notranslate"><span class="pre">sci-kit</span> <span class="pre">learn</span></code>.</p>
+<p>This workshop builds on what we learned about TF-IDF in the <code class="docutils literal notranslate"><span class="pre">Textual</span> <span class="pre">Feature</span> <span class="pre">Extraction</span> <span class="pre">using</span> <span class="pre">Traditional</span> <span class="pre">Machine</span> <span class="pre">Learning</span></code>. In that notebook, we saw how we could take sections of text from a larger work and turn them into a numerial representations of that text. We also saw how we might begin to manipulate this numerical data, for example using linear regression. In this workshop, we’ll see a more complex transformation of the numerical data. That said, the underlying concept remains the same: we can split up our corpus into several texts and then we can using TF-IDF to transform this text into a matrix of numbers. Instead of using the dot product to determine similarity between chapters, though, we’ll see how we can find similar word usage acorss different chapters.</p>
+<p><strong>Topic modelling seeks to group together words which have a similar usage. These groups constitute a topic</strong>. As a result, topic modelling can be particularly useful if you don’t know what is in a text, but you know that it has distinct parts. As we will see, there are two different approaches to topic modelling, Non-negative Matrix Factorization (NMF) and Latent Dirichlet Allocation (LDA), but the results will be very similar.</p>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
+<p>For this example, like in <code class="docutils literal notranslate"><span class="pre">Textual</span> <span class="pre">Feature</span> <span class="pre">Extraction</span> <span class="pre">using</span> <span class="pre">Traditional</span> <span class="pre">Machine</span> <span class="pre">Learning</span></code>, we’ll be using Edward Gibbon’s <em>Decline and Fall of the Roman Empire</em> as our example text. I like using this source for topic modelling because, providing a history of Western Europe from the 200s to the 1450s AD, it’s incredibly long and multifacetted. These are the sorts of texts for which topic modelling can be most useful, though feel free to use any other text instead.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">NMF</span><span class="p">,</span> <span class="n">LatentDirichletAllocation</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">random_state</span> <span class="o">=</span> <span class="mi">1337</span> <span class="c1"># will be using later</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pprint</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">NMF</span><span class="p">,</span> <span class="n">LatentDirichletAllocation</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">daf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;daf.csv&#39;</span><span class="p">)[[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">]]</span>
+<span class="n">daf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-dc28ffc1-a4dd-4d71-8e5d-b6562484163e" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>Introduction.       The Extent And Military Fo...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>It was an ancient tradition, that when the Cap...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>The camp of a Roman legion presented the appea...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>The Internal Prosperity In The Age Of The Anto...</td>
+      <td>Of The Union And Internal Prosperity Of The Ro...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>The Internal Prosperity In The Age Of The Anto...</td>
+      <td>Till the privileges of Romans had been progres...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>291</th>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>Never perhaps has the energy and effect of a s...</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>Without drawing his sword, count Pepin restore...</td>
+    </tr>
+    <tr>
+      <th>293</th>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>The royal prerogative of coining money, which ...</td>
+    </tr>
+    <tr>
+      <th>294</th>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+    </tr>
+    <tr>
+      <th>295</th>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>These general observations may be separately a...</td>
+    </tr>
+  </tbody>
+</table>
+<p>296 rows × 2 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-dc28ffc1-a4dd-4d71-8e5d-b6562484163e')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-dc28ffc1-a4dd-4d71-8e5d-b6562484163e button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-dc28ffc1-a4dd-4d71-8e5d-b6562484163e');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-1ecce05b-bbc9-431c-9be2-5e27f7fdb425">
+  <button class="colab-df-quickchart" onclick="quickchart('df-1ecce05b-bbc9-431c-9be2-5e27f7fdb425')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-1ecce05b-bbc9-431c-9be2-5e27f7fdb425 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_954d1655-34b8-430b-84a6-e2227120cea8">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('daf')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_954d1655-34b8-430b-84a6-e2227120cea8 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('daf');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">daf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;text&#39;</span><span class="p">][:</span><span class="mi">300</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Introduction.       The Extent And Military Force Of The Empire In The Age &#39;
+ &#39;Of The      Antonines.  In the second century of the Christian Æra, the &#39;
+ &#39;empire of Rome comprehended the fairest part of the earth, and the most &#39;
+ &#39;civilized portion of mankind. The frontiers of that extensive monarchy were &#39;
+ &#39;guard&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># applying TF-IDF to the text in Gibbon</span>
+<span class="c1"># feel free to play around with the default parameters</span>
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">max_df</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stop_words</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">dtm</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">daf</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span> <span class="c1"># dtm = document-term matrix</span>
+<span class="n">dtm</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;296x8274 sparse matrix of type &#39;&lt;class &#39;numpy.float64&#39;&gt;&#39;
+	with 100139 stored elements in Compressed Sparse Row format&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="non-negative-matrix-factorization-nmf">
+<h2>Non-negative Matrix Factorization (NMF)<a class="headerlink" href="#non-negative-matrix-factorization-nmf" title="Link to this heading">#</a></h2>
+<p>The NMF algorithm asks what document matrix, <span class="math notranslate nohighlight">\(W\)</span> and what word matrix <span class="math notranslate nohighlight">\(H\)</span> would need to be multiplied together so that we arrive back at our original document-term matrix (DTM), the TF-IDF transformed text. In other words, it attempts to group those words which would have to occur together in such a pattern so as to produce the original DTM. Importantly, this process requires the user to input the amount of topics they think is appropriate for the text. Otherwise, NMF would return its approximation of the exact same DTM, with each “topic” comprising just a single word. Instead, topic modeling seeks to project this approximation into the predefined amount of topics, so it must group together words which have a high probability of occurring together.</p>
+<p>It is for this reason that we import NMF from the <code class="docutils literal notranslate"><span class="pre">decomposition</span></code> module. Outside of NLP, NMF is used to reduce the dimensionality of high dimensional inputs, like images or complex tabular datasets. This is exactly what it’s doing in this context as well: taking the features from our TF-IDF vectorization and reducing them to the given number of topics.</p>
+<p>In this way, you think of topics of both NMF and LDA, which we will turn to after NMF, as respresenting groups of probability. All words are in all topics, but we care the most about those which are most likely to be part of a given topic. Thus, below, we’ll see “THE TOP 15 WORDS” for each topic. These are then the fifteen words most likely to be associated with each other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nmf_model</span> <span class="o">=</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+<span class="n">nmf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dtm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>NMF(n_components=12, random_state=1337)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">NMF</label><div class="sk-toggleable__content"><pre>NMF(n_components=12, random_state=1337)</pre></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nmf_model</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;THE TOP 15 WORDS FOR TOPIC #</span><span class="si">{</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># note: we use `tfidf.get_feature_names_out` to access the actual words, not just the index position of them</span>
+    <span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">([</span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">topic</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="mi">15</span><span class="p">:]])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>THE TOP 15 WORDS FOR TOPIC #1
+[   &#39;guards&#39;,
+    &#39;rome&#39;,
+    &#39;alexander&#39;,
+    &#39;caracalla&#39;,
+    &#39;emperor&#39;,
+    &#39;prætorian&#39;,
+    &#39;military&#39;,
+    &#39;empire&#39;,
+    &#39;public&#39;,
+    &#39;pertinax&#39;,
+    &#39;roman&#39;,
+    &#39;commodus&#39;,
+    &#39;augustus&#39;,
+    &#39;severus&#39;,
+    &#39;senate&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #2
+[   &#39;truth&#39;,
+    &#39;zeal&#39;,
+    &#39;christ&#39;,
+    &#39;worship&#39;,
+    &#39;bishops&#39;,
+    &#39;religious&#39;,
+    &#39;primitive&#39;,
+    &#39;persecution&#39;,
+    &#39;divine&#39;,
+    &#39;christian&#39;,
+    &#39;christianity&#39;,
+    &#39;religion&#39;,
+    &#39;faith&#39;,
+    &#39;church&#39;,
+    &#39;christians&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #3
+[   &#39;sultan&#39;,
+    &#39;manuel&#39;,
+    &#39;years&#39;,
+    &#39;byzantine&#39;,
+    &#39;andronicus&#39;,
+    &#39;turkish&#39;,
+    &#39;alexius&#39;,
+    &#39;palæologus&#39;,
+    &#39;emperor&#39;,
+    &#39;greek&#39;,
+    &#39;turks&#39;,
+    &#39;john&#39;,
+    &#39;latins&#39;,
+    &#39;greeks&#39;,
+    &#39;constantinople&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #4
+[   &#39;gods&#39;,
+    &#39;death&#39;,
+    &#39;gaul&#39;,
+    &#39;army&#39;,
+    &#39;temple&#39;,
+    &#39;sapor&#39;,
+    &#39;monarch&#39;,
+    &#39;march&#39;,
+    &#39;emperor&#39;,
+    &#39;jovian&#39;,
+    &#39;gallus&#39;,
+    &#39;antioch&#39;,
+    &#39;c¾sar&#39;,
+    &#39;constantius&#39;,
+    &#39;julian&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #5
+[   &#39;ali&#39;,
+    &#39;damascus&#39;,
+    &#39;syria&#39;,
+    &#39;koran&#39;,
+    &#39;abu&#39;,
+    &#39;caliph&#39;,
+    &#39;caliphs&#39;,
+    &#39;arabian&#39;,
+    &#39;saracens&#39;,
+    &#39;prophet&#39;,
+    &#39;medina&#39;,
+    &#39;arabs&#39;,
+    &#39;mecca&#39;,
+    &#39;god&#39;,
+    &#39;mahomet&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #6
+[   &#39;victory&#39;,
+    &#39;enemy&#39;,
+    &#39;siege&#39;,
+    &#39;army&#39;,
+    &#39;troops&#39;,
+    &#39;rome&#39;,
+    &#39;king&#39;,
+    &#39;ravenna&#39;,
+    &#39;italy&#39;,
+    &#39;thousand&#39;,
+    &#39;totila&#39;,
+    &#39;gothic&#39;,
+    &#39;justinian&#39;,
+    &#39;goths&#39;,
+    &#39;belisarius&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #7
+[   &#39;arms&#39;,
+    &#39;rhine&#39;,
+    &#39;saxons&#39;,
+    &#39;great&#39;,
+    &#39;china&#39;,
+    &#39;britain&#39;,
+    &#39;nations&#39;,
+    &#39;north&#39;,
+    &#39;huns&#39;,
+    &#39;roman&#39;,
+    &#39;danube&#39;,
+    &#39;empire&#39;,
+    &#39;tribes&#39;,
+    &#39;germany&#39;,
+    &#39;barbarians&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #8
+[   &#39;ecclesiastical&#39;,
+    &#39;tribune&#39;,
+    &#39;century&#39;,
+    &#39;city&#39;,
+    &#39;peter&#39;,
+    &#39;romans&#39;,
+    &#39;charlemagne&#39;,
+    &#39;pope&#39;,
+    &#39;colonna&#39;,
+    &#39;church&#39;,
+    &#39;italy&#39;,
+    &#39;st&#39;,
+    &#39;rienzi&#39;,
+    &#39;popes&#39;,
+    &#39;rome&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #9
+[   &#39;roman&#39;,
+    &#39;soon&#39;,
+    &#39;persian&#39;,
+    &#39;princes&#39;,
+    &#39;civil&#39;,
+    &#39;provinces&#39;,
+    &#39;empire&#39;,
+    &#39;war&#39;,
+    &#39;maxentius&#39;,
+    &#39;maximian&#39;,
+    &#39;licinius&#39;,
+    &#39;constantius&#39;,
+    &#39;galerius&#39;,
+    &#39;diocletian&#39;,
+    &#39;constantine&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #10
+[   &#39;study&#39;,
+    &#39;citizen&#39;,
+    &#39;iii&#39;,
+    &#39;theodora&#39;,
+    &#39;private&#39;,
+    &#39;code&#39;,
+    &#39;decemvirs&#39;,
+    &#39;institutes&#39;,
+    &#39;roman&#39;,
+    &#39;law&#39;,
+    &#39;pandects&#39;,
+    &#39;laws&#39;,
+    &#39;civilians&#39;,
+    &#39;jurisprudence&#39;,
+    &#39;justinian&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #11
+[   &#39;reign&#39;,
+    &#39;death&#39;,
+    &#39;genseric&#39;,
+    &#39;huns&#39;,
+    &#39;arcadius&#39;,
+    &#39;honorius&#39;,
+    &#39;ætius&#39;,
+    &#39;vandals&#39;,
+    &#39;emperor&#39;,
+    &#39;stilicho&#39;,
+    &#39;maximus&#39;,
+    &#39;attila&#39;,
+    &#39;gratian&#39;,
+    &#39;valentinian&#39;,
+    &#39;theodosius&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #12
+[   &#39;tacitus&#39;,
+    &#39;legions&#39;,
+    &#39;goths&#39;,
+    &#39;gaul&#39;,
+    &#39;army&#39;,
+    &#39;barbarians&#39;,
+    &#39;tetricus&#39;,
+    &#39;palmyra&#39;,
+    &#39;alemanni&#39;,
+    &#39;emperor&#39;,
+    &#39;probus&#39;,
+    &#39;zenobia&#39;,
+    &#39;claudius&#39;,
+    &#39;gallienus&#39;,
+    &#39;aurelian&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="latent-dirichlet-allocation-lda">
+<h2>Latent Dirichlet Allocation (LDA)<a class="headerlink" href="#latent-dirichlet-allocation-lda" title="Link to this heading">#</a></h2>
+<p><strong>Nota bene</strong>: <em>Latent Dirichlet Allocation is usually abbreviated as ‘LDA’. However, Linear Discriminant Analysis, another dimensionality reduction algorithm, is also frequently abbreviated as ‘LDA’. This unfortunate coincidence may be confusing if you do your own research, so keep it in mind.</em></p>
+<p>Similar to NMF, LDA supposes that we can reverse engineer the process that generated the documents. The documents, the document-term matrix from our TF-IDF transformation, are understood as random mixtures over latent topics, where each topic is characterized by a symmetric <em>Dirichlet</em> distribution over all of the words in our document-term matrix.</p>
+<p>In this way, NMF and LDA are quite similar. They both reduce the dimensionality of text features (in our case from TF-IDF). Where the two algorithms differ is in the probabiltiy distribution that each assumes. NMF is much more naive in its approach, assuming that each word comes from a uniform distribution and is, before any computation, as equally likely to be in any topic as any other word. LDA assumes that the words are sampled from a Poisson distribtuion and that topics are sampled a Dirichlet distribution. This difference theoretically makes LDA more efficient and accurate for text and NMF better for other uses.</p>
+<p>In practice, however, determining which is better comes from imperical testing and evaluation against research question.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lda_model</span> <span class="o">=</span> <span class="n">LatentDirichletAllocation</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+<span class="n">lda_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dtm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-2 {color: black;background-color: white;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LatentDirichletAllocation(n_components=12, random_state=1337)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">LatentDirichletAllocation</label><div class="sk-toggleable__content"><pre>LatentDirichletAllocation(n_components=12, random_state=1337)</pre></div></div></div></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lda_model</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;THE TOP 15 WORDS FOR TOPIC #</span><span class="si">{</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">([</span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">topic</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="mi">15</span><span class="p">:]])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>THE TOP 15 WORDS FOR TOPIC #1
+[   &#39;christians&#39;,
+    &#39;public&#39;,
+    &#39;years&#39;,
+    &#39;arms&#39;,
+    &#39;church&#39;,
+    &#39;italy&#39;,
+    &#39;barbarians&#39;,
+    &#39;death&#39;,
+    &#39;constantine&#39;,
+    &#39;war&#39;,
+    &#39;people&#39;,
+    &#39;rome&#39;,
+    &#39;emperor&#39;,
+    &#39;empire&#39;,
+    &#39;roman&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #2
+[   &#39;livy&#39;,
+    &#39;captivating&#39;,
+    &#39;earliest&#39;,
+    &#39;stipulate&#39;,
+    &#39;ulphilas&#39;,
+    &#39;rebuilt&#39;,
+    &#39;animating&#39;,
+    &#39;wielded&#39;,
+    &#39;dictator&#39;,
+    &#39;apollo&#39;,
+    &#39;rosamond&#39;,
+    &#39;sigismond&#39;,
+    &#39;bajazet&#39;,
+    &#39;clovis&#39;,
+    &#39;rienzi&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #3
+[   &#39;britons&#39;,
+    &#39;alteration&#39;,
+    &#39;readers&#39;,
+    &#39;sages&#39;,
+    &#39;varangians&#39;,
+    &#39;obtains&#39;,
+    &#39;lateran&#39;,
+    &#39;domitian&#39;,
+    &#39;streams&#39;,
+    &#39;vii&#39;,
+    &#39;russians&#39;,
+    &#39;saxon&#39;,
+    &#39;otho&#39;,
+    &#39;clovis&#39;,
+    &#39;macrinus&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #4
+[   &#39;rudeness&#39;,
+    &#39;hymns&#39;,
+    &#39;seasonably&#39;,
+    &#39;kobad&#39;,
+    &#39;hormouz&#39;,
+    &#39;roasted&#39;,
+    &#39;novels&#39;,
+    &#39;newly&#39;,
+    &#39;berlin&#39;,
+    &#39;eudoxia&#39;,
+    &#39;ricimer&#39;,
+    &#39;languages&#39;,
+    &#39;russians&#39;,
+    &#39;meetings&#39;,
+    &#39;decemvirs&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #5
+[   &#39;basilian&#39;,
+    &#39;magnitude&#39;,
+    &#39;conclave&#39;,
+    &#39;genoa&#39;,
+    &#39;denomination&#39;,
+    &#39;balbinus&#39;,
+    &#39;chrysostom&#39;,
+    &#39;cyril&#39;,
+    &#39;gordian&#39;,
+    &#39;jovian&#39;,
+    &#39;irene&#39;,
+    &#39;rienzi&#39;,
+    &#39;hormouz&#39;,
+    &#39;boethius&#39;,
+    &#39;theophilus&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #6
+[   &#39;preserves&#39;,
+    &#39;amid&#39;,
+    &#39;baffled&#39;,
+    &#39;explained&#39;,
+    &#39;replunge&#39;,
+    &#39;praetor&#39;,
+    &#39;mourning&#39;,
+    &#39;kobad&#39;,
+    &#39;overbalanced&#39;,
+    &#39;presbyters&#39;,
+    &#39;grant&#39;,
+    &#39;tiridates&#39;,
+    &#39;huniades&#39;,
+    &#39;alboin&#39;,
+    &#39;carinus&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #7
+[   &#39;rendered&#39;,
+    &#39;romanus&#39;,
+    &#39;night&#39;,
+    &#39;schism&#39;,
+    &#39;word&#39;,
+    &#39;claudius&#39;,
+    &#39;led&#39;,
+    &#39;china&#39;,
+    &#39;sultan&#39;,
+    &#39;condemned&#39;,
+    &#39;stilicho&#39;,
+    &#39;aurelian&#39;,
+    &#39;john&#39;,
+    &#39;huns&#39;,
+    &#39;attila&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #8
+[   &#39;monarch&#39;,
+    &#39;turks&#39;,
+    &#39;st&#39;,
+    &#39;germany&#39;,
+    &#39;valentinian&#39;,
+    &#39;royal&#39;,
+    &#39;merit&#39;,
+    &#39;person&#39;,
+    &#39;europe&#39;,
+    &#39;greek&#39;,
+    &#39;asia&#39;,
+    &#39;constantius&#39;,
+    &#39;theodosius&#39;,
+    &#39;princes&#39;,
+    &#39;julian&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #9
+[   &#39;seljukian&#39;,
+    &#39;tours&#39;,
+    &#39;chrysostom&#39;,
+    &#39;wallia&#39;,
+    &#39;moslem&#39;,
+    &#39;britons&#39;,
+    &#39;version&#39;,
+    &#39;michael&#39;,
+    &#39;abbas&#39;,
+    &#39;fatimite&#39;,
+    &#39;abbassides&#39;,
+    &#39;eutropius&#39;,
+    &#39;fatimites&#39;,
+    &#39;mourzoufle&#39;,
+    &#39;aquitain&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #10
+[   &#39;savoy&#39;,
+    &#39;excluding&#39;,
+    &#39;anne&#39;,
+    &#39;pera&#39;,
+    &#39;durazzo&#39;,
+    &#39;genoese&#39;,
+    &#39;ottoman&#39;,
+    &#39;tables&#39;,
+    &#39;pr¾torian&#39;,
+    &#39;john&#39;,
+    &#39;andronicus&#39;,
+    &#39;michael&#39;,
+    &#39;paulicians&#39;,
+    &#39;cantacuzene&#39;,
+    &#39;palæologus&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #11
+[   &#39;eutyches&#39;,
+    &#39;think&#39;,
+    &#39;pedigree&#39;,
+    &#39;aleppo&#39;,
+    &#39;denied&#39;,
+    &#39;dialects&#39;,
+    &#39;hermanric&#39;,
+    &#39;comfort&#39;,
+    &#39;presumptuous&#39;,
+    &#39;equals&#39;,
+    &#39;òwe&#39;,
+    &#39;armenians&#39;,
+    &#39;bologna&#39;,
+    &#39;nestorius&#39;,
+    &#39;maxentius&#39;]
+
+
+THE TOP 15 WORDS FOR TOPIC #12
+[   &#39;samarcand&#39;,
+    &#39;babylon&#39;,
+    &#39;paganism&#39;,
+    &#39;logos&#39;,
+    &#39;donation&#39;,
+    &#39;revelation&#39;,
+    &#39;mahmud&#39;,
+    &#39;salvation&#39;,
+    &#39;jovian&#39;,
+    &#39;prayer&#39;,
+    &#39;prophets&#39;,
+    &#39;polytheism&#39;,
+    &#39;bajazet&#39;,
+    &#39;moses&#39;,
+    &#39;timour&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-topic-models">
+<h2>Visualizing Topic Models<a class="headerlink" href="#visualizing-topic-models" title="Link to this heading">#</a></h2>
+<section id="visualizing-topic-probability">
+<h3>Visualizing topic probability<a class="headerlink" href="#visualizing-topic-probability" title="Link to this heading">#</a></h3>
+<p>As we saw above, a topic is just a clustering together of words, based on a probability to associate with each other. We can see visualize this probability to give us a better sense of what’s happen.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameters from above</span>
+<span class="n">n_components</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">top_words</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="c1"># plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">n_components</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="c1"># looping through each topic</span>
+<span class="k">for</span> <span class="n">topic_idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nmf_model</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
+    <span class="c1"># topic manipuluation</span>
+    <span class="n">top_features_ind</span> <span class="o">=</span> <span class="n">topic</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[:</span><span class="o">-</span><span class="n">top_words</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># getting top word indices for each topic</span>
+    <span class="n">top_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_features_ind</span><span class="p">]</span> <span class="c1"># getting the actual text</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">topic</span><span class="p">[</span><span class="n">top_features_ind</span><span class="p">]</span> <span class="c1"># getting the probability of each word</span>
+
+    <span class="c1"># plotting</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">topic_idx</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">top_features</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">.7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Topic </span><span class="si">{</span><span class="n">topic_idx</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s2">&quot;top right left&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;NMF Model&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/970d14a3d171c3c48fec14ab67398373d3c2a2b450c39c7fcbf4b3eb744083c0.png" src="../../_images/970d14a3d171c3c48fec14ab67398373d3c2a2b450c39c7fcbf4b3eb744083c0.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-topics-over-time">
+<h3>Visualizing topics over time<a class="headerlink" href="#visualizing-topics-over-time" title="Link to this heading">#</a></h3>
+<p>In addition to looking at the composition of each topic, we can also visualize how topics interact over the course of a single corpus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">daf_time</span> <span class="o">=</span> <span class="n">daf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span><span class="s1">&#39;chapter_number&#39;</span><span class="p">})</span>
+<span class="n">daf_time</span><span class="p">[</span><span class="s1">&#39;chapter_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">daf_time</span><span class="p">[</span><span class="s1">&#39;chapter_number&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">daf_time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-1c520ae9-8e9f-4fab-9c89-8d94b59acc1d" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chapter_number</th>
+      <th>title</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>Introduction.       The Extent And Military Fo...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>It was an ancient tradition, that when the Cap...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>The camp of a Roman legion presented the appea...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>The Internal Prosperity In The Age Of The Anto...</td>
+      <td>Of The Union And Internal Prosperity Of The Ro...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>The Internal Prosperity In The Age Of The Anto...</td>
+      <td>Till the privileges of Romans had been progres...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>291</th>
+      <td>292</td>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>Never perhaps has the energy and effect of a s...</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>293</td>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>Without drawing his sword, count Pepin restore...</td>
+    </tr>
+    <tr>
+      <th>293</th>
+      <td>294</td>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>The royal prerogative of coining money, which ...</td>
+    </tr>
+    <tr>
+      <th>294</th>
+      <td>295</td>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+    </tr>
+    <tr>
+      <th>295</th>
+      <td>296</td>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>These general observations may be separately a...</td>
+    </tr>
+  </tbody>
+</table>
+<p>296 rows × 3 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-1c520ae9-8e9f-4fab-9c89-8d94b59acc1d')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-1c520ae9-8e9f-4fab-9c89-8d94b59acc1d button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-1c520ae9-8e9f-4fab-9c89-8d94b59acc1d');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-1a67720e-815a-4a8a-8cd6-7b31ef5bd428">
+  <button class="colab-df-quickchart" onclick="quickchart('df-1a67720e-815a-4a8a-8cd6-7b31ef5bd428')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-1a67720e-815a-4a8a-8cd6-7b31ef5bd428 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_e307f7b2-8380-4575-85e9-28276e709ced">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('daf_time')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_e307f7b2-8380-4575-85e9-28276e709ced button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('daf_time');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># adding a column for each topic to each chapter</span>
+<span class="c1"># these represent the topic membership of each chapter</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_components</span><span class="p">):</span>
+    <span class="n">daf_time</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Topic </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nmf_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dtm</span><span class="p">)[:,</span><span class="n">i</span><span class="p">]</span>
+<span class="n">daf_time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-c17d9c56-489f-4e4a-abb2-0d9c8a2f0bdb" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chapter_number</th>
+      <th>title</th>
+      <th>text</th>
+      <th>Topic 1</th>
+      <th>Topic 2</th>
+      <th>Topic 3</th>
+      <th>Topic 4</th>
+      <th>Topic 5</th>
+      <th>Topic 6</th>
+      <th>Topic 7</th>
+      <th>Topic 8</th>
+      <th>Topic 9</th>
+      <th>Topic 10</th>
+      <th>Topic 11</th>
+      <th>Topic 12</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>Introduction.       The Extent And Military Fo...</td>
+      <td>0.140357</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.138453</td>
+      <td>0.000000</td>
+      <td>0.008540</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>It was an ancient tradition, that when the Cap...</td>
+      <td>0.109082</td>
+      <td>0.013866</td>
+      <td>0.000000</td>
+      <td>0.004476</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.116163</td>
+      <td>0.000000</td>
+      <td>0.007720</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.006961</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>The Extent Of The Empire In The Age Of The Ant...</td>
+      <td>The camp of a Roman legion presented the appea...</td>
+      <td>0.016352</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.009661</td>
+      <td>0.000000</td>
+      <td>0.327493</td>
+      <td>0.000000</td>
+      <td>0.016435</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.027077</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>The Internal Prosperity In The Age Of The Anto...</td>
+      <td>Of The Union And Internal Prosperity Of The Ro...</td>
+      <td>0.059518</td>
+      <td>0.143894</td>
+      <td>0.000000</td>
+      <td>0.004308</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.038118</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.011437</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>The Internal Prosperity In The Age Of The Anto...</td>
+      <td>Till the privileges of Romans had been progres...</td>
+      <td>0.063011</td>
+      <td>0.020749</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.096147</td>
+      <td>0.025652</td>
+      <td>0.000000</td>
+      <td>0.078776</td>
+      <td>0.0</td>
+      <td>0.007686</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>291</th>
+      <td>292</td>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>Never perhaps has the energy and effect of a s...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.005997</td>
+      <td>0.002712</td>
+      <td>0.040459</td>
+      <td>0.000000</td>
+      <td>0.299737</td>
+      <td>0.005080</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.008144</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>293</td>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>Without drawing his sword, count Pepin restore...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.002737</td>
+      <td>0.002752</td>
+      <td>0.000000</td>
+      <td>0.001784</td>
+      <td>0.000000</td>
+      <td>0.432059</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.002417</td>
+    </tr>
+    <tr>
+      <th>293</th>
+      <td>294</td>
+      <td>Final Settlement Of The Ecclesiastical State.—...</td>
+      <td>The royal prerogative of coining money, which ...</td>
+      <td>0.015235</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.013029</td>
+      <td>0.007963</td>
+      <td>0.033410</td>
+      <td>0.000000</td>
+      <td>0.296186</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.004897</td>
+    </tr>
+    <tr>
+      <th>294</th>
+      <td>295</td>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>0.000000</td>
+      <td>0.047675</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.044810</td>
+      <td>0.085804</td>
+      <td>0.106584</td>
+      <td>0.000000</td>
+      <td>0.055540</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>295</th>
+      <td>296</td>
+      <td>Prospect Of The Ruins Of Rome In The Fifteenth...</td>
+      <td>These general observations may be separately a...</td>
+      <td>0.000000</td>
+      <td>0.001118</td>
+      <td>0.006289</td>
+      <td>0.000000</td>
+      <td>0.014871</td>
+      <td>0.000000</td>
+      <td>0.090771</td>
+      <td>0.171290</td>
+      <td>0.000000</td>
+      <td>0.036981</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>296 rows × 15 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c17d9c56-489f-4e4a-abb2-0d9c8a2f0bdb')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-c17d9c56-489f-4e4a-abb2-0d9c8a2f0bdb button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-c17d9c56-489f-4e4a-abb2-0d9c8a2f0bdb');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-cd0bb95f-1cd0-4929-a7bf-d900d1220c52">
+  <button class="colab-df-quickchart" onclick="quickchart('df-cd0bb95f-1cd0-4929-a7bf-d900d1220c52')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-cd0bb95f-1cd0-4929-a7bf-d900d1220c52 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_c0376d04-01c4-4061-9d9d-8f260115ea33">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('daf_time')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_c0376d04-01c4-4061-9d9d-8f260115ea33 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('daf_time');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nmf_weights</span> <span class="o">=</span> <span class="n">daf_time</span><span class="p">[[</span><span class="s1">&#39;chapter_number&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">daf_time</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">:])]</span>
+<span class="n">nmf_weights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-22b64af1-f48d-4fd8-89e8-d44016360f31" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chapter_number</th>
+      <th>Topic 1</th>
+      <th>Topic 2</th>
+      <th>Topic 3</th>
+      <th>Topic 4</th>
+      <th>Topic 5</th>
+      <th>Topic 6</th>
+      <th>Topic 7</th>
+      <th>Topic 8</th>
+      <th>Topic 9</th>
+      <th>Topic 10</th>
+      <th>Topic 11</th>
+      <th>Topic 12</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.140357</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.138453</td>
+      <td>0.000000</td>
+      <td>0.008540</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.109082</td>
+      <td>0.013866</td>
+      <td>0.000000</td>
+      <td>0.004476</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.116163</td>
+      <td>0.000000</td>
+      <td>0.007720</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.006961</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0.016352</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.009661</td>
+      <td>0.000000</td>
+      <td>0.327493</td>
+      <td>0.000000</td>
+      <td>0.016435</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.027077</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>0.059518</td>
+      <td>0.143894</td>
+      <td>0.000000</td>
+      <td>0.004308</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.038118</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.011437</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.063011</td>
+      <td>0.020749</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.096147</td>
+      <td>0.025652</td>
+      <td>0.000000</td>
+      <td>0.078776</td>
+      <td>0.0</td>
+      <td>0.007686</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>291</th>
+      <td>292</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.005997</td>
+      <td>0.002712</td>
+      <td>0.040459</td>
+      <td>0.000000</td>
+      <td>0.299737</td>
+      <td>0.005080</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.008144</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>293</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.002737</td>
+      <td>0.002752</td>
+      <td>0.000000</td>
+      <td>0.001784</td>
+      <td>0.000000</td>
+      <td>0.432059</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.002417</td>
+    </tr>
+    <tr>
+      <th>293</th>
+      <td>294</td>
+      <td>0.015235</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.013029</td>
+      <td>0.007963</td>
+      <td>0.033410</td>
+      <td>0.000000</td>
+      <td>0.296186</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.004897</td>
+    </tr>
+    <tr>
+      <th>294</th>
+      <td>295</td>
+      <td>0.000000</td>
+      <td>0.047675</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.044810</td>
+      <td>0.085804</td>
+      <td>0.106584</td>
+      <td>0.000000</td>
+      <td>0.055540</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>295</th>
+      <td>296</td>
+      <td>0.000000</td>
+      <td>0.001118</td>
+      <td>0.006289</td>
+      <td>0.000000</td>
+      <td>0.014871</td>
+      <td>0.000000</td>
+      <td>0.090771</td>
+      <td>0.171290</td>
+      <td>0.000000</td>
+      <td>0.036981</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>296 rows × 13 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-22b64af1-f48d-4fd8-89e8-d44016360f31')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-22b64af1-f48d-4fd8-89e8-d44016360f31 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-22b64af1-f48d-4fd8-89e8-d44016360f31');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-ea5486e0-8d4d-476a-a896-8347a0e50ba6">
+  <button class="colab-df-quickchart" onclick="quickchart('df-ea5486e0-8d4d-476a-a896-8347a0e50ba6')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-ea5486e0-8d4d-476a-a896-8347a0e50ba6 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_ca2b34fa-d850-4654-b44f-374765de4898">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('nmf_weights')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_ca2b34fa-d850-4654-b44f-374765de4898 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('nmf_weights');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># topic importance vs. chapter number</span>
+<span class="n">nmf_weights</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;chapter_number&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">nmf_weights</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;chapter_number&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/9149170e8ead2624807fb592b8d419badf69f30cd477edee018573f87c61c1b1.png" src="../../_images/9149170e8ead2624807fb592b8d419badf69f30cd477edee018573f87c61c1b1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># above is a buit hard to read so we can apply a gaussian filter</span>
+<span class="c1"># this will show the trends a bit more clearly by removing error</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage.filters</span> <span class="kn">import</span> <span class="n">gaussian_filter1d</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_components</span><span class="p">):</span>
+    <span class="n">nmf_weights</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Topic </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> Normalized&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gaussian_filter1d</span><span class="p">(</span><span class="n">nmf_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">dtm</span><span class="p">)[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">nmf_weights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-15-16d1672cc052&gt;:3: DeprecationWarning: Please use `gaussian_filter1d` from the `scipy.ndimage` namespace, the `scipy.ndimage.filters` namespace is deprecated.
+  from scipy.ndimage.filters import gaussian_filter1d
+&lt;ipython-input-15-16d1672cc052&gt;:6: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  nmf_weights[f&#39;Topic {i+1} Normalized&#39;] = gaussian_filter1d(nmf_model.transform(dtm)[:,i], sigma=1)
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-2e17c573-2b05-4862-ac6f-bd63e6c89a13" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chapter_number</th>
+      <th>Topic 1</th>
+      <th>Topic 2</th>
+      <th>Topic 3</th>
+      <th>Topic 4</th>
+      <th>Topic 5</th>
+      <th>Topic 6</th>
+      <th>Topic 7</th>
+      <th>Topic 8</th>
+      <th>Topic 9</th>
+      <th>...</th>
+      <th>Topic 3 Normalized</th>
+      <th>Topic 4 Normalized</th>
+      <th>Topic 5 Normalized</th>
+      <th>Topic 6 Normalized</th>
+      <th>Topic 7 Normalized</th>
+      <th>Topic 8 Normalized</th>
+      <th>Topic 9 Normalized</th>
+      <th>Topic 10 Normalized</th>
+      <th>Topic 11 Normalized</th>
+      <th>Topic 12 Normalized</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.140357</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.138453</td>
+      <td>0.000000</td>
+      <td>0.008540</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.001344</td>
+      <td>0.000564</td>
+      <td>0.000000</td>
+      <td>0.142437</td>
+      <td>0.000003</td>
+      <td>8.718205e-03</td>
+      <td>0.000063</td>
+      <td>0.0</td>
+      <td>0.003643</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.109082</td>
+      <td>0.013866</td>
+      <td>0.000000</td>
+      <td>0.004476</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.116163</td>
+      <td>0.000000</td>
+      <td>0.007720</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.002038</td>
+      <td>0.002339</td>
+      <td>0.000000</td>
+      <td>0.169615</td>
+      <td>0.000118</td>
+      <td>9.620701e-03</td>
+      <td>0.000977</td>
+      <td>0.0</td>
+      <td>0.009399</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0.016352</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.009661</td>
+      <td>0.000000</td>
+      <td>0.327493</td>
+      <td>0.000000</td>
+      <td>0.016435</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.002129</td>
+      <td>0.003854</td>
+      <td>0.000000</td>
+      <td>0.181594</td>
+      <td>0.001526</td>
+      <td>8.937603e-03</td>
+      <td>0.007353</td>
+      <td>0.0</td>
+      <td>0.012958</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>0.059518</td>
+      <td>0.143894</td>
+      <td>0.000000</td>
+      <td>0.004308</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.038118</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.001997</td>
+      <td>0.002338</td>
+      <td>0.000000</td>
+      <td>0.128979</td>
+      <td>0.007939</td>
+      <td>4.593752e-03</td>
+      <td>0.027757</td>
+      <td>0.0</td>
+      <td>0.009463</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.063011</td>
+      <td>0.020749</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.096147</td>
+      <td>0.025652</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.001226</td>
+      <td>0.000522</td>
+      <td>0.000000</td>
+      <td>0.091597</td>
+      <td>0.018277</td>
+      <td>1.645441e-03</td>
+      <td>0.053861</td>
+      <td>0.0</td>
+      <td>0.007585</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>291</th>
+      <td>292</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.005997</td>
+      <td>0.002712</td>
+      <td>0.040459</td>
+      <td>0.000000</td>
+      <td>0.299737</td>
+      <td>0.005080</td>
+      <td>...</td>
+      <td>0.000663</td>
+      <td>0.003762</td>
+      <td>0.001514</td>
+      <td>0.020996</td>
+      <td>0.001240</td>
+      <td>0.340196</td>
+      <td>2.026700e-03</td>
+      <td>0.000701</td>
+      <td>0.0</td>
+      <td>0.004099</td>
+    </tr>
+    <tr>
+      <th>292</th>
+      <td>293</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.002737</td>
+      <td>0.002752</td>
+      <td>0.000000</td>
+      <td>0.001784</td>
+      <td>0.000000</td>
+      <td>0.432059</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.001120</td>
+      <td>0.005702</td>
+      <td>0.002651</td>
+      <td>0.021545</td>
+      <td>0.005116</td>
+      <td>0.343234</td>
+      <td>1.229256e-03</td>
+      <td>0.003204</td>
+      <td>0.0</td>
+      <td>0.004120</td>
+    </tr>
+    <tr>
+      <th>293</th>
+      <td>294</td>
+      <td>0.015235</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.013029</td>
+      <td>0.007963</td>
+      <td>0.033410</td>
+      <td>0.000000</td>
+      <td>0.296186</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.001030</td>
+      <td>0.006188</td>
+      <td>0.004192</td>
+      <td>0.026838</td>
+      <td>0.026079</td>
+      <td>0.276297</td>
+      <td>2.742841e-04</td>
+      <td>0.015608</td>
+      <td>0.0</td>
+      <td>0.002978</td>
+    </tr>
+    <tr>
+      <th>294</th>
+      <td>295</td>
+      <td>0.000000</td>
+      <td>0.047675</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.044810</td>
+      <td>0.085804</td>
+      <td>0.106584</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.002009</td>
+      <td>0.003330</td>
+      <td>0.006341</td>
+      <td>0.026441</td>
+      <td>0.061476</td>
+      <td>0.190100</td>
+      <td>2.251461e-05</td>
+      <td>0.033348</td>
+      <td>0.0</td>
+      <td>0.001352</td>
+    </tr>
+    <tr>
+      <th>295</th>
+      <td>296</td>
+      <td>0.000000</td>
+      <td>0.001118</td>
+      <td>0.006289</td>
+      <td>0.000000</td>
+      <td>0.014871</td>
+      <td>0.000000</td>
+      <td>0.090771</td>
+      <td>0.171290</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.004043</td>
+      <td>0.000775</td>
+      <td>0.009997</td>
+      <td>0.015227</td>
+      <td>0.083571</td>
+      <td>0.160644</td>
+      <td>6.798822e-07</td>
+      <td>0.040140</td>
+      <td>0.0</td>
+      <td>0.000298</td>
+    </tr>
+  </tbody>
+</table>
+<p>296 rows × 25 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-2e17c573-2b05-4862-ac6f-bd63e6c89a13')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-2e17c573-2b05-4862-ac6f-bd63e6c89a13 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-2e17c573-2b05-4862-ac6f-bd63e6c89a13');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-0875dee4-bcf6-425c-a23d-b4a7e2294845">
+  <button class="colab-df-quickchart" onclick="quickchart('df-0875dee4-bcf6-425c-a23d-b4a7e2294845')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-0875dee4-bcf6-425c-a23d-b4a7e2294845 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_a9e9ad7e-1ada-4f3c-abf4-4a22c318e2fe">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('nmf_weights')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_a9e9ad7e-1ada-4f3c-abf4-4a22c318e2fe button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('nmf_weights');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># topic importance vs. chapter number</span>
+<span class="n">nmf_weights</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;chapter_number&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">nmf_weights</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">13</span><span class="p">:]),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;chapter_number&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/e45eada75b3c3563844c59b76a40c47cdf2c9bdcf8c9a93c878ad21c6bfe00ad.png" src="../../_images/e45eada75b3c3563844c59b76a40c47cdf2c9bdcf8c9a93c878ad21c6bfe00ad.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># clean up the plot a bit</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_components</span><span class="p">):</span>
+    <span class="n">top_features_ind</span> <span class="o">=</span> <span class="n">nmf_model</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[:</span><span class="o">-</span><span class="n">top_words</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">top_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">top_features_ind</span><span class="p">]</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Topic </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top_features</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;¾&quot;</span><span class="p">,</span><span class="s2">&quot;æ&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">...&#39;</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nmf_weights</span><span class="p">[</span><span class="s1">&#39;chapter_number&#39;</span><span class="p">],</span> <span class="n">nmf_weights</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Topic </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> Normalized&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s1">&#39;Topic Importance Over Time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Chapter Number&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Topic Weight&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">.1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7b762ba544f0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/b07dc7f3902267eef4a35b37319b741a2d89ae62350fcc00aef48b85a8b0bf10.png" src="../../_images/b07dc7f3902267eef4a35b37319b741a2d89ae62350fcc00aef48b85a8b0bf10.png" />
+</div>
+</div>
+</section>
+<section id="interpretation">
+<h3>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h3>
+<p>Interpreting topic models can be difficult. They fall into <em>unsupervised</em> learning, which means we don’t have a validation set with which to evaulate our results. Thus, the interpretation of a topic model often depends on why someone is modeling the topics in a text in the first place. For example, one might want to create a topic model for Gibbon’s <em>Decline and Fall</em> because they are interested in the importance of certain ideas about history as they develop in the course of the book. In this case, they might look at the figure above and see that most topics occur as spikes, meaning that Gibbon will treat a subject closely and then move on to a different one.</p>
+<p>I recommend that you try these visualization examples with the LDA model, as I only used the NMF model. You’ll get much different results. Why do you think that is? What does it mean about the topics from the LDA model?</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_Textual_Feature_Extraction_using_Traditional_Machine_Learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Textual Feature Extraction using Traditional Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="09_Language_Hacking_workshop.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Language Hacking: Using <code class="docutils literal notranslate"><span class="pre">spaCy</span></code> for Morphosyntactic Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-negative-matrix-factorization-nmf">Non-negative Matrix Factorization (NMF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-dirichlet-allocation-lda">Latent Dirichlet Allocation (LDA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-topic-models">Visualizing Topic Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-topic-probability">Visualizing topic probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-topics-over-time">Visualizing topics over time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/nlp/tutorials/08_Topic_Modelling_using_Traditional_Machine_Learning.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Sep 16, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
