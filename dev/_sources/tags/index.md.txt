@@ -6,6 +6,8 @@ html_theme.sidebar_secondary.remove: true
 # Tags
 - [bioinformatics (6)](/tags/bioinformatics.md)
 - [cli (1)](/tags/cli.md)
+- [data-analysis (1)](/tags/data-analysis.md)
+- [data-management (1)](/tags/data-management.md)
 - [digital-humanities (1)](/tags/digital-humanities.md)
 - [ds (1)](/tags/ds.md)
 - [gis (1)](/tags/gis.md)
@@ -14,3 +16,4 @@ html_theme.sidebar_secondary.remove: true
 - [python (1)](/tags/python.md)
 - [r (1)](/tags/r.md)
 - [remote-sensing (1)](/tags/remote-sensing.md)
+- [visualization (1)](/tags/visualization.md)
