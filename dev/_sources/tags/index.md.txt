@@ -4,16 +4,21 @@ nosearch:
 html_theme.sidebar_secondary.remove: true
 ---
 # Tags
+- [academic-programming (1)](/tags/academic-programming.md)
 - [bioinformatics (6)](/tags/bioinformatics.md)
 - [cli (1)](/tags/cli.md)
 - [data-analysis (1)](/tags/data-analysis.md)
+- [data-engineering (1)](/tags/data-engineering.md)
 - [data-management (1)](/tags/data-management.md)
 - [digital-humanities (1)](/tags/digital-humanities.md)
 - [ds (1)](/tags/ds.md)
 - [gis (1)](/tags/gis.md)
 - [hpc (1)](/tags/hpc.md)
+- [jupyter (1)](/tags/jupyter.md)
+- [machine-learning (1)](/tags/machine-learning.md)
+- [modeling (1)](/tags/modeling.md)
 - [nlp (1)](/tags/nlp.md)
 - [python (1)](/tags/python.md)
 - [r-rstudio (1)](/tags/r-rstudio.md)
 - [remote-sensing (1)](/tags/remote-sensing.md)
-- [visualization (1)](/tags/visualization.md)
+- [visualization (2)](/tags/visualization.md)
