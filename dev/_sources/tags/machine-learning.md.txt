@@ -4,4 +4,5 @@ nosearch:
 html_theme.sidebar_secondary.remove: true
 ---
 # machine-learning
+- [](/nlp/index.md)
 - [](/python/index.md)
