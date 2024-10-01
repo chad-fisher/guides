@@ -14,6 +14,6 @@ html_theme.sidebar_secondary.remove: true
 - [hpc (1)](/tags/hpc.md)
 - [nlp (1)](/tags/nlp.md)
 - [python (1)](/tags/python.md)
-- [r (1)](/tags/r.md)
+- [r-rstudio (1)](/tags/r-rstudio.md)
 - [remote-sensing (1)](/tags/remote-sensing.md)
 - [visualization (1)](/tags/visualization.md)
