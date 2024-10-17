@@ -1,8 +1,16 @@
-# Conda Environment on Tufts HPC
+# Conda Environments
+
+Conda is a software package manager similar to PIP that allows users to easily install software not already available on the cluster.
+It is designed to install software into user space and does not require administrative permissions.  This makes it ideal for use on shared
+HPC systems.
+
+In most cases `conda install package-name` is a direct replacement for PIP in instructions from the internet you might be following.  You can 
+search [Anaconda Cloud](https://anaconda.org/search) for packages available for install.  Instructions on specifying an exact version can be found at 
+[Managing Packages](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-pkgs.html).
 
 ### Allocate Resources
 
-1. [Start an interactive session](../Slurm/interactive.md) on the cluster on a compute node (execute every time you need to execute/run any programs on the cluster)
+1. [Start an interactive session](../slurm/interactive.md) on the cluster on a compute node (execute every time you need to execute/run any programs on the cluster)
 
    1. Determine if you need GUI forwarding
    2. Determine if you need GPU access

@@ -51,7 +51,8 @@ html_baseurl = os.environ.get(key="BASEURL", default="/")
 html_favicon = "_static/favicon.ico"
 html_last_updated_fmt = ""
 html_logo = "_static/jumbo.png"
-html_static_path = ["_static"]
+html_static_path = ['_static']
+html_css_files = ["custom.css"]
 html_theme = "pydata_sphinx_theme"
 html_title = project
 
@@ -93,7 +94,10 @@ html_theme_options = {
     "icon_links": icon_links,
     "logo": {"text": project},
     "navbar_align": "content",
-    "navigation_depth": 1,
+    "navigation_depth": {
+        "**": 1,
+        "hpc/*": 2,
+    },
     "navigation_with_keys": False,
     "search_bar_text": "",
     "secondary_sidebar_items": [

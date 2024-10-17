@@ -1,5 +1,5 @@
 defaults:
-  hidden: false #this is to control if the main page have table of 
+  hidden: false #this is to control if the main page have table of
   #content for all the tutorials at the bottom of the page
 
 root: index
@@ -18,13 +18,48 @@ subtrees:
         subtrees:
           - entries:
             - glob: r/*
+
   - caption: High-Performance Computing
     entries:
-      - file: hpc/index
+      - file: hpc/index.md
         title: HPC
         subtrees:
-          - entries:
-            - glob: hpc/**
+          - hidden: True
+            entries:
+            - file: hpc/terminology.md
+              title: What is HPC
+            - file: hpc/Access/index.md
+              title: Using the HPC Cluster
+              subtrees:
+                - hidden: True
+                  entries:
+                    - glob: hpc/Access/*
+            - file: hpc/Compute/index.md
+              title: Computing Resources
+              subtrees:
+                - hidden: True
+                  entries:
+                  - glob: hpc/Compute/*
+            - file: hpc/slurm/index.md
+              subtrees:
+                - hidden: True
+                  entries:
+                  - glob: hpc/slurm/*
+            - file: hpc/Application/index.md
+              subtrees:
+                - hidden: True
+                  entries:
+                  - glob: hpc/Application/*
+            - file: hpc/examples/index.md
+              title: Examples and Tutorials
+              subtrees:
+                - hidden: True
+                  entries:
+                  - glob: hpc/examples/*
+            - file: hpc/policy.md
+              title: Policy
+            - file: hpc/help.md
+              title: Help
 
   - caption: Command Line Interfaces 
     entries:
