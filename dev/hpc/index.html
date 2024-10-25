@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -65,11 +66,11 @@
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tufts HPC Cluster Account Request" href="Access/AccountRequest.html" />
+    <link rel="next" title="HPC Terminology" href="terminology.html" />
     <link rel="prev" title="Fast for loops and parallel processing" href="../r/04_ParallelProcessingR.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -478,35 +479,13 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/condaenv.html">Conda Environment on Tufts HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="terminology.html">What is HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Access/index.html">Using the HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Compute/index.html">Computing Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Application/index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/r.html">R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/rstudio.html">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/tmux.html">Tmux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/GPU.html">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/terminology.html">Terminology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/batchjob.html">Batch Jobs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/monitor.html">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples and Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policy.html">Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
 </ul>
 </div>
 </nav></div>
@@ -565,13 +544,25 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="high-performance-computing-hpc-cluster">
 <h1>High Performance Computing (HPC) Cluster<a class="headerlink" href="#high-performance-computing-hpc-cluster" title="Link to this heading">#</a></h1>
 <p>Welcome to Tufts HPC Cluster documentation! The High-Performance Computing (HPC) Cluster is available to researchers, faculty, students, and staff in need of large-scale computing.</p>
+<p>The High-Performance Computing (HPC) Cluster is available to researchers, faculty, students, and staff in need of large-scale computing. Tufts Linux HPC Cluster is comprised of over 100 high-powered servers running the RedHat Linux operating system. Nodes are interconnected via a 100Gbps ethernet network.</p>
+<p>Tufts HPC is located in the Massachusetts Green High Performance Compute Center. The MGHPCC is an intercollegiate high-performance computing facility whose computing and storage resources serve a user community of more than 20,000 faculty and student researchers and educators, supported by on-campus research teams.</p>
 <p>Please visit <a class="reference external" href="https://it.tufts.edu/high-performance-computing">Research Technology (RT) Website HPC page</a> and <a class="reference external" href="https://it.tufts.edu/research-technology/announcements">RT Announcements</a> for <strong>important</strong> policy updates.</p>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> HPC Cluster and Storage Access</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 01 What is HPC</p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Brief primer on what HPC is, and the terminology used.</p>
+</div>
+<a class="sd-stretched-link reference external" href="terminology.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 02 Using the HPC Cluster</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">How to gain access to Tufts HPC cluster and storage?</p>
@@ -581,40 +572,30 @@ document.write(`
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> HPC Cluster Computing Resources</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 03 Computing Resources</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">What resources does Tufts HPC cluster have to offer?</p>
+<p class="sd-card-text">Overview of the computing resources available for use.</p>
 </div>
 <a class="sd-stretched-link reference external" href="Compute/index.html"></a></div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> HPC Cluster Storage</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span>  04 Slurm Job Scheduler</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Understand different use cases for Tufts HPC Cluster Storage</p>
+<p class="sd-card-text">Description of how to use the scheduler to run jobs on the HPC Cluster</p>
 </div>
-<a class="sd-stretched-link reference external" href="Storage/index.html"></a></div>
+<a class="sd-stretched-link reference external" href="slurm/index.html"></a></div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Slurm - HPC Cluster Scheduler</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 05 Software Applications</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">How to work with SLURM to get your work done?</p>
-</div>
-<a class="sd-stretched-link reference external" href="Slurm/index.html"></a></div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> HPC Cluster Applications HOW-TOs</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">A collection of How-to instructions for the applications installed on Tufts HPC cluster</p>
+<p class="sd-card-text">Tutorials on getting started using common software applications on the cluster.</p>
 </div>
 <a class="sd-stretched-link reference external" href="Application/index.html"></a></div>
 </div>
@@ -624,167 +605,6 @@ document.write(`
 <div><p><strong>To Get Support:</strong> - please email <a class="reference external" href="mailto:tts-research&#37;&#52;&#48;tufts&#46;edu">tts-research<span>&#64;</span>tufts<span>&#46;</span>edu</a> for all Tufts HPC cluster questions and requests.</p>
 </div></blockquote>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Access/AccountRequest.html">Tufts HPC Cluster Account Request</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Access/AccountRequest.html#prerequisites">Prerequisites:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Access/AccountRequest.html#cluster-account-request">Cluster Account Request</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Access/StorageRequest.html#prerequisites">Prerequisites:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Access/StorageRequest.html#check-if-you-already-access-to-a-research-storage-share">Check if you already access to a research storage share</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Access/StorageRequest.html#new-storage-request">New Storage Request</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Access/StorageRequest.html#existing-storage-increase">Existing Storage Increase</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Access/cli.html">Command Line Interface (CLI) via SSH</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Access/cli.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Access/cli.html#mac-osx-linux">Mac OSX &amp; Linux</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Access/cli.html#windows">Windows</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Access/ondemand.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Access/ondemand.html#easy-hpc-access-with-ondemand">Easy HPC Access with OnDemand</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Application/condaenv.html">Conda Environment on Tufts HPC</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application/condaenv.html#allocate-resources">Allocate Resources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/condaenv.html#configure-your-conda">Configure your conda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/condaenv.html#create-your-conda-environment">Create your conda environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/condaenv.html#additional-information-for-jupyter-users">Additional Information for Jupyter Users:</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Application/condaenv.html#run-conda-env-as-a-kernel-in-jupyter">Run conda env as a kernel in Jupyter</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Application/index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Application/modules.html">Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application/modules.html#what-are-modules">What are modules?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/modules.html#why-use-modules">Why Use Modules?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/modules.html#how-to-use-modules">How to use modules?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Application/modules.html#example-using-gcc-compiler">Example: Using <code class="docutils literal notranslate"><span class="pre">gcc</span></code> Compiler</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="Application/modules.html#private-modules">Private Modules</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Application/portforward.html">Port Forwarding on HPC Cluster</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application/portforward.html#login-to-the-cluster-from-terminal-with-ssh">1. Login to the Cluster from terminal with SSH</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/portforward.html#optional-start-a-tmux-session-on-the-login-node">2. (Optional) Start a tmux session on the login node</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/portforward.html#start-interactive-session">3. Start interactive session</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Application/portforward.html#before-we-can-run-jupyter-make-sure-to-be-in-the-directory-you-need-to-be-and-know-the-node-name-of-your-compute-node">Before we can run <code class="docutils literal notranslate"><span class="pre">Jupyter</span></code>, make sure to be in the directory you need to be and know the node name of your compute node</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="Application/portforward.html#start-jupyter-notebook-or-jupyter-lab">4. Start <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebook</span></code> or <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Lab</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/portforward.html#port-forwarding-from-the-terminal">5. Port Forwarding from the terminal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/portforward.html#using-the-application">6. Using the application</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/portforward.html#enjoy">Enjoy!</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Application/privatemodule.html">Private Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application/privatemodule.html#have-the-software-installed">1. Have the Software Installed</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/privatemodule.html#create-your-module-file">2. Create Your Module File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/privatemodule.html#load-your-own-module">3. Load Your Own Module</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Application/r.html">R</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application/r.html#id1"></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/r.html#r-interactive-session">R Interactive Session</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/r.html#r-batch-jobs">R batch jobs</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Application/rstudio.html">RStudio from OnDemand</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application/rstudio.html#launch-rstudio">Launch RStudio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/rstudio.html#debug-ondemand-rstudio-pax">Debug OnDemand RStudio Pax</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Application/tmux.html">Tmux</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application/tmux.html#load-tmux-module">Load tmux module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/tmux.html#start-your-tmux-session">Start your tmux session</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/tmux.html#start-your-interactive-session-inside-the-tmux-session-and-run-your-programs">Start your Interactive session inside the tmux session, and run your programs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/tmux.html#detach-your-tmux-session-or-lose-connection">Detach your tmux session OR lose connection…</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/tmux.html#get-your-work-session-back">Get your work session back</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/tmux.html#check-tmux-sessions">Check tmux sessions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/tmux.html#pick-your-session-and-reattach-it">Pick your session and reattach it</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Application/vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application/vscode.html#local-extensions-optional">Local Extensions (Optional)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Application/vscode.html#example-extensions">Example extensions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="Application/vscode.html#ssh-keyless-access-optional">SSH Keyless Access (Optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Application/vscode.html#tunnels">Tunnels:</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/GPU.html">GPU</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Compute/GPU.html#available-gpus-in-gpu-partition-p-gpu">Available GPUs in <code class="docutils literal notranslate"><span class="pre">gpu</span></code> partition<code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">gpu</span></code>:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compute/GPU.html#available-gpus-inpreempt-partition-p-preempt">Available GPUs in<code class="docutils literal notranslate"><span class="pre">preempt</span></code> partition <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">preempt</span></code>:</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/partition.html">Tufts HPC Partitions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Compute/partition.html#partitions">Partitions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compute/partition.html#time-limit">Time limit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compute/partition.html#resource-usage-limit">Resource Usage limit</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Compute/terminology.html">Terminology</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Compute/terminology.html#what-is-cluster">What is “Cluster”</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compute/terminology.html#cores-vs-node">Cores vs Node</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compute/terminology.html#cpu-and-gpu">CPU and GPU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compute/terminology.html#memory-and-storage">Memory and Storage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Compute/terminology.html#what-to-expect-on-tufts-hpc-cluster">What to Expect on Tufts HPC Cluster?</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/batchjob.html">Batch Jobs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Slurm/batchjob.html#cpu-batch-job">CPU Batch Job</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Slurm/batchjob.html#gpu-batch-job">GPU Batch Job</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/interactive.html">Interactive Sessions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Slurm/interactive.html#cpu-job">CPU Job</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Slurm/interactive.html#gpu-job">GPU Job</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/monitor.html">Job Monitoring and Management</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Slurm/monitor.html#check-active-jobs">Check Active Jobs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Slurm/monitor.html#cancel-jobs">Cancel Jobs</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Slurm/utilization.html">Job Resource Utilization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Slurm/utilization.html#check-your-finished-jobs">Check your <strong>finished</strong> jobs</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Storage/quota.html#policy">Policy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Storage/quota.html#home-directory">Home Directory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Storage/quota.html#lab-research-project-storage">Lab Research Project Storage</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Storage/snapshots.html#important-note">Important Note</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Storage/snapshots.html#example-scenario">Example Scenario</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Storage/snapshots.html#find-snapshots">Find Snapshots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Storage/snapshots.html#locate-missing-files-directories">Locate Missing Files/Directories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Storage/snapshots.html#recovery-files-directories">Recovery Files/Directories</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Storage/xfer.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Storage/xfer.html#ondemand">OnDemand</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Storage/xfer.html#command-line-scp-rsync">Command Line - scp &amp; rsync</a></li>
-</ul>
-</li>
-</ul>
 </div>
 </section>
 
@@ -808,11 +628,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="Access/AccountRequest.html"
+       href="terminology.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tufts HPC Cluster Account Request</p>
+        <p class="prev-next-title">HPC Terminology</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -842,6 +662,9 @@ document.write(`
     </li>
     <li class="tag-item">
         <a href="../tags/hpc.html" class="tag-link">hpc</a>
+    </li>
+    <li class="tag-item">
+        <a href="../tags/open-ondemand-ood.html" class="tag-link">open-ondemand-ood</a>
     </li>
     <li class="tag-item">
         <a href="../tags/research-storage-cluster.html" class="tag-link">research-storage-cluster</a>
@@ -912,7 +735,7 @@ document.write(`
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

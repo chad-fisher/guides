@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -63,11 +64,11 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="HPC Helper Tool - hpctools" href="hpctools.html" />
-    <link rel="prev" title="Using VSCode on Tufts HPC Cluster - Remote Tunnels" href="../Application/vscode.html" />
+    <link rel="next" title="Software Applications" href="../Application/index.html" />
+    <link rel="prev" title="Computing Resources" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -476,35 +477,16 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/condaenv.html">Conda Environment on Tufts HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminology.html">What is HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Using the HPC Cluster</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Computing Resources</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">GPU</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Application/index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/r.html">R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/rstudio.html">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/tmux.html">Tmux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="terminology.html">Terminology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/batchjob.html">Batch Jobs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/monitor.html">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy.html">Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 </ul>
 </div>
 </nav></div>
@@ -546,6 +528,9 @@ document.write(`
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">High Performance...</a></li>
     
     
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Computing Resources</a></li>
+    
+    
     <li class="breadcrumb-item active" aria-current="page">GPU</li>
   </ul>
 </nav>
@@ -565,22 +550,26 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="gpu">
 <h1>GPU<a class="headerlink" href="#gpu" title="Link to this heading">#</a></h1>
-<p>GPUs (Graphics Processing Units) are essential for tasks requiring high parallelism, such as deep learning and simulations. Tufts HPC cluster offers various types of NVIDIA GPUs in different partitions.</p>
-<p><strong>NVIDIA GPUs</strong> are available in <code class="docutils literal notranslate"><span class="pre">gpu</span></code> and <code class="docutils literal notranslate"><span class="pre">preempt</span></code> partitions</p>
-<p><strong>Request GPU resources with <code class="docutils literal notranslate"><span class="pre">--gres</span></code>. See details below.</strong></p>
+<p>GPUs (Graphics Processing Units) are essential for tasks requiring high parallelism,
+such as deep learning and simulations.  In the context of HPC these devices no longer perform any
+graphics function, but the “graphics” name has stuck vs the more apt accelerator term. To lean more about
+accelerated computing visit <a class="reference external" href="https://blogs.nvidia.com/blog/what-is-accelerated-computing/">https://blogs.nvidia.com/blog/what-is-accelerated-computing/</a> .</p>
+<p>NVIDIA GPUs are available in <code class="docutils literal notranslate"><span class="pre">gpu</span></code> and <code class="docutils literal notranslate"><span class="pre">preempt</span></code> public partitions as well as some labs private partitions.
+When scheduling batch or interactive jobs that need GPU you add the <code class="docutils literal notranslate"><span class="pre">--gres</span></code> option to your command.
+This allows you to select the type and quantity of GPUs needed.</p>
 <ul>
-<li><p>Request specific GPU architecture with <code class="docutils literal notranslate"><span class="pre">--gres=gpu:t4:1</span></code>, e.g.</p>
-<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">srun</span> <span class="pre">-p</span> <span class="pre">preempt</span> <span class="pre">-n</span> <span class="pre">2</span> <span class="pre">--mem=4g</span> <span class="pre">--gres=gpu:t4:1</span> <span class="pre">-t</span> <span class="pre">1:00:00</span> <span class="pre">--pty</span> <span class="pre">bash</span></code></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--gres</span></code> : Generic Resource</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gpu:t4:1</span></code> : requesting one T4 GPU.</p></li>
-</ul>
-</li>
-<li><p>If no specific architecture is required, GPU resources can be request with<code class="docutils literal notranslate"><span class="pre">--gres=gpu:1</span></code>, e.g.</p>
+<li><p>The simplest request is <code class="docutils literal notranslate"><span class="pre">--gres=gpu:1</span></code>, e.g.</p>
 <p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">srun</span> <span class="pre">-p</span> <span class="pre">preempt</span> <span class="pre">-n</span> <span class="pre">2</span> <span class="pre">--mem=4g</span> <span class="pre">--gres=gpu:1</span> <span class="pre">-t</span> <span class="pre">1:00:00</span> <span class="pre">--pty</span> <span class="pre">bash</span></code></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--gres</span></code> : Generic Resource</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpu:1</span></code> : requesting one GPU (any GPU architecture available in the request partition)</p></li>
+</ul>
+</li>
+<li><p>To request a specific GPU architecture you can add it to the gres <code class="docutils literal notranslate"><span class="pre">--gres=gpu:t4:1</span></code>, e.g.</p>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">srun</span> <span class="pre">-p</span> <span class="pre">preempt</span> <span class="pre">-n</span> <span class="pre">2</span> <span class="pre">--mem=4g</span> <span class="pre">--gres=gpu:t4:1</span> <span class="pre">-t</span> <span class="pre">1:00:00</span> <span class="pre">--pty</span> <span class="pre">bash</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--gres</span></code> : Generic Resource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gpu:t4:1</span></code> : requesting one T4 GPU.</p></li>
 </ul>
 </li>
 <li><p>You can request more than one type (but not all) of GPUs with <code class="docutils literal notranslate"><span class="pre">constraint</span></code>, e.g.</p>
@@ -590,130 +579,110 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">t4|p100|v100</span></code> : indicates that the task can use a GPU of type t4, p100, or v100, where the | symbol means “or”.</p></li>
 </ul>
 </li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
 <li><p><strong>DO NOT</strong> manually set <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>.</p></li>
-<li><p>Users can <strong>ONLY</strong> see GPU devices that are assigned to them by using the <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">nvidia-smi</span></code> command.</p>
-<p>If you submit batch jobs, it’s recommended adding this command in your slurm job submission script.</p>
-</li>
+<li><p>Users can only see GPU devices that are assigned to them by using the <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">nvidia-smi</span></code> command.</p></li>
+<li><p>When submiting batch jobs, it’s recommended adding this command <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">nvidia-smi</span></code> in your slurm job submission script to
+include the output in the log for troubleshooting purposes.</p></li>
 </ul>
-<section id="available-gpus-in-gpu-partition-p-gpu">
-<h2>Available GPUs in <code class="docutils literal notranslate"><span class="pre">gpu</span></code> partition<code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">gpu</span></code>:<a class="headerlink" href="#available-gpus-in-gpu-partition-p-gpu" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>NVIDIA A100</p>
-<ul>
-<li><p>In “gpu” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:a100:1</span></code>(one A100 GPU, can request up to 8 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;a100-80G&quot;</span></code></p></li>
-<li><p>Each GPU comes with 80GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA P100s</p>
-<ul>
-<li><p>In “gpu” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:p100:1</span></code>(one P100 GPU, can request up to 4 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;p100&quot;</span></code></p></li>
-<li><p>Each GPU comes with 16GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="available-gpus-inpreempt-partition-p-preempt">
-<h2>Available GPUs in<code class="docutils literal notranslate"><span class="pre">preempt</span></code> partition <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">preempt</span></code>:<a class="headerlink" href="#available-gpus-inpreempt-partition-p-preempt" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>NVIDIA T4</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:t4:1</span></code>(one T4 GPU, can request up to 4 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;t4&quot;</span></code></p></li>
-<li><p>Each GPU comes with 16GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 10.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA V100</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:v100:1</span></code>(one V100 GPU, can request up to 4 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;v100&quot;</span></code></p></li>
-<li><p>Each GPU comes with 16GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA P100</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:p100:1</span></code>(one P100 GPU, can request up to 6 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;p100&quot;</span></code></p></li>
-<li><p>Each GPU comes with 16GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA rtx_6000</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:rtx_6000:1</span></code>(one RTX_6000 GPU, can request up to 8 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;rtx_6000&quot;</span></code></p></li>
-<li><p>Each GPU comes with 24GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA rtx_a6000</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:rtx_a6000:1</span></code>(one RTX_A6000 GPU, can request up to 8 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;rtx_a6000&quot;</span></code></p></li>
-<li><p>Each GPU comes with 48GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA rtx_6000ada</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:rtx_6000ada:1</span></code>(one RTX_6000Ada GPU, can request up to 4 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;rtx_6000ada&quot;</span></code></p></li>
-<li><p>Each GPU comes with 48GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA L40s</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:l40s:1</span></code>(one L40s GPU, can request up to 4 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;l40s&quot;</span></code></p></li>
-<li><p>Each GPU comes with 48GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA rtx_a5000</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:rtx_a5000:1</span></code>(one RTX_A5000 GPU, can request up to 8 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;rtx_a5000&quot;</span></code></p></li>
-<li><p>Each GPU comes with 24GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA A100</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:a100:1</span></code>(one A100 GPU, can request up to 8 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;a100-80G&quot;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;a100-40G&quot;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;a100&quot;</span></code></p></li>
-<li><p>Each GPU comes with 40GB of DRAM or 80GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-<li><p>NVIDIA H100</p>
-<ul>
-<li><p>In “preempt” partition</p></li>
-<li><p>Request with: <code class="docutils literal notranslate"><span class="pre">--gres=gpu:h100:1</span></code>(one H100 GPU, can request up to 3 on one node)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--constraint=&quot;h100&quot;</span></code></p></li>
-<li><p>Each GPU comes with 80GB of DRAM</p></li>
-<li><p>Driver supports upto CUDA 12.2</p></li>
-</ul>
-</li>
-</ul>
+</div>
+<section id="available-gpus">
+<h2>Available GPUs:<a class="headerlink" href="#available-gpus" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>GPU Model</p></th>
+<th class="head"><p>Memory</p></th>
+<th class="head"><p>Max per node</p></th>
+<th class="head"><p>Partition Available in</p></th>
+<th class="head"><p>Constraints</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A100</p></td>
+<td><p>40G or 80G</p></td>
+<td><p>8</p></td>
+<td><p>gpu, preempt</p></td>
+<td><p>a100 <br/>a100-40G<br/>a100-80G</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>P100</p></td>
+<td><p>16GB</p></td>
+<td><p>6</p></td>
+<td><p>gpu, preempt</p></td>
+<td><p>p100</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>V100</p></td>
+<td><p>16GB</p></td>
+<td><p>4</p></td>
+<td><p>preempt</p></td>
+<td><p>v100</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>T4</p></td>
+<td><p>16GB</p></td>
+<td><p>4</p></td>
+<td><p>preempt</p></td>
+<td><p>t4</p></td>
+<td><p>Max CUDA version is 10.2</p></td>
+</tr>
+<tr class="row-even"><td><p>rtx_6000</p></td>
+<td><p>24GB</p></td>
+<td><p>8</p></td>
+<td><p>preempt</p></td>
+<td><p>rtx_6000</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>rtx_a6000</p></td>
+<td><p>48GB</p></td>
+<td><p>8</p></td>
+<td><p>preempt</p></td>
+<td><p>rtx_a6000</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>rtx_6000ada</p></td>
+<td><p>48GB</p></td>
+<td><p>4</p></td>
+<td><p>preempt</p></td>
+<td><p>rtx_6000ada</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>L40s</p></td>
+<td><p>48GB</p></td>
+<td><p>4</p></td>
+<td><p>preempt</p></td>
+<td><p>L40s</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>rtx_a5000</p></td>
+<td><p>24GB</p></td>
+<td><p>8</p></td>
+<td><p>preempt</p></td>
+<td><p>rtx_a5000</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>L40</p></td>
+<td><p>48GB</p></td>
+<td><p>4</p></td>
+<td><p>preempt</p></td>
+<td><p>L40</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>H100</p></td>
+<td><p>80GB</p></td>
+<td><p>3</p></td>
+<td><p>preempt</p></td>
+<td><p>H100</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All GPU cards drivers except t4 support CUDA 12.2</p>
 </section>
 </section>
 
@@ -728,20 +697,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../Application/vscode.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Using VSCode on Tufts HPC Cluster - Remote Tunnels</p>
+        <p class="prev-next-title">Computing Resources</p>
       </div>
     </a>
     <a class="right-next"
-       href="hpctools.html"
+       href="../Application/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">HPC Helper Tool - hpctools</p>
+        <p class="prev-next-title">Software Applications</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -763,8 +732,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-gpus-in-gpu-partition-p-gpu">Available GPUs in <code class="docutils literal notranslate"><span class="pre">gpu</span></code> partition<code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">gpu</span></code>:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-gpus-inpreempt-partition-p-preempt">Available GPUs in<code class="docutils literal notranslate"><span class="pre">preempt</span></code> partition <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">preempt</span></code>:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-gpus">Available GPUs:</a></li>
 </ul>
   </nav></div>
 
@@ -828,7 +796,7 @@ document.write(`
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -63,11 +64,9 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Slurm" href="index.html" />
-    <link rel="prev" title="Terminology" href="../Compute/terminology.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -180,7 +179,7 @@
 </li>
 
 
-<li class="nav-item current active">
+<li class="nav-item ">
   <a class="nav-link nav-internal" href="../index.html">
     HPC
   </a>
@@ -332,7 +331,9 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -361,7 +362,7 @@ document.write(`
 </li>
 
 
-<li class="nav-item current active">
+<li class="nav-item ">
   <a class="nav-link nav-internal" href="../index.html">
     HPC
   </a>
@@ -470,46 +471,6 @@ document.write(`
     
   </div>
   
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-<nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/condaenv.html">Conda Environment on Tufts HPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/r.html">R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/rstudio.html">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/tmux.html">Tmux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/GPU.html">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/terminology.html">Terminology</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Batch Jobs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="monitor.html">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
-</ul>
-</div>
-</nav></div>
-    </div>
-  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -543,9 +504,6 @@ document.write(`
     </li>
     
     
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">High Performance...</a></li>
-    
-    
     <li class="breadcrumb-item active" aria-current="page">Batch Jobs</li>
   </ul>
 </nav>
@@ -568,7 +526,7 @@ document.write(`
 <p>Batch jobs are best suited for production level work, as there’s no chance for users to interact and modify the programs while it’s running. So be sure to debug and test your programs beforehand.</p>
 <p>It is easy to submit a batch job.</p>
 <p>You will need a slurm batch job script which contains <u>all the resource requirements</u> and the <u>commands to run your program</u>.</p>
-<p>We strongly recommend user check available resources using <a class="reference internal" href="../Compute/hpctools.html"><span class="std std-doc">hpctools - Tufts HPC Helper Tool</span></a> before submitting batch jobs.</p>
+<p>We strongly recommend user check available resources using <a class="reference internal" href="../examples/hpctools.html"><span class="std std-doc">hpctools - Tufts HPC Helper Tool</span></a> before submitting batch jobs.</p>
 <p>Please see examples below:</p>
 <section id="cpu-batch-job">
 <h2>CPU Batch Job<a class="headerlink" href="#cpu-batch-job" title="Link to this heading">#</a></h2>
@@ -582,11 +540,11 @@ document.write(`
 <span class="c1">#SBATCH --mem=2g  #requesting 2GB of RAM total for the number of cpus you requested</span>
 <span class="c1">#SBATCH --output=MyJob.%j.%N.out  #saving standard output to file, %j=JOBID, %N=NodeName</span>
 <span class="c1">#SBATCH --error=MyJob.%j.%N.err   #saving standard error to file, %j=JOBID, %N=NodeName</span>
-<span class="c1">#SBATCH --mail-type=ALL    #email optitions</span>
+<span class="c1">#SBATCH --mail-type=ALL    #email options</span>
 <span class="c1">#SBATCH --mail-user=Your_Tufts_Email@tufts.edu</span>
 
 <span class="c1">#[commands_you_would_like_to_exe_on_the_compute_nodes]</span>
-<span class="c1"># have a clean start. purge all loaded modules in curren environment</span>
+<span class="c1"># have a clean start. purge all loaded modules in current environment</span>
 module<span class="w"> </span>purge
 <span class="c1"># for example, running a python script </span>
 <span class="c1"># load the module so the correct version python is available to you</span>
@@ -656,24 +614,6 @@ conda<span class="w"> </span>deactivate
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../Compute/terminology.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Terminology</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="index.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Slurm</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -757,7 +697,7 @@ conda<span class="w"> </span>deactivate
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

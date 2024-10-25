@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Slurm &#8212; Tufts RT Guides</title>
+    <title>Slurm Job Scheduler &#8212; Tufts RT Guides</title>
   
   
   
@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -63,11 +64,9 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Interactive Sessions" href="interactive.html" />
-    <link rel="prev" title="Batch Jobs" href="batchjob.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -180,7 +179,7 @@
 </li>
 
 
-<li class="nav-item current active">
+<li class="nav-item ">
   <a class="nav-link nav-internal" href="../index.html">
     HPC
   </a>
@@ -332,7 +331,9 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -361,7 +362,7 @@ document.write(`
 </li>
 
 
-<li class="nav-item current active">
+<li class="nav-item ">
   <a class="nav-link nav-internal" href="../index.html">
     HPC
   </a>
@@ -470,46 +471,6 @@ document.write(`
     
   </div>
   
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-<nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/condaenv.html">Conda Environment on Tufts HPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/r.html">R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/rstudio.html">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/tmux.html">Tmux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/GPU.html">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/terminology.html">Terminology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="batchjob.html">Batch Jobs</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="monitor.html">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
-</ul>
-</div>
-</nav></div>
-    </div>
-  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -543,10 +504,7 @@ document.write(`
     </li>
     
     
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">High Performance...</a></li>
-    
-    
-    <li class="breadcrumb-item active" aria-current="page">Slurm</li>
+    <li class="breadcrumb-item active" aria-current="page">Slurm Job Scheduler</li>
   </ul>
 </nav>
 </div>
@@ -563,17 +521,28 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="slurm">
-<h1>Slurm<a class="headerlink" href="#slurm" title="Link to this heading">#</a></h1>
-<p>What is Slurm?</p>
-<p>Slurm is an open source, fault-tolerant, and highly scalable cluster management and job scheduling system for large and small Linux clusters.</p>
-<p>Here are some tips on how to work with Slurm to get your work done on Tufts HPC cluster:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="slurm-job-scheduler">
+<h1>Slurm Job Scheduler<a class="headerlink" href="#slurm-job-scheduler" title="Link to this heading">#</a></h1>
+<p>The HPC cluster uses the Slurm Job Scheduler to assign users jobs to compute nodes.  Jobs are allocated based on the
+requested resources and the submitting users priority.  We use the FairShare algorithm which adjusts priority to
+balance usage across of our users.</p>
+<p>Command Quick Reference</p>
+<ul class="simple">
+<li><p><strong>squeue</strong> lists your jobs in the queue</p></li>
+<li><p><strong>sinfo</strong> lists the state of all computers in the HPC cluster</p></li>
+<li><p><strong>sbatch</strong> submits batch jobs</p></li>
+<li><p><strong>sprio</strong> Displays the priorities of pending jobs in the queue</p></li>
+<li><p><strong>scancel</strong> can be used to cancel jobs</p></li>
+<li><p><strong>salloc</strong> allocates a compute node for interactive use</p></li>
+<li><p><strong>sacct</strong> display historical report data for jobs</p></li>
+<li><p><strong>seff</strong> displays job CPU and Memory efficiency</p></li>
+</ul>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Interactive Sessions</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 01 Interactive Sessions</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">How to run interactive jobs with cluster resources</p>
@@ -583,7 +552,7 @@ document.write(`
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Batch jobs</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 02 Batch jobs</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">How to submit batch jobs to the cluster and sample slurm batch job scripts</p>
@@ -593,7 +562,17 @@ document.write(`
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Job Monitoring and Management Commands</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 03 Partitions</p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">How to select where your jobs and the resources available to them.</p>
+</div>
+<a class="sd-stretched-link reference external" href="monitor.html"></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 04 Job Monitoring and Management Commands</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">How to monitor and manage your active jobs</p>
@@ -603,7 +582,7 @@ document.write(`
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Job Resource Utilization</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 05 Job Resource Utilization</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">How to check resource utilization of completed jobs: how much memory did the completed job used? how many cores did the completed job utilized?</p>
@@ -624,24 +603,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="batchjob.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Batch Jobs</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="interactive.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Interactive Sessions</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -712,7 +673,7 @@ document.write(`
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

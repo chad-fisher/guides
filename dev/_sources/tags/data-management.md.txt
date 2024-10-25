@@ -4,5 +4,6 @@ nosearch:
 html_theme.sidebar_secondary.remove: true
 ---
 # data-management
+- [](/hpc/examples/index.md)
 - [](/hpc/index.md)
 - [](/r/index.md)

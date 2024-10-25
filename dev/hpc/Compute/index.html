@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Computing Resource &#8212; Tufts RT Guides</title>
+    <title>Computing Resources &#8212; Tufts RT Guides</title>
   
   
   
@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -63,11 +64,11 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Tufts HPC Partitions" href="partition.html" />
-    <link rel="prev" title="HPC Helper Tool - hpctools" href="hpctools.html" />
+    <link rel="next" title="GPU" href="GPU.html" />
+    <link rel="prev" title="Modules" href="../Access/0050_modules.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -476,35 +477,16 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/condaenv.html">Conda Environment on Tufts HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminology.html">What is HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Using the HPC Cluster</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Computing Resources</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="GPU.html">GPU</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Application/index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/r.html">R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/rstudio.html">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/tmux.html">Tmux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GPU.html">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="terminology.html">Terminology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/batchjob.html">Batch Jobs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/monitor.html">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy.html">Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 </ul>
 </div>
 </nav></div>
@@ -546,7 +528,7 @@ document.write(`
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">High Performance...</a></li>
     
     
-    <li class="breadcrumb-item active" aria-current="page">Computing Resource</li>
+    <li class="breadcrumb-item active" aria-current="page">Computing Resources</li>
   </ul>
 </nav>
 </div>
@@ -563,35 +545,111 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="computing-resource">
-<h1>Computing Resource<a class="headerlink" href="#computing-resource" title="Link to this heading">#</a></h1>
-<p>Available computing resources for Tufts HPC users and where to find them!</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="computing-resources">
+<h1>Computing Resources<a class="headerlink" href="#computing-resources" title="Link to this heading">#</a></h1>
+<p>The Tufts HPC Cluster is comprised of various type of CPU and GPU enabled compute nodes.  This table provides a
+general idea of what is currently available for use.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Number</p></th>
+<th class="head text-left"><p>Type</p></th>
+<th class="head text-left"><p>CPU</p></th>
+<th class="head text-left"><p>Memory</p></th>
+<th class="head text-left"><p>GPU</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>40</p></td>
+<td class="text-left"><p>CPU</p></td>
+<td class="text-left"><p>2x 32 Cores</p></td>
+<td class="text-left"><p>512GB</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>45</p></td>
+<td class="text-left"><p>CPU</p></td>
+<td class="text-left"><p>2x 18 Cores</p></td>
+<td class="text-left"><p>256GB+</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p>CPU</p></td>
+<td class="text-left"><p>2x 18 Cores</p></td>
+<td class="text-left"><p>1TB</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>8</p></td>
+<td class="text-left"><p>CPU</p></td>
+<td class="text-left"><p>2x 24 Cores</p></td>
+<td class="text-left"><p>756GB</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>8</p></td>
+<td class="text-left"><p>CPU</p></td>
+<td class="text-left"><p>2x 32 Cores</p></td>
+<td class="text-left"><p>256GB</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5</p></td>
+<td class="text-left"><p>GPU</p></td>
+<td class="text-left"><p>2x 16 Cores</p></td>
+<td class="text-left"><p>756GB</p></td>
+<td class="text-left"><p>8x a100-40G</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>5</p></td>
+<td class="text-left"><p>GPU</p></td>
+<td class="text-left"><p>2x 32 Cores</p></td>
+<td class="text-left"><p>1TB</p></td>
+<td class="text-left"><p>8x a100-80G</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>20</p></td>
+<td class="text-left"><p>GPU</p></td>
+<td class="text-left"><p>2x 20 Cores</p></td>
+<td class="text-left"><p>92GB</p></td>
+<td class="text-left"><p>4x t4</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>9</p></td>
+<td class="text-left"><p>GPU</p></td>
+<td class="text-left"><p>2x 32 Cores</p></td>
+<td class="text-left"><p>256GB</p></td>
+<td class="text-left"><p>4x l40</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>25</p></td>
+<td class="text-left"><p>MIXED</p></td>
+<td class="text-left"><p>MIXED</p></td>
+<td class="text-left"><p>MIXED</p></td>
+<td class="text-left"><p>MIXED</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Some systems are only available to all users on the preempt partition.</p>
+<p>Mixed systems include a limited number of various GPUs including V100, A100, H100 and GH200.</p>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Terminology Overview</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 01 Terminology Overview</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">Understand the terminoloies used accross Tufts HPC cluster documentations</p>
 </div>
-<a class="sd-stretched-link reference external" href="terminology.html"></a></div>
+<a class="sd-stretched-link reference external" href="../terminology.html"></a></div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> HPC Partitions</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 02 HPC Partitions</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">Partitions on Tufts HPC cluster and their purposes</p>
 </div>
-<a class="sd-stretched-link reference external" href="partition.html"></a></div>
+<a class="sd-stretched-link reference external" href="../slurm/partition.html"></a></div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> GPU Resources</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 03 GPU Resources</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">Available GPU resources on Tufts HPC cluster and how to request them</p>
@@ -601,14 +659,16 @@ document.write(`
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
 <div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> hpctools</p>
+<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> 04 hpctools</p>
 </div>
 <div class="sd-card-body docutils">
 <p class="sd-card-text">Utilize a command line tool - hpctools - to help you find available resource on Tufts HPC cluster</p>
 </div>
-<a class="sd-stretched-link reference external" href="hpctools.html"></a></div>
+<a class="sd-stretched-link reference external" href="../examples/hpctools.html"></a></div>
 </div>
 </div>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 </section>
 
@@ -623,20 +683,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="hpctools.html"
+       href="../Access/0050_modules.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">HPC Helper Tool - hpctools</p>
+        <p class="prev-next-title">Modules</p>
       </div>
     </a>
     <a class="right-next"
-       href="partition.html"
+       href="GPU.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tufts HPC Partitions</p>
+        <p class="prev-next-title">GPU</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -710,7 +770,7 @@ document.write(`
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

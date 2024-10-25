@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -63,11 +64,9 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Job Resource Utilization" href="utilization.html" />
-    <link rel="prev" title="Interactive Sessions" href="interactive.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -180,7 +179,7 @@
 </li>
 
 
-<li class="nav-item current active">
+<li class="nav-item ">
   <a class="nav-link nav-internal" href="../index.html">
     HPC
   </a>
@@ -332,7 +331,9 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -361,7 +362,7 @@ document.write(`
 </li>
 
 
-<li class="nav-item current active">
+<li class="nav-item ">
   <a class="nav-link nav-internal" href="../index.html">
     HPC
   </a>
@@ -470,46 +471,6 @@ document.write(`
     
   </div>
   
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-<nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/condaenv.html">Conda Environment on Tufts HPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/r.html">R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/rstudio.html">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/tmux.html">Tmux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Application/vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/GPU.html">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/terminology.html">Terminology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="batchjob.html">Batch Jobs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
-</ul>
-</div>
-</nav></div>
-    </div>
-  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -543,9 +504,6 @@ document.write(`
     </li>
     
     
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">High Performance...</a></li>
-    
-    
     <li class="breadcrumb-item active" aria-current="page">Job Monitoring and Management</li>
   </ul>
 </nav>
@@ -565,12 +523,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="job-monitoring-and-management">
 <h1>Job Monitoring and Management<a class="headerlink" href="#job-monitoring-and-management" title="Link to this heading">#</a></h1>
-<p>Utilize  <a class="reference internal" href="../Compute/hpctools.html"><span class="std std-doc">hpctools - Tufts HPC Helper Tool</span></a> to monitor active jobs</p>
+<p>Utilize  <a class="reference internal" href="../examples/hpctools.html"><span class="std std-doc">hpctools - Tufts HPC Helper Tool</span></a> to monitor active jobs</p>
 <section id="check-active-jobs">
 <h2>Check Active Jobs<a class="headerlink" href="#check-active-jobs" title="Link to this heading">#</a></h2>
 <p>Active jobs are the jobs in the stage of R (running), PD (pending), or CG (completing). Only active jobs can be displayed in <code class="docutils literal notranslate"><span class="pre">squeue</span></code> command output.</p>
 <p>To check your active jobs in the queue:</p>
-<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">squeue</span> <span class="pre">-u</span> <span class="pre">$USER</span></code> or <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">squeue</span> <span class="pre">-u</span> <span class="pre">your_utln</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">squeue</span> <span class="pre">--me</span></code> or <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">squeue</span> <span class="pre">-u</span> <span class="pre">your_utln</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>tutln01@cc1gpu001<span class="w"> </span>~<span class="o">]</span>$<span class="w"> </span>squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
 <span class="w">             </span>JOBID<span class="w"> </span>PARTITION<span class="w">     </span>NAME<span class="w">     </span>USER<span class="w"> </span>ST<span class="w">       </span>TIME<span class="w">  </span>NODES<span class="w"> </span>NODELIST<span class="o">(</span>REASON<span class="o">)</span><span class="w"> </span>
 <span class="w">            </span><span class="m">296794</span><span class="w">   </span>preempt<span class="w">     </span>bash<span class="w"> </span>tutln01<span class="w">  </span>R<span class="w">       </span><span class="m">5</span>:12<span class="w">      </span><span class="m">1</span><span class="w"> </span>cc1gpu001<span class="w"> </span>
@@ -632,24 +590,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="interactive.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Interactive Sessions</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="utilization.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Job Resource Utilization</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -733,7 +673,7 @@ document.write(`
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

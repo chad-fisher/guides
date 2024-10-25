@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -52,6 +53,8 @@
     <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'hpc/Application/index';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
@@ -63,11 +66,11 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Modules" href="modules.html" />
-    <link rel="prev" title="Conda Environment on Tufts HPC" href="condaenv.html" />
+    <link rel="next" title="Conda Environments" href="0010_condaenv.html" />
+    <link rel="prev" title="GPU" href="../Compute/GPU.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -476,35 +479,20 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="condaenv.html">Conda Environment on Tufts HPC</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="r.html">R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rstudio.html">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tmux.html">Tmux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/GPU.html">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/terminology.html">Terminology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/batchjob.html">Batch Jobs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/monitor.html">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminology.html">What is HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Using the HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resources</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Software Applications</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="0010_condaenv.html">Conda Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r.html">R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rstudio.html">RStudio via OnDemand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tmux.html">Tmux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vscode.html">VSCode</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy.html">Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 </ul>
 </div>
 </nav></div>
@@ -565,7 +553,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="software-applications">
 <h1>Software Applications<a class="headerlink" href="#software-applications" title="Link to this heading">#</a></h1>
-<p>Applications installed globally on Tufts HPC cluster are managed by environment modules - Lmod.</p>
+<p>The research computing team strives to make current versions of most common application available for users to run.
+Applications installed globally on Tufts HPC cluster are managed by environment modules - <a class="reference internal" href="../Access/0050_modules.html"><span class="std std-doc">Lmod</span></a>.</p>
+<p>If you dont see a common application used in your scientific domain please reach out to us about having it installed.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Some of the software available on the HPC Cluster is not <strong>NOT FREE/OPEN SOURCE SOFTWARE</strong>.  Compliance with applicable license agreements is the responsibility of the users running the software on the
+cluster, failure to comply with license agreements is a violation of our Acceptable Use Policy.</p>
+</div>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 gallery-directive docutils">
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 sd-g-2 sd-g-xs-2 sd-g-sm-2 sd-g-md-2 sd-g-lg-2 docutils">
 <div class="sd-col sd-d-flex-row docutils">
@@ -574,9 +569,9 @@ document.write(`
 <p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Modules</p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">How to use Lmod on Tufts HPC cluter to access installed applications</p>
+<p class="sd-card-text">How to use Lmod on the Tufts HPC cluter to access installed applications</p>
 </div>
-<a class="sd-stretched-link reference external" href="modules.html"></a></div>
+<a class="sd-stretched-link reference external" href="../Access/0050_modules.html"></a></div>
 </div>
 <div class="sd-col sd-d-flex-row docutils">
 <div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
@@ -586,59 +581,11 @@ document.write(`
 <div class="sd-card-body docutils">
 <p class="sd-card-text">How to create conda environment on Tufts HPC cluster</p>
 </div>
-<a class="sd-stretched-link reference external" href="condaenv.html"></a></div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Running R with RScript</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">Submit batch jobs to run R scripts</p>
-</div>
-<a class="sd-stretched-link reference external" href="r.html"></a></div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> RStudio</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">Run RStudio on Tufts HPC cluster</p>
-</div>
-<a class="sd-stretched-link reference external" href="rstudio.html"></a></div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Tmux</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">How to use tmux on Tufts HPC cluster</p>
-</div>
-<a class="sd-stretched-link reference external" href="tmux.html"></a></div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> VSCode</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">Connect VSCode to Tufts HPC cluster</p>
-</div>
-<a class="sd-stretched-link reference external" href="vscode.html"></a></div>
-</div>
-<div class="sd-col sd-d-flex-row docutils">
-<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
-<div class="sd-card-header docutils">
-<p class="sd-card-text"><span class="fas fa-book pst-color-primary"></span> Port Forwarding</p>
-</div>
-<div class="sd-card-body docutils">
-<p class="sd-card-text">How to do port forwarding on Tufts HPC cluster</p>
-</div>
-<a class="sd-stretched-link reference external" href="portforward.html"></a></div>
+<a class="sd-stretched-link reference external" href="0010_condaenv.html"></a></div>
 </div>
 </div>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 </section>
 
@@ -653,20 +600,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="condaenv.html"
+       href="../Compute/GPU.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Conda Environment on Tufts HPC</p>
+        <p class="prev-next-title">GPU</p>
       </div>
     </a>
     <a class="right-next"
-       href="modules.html"
+       href="0010_condaenv.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Modules</p>
+        <p class="prev-next-title">Conda Environments</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -740,7 +687,7 @@ document.write(`
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

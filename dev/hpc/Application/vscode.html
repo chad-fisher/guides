@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Using VSCode on Tufts HPC Cluster - Remote Tunnels &#8212; Tufts RT Guides</title>
+    <title>VSCode &#8212; Tufts RT Guides</title>
   
   
   
@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -63,11 +64,11 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="GPU" href="../Compute/GPU.html" />
+    <link rel="next" title="Examples and Tutorials" href="../examples/index.html" />
     <link rel="prev" title="Tmux" href="tmux.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -476,35 +477,20 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="condaenv.html">Conda Environment on Tufts HPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="r.html">R</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rstudio.html">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tmux.html">Tmux</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/GPU.html">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/terminology.html">Terminology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/batchjob.html">Batch Jobs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/monitor.html">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminology.html">What is HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Using the HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resources</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Software Applications</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0010_condaenv.html">Conda Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r.html">R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rstudio.html">RStudio via OnDemand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tmux.html">Tmux</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">VSCode</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy.html">Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 </ul>
 </div>
 </nav></div>
@@ -546,7 +532,10 @@ document.write(`
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">High Performance...</a></li>
     
     
-    <li class="breadcrumb-item active" aria-current="page">Using VSCode on Tufts...</li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Software Applications</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">VSCode</li>
   </ul>
 </nav>
 </div>
@@ -563,8 +552,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="using-vscode-on-tufts-hpc-cluster-remote-tunnels">
-<h1>Using VSCode on Tufts HPC Cluster - Remote Tunnels<a class="headerlink" href="#using-vscode-on-tufts-hpc-cluster-remote-tunnels" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="vscode">
+<h1>VSCode<a class="headerlink" href="#vscode" title="Link to this heading">#</a></h1>
 <p>In this walkthrough, we’ll examine how to set up a tunnel between the Cluster and your local installation of VSCode. This can be useful when you need to create, edit and publish sophisticated codebases on the Cluster. We can also use this method for running <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Notebooks</span></code> from the Cluster.</p>
 <p>This process requries that you already have a Github account. Please feel free to make one <a class="reference external" href="https://github.com/">here</a>.</p>
 <section id="local-extensions-optional">
@@ -593,7 +582,7 @@ document.write(`
 <ul class="simple">
 <li><p>Allocate resources on HPC Cluster</p></li>
 </ul>
-<p>Allocate appropriate amount of resources you need for your session with <code class="docutils literal notranslate"><span class="pre">srun</span></code> to start an <a class="reference internal" href="../Slurm/interactive.html"><span class="std std-doc">interactive session</span></a> inside the tmux session.</p>
+<p>Allocate appropriate amount of resources you need for your session with <code class="docutils literal notranslate"><span class="pre">srun</span></code> to start an <a class="reference internal" href="#../slurm/interactive.md"><span class="xref myst">interactive session</span></a> inside the tmux session.</p>
 <blockquote>
 <div><p>e.g. <code class="docutils literal notranslate"><span class="pre">srun</span> <span class="pre">-p</span> <span class="pre">interactive</span> <span class="pre">-n</span> <span class="pre">2</span> <span class="pre">--mem=4g</span> <span class="pre">--pty</span> <span class="pre">bash</span></code></p>
 </div></blockquote>
@@ -603,7 +592,7 @@ document.write(`
 <p><code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">vscode_cli/1.77.3</span></code></p>
 <p>Then configure and start tunnel:</p>
 <p><code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">tunnel</span></code></p>
-<p>You will need to follow any Two Factor Authenitcation steps from Github to proceed. Once you have done so, copy the link given into your local browser. You should now see a VSCdoe window running from the browser. Feel free to connect any directory by clicking on the file explorer on the left. Currently, VSCode does not support Python environments to be ported through the remote tunnel. Read more <a class="reference external" href="https://github.com/microsoft/vscode-python/issues/21557">here</a>.</p>
+<p>You will need to follow any Two Factor Authentication steps from Github to proceed. Once you have done so, copy the link given into your local browser. You should now see a VSCode window running from the browser. Feel free to connect any directory by clicking on the file explorer on the left. Currently, VSCode does not support Python environments to be ported through the remote tunnel. Read more <a class="reference external" href="https://github.com/microsoft/vscode-python/issues/21557">here</a>.</p>
 <p>You can either use the VSCode server browser tab from there, or you can go back to your locally installed VSCode. You can find your active tunnels in “Remote Explorer”.</p>
 </section>
 </section>
@@ -628,11 +617,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../Compute/GPU.html"
+       href="../examples/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">GPU</p>
+        <p class="prev-next-title">Examples and Tutorials</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -723,7 +712,7 @@ document.write(`
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

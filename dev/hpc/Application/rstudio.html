@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>RStudio from OnDemand &#8212; Tufts RT Guides</title>
+    <title>RStudio via OnDemand &#8212; Tufts RT Guides</title>
   
   
   
@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6fd0c29a" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -69,7 +70,7 @@
     <link rel="prev" title="R" href="r.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 01, 2024"/>
+    <meta name="docbuild:last-update" content="Oct 25, 2024"/>
   </head>
   
   
@@ -478,35 +479,20 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Access/AccountRequest.html">Tufts HPC Cluster Account Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/StorageRequest.html">Tufts HPC Cluster Storage Request</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/cli.html">Command Line Interface (CLI) via SSH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Access</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Access/ondemand.html">OnDemand - Tufts HPC Cluster Web Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="condaenv.html">Conda Environment on Tufts HPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Software Applications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="portforward.html">Port Forwarding on HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="privatemodule.html">Private Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="r.html">R</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">RStudio from OnDemand</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tmux.html">Tmux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vscode.html">Using VSCode on Tufts HPC Cluster - Remote Tunnels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/GPU.html">GPU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/hpctools.html">HPC Helper Tool - hpctools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resource</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/partition.html">Tufts HPC Partitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Compute/terminology.html">Terminology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/batchjob.html">Batch Jobs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/index.html">Slurm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/interactive.html">Interactive Sessions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/monitor.html">Job Monitoring and Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Slurm/utilization.html">Job Resource Utilization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/globus.html">Globus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/index.html">Tufts HPC Cluster Storage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/quota.html">Tufts HPC Cluster Storage Usage and Quota</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/snapshots.html">File Recovery on Tufts HPC Cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Storage/xfer.html">File Transfer to/from Tufts HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../terminology.html">What is HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Access/index.html">Using the HPC Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Compute/index.html">Computing Resources</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Software Applications</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0010_condaenv.html">Conda Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="r.html">R</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">RStudio via OnDemand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tmux.html">Tmux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vscode.html">VSCode</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples and Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../policy.html">Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Help</a></li>
 </ul>
 </div>
 </nav></div>
@@ -548,7 +534,10 @@ document.write(`
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">High Performance...</a></li>
     
     
-    <li class="breadcrumb-item active" aria-current="page">RStudio from OnDemand</li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Software Applications</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">RStudio via OnDemand</li>
   </ul>
 </nav>
 </div>
@@ -565,8 +554,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="rstudio-from-ondemand">
-<h1>RStudio from OnDemand<a class="headerlink" href="#rstudio-from-ondemand" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="rstudio-via-ondemand">
+<h1>RStudio via OnDemand<a class="headerlink" href="#rstudio-via-ondemand" title="Link to this heading">#</a></h1>
 <blockquote>
 <div><p>Yucheng will have new documentation to replace this one</p>
 </div></blockquote>
@@ -711,7 +700,7 @@ document.write(`
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 01, 2024.
+  Last updated on Oct 25, 2024.
   <br/>
 </p></div>
       

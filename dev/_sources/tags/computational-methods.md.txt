@@ -4,4 +4,6 @@ nosearch:
 html_theme.sidebar_secondary.remove: true
 ---
 # computational-methods
+- [](/ds/index.md)
+- [](/hpc/examples/index.md)
 - [](/hpc/index.md)
