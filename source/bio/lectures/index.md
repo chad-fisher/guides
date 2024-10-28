@@ -13,7 +13,7 @@ Training workshops on bioinformatics provided by Tufts Research Technology.
   link: "doc/2024/IGDH-1001_2024Feb/00_introduction.html"
 
 - header: "{fas}`dna;pst-color-primary` Introduction to Alphafold2 -- 2024"
-  content: "Slides and hands-on sessions for structural predictions of Cas12a mutants using AlphaFold2"
+  content: "Slides and hands-on sessions for class: CHBE-0165-2024Mar (Biomolecular Engineering and Design)"
   link: "doc/2024/Introduction_to_Alphafold2/00_introduction.html"
 
 
