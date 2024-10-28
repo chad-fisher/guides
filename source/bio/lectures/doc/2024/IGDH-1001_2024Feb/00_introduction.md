@@ -14,7 +14,7 @@ Content developed by TTS Research Technology
 
 ## Contents
 
-- Slides for this lecture is [here](./Metagenomics_ShirleyLi_IDGH1001_2024-02.pdf.pdf)
+- Slides for this lecture is [here](./Metagenomics_ShirleyLi_IDGH1001_2024-02.pdf)
 
 
 
