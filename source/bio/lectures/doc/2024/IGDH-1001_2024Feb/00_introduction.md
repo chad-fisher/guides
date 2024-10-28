@@ -1,6 +1,6 @@
 # Introduction to Metagenomics
 
-Materials designed for class [Sp24-IDGH-1001-1-Bioinformatics)] Feb 2024.
+Materials designed for class Sp24-IDGH-1001-1-Bioinformatics Feb 2024.
 
 Content developed by TTS Research Technology
 
@@ -8,17 +8,14 @@ Content developed by TTS Research Technology
 
 
 
-## The Research Technology Team
-
-- Consultation on Projects and Grants
-- High Performance Compute Cluster
-- Workshops
-
 ## Prerequisites
 
 - [Access to Galaxy](https://galaxy.cluster.tufts.edu/)
 
 ## Contents
+
+- Slides for this lecture is [here](./Metagenomics_ShirleyLi_IDGH1001_2024-02.pdf.pdf)
+
 
 
 ## E-List
