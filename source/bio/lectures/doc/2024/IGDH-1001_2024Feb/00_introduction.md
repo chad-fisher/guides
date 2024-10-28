@@ -13,7 +13,11 @@ Content developed by TTS Research Technology
 - [Access to Galaxy](https://galaxy.cluster.tufts.edu/)
 
 ## Contents
-
+- [Hands-on exercise](./Hands-on_session.md)
+	- Exercise 1: NCBI Database Navigation
+	- Exercise 2: NCBI Database Exploration
+	- Exercise 3: Taxonomy assignment and interpretation with Kraken2
+	- Exercise 4: Taxonomy visualization
 - Slides for this lecture is [here](./Metagenomics_ShirleyLi_IDGH1001_2024-02.pdf)
 
 
