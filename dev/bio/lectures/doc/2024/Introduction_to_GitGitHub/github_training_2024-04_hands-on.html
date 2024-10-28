@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Intro to GitHub &amp; GitHub Desktop &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=6fd0c29a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../../../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bio/lectures/doc/2024/Introduction_to_GitGitHub/github_training_2024-04_hands-on';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/bio/lectures/doc/2024/Introduction_to_GitGitHub/github_training_2024-04_hands-on.html" />
+    <link rel="icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Oct 28, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../../../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../r/index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">Intro to GitHub &amp;...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-github-github-desktop">
+<h1>Intro to GitHub &amp; GitHub Desktop<a class="headerlink" href="#intro-to-github-github-desktop" title="Link to this heading">#</a></h1>
+<p>– Tytell Lab GitHub Training</p>
+<p>Date: 2024-04-25</p>
+<p>Author: Shirley Xue Li, Bioinformatician, TTS Research Technology, Tufts University<br />
+Email: <a class="reference external" href="mailto:xue&#46;li37&#37;&#52;&#48;tufts&#46;edu">xue<span>&#46;</span>li37<span>&#64;</span>tufts<span>&#46;</span>edu</a><br />
+<strong>Research Technology Contact: <a class="reference external" href="mailto:tts-research&#37;&#52;&#48;tufts&#46;edu">tts-research<span>&#64;</span>tufts<span>&#46;</span>edu</a></strong></p>
+<p>[toc]</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="set-up-github-desktop">
+<h1>1. Set up GitHub Desktop<a class="headerlink" href="#set-up-github-desktop" title="Link to this heading">#</a></h1>
+<p>GitHub Desktop can be downloaded <a class="reference external" href="https://desktop.github.com/">HERE</a>.</p>
+<p>To create a GitHub Account, following instructions <a class="reference external" href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github">HERE</a>.</p>
+<p>To set up GitHub Desktop, follow instructions <a class="reference external" href="https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/setting-up-github-desktop">HERE</a>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="get-started-with-github-desktop">
+<h1>2. Get started with GitHub Desktop<a class="headerlink" href="#get-started-with-github-desktop" title="Link to this heading">#</a></h1>
+<section id="create-a-new-repository-and-publish-it">
+<h2>2.1 Create a new repository and publish it.<a class="headerlink" href="#create-a-new-repository-and-publish-it" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">File</span></code>, select <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">repository</span></code>, then fill in the information, and hit <code class="docutils literal notranslate"><span class="pre">create</span> <span class="pre">repository</span></code>. Remember to change Local Path to your own path<br />
+<img src="images/newrepo.png" width="400" height="450"></p></li>
+<li><p>In the repository bar, click <code class="docutils literal notranslate"><span class="pre">Publish</span> <span class="pre">repository</span></code>. Check your GitHub website, you will see this new repo under your Repositories.</p></li>
+</ol>
+<img src="images/firstpublish.png" width="700" height="60">
+<ol class="arabic simple" start="3">
+<li><p>Navigate to GitHub website to check your new repository.</p></li>
+</ol>
+</section>
+<section id="making-commiting-and-pushing-changes">
+<h2>2.2 Making, commiting, and pushing changes.<a class="headerlink" href="#making-commiting-and-pushing-changes" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">in</span> <span class="pre">Finder</span></code> folder, this will be the local folder of your GitHub Repo.<br />
+<img src="images/showinfinder.png" width="700" height="300"></p></li>
+<li><p>For Mac users, <code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">.</span></code> to show hidden files. You will see <code class="docutils literal notranslate"><span class="pre">.git</span></code> folder which contains stores all the metadata and object database for that project.<br />
+<img src="images/hiddenfolder.png" width="500" height="300"></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Command</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">.</span></code> to hide hidden files.</p></li>
+<li><p>Make changes to your local repo. Ex: Create a new file called <code class="docutils literal notranslate"><span class="pre">file.txt</span></code>.</p></li>
+<li><p>In GitHub Desktop, navigate to the Changes view. In the file list, you should see your file.txt. The checkbox to the left of the file.txt file indicates that the changes you’ve made to the file will be part of the commit you make. In the future, you might make changes to multiple files but only want to commit the changes you’ve made to some of the files. If you click the checkbox next to a file, that file will not be included in the commit.<br />
+<img src="images/firstchange.png" width="300" height="200"></p></li>
+<li><p>You can write the commit message in <code class="docutils literal notranslate"><span class="pre">commit</span> <span class="pre">message</span></code>, click <code class="docutils literal notranslate"><span class="pre">Commit</span> <span class="pre">to</span> <span class="pre">main</span></code>. Ex: we can write commit message as ‘Create file.txt’.<br />
+<img src="images/firstcommit.png" width="280" height="210"></p></li>
+<li><p>To push your changes to the remote repository on GitHub, click Push origin.<br />
+<img src="images/firstpush.png" width="800" height="60"></p></li>
+<li><p>In your browser, check the changes to the remote repo.<br />
+<img src="images/checkremote1.png" width="800" height="200"></p></li>
+</ol>
+</section>
+<section id="fetching-and-pulling-changes-from-remote-repo-to-local-repo">
+<h2>2.3 Fetching, and pulling changes from remote repo to local repo.<a class="headerlink" href="#fetching-and-pulling-changes-from-remote-repo-to-local-repo" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>In your brower, make some edits to file.txt. Ex: Add <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code> as first line and then <code class="docutils literal notranslate"><span class="pre">commit</span> <span class="pre">changes</span></code>.<br />
+<img src="images/editremote1.png" width="800" height="170"></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fetch</span> <span class="pre">origin</span></code> to check the changes in remote repo. This will only check the changes made in origin, and your local repo won’t be overwritten.
+<img src="images/firstfetch.png" width="800" height="60"></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">origin</span></code> to pull the changes and update the local repo. Your local repo will be overwritten.<br />
+<img src="images/firstpull.png" width="800" height="60"></p></li>
+<li><p>You can see your <code class="docutils literal notranslate"><span class="pre">file.txt</span></code> has been updated.<br />
+<img src="images/checklocal1.png" width="490" height="410"></p></li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="restore-a-previous-version">
+<h1>3. Restore a previous version<a class="headerlink" href="#restore-a-previous-version" title="Link to this heading">#</a></h1>
+<p>Under the History section, you can revert a commit by clicking on <code class="docutils literal notranslate"><span class="pre">Revert</span> <span class="pre">Changes</span> <span class="pre">in</span> <span class="pre">Commit</span></code>. This action will generate a new commit that restores the project to its former version. With GitHub Desktop, reverting is limited to the most recent commit only. When you revert multiple commits, it’s best to revert in order from newest to oldest. If you revert commits in a different order, you may see merge conflicts.</p>
+<blockquote>
+<div><dl class="myst field-list simple">
+<dt class="field-odd">warning<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Always write clear and detailed commit messages! This practice will enable quicker identification of previous versions for potential reverts.</strong></p>
+</dd>
+</dl>
+</div></blockquote>
+<img src="images/revert.png" width="550" height="500"> 
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="addressing-conflicts-between-local-and-remote">
+<h1>4. Addressing conflicts between local and remote.<a class="headerlink" href="#addressing-conflicts-between-local-and-remote" title="Link to this heading">#</a></h1>
+<section id="intentionally-create-a-conflict">
+<h2>4.1 Intentionally create a conflict.<a class="headerlink" href="#intentionally-create-a-conflict" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In your browser, edit file.txt. Ex: Add <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Medford</span></code> as second line and then <code class="docutils literal notranslate"><span class="pre">commit</span> <span class="pre">changes</span></code>.</p></li>
+<li><p>Locally, edit file.txt. Ex: Add <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Boston</span></code> as second line, and then <code class="docutils literal notranslate"><span class="pre">Commit</span> <span class="pre">to</span> <span class="pre">main</span></code>.<br />
+<img src="images/secondcommit.png" width="500" height="430"></p></li>
+<li><p>After you <code class="docutils literal notranslate"><span class="pre">Commit</span> <span class="pre">to</span> <span class="pre">main</span></code>, under <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">origin</span></code> in repository bar, you can see one up arrow and one down arrow. This means that you are one step behind remote repo (Adding <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Medford</span></code> as second line), but at the same time one step ahead remote repo (Adding <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Boston</span></code> as second line).<br />
+<img src="images/conflict1.png" width="800" height="60"></p></li>
+<li><p>When you <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">origin</span></code>, you will see conflict warning.<br />
+<img src="images/conflict2.png" width="500" height="250"></p></li>
+<li><p>An explanation of <code class="docutils literal notranslate"><span class="pre">file.txt</span></code> with conflict.</p>
+<ul>
+<li><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD: Everything between this line and the ======= line are your changes—the content from local repo where you’re trying to push into remote.</p></li>
+<li><p>After the ======= line, the content up until &gt;&gt;&gt;&gt;&gt;&gt;&gt; represents the incoming changes from remote repo that you are trying to push to.<br />
+<img src="images/conflict3.png" width="650" height="200"></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="resolve-the-conflict">
+<h2>4.2 Resolve the conflict.<a class="headerlink" href="#resolve-the-conflict" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">conflicts</span></code> and right click the down arrow in the new window.</p></li>
+<li><p>There are two simple options, <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">the</span> <span class="pre">modified</span> <span class="pre">file</span> <span class="pre">from</span> <span class="pre">main</span></code> and <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">the</span> <span class="pre">modified</span> <span class="pre">file</span> <span class="pre">from</span> <span class="pre">origin/main</span></code>.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">main</span></code> represents local repo main branch</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">origin/main</span></code> represents remote repo main branch.</p>
+<img src="images/twooption.png" width="650" height="240"> 
+</li>
+</ul>
+</li>
+<li><p>There is also a third option, when you don’t like the version in local repo and the version in remote repo. You can edit the file.txt again to make new changes.</p>
+<ul class="simple">
+<li><p>Ex: Let’s change the file content, so the first line is still <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">World</span></code>, but the second line is <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Tufts</span></code>.<br />
+<img src="images/hellotufts.png" width="650" height="150"></p></li>
+</ul>
+</li>
+<li><p>You can commit and push again. This new commit will overright the previous commits made locally and globally.</p></li>
+<li><p>Check the file.txt in your browser, you can now see something like below.<br />
+<img src="images/checkremote2.png" width="800" height="200"></p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="addressing-conflicts-between-main-and-other-branch">
+<h1>5. Addressing conflicts between main and other branch<a class="headerlink" href="#addressing-conflicts-between-main-and-other-branch" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>5.1 Intentionally create a conflict.<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Create a test branch with name <code class="docutils literal notranslate"><span class="pre">test</span></code>, then publish the branch.</p>
+<img src="images/testbranch.png" width="600" height="300"> 
+</li>
+</ul>
+<ul>
+<li><p>In test branch, edit file.txt. Ex: Add <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Dog</span></code> as the third line, then <code class="docutils literal notranslate"><span class="pre">Commit</span> <span class="pre">to</span> <span class="pre">test</span></code>, then <code class="docutils literal notranslate"><span class="pre">Push</span> <span class="pre">orgin</span></code>.</p></li>
+<li><p>Switch back to main branch, edit file.txt. Ex: Add <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Cat</span></code> as the third line, then <code class="docutils literal notranslate"><span class="pre">Commit</span> <span class="pre">to</span> <span class="pre">main</span></code>, then <code class="docutils literal notranslate"><span class="pre">Push</span> <span class="pre">orgin</span></code>.</p></li>
+<li><p>Switch back to test branch again.</p></li>
+<li><p>Under menu bar <code class="docutils literal notranslate"><span class="pre">Branch</span></code>, click <code class="docutils literal notranslate"><span class="pre">compare</span> <span class="pre">to</span> <span class="pre">branch</span></code>, then select <code class="docutils literal notranslate"><span class="pre">main</span></code> branch to compare with.</p>
+<img src="images/compare.png" width="600" height="350"> 
+</li>
+<li><p>Under Changes, you will see <code class="docutils literal notranslate"><span class="pre">Behind(1)</span></code> and <code class="docutils literal notranslate"><span class="pre">Ahead(1)</span></code>, which means local branch is one step behind main branch, because it doesn’t add line <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Cat</span></code>, and at the same time, it is one step ahead main branch, because it adds line <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Dog</span></code> which main branch doesn’t have.</p></li>
+<li><p>In your browser, you can still create a pull request to merge test branch to main branch. But you will see conflict warning.</p></li>
+</ul>
+</section>
+<section id="resolve-conflict">
+<h2>5.2 Resolve conflict.<a class="headerlink" href="#resolve-conflict" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In your browser, check the conflicts and create a new commit under test branch.</p></li>
+<li><p>Merge again.</p></li>
+<li><p>Check the two branches, you will see the file.txt is the version after you made the new commit to test branch.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Intro to GitHub &amp; GitHub Desktop</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-github-desktop">1. Set up GitHub Desktop</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#get-started-with-github-desktop">2. Get started with GitHub Desktop</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-new-repository-and-publish-it">2.1 Create a new repository and publish it.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-commiting-and-pushing-changes">2.2 Making, commiting, and pushing changes.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fetching-and-pulling-changes-from-remote-repo-to-local-repo">2.3 Fetching, and pulling changes from remote repo to local repo.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#restore-a-previous-version">3. Restore a previous version</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#addressing-conflicts-between-local-and-remote">4. Addressing conflicts between local and remote.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intentionally-create-a-conflict">4.1 Intentionally create a conflict.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolve-the-conflict">4.2 Resolve the conflict.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#addressing-conflicts-between-main-and-other-branch">5. Addressing conflicts between main and other branch</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.1 Intentionally create a conflict.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolve-conflict">5.2 Resolve conflict.</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/bio/lectures/doc/2024/Introduction_to_GitGitHub/github_training_2024-04_hands-on.md">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../../../_sources/bio/lectures/doc/2024/Introduction_to_GitGitHub/github_training_2024-04_hands-on.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Oct 28, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
