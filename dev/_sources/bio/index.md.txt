@@ -24,6 +24,10 @@ Welcome to the users guides designed to enhance your understanding and skills in
   content: "Bioinformaitcs applications deployed on Tufts HPC."
   link: "apps/index.html"
 
-- header: "{fas}`dna;pst-color-primary` 05 Additional resources"
+- header: "{fas}`dna;pst-color-primary` 05 Bioinformatics lectures"
+  content: "Bioinformaitcs applications deployed on Tufts HPC."
+  link: "lectures/index.html"
+
+- header: "{fas}`dna;pst-color-primary` 06 Additional resources"
   content: "Useful resources to learn bioinformatics."
   link: "resources/index.html"

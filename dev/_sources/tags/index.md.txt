@@ -5,7 +5,7 @@ html_theme.sidebar_secondary.remove: true
 ---
 # Tags
 - [academic-programming (1)](/tags/academic-programming.md)
-- [bioinformatics (6)](/tags/bioinformatics.md)
+- [bioinformatics (7)](/tags/bioinformatics.md)
 - [cli (1)](/tags/cli.md)
 - [computational-methods (3)](/tags/computational-methods.md)
 - [data-analysis (1)](/tags/data-analysis.md)
