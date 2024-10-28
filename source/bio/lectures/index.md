@@ -1,8 +1,8 @@
 ---
 tags: bioinformatics
 ---
-# Bioinformatics workshops
-Training workshops on bioinformatics provided by Tufts Research Technology.
+# Bioinformatics lectures
+Hands-on session for bioinformatics guest lectures
 
 ```{gallery-grid}
 :grid-columns: 1
