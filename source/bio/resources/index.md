@@ -23,5 +23,5 @@ Please note that some of the materials could contain outdated information. Alway
   link: "https://best-tufts.github.io/bioinformatics_workshops/"
 
 - header: "{fas}`dna;pst-color-primary` TTS Research Technology Bioinformatics Website"
-  content: "Bioinformatics workshops provided by Bioinformatics Education and Services at Tufts"
+  content: "Official website for bioinformatics resources provided by TTS Research Technology at Tufts"
   link: "https://it.tufts.edu/bioinformatics"
