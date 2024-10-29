@@ -2,32 +2,32 @@
 tags: bioinformatics
 ---
 # Bioinformatics
-Welcome to the users guides designed to enhance your understanding and skills in running bioinformatics analysis on Tufts HPC. 
+Welcome to our comprehensive user guides, thoughtfully designed to support you in enhancing your bioinformatics analysis skills by making the most of the High-Performance Computing (HPC) resources at Tufts.
 
 ```{gallery-grid}
 :grid-columns: 1
 :grid-rows: 16
 
-- header: "{fas}`dna;pst-color-primary` 01 Bioinformatics tutorials"
-  content: "Step-by-step guidance on using computational tools and techniques to analyze biological data using HPC."
+- header: "{fas}`dna;pst-color-primary` 01 Tutorials"
+  content: "Step-by-step guides for utilizing computational tools and techniques to analyze biological data on Tufts HPC."
   link: "tutorials/index.html"
 
-- header: "{fas}`dna;pst-color-primary` 02 Bioinformatics workshops"
-  content: "Training workshops on bioinformatics provided by Tufts Research Technology."
+- header: "{fas}`dna;pst-color-primary` 02 Workshops"
+  content: "Hands-on training workshops offered by TTS Research Technology to build bioinformatics expertise."
   link: "workshops/index.html"
 
 - header: "{fas}`dna;pst-color-primary` 03 Reference databases"
-  content: "A set of centrally-maintained bioinformatics reference databases."
+  content: "Centrally maintained bioinformatics reference databases by TTS Research Technology."
   link: "databases/index.html"
 
-- header: "{fas}`dna;pst-color-primary` 04 Bioinformatics applications"
-  content: "Bioinformaitcs applications deployed on Tufts HPC."
+- header: "{fas}`dna;pst-color-primary` 04 Applications"
+  content: "A curated collection of bioinformatics tools and software available on Tufts HPC for various biological data analysis needs."
   link: "apps/index.html"
 
-- header: "{fas}`dna;pst-color-primary` 05 Bioinformatics lectures"
-  content: "Bioinformaitcs applications deployed on Tufts HPC."
+- header: "{fas}`dna;pst-color-primary` 05 Lectures"
+  content: "Lectures and trainings on key bioinformatics topics offered by TTS Research Technology"
   link: "lectures/index.html"
 
 - header: "{fas}`dna;pst-color-primary` 06 Additional resources"
-  content: "Useful resources to learn bioinformatics."
+  content: "Archived bioinformatics resources containing past guides, tutorials, and materials for reference on key bioinformatics topics and HPC usage at Tufts."
   link: "resources/index.html"
