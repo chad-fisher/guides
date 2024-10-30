@@ -3,7 +3,7 @@ tags: hpc research-storage-cluster data-management computational-methods softwar
 ---
 # High Performance Computing (HPC) Cluster
 
-Welcome to Tufts HPC Cluster documentation! The High-Performance Computing (HPC) Cluster is available to researchers, faculty, students, and staff in need of large-scale computing.
+Welcome to the Tufts HPC Cluster documentation!
 
 The High-Performance Computing (HPC) Cluster is available to researchers, faculty, students, and staff in need of large-scale computing. Tufts Linux HPC Cluster is comprised of over 100 high-powered servers running the RedHat Linux operating system. Nodes are interconnected via a 100Gbps ethernet network.
 
