@@ -24,3 +24,6 @@ Bioinformatics tutorials provided by Tufts Research Technology.
   content: "Introduction to biocontainers and singularity"
   link: "doc/Using_singularity_in_bioinformatics.html"
 
+- header: "{fas}`book;pst-color-primary` Using Python Packages with Jupyter Notebook"
+  content: "Exploring Python Bioiformatics Packages with Jupyter Notebook"
+  link: "doc/Exploring_Python_Bioiformatics_Packages_with_Jupyter_Notebook.html"
