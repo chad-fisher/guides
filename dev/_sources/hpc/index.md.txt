@@ -21,12 +21,12 @@ Please visit [Research Technology (RT) Website HPC page](https://it.tufts.edu/hi
   content: "Brief primer on what HPC is, and the terminology used."
   link: "terminology.html"
 
-- header: "{fas}`book;pst-color-primary` 02 Using the HPC Cluster"
-  content: "How to gain access to Tufts HPC cluster and storage?"
+- header: "{fas}`book;pst-color-primary` 02 Accessing and Using the HPC Cluster"
+  content: "How to gain access to the Tufts HPC cluster and storage, and running your first task on the HPC."
   link: "Access/index.html"
 
 - header: "{fas}`book;pst-color-primary` 03 Computing Resources"
-  content: "Overview of the computing resources available for use."
+  content: "Overview of the computing resources available for use on the HPC, including partitions and CPU/GPU."
   link: "Compute/index.html"
 
 - header: "{fas}`book;pst-color-primary`  04 Slurm Job Scheduler"
@@ -39,4 +39,4 @@ Please visit [Research Technology (RT) Website HPC page](https://it.tufts.edu/hi
 
 ```
 
->  **To Get Support:** - please email tts-research@tufts.edu for all Tufts HPC cluster questions and requests.
+>  **To Get Support:** - Please email tts-research@tufts.edu for all Tufts HPC cluster questions and requests.
