@@ -31,7 +31,7 @@ Please visit [Research Technology (RT) Website HPC page](https://it.tufts.edu/hi
 
 - header: "{fas}`book;pst-color-primary`  04 Slurm Job Scheduler"
   content: "Description of how to use the scheduler to run jobs on the HPC Cluster"
-  link: "slurm/index.html"
+  link: "Slurm/index.html"
 
 - header: "{fas}`book;pst-color-primary` 05 Software Applications"
   content: "Tutorials on getting started using common software applications on the cluster."
