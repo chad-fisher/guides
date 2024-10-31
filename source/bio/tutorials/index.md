@@ -27,3 +27,8 @@ Bioinformatics tutorials provided by Tufts Research Technology.
 - header: "{fas}`book;pst-color-primary` Using Python Packages with Jupyter Notebook"
   content: "Exploring Python Bioiformatics Packages with Jupyter Notebook"
   link: "doc/Exploring_Python_Bioiformatics_Packages_with_Jupyter_Notebook.html"
+
+- header: "{fas}`book;pst-color-primary` scRNA-seq in Python"
+  content: "Set Up Conda Environment and Create Jupyter Kernel for scRNA-seq Analysis"
+  link: "doc/Set_Up_Conda_Environment_and_Create_Jupyter_Kernel_for_scRNA-seq_Analysis.html"
+
