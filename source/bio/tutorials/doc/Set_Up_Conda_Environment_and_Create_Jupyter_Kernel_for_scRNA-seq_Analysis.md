@@ -126,6 +126,8 @@ Executing transaction: ...working... done
    pip install pyscenic
    pip install scvi-tools
    pip install -i https://test.pypi.org/simple/ memento
+   pip install pooch
+   conda install -c conda-forge python-igraph
    
    conda list # check again
    ```
