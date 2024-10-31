@@ -14,7 +14,7 @@ familiarize themselves.
 
 - header: "{fas}`book;pst-color-primary` 02 Cluster Login (CLI) via SSH"
   content: "Login to Tufts HPC Cluster through CLI using SSH"
-  link: "Access/0020_cli.html"
+  link: "0020_cli.html"
 
 - header: "{fas}`book;pst-color-primary` 03 HPC Storage"
   content: "Information on HPC storage available"
@@ -30,7 +30,7 @@ familiarize themselves.
 
 - header: "{fas}`book;pst-color-primary` 06 Modules"
   content: "Explaination of the modules system and how to use it to run software."
-  link: "0050_Modules.html"
+  link: "0050_modules.html"
 
 - header: "{fas}`book;pst-color-primary` 07 Run Hello World example Job"
   content: "Simple tutorial to get you started with your first HPC Job"
