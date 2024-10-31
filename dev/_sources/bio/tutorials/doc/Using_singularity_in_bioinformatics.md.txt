@@ -2,6 +2,10 @@
 Shirley Li, Bioinformatician, TTS Research Technology
 xue.li37@tufts.edu
 
+Date: 2024-11-01
+
+
+
 
 **We recommend you read this paper before delving into the details: [Containerized Bioinformatics Ecosystem for HPC](https://ieeexplore.ieee.org/abstract/document/10027523)**       
 

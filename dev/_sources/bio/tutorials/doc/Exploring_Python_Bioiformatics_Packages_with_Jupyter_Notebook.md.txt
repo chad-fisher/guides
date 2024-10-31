@@ -1,10 +1,9 @@
 # Exploring Python Bioinformatics Packages with Jupyter Notebook
 
+Shirley Li, Bioinformatician, TTS Research Technology
+xue.li37@tufts.edu
 
-
-July 11, 2024
-
-Author: xue.li37@tufts.edu
+Date: 2024-11-01
 
 
 

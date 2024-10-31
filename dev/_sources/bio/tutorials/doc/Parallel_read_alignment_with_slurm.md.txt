@@ -2,6 +2,10 @@
 Shirley Li, Bioinformatician, TTS Research Technology
 xue.li37@tufts.edu
 
+Date: 2024-11-01
+
+
+
 
 This documentation outlines the process for running read alignment in parallel using the SLURM job scheduler. Specifically, it describes how to map and align Illumina reads to a reference genome by leveraging SLURM's job arrays and job submission capabilities. The approach involves using a wrapper script to read sample information from a text file and submit SLURM jobs for each sample.
 
@@ -68,7 +72,7 @@ samtools index ${OUTPUT_DIR}/sample.${READ1}.${READ2}_sorted.bam
 
 echo "Alignment for sample ${SLURM_ARRAY_TASK_ID} completed"
 
-``` 
+```
 
 3. Wrapper Script: submit_jobs.sh
 Create a wrapper script to read the sample list and submit jobs to SLURM.   

@@ -1,6 +1,7 @@
 # Set Up Conda Environment and Create Jupyter Kernel for scRNA-seq Analysis
 
-Author: Shirley Li, xue.li37@tufts.edu
+Shirley Li, Bioinformatician, TTS Research Technology
+xue.li37@tufts.edu
 
 Date: 2024-11-01
 
@@ -125,6 +126,8 @@ Executing transaction: ...working... done
    pip install pyscenic
    pip install scvi-tools
    pip install -i https://test.pypi.org/simple/ memento
+   pip install pooch
+   conda install -c conda-forge python-igraph
    
    conda list # check again
    ```
