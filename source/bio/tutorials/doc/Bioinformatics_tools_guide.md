@@ -3,6 +3,8 @@
 Shirley Li, Bioinformatician, TTS Research Technology
 xue.li37@tufts.edu
 
+Date: 2024-11-01
+
 Warning: This document serves as a guide and is not intended to be the definitive standard for bioinformatics analysis.  
 
 For your specific research needs, always consult the original references and adhere to established best practices. Additionally, ensure you visit the official websites of the tools listed herein to confirm their usage instructions and obtain the most accurate and up-to-date information. 

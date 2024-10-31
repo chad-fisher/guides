@@ -1,6 +1,7 @@
 # Set Up Conda Environment and Create Jupyter Kernel for scRNA-seq Analysis
 
-Author: Shirley Li, xue.li37@tufts.edu
+Shirley Li, Bioinformatician, TTS Research Technology
+xue.li37@tufts.edu
 
 Date: 2024-11-01
 
