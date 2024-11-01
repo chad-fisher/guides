@@ -68,7 +68,7 @@
     <link rel="prev" title="HPC Account Request" href="0010_AccountRequest.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Oct 31, 2024"/>
+    <meta name="docbuild:last-update" content="Nov 01, 2024"/>
   </head>
   
   
@@ -557,28 +557,51 @@ document.write(`
 <h1>Cluster login<a class="headerlink" href="#cluster-login" title="Link to this heading">#</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>VPN - Off-campus access from non-Tufts Network please connect to <a class="reference external" href="https://access.tufts.edu/vpn">Tufts VPN</a></p>
+<p>VPN - For Off-campus access from non-Tufts Networks please connect to <a class="reference external" href="https://access.tufts.edu/vpn">the Tufts VPN</a></p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Requires and active Cluster Account</p>
+<p>Requires an Active Cluster Account, to request an account <a class="reference external" href="https://tuftsrt.github.io/guides/dev/hpc/Access/0010_AccountRequest.html">click here</a>.</p>
 </div>
-<p>There are two main ways to access the HPC cluster to run software.  These are command line access via SSH, and web browser access via the <a class="reference external" href="https://ondemand.pax.tufts.edu">OnDemand Portal</a>.
-We also provide methods to use X Window System (X11) to access a <strong>GUI</strong> running on a cluster node.</p>
+<p>There are two main ways to access the HPC cluster to run software:</p>
+<ol class="arabic simple">
+<li><p>Web browser access via the <a class="reference external" href="https://ondemand.pax.tufts.edu">OnDemand Portal</a></p></li>
+<li><p>Command line access via Secure Shell (SSH)</p></li>
+</ol>
+<section id="new-users">
+<h2>New users<a class="headerlink" href="#new-users" title="Link to this heading">#</a></h2>
+<p>For new users who have not used HPC resources before, we recommend starting with the <strong>OnDemand Portal</strong> via your web browser. OnDemand is useful for running many graphical applications such as MATLAB, Jupyter Notebooks, and uploading downloading small files all within your web browser session. However, more advanced users who require greater control and longer running times for their research tasks are advised to use SSH.</p>
+</section>
+<section id="ondemand-portal">
+<h2>1) OnDemand Portal<a class="headerlink" href="#ondemand-portal" title="Link to this heading">#</a></h2>
+<p>To access the OnDemand Portal, open your web browser. Note that for the best user experience we strongly reccomended Chrome or Firefox. You cannot use the default MacOS browser, Safari.</p>
+<p>Nagivate to the <a class="reference external" href="https://ondemand.pax.tufts.edu">OnDemand Portal</a>. If you are off-campus, please connect to <a class="reference external" href="https://access.tufts.edu/vpn">the Tufts VPN</a>.</p>
+<p>You will see a login screen as below, and you should use your Tufts username and password to login:</p>
+<p><img alt="OnDemand Login Screen" src="https://tufts.box.com/shared/static/kwskz4ybo21sq2agcq4e7khmknc99qa0.jpg" /></p>
+<p>You’ll see the OnDemand logo, along with tabs including:</p>
+<ul class="simple">
+<li><p>Files</p></li>
+<li><p>Jobs</p></li>
+<li><p>Interactive Apps</p></li>
+<li><p>…</p></li>
+</ul>
+<p>You can now use the Tufts HPC cluster on OnDemand.</p>
+</section>
+<section id="ssh">
+<h2>2) SSH<a class="headerlink" href="#ssh" title="Link to this heading">#</a></h2>
+<p>We also provide methods to use X Window System (X11) to access a <strong>Graphical User Interface (GUI)</strong> running on a cluster node. The X11 window system allows us to forward graphics through a Secure Shell (SSH) session.</p>
 <ul>
 <li><p>Recommended SSH Client software</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Cross-Platform: <a class="reference external" href="https://access.tufts.edu/securecrt">SecureCRT</a></p></li>
-<li><p>Native:  Windows 11, Mac and Linux all include a command line SSH clients in the OS.  This <code class="docutils literal notranslate"><span class="pre">scp</span></code> command can be used for quick connections without installing additional software.</p></li>
+<li><p>Native:  Windows 11, Mac and Linux all include a command line SSH clients in the operating system (OS).  Commands such as <code class="docutils literal notranslate"><span class="pre">scp</span></code> can be used for quick connections without installing additional software.</p></li>
 <li><p>Windows: <a class="reference external" href="https://www.putty.org/">PuTTY</a></p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<section id="ssh">
-<h2>SSH<a class="headerlink" href="#ssh" title="Link to this heading">#</a></h2>
-<p>The SSH protocol aka <strong>Secure Shell</strong> a method for secure remote login from one computer to another.</p>
+<p>The SSH protocol aka <strong>Secure Shell</strong> a method for secure remote login from one computer to another. This is predominantly a text-based login method, but graphical forwarding can be enabled via the aforementioned x11.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>SSH login host is <a class="reference external" href="http://login.pax.tufts.edu">login.pax.tufts.edu</a> (formerly <a class="reference external" href="http://login.cluster.tufts.edu">login.cluster.tufts.edu</a>)</p>
@@ -586,13 +609,15 @@ We also provide methods to use X Window System (X11) to access a <strong>GUI</st
 <ul class="simple">
 <li><p>Command for Shell environment (default: bash):</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">ssh</span> <span class="pre">your_utln&#64;login.cluster.tufts.edu</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">ssh</span> <span class="pre">your_utln&#64;login.pax.tufts.edu</span></code></p></li>
 </ul>
 </li>
 <li><p>Explanation of the Command:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">ssh</span></code>: The command to initiate an SSH connection.The SSH protocol aka <strong>Secure Shell</strong> is a method for secure remote login from one computer to another.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">your_utln&#64;login.cluster.tufts.edu</span></code>: Replace your_utln with your actual Tufts username. This is the address of the remote HPC cluster.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">your_utln&#64;login.pax.tufts.edu</span></code>: Replace <code class="docutils literal notranslate"><span class="pre">your_utln</span></code> with your actual Tufts username. This is the address of the remote HPC cluster.</p></li>
+<li><p>You can add the argument <code class="docutils literal notranslate"><span class="pre">-X</span></code> to your ssh command to enable the X11 graphical forwarding in your SSH connection. That looks like this:
+<code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-X</span> <span class="pre">your_utln&#64;login.pax.tufts.edu</span></code></p></li>
 </ul>
 </li>
 <li><p>What Happens After Running the Command for Login:</p>
@@ -669,7 +694,9 @@ We also provide methods to use X Window System (X11) to access a <strong>GUI</st
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh">SSH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-users">New users</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ondemand-portal">1) OnDemand Portal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh">2) SSH</a></li>
 </ul>
   </nav></div>
 
@@ -733,7 +760,7 @@ We also provide methods to use X Window System (X11) to access a <strong>GUI</st
     <div class="footer-items__center">
       
         <div class="footer-item"><p class="last-updated">
-  Last updated on Oct 31, 2024.
+  Last updated on Nov 01, 2024.
   <br/>
 </p></div>
       
