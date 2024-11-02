@@ -32,3 +32,8 @@ Bioinformatics tutorials provided by Tufts Research Technology.
   content: "Set Up Conda Environment and Create Jupyter Kernel for scRNA-seq Analysis"
   link: "doc/Set_Up_Conda_Environment_and_Create_Jupyter_Kernel_for_scRNA-seq_Analysis.html"
 
+
+- header: "{fas}`book;pst-color-primary` scRNA-seq in R"
+  content: "scRNA-seq analysis with RStudio"
+  link: "doc/scRNA-seq_analysis_with_RStudio.html"
+
