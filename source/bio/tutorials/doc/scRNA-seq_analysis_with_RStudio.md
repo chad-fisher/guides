@@ -37,6 +37,7 @@ In this tutorial, you will learn how to:
    # code to install scRNAseq
    # BiocManager::install("scRNAseq")
    library(scRNAseq)
+   library(monocle)
    ```
 
 ## Single-Cell RNA-seq Analysis Packages
@@ -72,6 +73,16 @@ In this tutorial, you will learn how to:
 - **Website**: [https://bioconductor.org/packages/scRNAseq/](https://bioconductor.org/packages/scRNAseq/)
 
 
+
+### Monocle
+
+- **Summary**: `Monocle` is a package designed for analyzing single-cell trajectories. It identifies and orders cells based on gene expression dynamics over pseudotime, which can help reveal cell differentiation and developmental processes.
+
+- **Paper**: Trapnell, C., Cacchiarelli, D., Grimsby, J., Pokharel, P., Li, S., Morse, M., et al. (2014). "The dynamics and regulators of cell fate decisions are revealed by pseudotemporal ordering of single cells." *Nature Biotechnology*, 32(4), 381–386. https://doi.org/10.1038/nbt.2859
+
+- **Website**: http://cole-trapnell-lab.github.io/monocle-release/
+
+  
 
 ## Example Code for Data Loading and Visualization
 
