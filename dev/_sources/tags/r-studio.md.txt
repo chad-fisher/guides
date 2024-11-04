@@ -1,0 +1,7 @@
+---
+orphan:
+nosearch:
+html_theme.sidebar_secondary.remove: true
+---
+# r-studio
+- [](/r/00_Getting_started_with_R.md)
