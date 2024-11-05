@@ -4,11 +4,6 @@ tags: r r-studio
 
 # Introduction to RStudio
 
-https://docs.posit.co/ide/user/ide/get-started/
-
-**put into description of the block
-This tutorial provides an in-depth overview of RStudio, guiding users on how to navigate its interface and effectively utilize the main features. The objective is to help users understand how to start RStudio, navigate different panes, and access essential functionality for coding in R.
-
 ## Learning Objectives
 - Understand the layout and components of the RStudio interface.
 - Learn how to interact with the Console, Source, Environment, and File (Output) panes.
@@ -20,7 +15,7 @@ On your computer, start RStudio by going to the application search (either the W
 
 When you first open RStudio, you will see the **Menu**, the **Console Pane**, the **Environment Pane**, and the **Files (Output) Pane**. To open the **Source Pane**, click on the "+" icon in the top left corner. From the dropdown menu, select **R Script** to create a new script. You should now see the following window structure:
 
-<img src="https://tufts.box.com/shared/static/0ueb0yko0t0hflgulbrogf1nj5zjjwni.png" alt="RStudio Panes" width="80%"/>
+<img src="https://tufts.box.com/shared/static/rgsbzl5cyehstqry47azpv5svebg1wrj.jpg" alt="RStudio Panes" width="80%"/>
 
 ## The Console Pane
 
@@ -173,3 +168,5 @@ The **Menu** in RStudio includes dropdown menus and buttons for file management,
 - **Profile**: Profile code to identify slow functions.
 - **Tools**: Install packages and manage add-ins.
 - **Help**: Access documentation and resources.
+
+  >  **To Get Support:** - Please email tts-research@tufts.edu for questions and requests.
