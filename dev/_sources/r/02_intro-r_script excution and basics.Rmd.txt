@@ -1,9 +1,5 @@
 # Introduction to R: R Basics and Running your Script
 
-
-## text of box
-This tutorial introduces R and demonstrates how to run R code, with practical instructions on setting up the environment, running scripts, and performing basic data manipulations.
-
 ##Learning Objectives
 - Understand how to set up and use RStudio.
 - Learn to execute R scripts and interact with the console.
@@ -17,7 +13,7 @@ R is a statistical platform similar to Stata, SAS, and SPSS. This software allow
 If you see code that looks like this: `code`, this refers to code that you could write in the R console. 
 
 ## Set working directory 
-The first thing we need to do is to set a working directory. Go to **Session in the top menu bar > Set Working Directory > To Source File location**. This is always good practice! 
+The first thing we need to do is to set up a working directory. Go to **Session in the top menu bar > Set Working Directory > To Source File location**. This is always good practice! 
 
 ## Comments
 
@@ -27,7 +23,7 @@ You write a comment by adding a `#` to the start of a line in an R script or the
 To create a variable, use the assignment operator `<-`. For example:
 
 To assign a variable `n` equal to the value two-hundred. 
-If you copy and paste the code to RScript or console pane and the **Run** button or by pressing **Ctrl+Enter**. The variable `n` will appear in the **Environment** tab.
+If you copy and paste the code to RScript or the console pane and the **Run** button or press **Ctrl+Enter**, The variable `n` will appear in the **Environment** tab.
 
 ```{r}
 n <- 200
@@ -36,7 +32,7 @@ n <- 200
 # You can write a comment in an RScript by writing a "#"
 ```
 
-This created a variable `n` which we can access in R. The value appears in the Environment tab, on the upper right-hand side of the window. 
+This created a variable `n`, which we can access in R. The value appears in the Environment tab on the upper right-hand side of the window. 
 
 > **Tip**: If you cannot see the console window, click on "Console" below. The `>` symbol indicates that R is waiting for input.
 
@@ -67,7 +63,7 @@ We see the values are printed. This is called a vector. One can access the value
 ```{r}
 scores[2]
 ```
-> **Note**: R uses one-based indexing.To get the first score, we use '[1]', not '[0]'.
+> **Note**: R uses one-based indexing. To get the first score, we use '[1]', not '[0]'.
 
 ## Operators
 To check if a vector contains an element, we can use the %in% operator.
@@ -94,14 +90,14 @@ sd(scores)      # standard deviation
 
 ## Running from History
 Take a look at the **History** tab on the right next to the Environment tab. 
-This is where you will find commands you have run in the past.If you double click one, it will auto fill in the Console below.
+This is where you will find commands you have run in the past.If you double-click one, it will auto-fill in the Console below.
 
 Select a command from the History tab and double-click on it.
 Then select the console window and press Enter/Return to run the command.
 
 
 ## The Environment
-Now click on the Environment tab. We see two objects, labeled as Values. These include scores and n.
+Now click on the Environment tab. We see two objects labeled as Values. These include scores and n.
 
 If you ever forget objects and do not want to click on the Environment tab, you can always call the function objects() for a list of all object names.
 ```{r}
@@ -121,7 +117,7 @@ scores[3] <- 85
 ## Saving Variables and Creating Tables
 
 Re-calculate stats given our retake and create new values to store them.
-In R you can store almost anything as a variable, and you should take advantage of that. Always save anything that you might need going forward.
+In R, you can store almost anything as a variable, and you should take advantage of that. Always save anything that you might need going forward.
 
 ```{r}
 scores_mean <- mean(scores)
@@ -172,7 +168,7 @@ scores_table <- round(scores_table, 2)
 scores_table
 ```
 
-Also note how on code above, we first rounded every score in scores_table to two decimal places, creating a new table. Then we assigned this table to the variable scores_table, replacing the previous table.
+Also note how, on the code above, we first rounded every score in scores_table to two decimal places, creating a new table. Then we assigned this table to the variable scores_table, replacing the previous table.
 
 
->  **To Get Support:** - Please email tts-research@tufts.edu for all Tufts HPC cluster questions and requests.
+>  **To Get Support:** - Please email tts-research@tufts.edu for questions and requests.
