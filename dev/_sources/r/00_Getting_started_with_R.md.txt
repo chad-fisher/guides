@@ -4,9 +4,6 @@ tags: r r-studio
 
 # Getting started with R for new users
 
-**put into description of the block as an "overview"
-
-Learn about R: guide on how to download and install, and present different environments and methods for running R, including the popular RStudio IDE and the Tufts HPC cluster.
 
 ## Learning Objectives
 
@@ -14,11 +11,11 @@ Learn about R: guide on how to download and install, and present different envir
 - How to set up their environment for using R.
 - Explore different options for executing R code locally in RStudio or in a high-performance computing (HPC) environment. 
 
-*Note: To navigate to a specific section in the below, please click the Table of Contents located in the right panel under the "On this Page".*
+**Note: To navigate to a specific section in the below, please click the Table of Contents located in the right panel under the "On this Page".**
 
 ## What is R?
 
-R is a free and open-source programming language that is particularly well-suited for statistical analysis and data visualization. It is widely used by data scientists, statisticians, and researchers for its powerful data manipulation capabilities and an extensive library of packages. These packages support a broad spectrum of applications, including machine learning, bioinformatics, geospatial analysis, and natural language processing.
+R is a free and open-source programming language that is particularly well-suited for statistical analysis and data visualization. It is widely used by data scientists, statisticians, and researchers for its powerful data manipulation capabilities and extensive library of packages. These packages support a broad spectrum of applications, including machine learning, bioinformatics, geospatial analysis, and natural language processing.
 
 ### Key Features of R:
 - **Statistical Analysis**: Perform complex statistical analyses with ease.
@@ -56,7 +53,7 @@ RStudio is the most popular integrated development environment (IDE) for R. It i
    - Open RStudio after installation and ensure it recognizes your R installation.
 
 ## Running R on Tufts Datalab computer
-R and RStudio have been donwloaded and installed in all computers in the Tufts Data Lab, and you are welcome to use them. 
+R and RStudio have been downloaded and installed on all computers in the Tufts Data Lab, and you are welcome to use them. 
 For more information on hours, services available, and the other software installed on those computers, please see the [Medford Data Lab](https://sites.tufts.edu/datalab/medford-data-lab/) and [Boston Data Lab](https://sites.tufts.edu/datalab/boston-data-lab/).
 
 ## Running R in Linux/MacOS (UNIX)
