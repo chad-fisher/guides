@@ -1,0 +1,1067 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to R: R Basics and Running your Script &#8212; Tufts RT Guides</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=6fd0c29a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'r/02_intro-r_script excution and basics';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://tuftsrt.github.io/guides/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="canonical" href="https://tuftsrt.github.io/guides/r/02_intro-r_script excution and basics.html" />
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Manipulation and Visualization" href="02_r-data-viz-test.html" />
+    <link rel="prev" title="Introduction to R" href="01_intro-r.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 05, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder=""
+         aria-label=""
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Incomplete and under active development. Subject to change without notice.</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/jumbo.png" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../_static/jumbo.png" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">Tufts RT Guides</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../python/index.html">
+    Python
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    R
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../hpc/index.html">
+    HPC
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../cli/index.html">
+    CLI
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../bio/index.html">
+    Bioinformatics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../gis/index.html">
+    GIS
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../nlp/index.html">
+    DH+NLP
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../ds/index.html">
+    DS+Cloud
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+            
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://tuftsrt.github.io/guides/tags/index.html" title="Tags" class="nav-link pst-navbar-icon" rel="noopener" target="_self" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-tags fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Tags</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/tuftsrt/guides" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:tts-research@tufts.edu" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_Getting_started_with_R.html">Getting started with R for new users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_Intro_to_RStudio.html">Introduction to RStudio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_intro-r.html">Introduction to R</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to R: R Basics and Running your Script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_r-data-viz-test.html">Data Manipulation and Visualization</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="03_IntermediateR_2020.html">Survey analysis in R</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_ParallelProcessingR.html">Fast for loops and parallel processing</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">R</a></li>
+    
+    
+    <li class="breadcrumb-item active" aria-current="page">Introduction to R: R...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-r-r-basics-and-running-your-script">
+<h1>Introduction to R: R Basics and Running your Script<a class="headerlink" href="#introduction-to-r-r-basics-and-running-your-script" title="Link to this heading">#</a></h1>
+<section id="text-of-box">
+<h2>text of box<a class="headerlink" href="#text-of-box" title="Link to this heading">#</a></h2>
+<p>This tutorial introduces R and demonstrates how to run R code, with practical instructions on setting up the environment, running scripts, and performing basic data manipulations.</p>
+<p>##Learning Objectives</p>
+<ul class="simple">
+<li><p>Understand how to set up and use RStudio.</p></li>
+<li><p>Learn to execute R scripts and interact with the console.</p></li>
+<li><p>Familiarize with variables, functions, and vectors in R.</p></li>
+<li><p>Perform basic descriptive statistics and work with data structures.</p></li>
+</ul>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<p>R is a statistical platform similar to Stata, SAS, and SPSS. This software allows you to manipulate data, perform descriptive statistics, recoding variables, and bringing in your own data. If you’re reading this, you’ve opened RStudio (the development environment for R) and you’re on the way! We will walk through this document together in the workshop.</p>
+<p>If you see code that looks like this: <code class="docutils literal notranslate"><span class="pre">code</span></code>, this refers to code that you could write in the R console.</p>
+</section>
+<section id="set-working-directory">
+<h2>Set working directory<a class="headerlink" href="#set-working-directory" title="Link to this heading">#</a></h2>
+<p>The first thing we need to do is to set a working directory. Go to <strong>Session in the top menu bar &gt; Set Working Directory &gt; To Source File location</strong>. This is always good practice!</p>
+</section>
+<section id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Link to this heading">#</a></h2>
+<p>You write a comment by adding a <code class="docutils literal notranslate"><span class="pre">#</span></code> to the start of a line in an R script or the code section in R markdown. Or you could select the lines you wish to comment and press <strong>Ctrl/Cmd+Shift+C</strong>. We will not be writing a script, only running one, but the idea is the same. The text in GREEN (if you are using the default theme) is a comment.</p>
+</section>
+<section id="assigning-variables">
+<h2>Assigning Variables<a class="headerlink" href="#assigning-variables" title="Link to this heading">#</a></h2>
+<p>To create a variable, use the assignment operator <code class="docutils literal notranslate"><span class="pre">&lt;-</span></code>. For example:</p>
+<p>To assign a variable <code class="docutils literal notranslate"><span class="pre">n</span></code> equal to the value two-hundred.
+If you copy and paste the code to RScript or console pane and the <strong>Run</strong> button or by pressing <strong>Ctrl+Enter</strong>. The variable <code class="docutils literal notranslate"><span class="pre">n</span></code> will appear in the <strong>Environment</strong> tab.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">200</span>
+<span class="c1"># The variable n is set equal to 200. </span>
+
+<span class="c1"># You can write a comment in an RScript by writing a &quot;#&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This created a variable <code class="docutils literal notranslate"><span class="pre">n</span></code> which we can access in R. The value appears in the Environment tab, on the upper right-hand side of the window.</p>
+<blockquote>
+<div><p><strong>Tip</strong>: If you cannot see the console window, click on “Console” below. The <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> symbol indicates that R is waiting for input.</p>
+</div></blockquote>
+<p>Now if you call n, you will see the console report its value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">200</div></div>
+</div>
+</section>
+<section id="console-window">
+<h2>Console Window<a class="headerlink" href="#console-window" title="Link to this heading">#</a></h2>
+<p>YOUR TURN: Try setting  <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&lt;-</span> <span class="pre">300</span></code> in the Console Window! After you are done, print <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p>If you cannot see the Console Window, click on the word “Console” below.</p>
+<p>Try typing ‘N’ in the Console Window. What happens? The variable ‘N’ is not found, because ‘n’ is the name of the variable, not ‘N’. R is case-sensitive!</p>
+</section>
+<section id="functions-and-vectors">
+<h2>Functions and Vectors<a class="headerlink" href="#functions-and-vectors" title="Link to this heading">#</a></h2>
+<p>What if you have multiple numbers to set as a variable? For example, what if we wanted to store the scores we got on exams? These include 94, 96, 72, and 92.</p>
+<p>We use the combine function, which is ‘c(n, n, n, … n)’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">94</span><span class="p">,</span><span class="w"> </span><span class="m">96</span><span class="p">,</span><span class="w"> </span><span class="m">72</span><span class="p">,</span><span class="w"> </span><span class="m">92</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This assigns our scores to the variable “scores” in the Environment. If we call the variable…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>94</li><li>96</li><li>72</li><li>92</li></ol>
+</div></div>
+</div>
+<p>We see the values are printed. This is called a vector. One can access the values within a vector by using square braces ‘[]’. To get the second score, we use…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span><span class="p">[</span><span class="m">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">96</div></div>
+</div>
+<blockquote>
+<div><p><strong>Note</strong>: R uses one-based <a class="reference external" href="http://indexing.To">indexing.To</a> get the first score, we use ‘[1]’, not ‘[0]’.</p>
+</div></blockquote>
+</section>
+<section id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Link to this heading">#</a></h2>
+<p>To check if a vector contains an element, we can use the %in% operator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">96</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">TRUE</div></div>
+</div>
+<p>It returns TRUE if the vector contains the element…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">100</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">FALSE</div></div>
+</div>
+<p>and FALSE if it does not. TRUE and FALSE are boolean datatypes, also known as logical datatypes in R. These are commonly used to denote binary variables.</p>
+</section>
+<section id="descriptive-statistics">
+<h2>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Link to this heading">#</a></h2>
+<p>The best thing about having multiple values to work with is that we can calculate various statistics. Most statistical functions in R easily take a whole vector as input. Let us see what our final semester score would be!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="w">    </span><span class="c1"># mean</span>
+<span class="nf">median</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="w">  </span><span class="c1"># median</span>
+<span class="nf">sd</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="w">      </span><span class="c1"># standard deviation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">88.5</div><div class="output text_html">93</div><div class="output text_html">11.1205515450749</div></div>
+</div>
+</section>
+<section id="running-from-history">
+<h2>Running from History<a class="headerlink" href="#running-from-history" title="Link to this heading">#</a></h2>
+<p>Take a look at the <strong>History</strong> tab on the right next to the Environment tab.
+This is where you will find commands you have run in the past.If you double click one, it will auto fill in the Console below.</p>
+<p>Select a command from the History tab and double-click on it.
+Then select the console window and press Enter/Return to run the command.</p>
+</section>
+<section id="the-environment">
+<h2>The Environment<a class="headerlink" href="#the-environment" title="Link to this heading">#</a></h2>
+<p>Now click on the Environment tab. We see two objects, labeled as Values. These include scores and n.</p>
+<p>If you ever forget objects and do not want to click on the Environment tab, you can always call the function objects() for a list of all object names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">objects</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'n'</li><li>'scores'</li></ol>
+</div></div>
+</div>
+</section>
+<section id="modifying-a-vector">
+<h2>Modifying a Vector<a class="headerlink" href="#modifying-a-vector" title="Link to this heading">#</a></h2>
+<p>Suddenly, we were able to retake a test. Great!
+Now we have to replace the value of 72 (the lowest score) with our new score of 85. We can assign the new value to the specific index we want to replace.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span><span class="p">[</span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">85</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="saving-variables-and-creating-tables">
+<h2>Saving Variables and Creating Tables<a class="headerlink" href="#saving-variables-and-creating-tables" title="Link to this heading">#</a></h2>
+<p>Re-calculate stats given our retake and create new values to store them.
+In R you can store almost anything as a variable, and you should take advantage of that. Always save anything that you might need going forward.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores_mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="n">scores_median</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">median</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="n">scores_sd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sd</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="c1"># To store the values, remember to assign them to variables.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can create a table with a function called rbind():</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">Mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores_mean</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">Median</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores_median</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">SD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores_sd</span><span class="p">)</span>
+<span class="n">scores_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<tbody>
+	<tr><th scope=row>Mean</th><td>91.750000</td></tr>
+	<tr><th scope=row>Median</th><td>93.000000</td></tr>
+	<tr><th scope=row>SD</th><td> 4.787136</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>When creating the table, we save it as an object (scores_table).
+This allows us to refer back to this table at any point later in the script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">class</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'matrix'</li><li>'array'</li></ol>
+</div></div>
+</div>
+<p>We can see that our scores_table is a matrix. Matrices are the most primitive form of table supported in R. Although matrices support both row and column names, they are not best structure to use for working with tabular data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rownames</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>'Mean'</li><li>'Median'</li><li>'SD'</li></ol>
+</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NULL
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how our column is unnamed. We can easily fix this as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">scores_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Value</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mean</th><td>91.750000</td></tr>
+	<tr><th scope=row>Median</th><td>93.000000</td></tr>
+	<tr><th scope=row>SD</th><td> 4.787136</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>You can round values to the nearest whole number using the round() function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">round</span><span class="p">(</span><span class="n">scores_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Value</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mean</th><td>92</td></tr>
+	<tr><th scope=row>Median</th><td>93</td></tr>
+	<tr><th scope=row>SD</th><td> 5</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>But what if we wanted to keep a certain number of decimal places?
+We can use help() to pull up the function’s documentation and investigate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">help</span><span class="p">(</span><span class="n">round</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Looks like we can specify an additional argument named “digits” to do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">round</span><span class="p">(</span><span class="n">scores_table</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Value</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mean</th><td>91.75</td></tr>
+	<tr><th scope=row>Median</th><td>93.00</td></tr>
+	<tr><th scope=row>SD</th><td> 4.79</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Omitting the name of the argument is allowed and does not change the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">scores_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">scores_table</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="n">scores_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 3 × 1 of type dbl</caption>
+<thead>
+	<tr><th></th><th scope=col>Value</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Mean</th><td>91.75</td></tr>
+	<tr><th scope=row>Median</th><td>93.00</td></tr>
+	<tr><th scope=row>SD</th><td> 4.79</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Also note how on code above, we first rounded every score in scores_table to two decimal places, creating a new table. Then we assigned this table to the variable scores_table, replacing the previous table.</p>
+<blockquote>
+<div><p><strong>To Get Support:</strong> - Please email <a class="reference external" href="mailto:tts-research&#37;&#52;&#48;tufts&#46;edu">tts-research<span>&#64;</span>tufts<span>&#46;</span>edu</a> for all Tufts HPC cluster questions and requests.</p>
+</div></blockquote>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_intro-r.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to R</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_r-data-viz-test.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Manipulation and Visualization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text-of-box">text of box</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-working-directory">Set working directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comments">Comments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-variables">Assigning Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#console-window">Console Window</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-and-vectors">Functions and Vectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-from-history">Running from History</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-environment">The Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-a-vector">Modifying a Vector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-variables-and-creating-tables">Saving Variables and Creating Tables</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/tuftsrt/guides/edit/main/source/r/02_intro-r_script excution and basics.Rmd">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+  Suggest Edits
+
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/r/02_intro-r_script excution and basics.Rmd.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Tufts University.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Nov 05, 2024.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
