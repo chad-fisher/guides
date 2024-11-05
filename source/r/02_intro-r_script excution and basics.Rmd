@@ -1,0 +1,178 @@
+# Introduction to R: R Basics and Running your Script
+
+
+## text of box
+This tutorial introduces R and demonstrates how to run R code, with practical instructions on setting up the environment, running scripts, and performing basic data manipulations.
+
+##Learning Objectives
+- Understand how to set up and use RStudio.
+- Learn to execute R scripts and interact with the console.
+- Familiarize with variables, functions, and vectors in R.
+- Perform basic descriptive statistics and work with data structures.
+
+## Getting Started 
+
+R is a statistical platform similar to Stata, SAS, and SPSS. This software allows you to manipulate data, perform descriptive statistics, recoding variables, and bringing in your own data. If you're reading this, you've opened RStudio (the development environment for R) and you're on the way! We will walk through this document together in the workshop. 
+
+If you see code that looks like this: `code`, this refers to code that you could write in the R console. 
+
+## Set working directory 
+The first thing we need to do is to set a working directory. Go to **Session in the top menu bar > Set Working Directory > To Source File location**. This is always good practice! 
+
+## Comments
+
+You write a comment by adding a `#` to the start of a line in an R script or the code section in R markdown. Or you could select the lines you wish to comment and press **Ctrl/Cmd+Shift+C**. We will not be writing a script, only running one, but the idea is the same. The text in GREEN (if you are using the default theme) is a comment.
+
+## Assigning Variables
+To create a variable, use the assignment operator `<-`. For example:
+
+To assign a variable `n` equal to the value two-hundred. 
+If you copy and paste the code to RScript or console pane and the **Run** button or by pressing **Ctrl+Enter**. The variable `n` will appear in the **Environment** tab.
+
+```{r}
+n <- 200
+# The variable n is set equal to 200. 
+
+# You can write a comment in an RScript by writing a "#"
+```
+
+This created a variable `n` which we can access in R. The value appears in the Environment tab, on the upper right-hand side of the window. 
+
+> **Tip**: If you cannot see the console window, click on "Console" below. The `>` symbol indicates that R is waiting for input.
+
+Now if you call n, you will see the console report its value.
+
+```{r}
+n
+```
+## Console Window
+YOUR TURN: Try setting  `n <- 300` in the Console Window! After you are done, print `n`.
+
+If you cannot see the Console Window, click on the word "Console" below.
+
+Try typing 'N' in the Console Window. What happens? The variable 'N' is not found, because 'n' is the name of the variable, not 'N'. R is case-sensitive!
+
+## Functions and Vectors
+What if you have multiple numbers to set as a variable? For example, what if we wanted to store the scores we got on exams? These include 94, 96, 72, and 92.
+
+We use the combine function, which is 'c(n, n, n, ... n)'
+```{r}
+scores <- c(94, 96, 72, 92)
+```
+This assigns our scores to the variable "scores" in the Environment. If we call the variable...
+```{r}
+scores
+```
+We see the values are printed. This is called a vector. One can access the values within a vector by using square braces '[]'. To get the second score, we use...
+```{r}
+scores[2]
+```
+> **Note**: R uses one-based indexing.To get the first score, we use '[1]', not '[0]'.
+
+## Operators
+To check if a vector contains an element, we can use the %in% operator.
+```{r}
+96 %in% scores
+```
+It returns TRUE if the vector contains the element...
+```{r}
+100 %in% scores
+```
+and FALSE if it does not. TRUE and FALSE are boolean datatypes, also known as logical datatypes in R. These are commonly used to denote binary variables.
+
+
+
+## Descriptive Statistics
+
+The best thing about having multiple values to work with is that we can calculate various statistics. Most statistical functions in R easily take a whole vector as input. Let us see what our final semester score would be!
+```{r}
+mean(scores)    # mean
+median(scores)  # median
+sd(scores)      # standard deviation
+```
+
+
+## Running from History
+Take a look at the **History** tab on the right next to the Environment tab. 
+This is where you will find commands you have run in the past.If you double click one, it will auto fill in the Console below.
+
+Select a command from the History tab and double-click on it.
+Then select the console window and press Enter/Return to run the command.
+
+
+## The Environment
+Now click on the Environment tab. We see two objects, labeled as Values. These include scores and n.
+
+If you ever forget objects and do not want to click on the Environment tab, you can always call the function objects() for a list of all object names.
+```{r}
+objects()
+```
+
+
+## Modifying a Vector
+
+Suddenly, we were able to retake a test. Great!
+Now we have to replace the value of 72 (the lowest score) with our new score of 85. We can assign the new value to the specific index we want to replace.
+```{r}
+scores[3] <- 85
+```
+
+
+## Saving Variables and Creating Tables
+
+Re-calculate stats given our retake and create new values to store them.
+In R you can store almost anything as a variable, and you should take advantage of that. Always save anything that you might need going forward.
+
+```{r}
+scores_mean <- mean(scores)
+scores_median <- median(scores)
+scores_sd <- sd(scores)
+# To store the values, remember to assign them to variables.
+```
+
+Now we can create a table with a function called rbind():
+```{r}
+scores_table <- rbind(Mean = scores_mean,
+                      Median = scores_median,
+                      SD = scores_sd)
+scores_table
+```
+When creating the table, we save it as an object (scores_table).
+This allows us to refer back to this table at any point later in the script.
+```{r}
+class(scores_table)
+```
+We can see that our scores_table is a matrix. Matrices are the most primitive form of table supported in R. Although matrices support both row and column names, they are not best structure to use for working with tabular data.
+
+```{r}
+rownames(scores_table)
+colnames(scores_table)
+```
+Note how our column is unnamed. We can easily fix this as follows.
+```{r}
+colnames(scores_table) <- c("Value")
+scores_table
+```
+You can round values to the nearest whole number using the round() function:
+```{r}
+round(scores_table)
+```
+But what if we wanted to keep a certain number of decimal places?
+We can use help() to pull up the function's documentation and investigate.
+```{r}
+help(round)
+```
+Looks like we can specify an additional argument named "digits" to do this:
+```{r}
+round(scores_table, digits = 2)
+```
+Omitting the name of the argument is allowed and does not change the result.
+```{r}
+scores_table <- round(scores_table, 2)
+scores_table
+```
+
+Also note how on code above, we first rounded every score in scores_table to two decimal places, creating a new table. Then we assigned this table to the variable scores_table, replacing the previous table.
+
+
+>  **To Get Support:** - Please email tts-research@tufts.edu for all Tufts HPC cluster questions and requests.
