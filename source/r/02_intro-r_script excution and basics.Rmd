@@ -1,6 +1,6 @@
 # Introduction to R: R Basics and Running your Script
 
-##Learning Objectives
+## Learning Objectives
 - Understand how to set up and use RStudio.
 - Learn to execute R scripts and interact with the console.
 - Familiarize with variables, functions, and vectors in R.
