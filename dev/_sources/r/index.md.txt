@@ -1,13 +1,26 @@
 ---
 tags: r-rstudio data-management data-analysis visualization statistics
 ---
+R
+====
+Welcome to the Tufts RT Guides R tutorial hub! Explore a variety of tutorials designed to help you start your journey with R. Learn how to utilize different packages and libraries for tasks such as data manipulation, analysis, visualization, and much more.
 
-# R
+```{gallery-grid}
+:grid-columns: 1
+:grid-rows: 15
 
-## What is R?
+- header: "{fab}`r-project;pst-color-primary` 01 Getting started with R"
+  content: "Learn about R: guide on how to download and install, and present different environments and methods for running R, including the popular RStudio IDE and the Tufts HPC cluster."
+  link: "r/00_Getting_started_with_R.html"
 
-R is a free and open-source programming language well-suited for statistical analysis and data visualization. Various community-developed packages support a wide range of data science applications, including but not limited to machine learning, bioinformatics, geospatial analysis, and natural language processing.
+- header: "{fab}`r-project;pst-color-primary` 02 Introduction to RStudio"
+  content: "An overview of RStudio - guiding users on how to navigate its interface and effectively utilize the main features. The objective is to help users understand how to start RStudio, navigate different panes, and access essential functionality for coding in R."
+  link: "r/01_Intro_to_RStudio.html"
 
-## How to install?
+- header: "{fab}`r-project;pst-color-primary` 03 Introduction to R Programming"
+  content: "This is your first tutorial on R Programming - demonstrates how to run R code, with practical instructions on setting up the environment, running scripts, and performing basic data manipulations."
+  link: "r/02_intro-r_script excution and basics.html"
 
-Please follow the [instructions here](https://sites.tufts.edu/datalab/installing-r-and-rstudio/) provided by the Data Lab to download and install R and R studio to your computer.
+
+
+```
