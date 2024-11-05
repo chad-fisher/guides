@@ -5,3 +5,4 @@ html_theme.sidebar_secondary.remove: true
 ---
 # r
 - [](/r/00_Getting_started_with_R.md)
+- [](/r/01_Intro_to_RStudio.md)
