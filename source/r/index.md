@@ -19,7 +19,7 @@ Welcome to the Tufts RT Guides R tutorial hub! Explore a variety of tutorials de
 
 - header: "{fab}`r-project;pst-color-primary` 03 Introduction to R Programming"
   content: "This is your first tutorial on R Programming - demonstrates how to run R code, with practical instructions on setting up the environment, running scripts, and performing basic data manipulations."
-  link: "02_intro-r_script excution and basics.html"
+  link: "02_intro-r_scriptexcutionandbasics.html"
 
 
 
