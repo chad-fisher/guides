@@ -60,4 +60,5 @@ The central processing unit (CPU) of a computer is what manipulates data by perf
 - If you don't have a framework that can utilize multiple GPUs, DO NOT request more than one GPU.
 - The more resources (Memory, CPU cores, GPUs) you request, the longer your job might have to wait in the queue.
 - Cluster VAST storage is fast, but may not be as fast as your local SSD.
+- When you first login to the HPC, you will be on a **login node**, while computation needs to be completed on **compute node**. You know you are on a login node when you see this via the shell: `your_utln@login-prod-01`. See [here](https://tuftsrt.github.io/guides/dev/hpc/Access/0020_cli.html) for details on how to access the HPC and using these nodes.
 
