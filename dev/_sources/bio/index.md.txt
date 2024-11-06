@@ -4,6 +4,9 @@ tags: bioinformatics
 # Bioinformatics
 Welcome to our comprehensive user guides, thoughtfully designed to support you in enhancing your bioinformatics analysis skills by making the most of the High-Performance Computing (HPC) resources at Tufts.
 
+To find out about Bioinformatics Education, Software and Tools you can subscribe to our e-list: best@elist.tufts.edu
+
+
 ```{gallery-grid}
 :grid-columns: 1
 :grid-rows: 16
