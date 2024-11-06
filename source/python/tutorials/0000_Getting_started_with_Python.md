@@ -178,14 +178,4 @@ Best option for data analysis and visualization. Notebooks are ideal for keeping
 | Visualization   | Limited, via external commands (e.g. matplotlib plots in separate windows) | Limited, via external commands | Good, integrated support for visualization libraries | Excellent, inline visualization directly in the notebook |
 | Documentation   | Limited, help commands    | Limited, external documentation | Integrated, documentation and help features | Excellent, can include markdown and rich text alongside code |
 
-For all our Python tutorials, we will use Notebooks to organize the text, code, and results. We use this format as it allows us to step through notes, annotations, and code clearly with results being shown for each cell.
-
-### Workflow for preparing each Python notebook
-1. Open the GitHub link from Uku to find the original Collab notebook.
-2. Go to File > Save to Drive.
-3. Share the Notebook with kyle.m.monahan@gmail.com as Editor.
-4. Add the note for viewers to Save a Copy in Drive (see your notebook that we edited together for the text).
-5. Then copy the Viewer access link to this notebook and add that link to the markdown file that will go on the website: 
-   - This is meant to be a walk-through for you running this code in your own environment. 
-   - If you would like to get started with Python, [click here](#). This is optional as you can use a browser-based environment (below). 
-   - If you want to run the code interactively in a browser-based environment (Google Collab), [click here](#).
+For all our Python tutorials, we will use Notebooks to organize the text, code, and results. We use this format as it allows us to step through notes, annotations, and code clearly with results being shown for each cell. 
