@@ -13,7 +13,7 @@ Content developed by TTS Research Technology
 - [Access to GitHub](https://github.com/)
 
 ## Contents
-- [Hands-on exercise](./github_training_2024-04_hands-on.md)
+- [Hands-on exercise](./github_training_2024-04_hands-on.pdf)
 - Slides for this lecture is [here](./TytellLab_github_training_2024-04.pdf)
 
 
