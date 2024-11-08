@@ -1,8 +1,3 @@
----
-tags: gis geospatial spatial remote-sensing
-html_theme.sidebar_secondary.remove: true
----
-
 # Geospatial & GIS Tutorials 
 ```{gallery-grid}
 :grid-columns: 1
