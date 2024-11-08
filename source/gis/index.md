@@ -4,15 +4,15 @@
 :grid-rows: 15
 - header: "{fas}`globe;pst-color-primary` 01 What is GIS?"
   content: "Learn more about the exciting world of Geographic Information Systems (GIS)"
-  link: "what_is_gis.md"
+  link: "01_what_is_gis.html"
 
 - header: "{fas}`globe;pst-color-primary` 02 Accessing GIS software"
   content: "There are many ways to access GIS software at Tufts. Learn about downloading, connecting remotely, and using these software programs."
-  link: "access_GIS_software.md"
+  link: "02_access_GIS_software.html"
 
 - header: "{fas}`globe;pst-color-primary` 03 Your first tutorial"
   content: "Choose from basic tutorials for ArcGIS Pro and QGIS designed for humanities, urban planning, and conservation students to learn how to make your first map!"
-  link: "basic_tutorials.md"
+  link: "03_basic_tutorials.html"
 
 - header: "{fas}`globe;pst-color-primary` 04 Explore the rest our catalogued geospatial learning resources"
   content: "In this Experience Builder, we’ve collected hundreds of resources, many of which were produced right here at Tufts, on all things ESRI ArcGIS, Open Source GIS, Drones & Remote Sensing, GPS/GNSS, Web Mapping, Design, and accessing GIS Data Sources!"
