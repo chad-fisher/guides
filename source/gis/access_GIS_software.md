@@ -1,5 +1,5 @@
 ---
-tags: GIS geospatial spatial
+tags: gis geospatial spatial
 ---
 
 # How to Access GIS and Geospatial Software
