@@ -1,5 +1,5 @@
 ---
-tags: gis remote-sensing
+tags: gis geospatial spatial remote-sensing
 html_theme.sidebar_secondary.remove: true
 ---
 
