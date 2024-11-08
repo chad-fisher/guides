@@ -1,7 +1,3 @@
----
-tags: gis geospatial spatial
----
-
 # How to Access GIS and Geospatial Software
 
 ## Learning Objectives
