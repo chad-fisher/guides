@@ -1,8 +1,3 @@
----
-tags: gis geospatial spatial
----
-
-
 # What is GIS?
 
 ## Learning Objectives
