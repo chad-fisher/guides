@@ -4,7 +4,9 @@ html_theme.sidebar_secondary.remove: true
 ---
 
 # Geospatial & GIS Tutorials 
-
+```{gallery-grid}
+:grid-columns: 1
+:grid-rows: 15
 - header: "{fab}`r-project;pst-color-primary` 01 What is GIS?"
 content: "Learn more about the exciting world of Geographic Information Systems (GIS)"
 link: “what_is_gis.md“
@@ -20,3 +22,4 @@ link: “basic_tutorials.md“
 - header: "{fab}`r-project;pst-color-primary` 04 Explore the rest our catalogued geospatial learning resources"
 content: "In this Experience Builder, we’ve collected hundreds of resources, many of which were produced right here at Tufts, on all things ESRI ArcGIS, Open Source GIS, Drones & Remote Sensing, GPS/GNSS, Web Mapping, Design, and accessing GIS Data Sources!"
 link: "https://experience.arcgis.com/experience/3564c35584ef40bf9510f2cea3a18983”
+```
