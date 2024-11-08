@@ -1,13 +1,20 @@
----
-tags: gis remote-sensing
-html_theme.sidebar_secondary.remove: true
----
+# Geospatial & GIS
+```{gallery-grid}
+:grid-columns: 1
+:grid-rows: 15
+- header: "{fas}`globe;pst-color-primary` 01 What is GIS?"
+  content: "Learn more about the exciting world of Geographic Information Systems (GIS)"
+  link: "01_what_is_gis.html"
 
-# Geospatial & GIS Tutorials 
+- header: "{fas}`globe;pst-color-primary` 02 Accessing GIS software"
+  content: "There are many ways to access GIS software at Tufts. Learn about downloading, connecting remotely, and using these software programs."
+  link: "02_access_GIS_software.html"
 
-See below for trainings. There are many additional trainings available on the Data Lab website. 
+- header: "{fas}`globe;pst-color-primary` 03 Your first tutorial"
+  content: "Choose from basic tutorials for ArcGIS Pro and QGIS designed for humanities, urban planning, and conservation students to learn how to make your first map!"
+  link: "03_basic_tutorials.html"
 
-<iframe src="https://sites.tufts.edu/gis/learning-gis/online-tips-and-tutorials/" width= 800, height= 1010, style="border: 0px solid #464646;" allowfullscreen="" allow="autoplay" data-external="1"></iframe>
-
-Please see the link below for full screen access:
-https://sites.tufts.edu/gis/learning-gis/online-tips-and-tutorials/
+- header: "{fas}`globe;pst-color-primary` 04 Explore the rest our catalogued geospatial learning resources"
+  content: "In this Experience Builder, we’ve collected hundreds of resources, many of which were produced right here at Tufts, on all things ESRI ArcGIS, Open Source GIS, Drones & Remote Sensing, GPS/GNSS, Web Mapping, Design, and accessing GIS Data Sources!"
+  link: "https://experience.arcgis.com/experience/3564c35584ef40bf9510f2cea3a18983"
+```
