@@ -1,4 +1,4 @@
-# Geospatial & GIS Tutorials 
+# Geospatial & GIS
 ```{gallery-grid}
 :grid-columns: 1
 :grid-rows: 15
