@@ -12,8 +12,7 @@ We will cover both briefly on this page.  Each is also covered extensively in th
 OnDemand is a web portal that provides easy access to the HPC environment using a web browser.  It provides web 
 forms for commonly used applications.
 
-1. Start by going to [**OnDemand**](https://ondemand.pax.tufts.edu), https://ondemand.pax.tufts.edu using **Chrome or 
-FireFox**
+1. Start by going to [**OnDemand**](https://ondemand.pax.tufts.edu), https://ondemand.pax.tufts.edu using **Chrome or FireFox**
 1. Login using your Tufts TTS username (utln) and password
 1. **Interactive Apps** and **Bioinformatics Apps** menus provide a listing of the software available.  
 1. Select the applications of interest and fill in the appropriate values for your job.
@@ -32,8 +31,9 @@ you wrote, or third party software you installed.
 
 1. Login to login.pax.tufts.edu using SSH
 1. Create a batch script file to run using Slurm , for example `nano myFirstJob.sh`
-    ```#!/bin/bash -l
-    #SBATCH -J My_First_Jon   #job name
+    ```
+    #!/bin/bash -l
+    #SBATCH -J My_First_Job     #job name
     #SBATCH --time=00-00:20:00  #requested time (DD-HH:MM:SS)
     #SBATCH -p batch
     #SBATCH -N 1    #1 nodes
@@ -50,8 +50,8 @@ you wrote, or third party software you installed.
     echo "Done"
     ```
 
-1. Submit your job using `sbatch myFirstJob.sb`
-1. View your job in the queue using `squeue --me`
+1. Submit your job using `sbatch myFirstJob.sh`
+1. View your job in the queue using `squeue --Your_Tufts_Username`
 
 For an indepth description of all the Slurm options visit [Slurm Job Scheduler](..
 /slurm/index.md).
