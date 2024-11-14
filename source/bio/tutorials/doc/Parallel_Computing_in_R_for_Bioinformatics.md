@@ -49,10 +49,6 @@ Here, we’ll demonstrate setting up parallel processing using each of these pac
 The `parallel` package is ideal for simple tasks that can be distributed across multiple cores. Here’s an example of using `parLapply` to run a task in parallel.
 
 ```
-r
-
-
-Copy code
 # Load the parallel library
 library(parallel)
 
@@ -71,10 +67,6 @@ stopCluster(cluster)
 For more complex workflows where each iteration can be customized, `foreach` with `doParallel` offers flexibility in combining results and managing multiple loops.
 
 ```
-r
-
-
-Copy code
 # Load necessary libraries
 library(doParallel)
 library(foreach)
@@ -96,10 +88,6 @@ stopImplicitCluster()
 `BiocParallel` is optimized for bioinformatics applications, with backends like `MulticoreParam` for multi-core processing on a single machine.
 
 ```
-r
-
-
-Copy code
 # Load BiocParallel library
 library(BiocParallel)
 
@@ -190,10 +178,12 @@ Before running your parallel job on Open OnDemand RStudio or submitting a SLURM 
      p1cmp019            mix                 batch*              248000              244445              16/56/0/72          
      p1cmp055            mix                 batch*              128000              125440              70/2/0/72           
      d1cmp028            mix                 batch*              510000              506880              88/40/0/128       
+     ...
+     ...
      ```
 
      CPU (A/I/O/T) shows the number of CPU cores that are allocated, idle, other, and total. 
-
+     
      
 
 2. **Setting Up SLURM Headers for Parallel Jobs**:
