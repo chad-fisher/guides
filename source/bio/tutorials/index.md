@@ -37,3 +37,9 @@ Bioinformatics tutorials provided by Tufts Research Technology.
   content: "scRNA-seq analysis with RStudio"
   link: "doc/scRNA-seq_analysis_with_RStudio.html"
 
+
+- header: "{fas}`book;pst-color-primary` Parallel Computing in R for Bioinformatics"
+  content: "Parallel Computing in R for Bioinformatics"
+  link: "doc/Parallel_Computing_in_R_for_Bioinformatics.html" 
+  
+
