@@ -4,7 +4,7 @@
 :grid-rows: 15
 - header: "{fas}`globe;pst-color-primary` 01 What is GIS?"
   content: "Learn more about the exciting world of Geographic Information Systems (GIS)"
-  link: "01_what_is_gis.html"
+  link: "01_what_is_GIS.html"
 
 - header: "{fas}`globe;pst-color-primary` 02 Accessing GIS software"
   content: "There are many ways to access GIS software at Tufts. Learn about downloading, connecting remotely, and using these software programs."
