@@ -11,7 +11,7 @@ To find out about Bioinformatics Education, Software and Tools you can subscribe
 :grid-columns: 1
 :grid-rows: 16
 
-- header: "{fas}`dna;pst-color-primary` 01 Tutorials"
+- header: "{fas}`book;pst-color-primary` 01 Tutorials"
   content: "Step-by-step guides for utilizing computational tools and techniques to analyze biological data on Tufts HPC."
   link: "tutorials/index.html"
 
@@ -27,10 +27,10 @@ To find out about Bioinformatics Education, Software and Tools you can subscribe
   content: "A curated collection of bioinformatics tools and software available on Tufts HPC for various biological data analysis needs."
   link: "apps/index.html"
 
-- header: "{fas}`dna;pst-color-primary` 05 Lectures"
+- header: "{fas}`chalkboard-teacher;pst-color-primary` 05 Lectures"
   content: "Lectures and trainings on key bioinformatics topics offered by TTS Research Technology"
   link: "lectures/index.html"
 
-- header: "{fas}`dna;pst-color-primary` 06 Additional resources"
+- header: "{fas}`external-link-alt;pst-color-primary` 06 Additional resources"
   content: "Archived bioinformatics resources containing past guides, tutorials, and materials for reference on key bioinformatics topics and HPC usage at Tufts."
   link: "resources/index.html"
