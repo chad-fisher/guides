@@ -13,7 +13,7 @@ Welcome! In this collection, you'll discover a variety of resources and tutorial
   content: "Learn more about the programming language Python."
   link: "python/index.html"
 
-- header: "{fab}`r-project;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>R</span>**"
+- header: "{fab}`r-project;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>R & RStudio</span>**"
   content: "Enhance your R skills from data analysis to visualization."
   link: "r/index.html"
 
@@ -35,7 +35,7 @@ Welcome! In this collection, you'll discover a variety of resources and tutorial
   content: "Get started with Geographic Information Systems (GIS), web mapping, cartography, GPS, remote sensing, drones, and ESRI applications." 
   link: "gis/index.html"
 
-- header: "{fas}`book;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>Digital Humanities and NLP</span>**"
+- header: "{fas}`book;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>Digital Humanities & NLP</span>**"
   content: "Dive into computational text analysis and Natural Language Processing."
   link: "nlp/index.html"
 
