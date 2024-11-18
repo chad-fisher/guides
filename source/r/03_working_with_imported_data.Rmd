@@ -1,9 +1,6 @@
 # Working with Imported Data - the Base R
 
-## text of box
-This tutorial will guide you through importing a CSV dataset of Atlantic hurricanes and performing basic data exploration and cleaning.
-
-##Learning Objectives
+## Learning Objectives
 - Set up the working directory and import data into R.
 - Explore and manipulate data frames to extract insights.
 - Perform basic data cleaning, including handling dates and missing values.
@@ -180,3 +177,4 @@ And then we use [] to extract those rows from the data frame.
 hurrdata2 <- hurrdata[sample(nrow(hurrdata), 1000), ]
 ```
 
+>  **To Get Support:** - Please email tts-research@tufts.edu for questions and requests.
