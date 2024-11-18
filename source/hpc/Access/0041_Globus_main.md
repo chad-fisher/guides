@@ -8,8 +8,6 @@
 
 Globus provides a secure, unified interface to your research data. Use Globus to 'fire and forget' high-performance data transfers between systems within and across organizations.
 
-https://docs.globus.org/guides/tutorials/manage-files/transfer-files/
-
 ## Key Concept: *endpoint*
 
 An endpoint is a server that hosts collections. If you want to be able to access, share, transfer, or manage data using Globus, the first  step is to create an endpoint on the system where the data is (or will be) stored.
@@ -44,3 +42,4 @@ An endpoint is a server that hosts collections. If you want to be able to access
 
 ```
 
+[Learn More](https://docs.globus.org/guides/tutorials/manage-files/transfer-files/)
