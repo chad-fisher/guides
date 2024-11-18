@@ -18,6 +18,7 @@ An endpoint is a server that hosts collections. If you want to be able to access
 
 ### Globus File Transfer Prerequisites
 > Gloubs Account(s)
+
 > Two Endpoints
 
 
