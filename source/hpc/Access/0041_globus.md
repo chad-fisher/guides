@@ -1,8 +1,6 @@
 # Date Transfer with Globus
 
-
-
-> This step-by-step guide will show you how to log into Globus and use it to transfer files reliably and securely. You will become familiar with basic Globus concepts and interfaces, and begin to experience how Globus can help you spend more time on your research and less time on data management.
+This step-by-step guide will show you how to log into Globus and use it to transfer files reliably and securely. You will become familiar with basic Globus concepts and interfaces, and begin to experience how Globus can help you spend more time on your research and less time on data management.
 
 ## What is Globus?
 
