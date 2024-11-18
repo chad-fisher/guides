@@ -25,4 +25,8 @@ Welcome to the Tufts RT Guides R tutorial hub! Explore a variety of tutorials de
   content: "This tutorial will guide you through importing a CSV dataset of Atlantic hurricanes and performing basic data exploration and cleaning."
   link: "03_working_with_imported_data.html"
 
+- header: "{fab}`r-project;pst-color-primary` 05 Working with Imported Data - the Tidyverse in R"
+  content: "This tutorial explores the Tidyverse, a collection of R packages that simplify data analysis. You will learn to enhance data workflows using streamlined functions for importing, cleaning, and summarizing data."
+  link: "04_working_with_imported_data_tidyverse.html"
+
 ```
