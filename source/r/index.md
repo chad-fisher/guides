@@ -21,6 +21,8 @@ Welcome to the Tufts RT Guides R tutorial hub! Explore a variety of tutorials de
   content: "This is your first tutorial on R Programming - demonstrates how to run R code, with practical instructions on setting up the environment, running scripts, and performing basic data manipulations."
   link: "02_intro-r_script%20excution%20and%20basics.html"
 
-
+- header: "{fab}`r-project;pst-color-primary` 04 Working with Imported Data - the Base R"
+  content: "This tutorial will guide you through importing a CSV dataset of Atlantic hurricanes and performing basic data exploration and cleaning."
+  link: "03_working_with_imported_data.html"
 
 ```
