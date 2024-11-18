@@ -16,13 +16,9 @@ An endpoint is a server that hosts collections. If you want to be able to access
 
 [Globus Connect](https://www.globus.org/globus-connect) is used to create endpoints. An endpoint can be a laptop, a personal desktop system, a laboratory server, a campus data storage service, a cloud service, or an HPC cluster. As explained below, it’s easy to set up your own Globus endpoint on a laptop or other personal system using  Globus Connect Personal. Administrators of shared services (like campus  storage servers) can set up multi-user endpoints using Globus Connect Server. You can use endpoints set up by others as long as you’re  authorized by the endpoint administrator or by a collection manager.
 
-
-
-### File Transfer Requirements
-
-- Gloubs Account(s)
-- Two Endpoints
-
+### Globus File Transfer Prerequisites
+> Gloubs Account(s)
+> Two Endpoints
 
 
 ```{gallery-grid}
@@ -30,46 +26,20 @@ An endpoint is a server that hosts collections. If you want to be able to access
 :grid-rows: 16
 
 - header: "{fas}`book;pst-color-primary`  Gloubs Account Setup"
-  content: "Create an account to access Tufts HPC Cluster"
+  content: "Tufts has a subscription to Globus, and you can set up a Globus account with your Tufts credentials. You can also link other accounts, either personal or through other institutions. Link Tufts Account"
   link: "0042_Gloubs_account_setup.html"
 
 - header: "{fas}`book;pst-color-primary`  Tufts Globus Collections"
-  content: "Login to Tufts HPC Cluster through CLI using SSH"
+  content: "Collections create by Tufts Research Technology, allows you to share and transfer files to and from your storage on Tufts HPC Cluster and Sharepoint."
   link: "0043_Globus_tufts_collection.html"
 
 - header: "{fas}`book;pst-color-primary`  Local Endpoint - Globus Connect Personal"
-  content: "Information on HPC storage available"
+  content: "Create a private collection on your own computer. Globus Connect Personal allows you to share and transfer files to and from your Mac/Linux/Windows laptop or desktop computer."
   link: "0044_Globus_connect_personal.html"
 
 - header: "{fas}`book;pst-color-primary`  Transfer Files between Two Endpoints"
-  content: "How to transfer files or data to the HPC Cluster."
+  content: "How to start and monitory your file transfers."
   link: "0045_Globus_transfer.html"
 
 ```
-
-
-
-
-
-## Gloubs Account Setup
-
-Tufts has a subscription to Globus, and you can set up a Globus account with your Tufts credentials. 
-
-You can also link other accounts, either personal or through other institutions.
-
-Link Tufts Account
-
-
-
-### Tufts Globus Collections
-
-Collections create by Tufts Research Technology, allows you to share and transfer files to and from your storage on Tufts HPC Cluster and Sharepoint.
-
-### Local Endpoint - Globus Connect Personal
-
-Create a private collection on your own computer. Globus Connect Personal allows you to share and transfer files to and from your Mac/Linux/Windows laptop or desktop computer.
-
-### Transfer Files between Two Endpoints
-
-How to start and monitory your file transfers.
 
