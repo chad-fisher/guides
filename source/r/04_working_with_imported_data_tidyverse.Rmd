@@ -1,12 +1,10 @@
 # Working with Imported Data - using Tidyverse in R
 
-## text box
-This tutorial explores the Tidyverse, a collection of R packages that simplify data analysis. You will learn to enhance data workflows using streamlined functions for importing, cleaning and summarizing data."
 
 ## Learning Objectives
-Learn the benefits of using Tidyverse for efficient data handling.
-Master tools for data import, cleaning, and analysis using Tidyverse packages.
-Apply the pipe operator to build streamlined data analysis pipelines.
+- Learn the benefits of using the Tidyverse package for efficient data handling.
+- Learn tools for data import, cleaning, and analysis using Tidyverse packages.
+- Apply the pipe operator to build streamlined data analysis pipelines.
 
 ## Base R and the Tidyverse 
 
@@ -138,3 +136,4 @@ print(hurrdata5)
 ```
 The pipe operator %>% from the magrittr library is often used to combine several functions into a data analysis pipeline. The pipeline above finds the maximum value of the maximum_wind column for each unique hurricane name and year combination. The pipe operator takes whatever is passed to it and feeds it into the next function as the first argument. Tidyverse functions are built to work with the pipe operator but other functions might not be.
 
+>  **To Get Support:** - Please email tts-research@tufts.edu for questions and requests.
