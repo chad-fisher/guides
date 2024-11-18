@@ -1,0 +1,182 @@
+# Working with Imported Data - the Base R
+
+## text of box
+This tutorial will guide you through importing a CSV dataset of Atlantic hurricanes and performing basic data exploration and cleaning.
+
+##Learning Objectives
+- Set up the working directory and import data into R.
+- Explore and manipulate data frames to extract insights.
+- Perform basic data cleaning, including handling dates and missing values.
+
+Now you have mastered the basics of R. But we really want to learn how to import data! So let us do that.
+
+We have a CSV file of the Atlantic Hurricane Database (HURDAT2) 1851-2022. The data is released by the National Hurricane Center (NHC) at NOAA. Use this link to download: https://tufts.box.com/shared/static/gdqc9tdv7334622tkco37oyg9t2fyeaf.csv
+
+But how do we import this data so we can use it in R?
+
+
+## Working Directory
+
+All relative file paths in R are relative to the current working directory, which might or might not be the location of the R script, depending on how RStudio was originally launched. If RStudio was launched by double-clicking on the R script or by right-clicking on the R script and then selecting Open With > RStudio, the default working directory will be the location of the R script. Otherwise the default working directory will either be your Documents directory (Windows) or your home directory (macOS and Linux).
+
+We can use getwd() and dir() to explore the current working directory.
+```{r}
+getwd()     # The current location of the working directory.
+dir()       # The files in the working directory.
+```
+
+You can use the %in% operator to ensure that your working directory contains data file (atlantic.csv).
+```{r}
+"atlantic.csv" %in% dir()
+```
+If the statement above returns TRUE, you are all set. But if it returns FALSE, you need to change your working directory. 
+Go to the top menu bar:   Session > Set Working Directory > To Source File Location.
+
+We can ensure the working directory is set correctly by either re-running the commands from above or clicking on the Files tab in the lower-right panel and then selecting More > Go To Working Directory and exploring the results.
+
+## Importing Data
+
+The atlantic.csv data file is in comma-separated values (CSV) format. (Note that the specifics of this format are outlined in standard RFC 4180.) This is a very common data format and you can easily import it in R as follows.
+```{r}
+hurrdata <- read.csv("atlantic.csv")
+```
+The read.csv() function has numerous additional optional arguments that we can use to specify how exactly a data file should be read in and interpreted.
+
+To investigate those, we can use the help() function or the ? operator.
+```{r}
+?read.csv
+```
+Note that CSV files are different from Excel spreadsheets (XLS or XLSX files) and R does not contain the functionality to import the latter by default. An external community-developed package must be used to import Excel files. Installing and loading external packages is discussed later in this script.
+
+## Exploring Data
+
+We see that a new variable "hurrdata" has been added to the environment.
+```{r}
+head(hurrdata)
+```
+This shows us a preview of the fist couple rows of the file.
+You can also click on the data table under Environment > Data.
+
+We can use summary() to get descriptive statistics.
+```{r}
+summary(hurrdata)
+```
+
+We might wonder - what type of data is hurrdata?
+We imported it from csv, but how is it stored?
+```{r}
+class(hurrdata)
+```
+We can see that it is a "data.frame", commonly referred to as a data frame.
+A data frame is a table where you have observations as rows and variables as columns. Data frames have some great features for working with data and are the go-to for R data storage. You can think of them almost as spreadsheets.
+
+## Working with Data Frames
+
+Let us say we want to access the maximum wind speed of the sixth observation.
+We can do this in multiple ways.
+Knowing that "Maximum.Wind" is the ninth column:
+```{r}
+hurrdata[[6, 9]]    # [[row, column]]
+hurrdata[[9]][6]    # [[column]][row]
+```
+NOTE: When using a data frame, we must use [[]] to access variable values.
+[] will just give us a subset of the data frame, not the values themselves.
+
+Alternatively, we could use the column name:
+```{r}
+hurrdata[["Maximum.Wind"]][6]
+hurrdata$Maximum.Wind[6]
+```
+Note the dollar sign ($). This is a special operator that allows us to access data.frame variables (columns) based on their name.
+
+The "$" operator is the preferred way of accessing data.frame variables based on their name, as it removes the complexity of when to use [[]] vs [] and does not require quotation marks ... given your column names do not contain spaces.
+
+Note how the read.csv() function automatically replaced spaces with periods in the column names to accommodate this. Underscores are also an acceptable alternative to spaces and other functions might use those instead of periods.
+
+## Selecting Data Based on Conditions
+
+Note how the summary() function from before did not provide much information on the columns containing textual (character/string) data. These columns can be analyzed further using the table() function. Can you guess what it does?
+```{r echo = T, results = 'hide'}
+table(hurrdata$Name)
+```
+It creates a frequency table of all the unique values in the column!
+But what if we wanted to analyze hurricanes only with a specific name?
+
+We can select rows based on a condition by combining logical operators with [] to subset all the rows where the logical operator returns TRUE. For example, all the hurricanes named Nicole can be extracted as follows.
+```{r echo = T, results = 'hide'}
+hurrdata[hurrdata$Name == "NICOLE", ]
+```
+
+Note that we leave the column index blank to select all the columns.
+
+Alternatively, we could extract values from one column based on the values of another column. For example, the maximum wind speed for all the hurricanes named Nicole could be obtained as follows.
+```{r}
+max(hurrdata$Maximum.Wind[hurrdata$Name == "NICOLE"])
+```
+
+
+## Data Cleaning: Dates & Strings
+Let us say we want to analyze maximum wind speed by year.
+Note how the date is stored as a number in YYYYMMDD format.
+This notation is great for sorting but very inconvenient for analysis.
+
+We can use the "$" operator to easily extract the Data column as follows.
+```{r echo = T, results = 'hide'}
+hurrdata$Date
+```
+Passing this column to the as.character() function will convert all the numbers into text (character data). Note the quotes around the new values.
+```{r echo = T, results = 'hide'}
+as.character(hurrdata$Date)
+```
+Let us store these new character (string) representations of the dates in a new variable and use the substr() function to extract the year and the month.
+```{r}
+date_strings <- as.character(hurrdata$Date)
+```
+Extract the year from the date string (position 1-4).
+```{r}
+hurrdata$Year <- substr(date_strings, start = 1, stop = 4)
+```
+Extract the month from the date string (position 5-6).
+```{r}
+hurrdata$Month <- substr(date_strings, 5, 6)
+```
+Convert both new variables to numeric to accommodate further analysis.
+```{r}
+hurrdata$Month <- as.numeric(hurrdata$Month)
+hurrdata$Year <- as.numeric(hurrdata$Year)
+```
+Note that this is a somewhat hack-y way of dealing with dates. It is suitable for simple conversions like this, but it is highly encouraged to use external packages specifically designed to work with dates for more complex tasks.
+
+
+## Data Cleaning: Missing Data
+
+Why are some wind speeds negative? If we looked into the metadata, we would find that we should have removed these! We can check on the negative data:
+```{r}
+min(hurrdata$Maximum.Wind)
+```
+We can combine [] with logical operators like before to find all the values less than zero (< 0) and replace them with "NA", which means "No Data" in R.
+```{r}
+hurrdata$Maximum.Wind[hurrdata$Maximum.Wind < 0] <- NA
+```
+We could also delete the whole observation, but this is bad practice!
+Let's check on the results. It should print "NA".
+```{r}
+min(hurrdata$Maximum.Wind)
+```
+To get the minimum wind speed excluding the NA values, we must call the min() function with na.rm = TRUE to instruct the function to ignore the NA values.
+```{r}
+min(hurrdata$Maximum.Wind, na.rm = TRUE)
+```
+
+
+## Sampling the Data
+
+We can also sample the data.frame to de-clutter the scatter plot. This is a two-step process in base R. First we use the sample() function to randomly select a desired quantity of row indexes/numbers for our data frame.
+```{r}
+sample(nrow(hurrdata), 1000)
+```
+And then we use [] to extract those rows from the data frame.
+```{r}
+hurrdata2 <- hurrdata[sample(nrow(hurrdata), 1000), ]
+```
+
