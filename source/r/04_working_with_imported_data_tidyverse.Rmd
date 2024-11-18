@@ -1,0 +1,140 @@
+# Working with Imported Data - using Tidyverse in R
+
+## text box
+This tutorial explores the Tidyverse, a collection of R packages that simplify data analysis. You will learn to enhance data workflows using streamlined functions for importing, cleaning and summarizing data."
+
+## Learning Objectives
+Learn the benefits of using Tidyverse for efficient data handling.
+Master tools for data import, cleaning, and analysis using Tidyverse packages.
+Apply the pipe operator to build streamlined data analysis pipelines.
+
+## Base R and the Tidyverse 
+
+Thus far we have been working with what is called base R, that is R without any community-developed packages installed. Base R has a lot of built-in functionality and can easily do most things, but you may have noticed how some of the code has been a little clunky. Community-developed packages often provide alternative functions that produce the same result using less or more streamlined code and add new functions that do things base R simply cannot.
+
+The most popular collection of R packages is called the Tidyverse, which is specifically designed for data science and often preferred by professionals. Tidyverse is a collection of several different packages, the following of which could be used to recreate our previous analysis using less code.
+
+'readr' is a package used for reading and writing tabular data
+'lubridate' is a package specifically designed to work with times and dates
+'dplyr' is a package that allows for easy modification of data frames
+'ggplot2' is a streamlined and user-friendly data visualization package
+
+
+
+## Checking Installed Packages 
+Depending on what system you are running this script on, you might already have tidyverse installed. This can be easily verified using the Packages tab to the right. Click on the Packages tab to view a list of installed packages. There is also a search bar that allows you to search for a specific package. Try searching for tidyverse to check whether you have it installed or not.
+
+Alternatively we could use the installed.packages() function to see which packages are installed on our system. That function outputs a list of all installed packages. Using the %in% operator from before, we can check whether tidyverse appears in the list of installed packages or not.
+
+```{r}
+"tidyverse" %in% installed.packages()
+```
+This will return TRUE if you have tidyverse installed and FALSE if you do not.
+
+
+
+## Installing Packages
+
+We can install new packages using the install.packages() function. However, this function does not check if a package is already installed and will overwrite and re-install the specified package if it is already installed.
+
+Hence you should only use install.packages() to install packages you do not already have installed or to update previously installed packages if needed.
+
+The code block below first checks whether the tidyverse is installed or not.
+If it is installed, a message stating so is displayed. Otherwise the function
+install.packages() is called to install all of the packages in the tidyverse.
+Note that the installation process could take several minutes to complete.
+
+```{r}
+if ("tidyverse" %in% installed.packages()) {
+  message("Tidyverse already installed!")
+} else {
+  install.packages("tidyverse")
+}
+```
+You only need to install packages on your machine once. The next time you use R on your computer, all of the tidyverse packages will already be installed.
+
+You can also install packages via the Packages tab by clicking "Install".
+
+
+## Calling a Library
+
+Before we can use a package, we need to add it to our library. This can be done using the library() command. Using the tidyverse meta-package, we can easily add all of the tidyverse packages into our library at once.
+
+```{r}
+library(tidyverse)
+```
+Note how multiple different packages were attached to our library. Also note the reported conflicts. This means that some of the packages currently loaded into R have functions that share the same name. One of those functions masks the other one and gets called by default. To ensure a specific function from a specific package gets called, use the package::function() notation.
+
+If you received an error stating that there is no package called "tidyverse",please follow the instructions in the previous section to install the package.
+
+You can also include a package in your library by checking the box next to the corresponding package in the Packages tab.
+
+
+
+## ADVANCED: Package Management Using Librarian 
+
+Keeping track of which packages you have installed could be quite tiresome and continuously re-installing packages is a waste of time. Luckily there are some R packages that make package management in R significantly easier.
+
+One of those packages is librarian. The shelf() command from the librarian package ensures that the package you want is loaded into your library and also installed if needed. This allows you to easily run the same script on different machines without having to worry about installing packages.But be warned that librarian does not display conflict warnings! Hence it is recommended to use the package::function() syntax when using librarian.
+
+Let us install librarian if it is not present and then use it to both install and load a package called janitor that is useful for data cleaning.
+
+```{r}
+if (! "librarian" %in% installed.packages()) {
+  install.packages("librarian")
+}
+```
+
+```{r}
+librarian::shelf(janitor)
+```
+
+## Rewriting the Analysis using Tidyverse
+
+Now let us recreate our previous analysis using packages from the Tidyverse!
+First we use read_csv() from the readr package to import the CSV data file.
+```{r}
+hurrdata3 <- readr::read_csv("atlantic.csv")
+```
+The readr::read_csv() function is much faster than read.csv() from base R but it does not reformat the column names. Luckily we can use the clean_names() function from the janitor package to convert the column names to snake_case.
+```{r}
+hurrdata3 <- janitor::clean_names(hurrdata3)
+```
+The date column can be converted to a date format using lubridate functions.
+```{r}
+lubridate::ymd(hurrdata3$date)
+```
+Combining this with mutate() from dplyr allows for easy overwriting.
+```{r}
+hurrdata3 <- dplyr::mutate(hurrdata3, date = lubridate::ymd(date))
+```
+Now we can combine the mutate() function from dplyr with the lubridate year() and month() functions to easily create new columns for the year and month.
+```{r}
+hurrdata3 <- dplyr::mutate(hurrdata3,
+                           year = lubridate::year(date),
+                           month = lubridate::month(date))
+```
+Dplyr can also easily convert values to NA and sample rows from a table.
+```{r}
+hurrdata3 <- dplyr::mutate(hurrdata3,
+                           maximum_wind = dplyr::na_if(maximum_wind, -99))
+
+hurrdata4 <- dplyr::sample_n(hurrdata3, 1000)
+```
+
+
+## Piping and Grouping
+
+Was it correct of us to sample the data given our hypothesis?
+A closer look at it reveals that the data contains several entries for each hurricane at different points of intensity. Hence our approach was wrong.
+
+To see how the maximum wind speed of hurricanes has changed over time, we should be looking at the maximum wind speed of each hurricane at its highest point of intensity. We can use functions from dplyr to extract those.
+```{r}
+hurrdata5 <- hurrdata3 %>%
+  dplyr::group_by(name, year) %>%
+  dplyr::summarize(maximum_wind = max(maximum_wind),
+                   .groups = "drop")
+print(hurrdata5)
+```
+The pipe operator %>% from the magrittr library is often used to combine several functions into a data analysis pipeline. The pipeline above finds the maximum value of the maximum_wind column for each unique hurricane name and year combination. The pipe operator takes whatever is passed to it and feeds it into the next function as the first argument. Tidyverse functions are built to work with the pipe operator but other functions might not be.
+
