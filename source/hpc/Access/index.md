@@ -26,11 +26,11 @@ familiarize themselves.
 
 - header: "{fas}`book;pst-color-primary` 05 Running your software"
   content: "Explaination of how to run software on the HPC cluster using OnDemand or Slurm."
-  link: "0045_brief_slurm.html"
+  link: "0050_brief_slurm.html"
 
 - header: "{fas}`book;pst-color-primary` 06 Modules"
   content: "Explaination of the modules system and how to use it to run software."
-  link: "0050_modules.html"
+  link: "0060_modules.html"
 
 - header: "{fas}`book;pst-color-primary` 07 Run Hello World example Job"
   content: "Simple tutorial to get you started with your first HPC Job"
