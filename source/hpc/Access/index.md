@@ -24,9 +24,9 @@ familiarize themselves.
   content: "How to transfer files or data to the HPC Cluster."
   link: "0040_xfer.html"
 
-- header: "{fas}`book;pst-color-primary` 04.1 File Transfers with Globus"
+- header: "{fas}`book;pst-color-primary` File Transfers with Globus"
   content: "How to transfer files or data using Globus Connect."
-  link: "0041_Globus_main.html"
+  link: "Globus/index.html"
 
 - header: "{fas}`book;pst-color-primary` 05 Running your software"
   content: "Explaination of how to run software on the HPC cluster using OnDemand or Slurm."
