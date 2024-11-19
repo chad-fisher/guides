@@ -26,19 +26,19 @@ An endpoint is a server that hosts collections. If you want to be able to access
 
 - header: "{fas}`book;pst-color-primary`  Globus Account Setup"
   content: "Tufts has a subscription to Globus, and you can set up a Globus account with your Tufts credentials. You can also link other accounts, either personal or through other institutions. Link Tufts Account"
-  link: "Globus/0042_Globus_account_setup.html"
+  link: "0042_Globus_account_setup.html"
 
 - header: "{fas}`book;pst-color-primary`  Tufts Globus Collections"
   content: "Collections create by Tufts Research Technology, allows you to share and transfer files to and from your storage on Tufts HPC Cluster and Sharepoint."
-  link: "Globus/0043_Globus_tufts_collections.html"
+  link: "0043_Globus_tufts_collections.html"
 
 - header: "{fas}`book;pst-color-primary`  Local Endpoint - Globus Connect Personal"
   content: "Create a private collection on your own computer. Globus Connect Personal allows you to share and transfer files to and from your Mac/Linux/Windows laptop or desktop computer."
-  link: "Globus/0044_Globus_connect_personal.html"
+  link: "0044_Globus_connect_personal.html"
 
 - header: "{fas}`book;pst-color-primary`  Transfer Files between Two Endpoints"
   content: "How to start and monitory your file transfers."
-  link: "Globus/0045_Globus_transfer_files.html"
+  link: "0045_Globus_transfer_files.html"
 
 ```
 
