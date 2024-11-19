@@ -32,6 +32,7 @@ subtrees:
             - file: hpc/Access/index.md
               title: Using the HPC Cluster
               subtrees:
+              :maxdepth: 1
                 - hidden: True
                   entries:
                     - glob: hpc/Access/*
