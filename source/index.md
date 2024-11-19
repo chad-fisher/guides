@@ -17,7 +17,7 @@ Welcome! In this collection, you'll discover a variety of resources and tutorial
   content: "Enhance your R skills from data analysis to visualization."
   link: "r/index.html"
 
-- header: "{fas}`terminal;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>Additional Statistical Software</span>**"
+- header: "{fas}`terminal;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#d09042'>More Statistical Software</span>**"
   content: "Learn the fundamentals of terminal, shell, and Command Prompt to streamline your workflows and automate tasks."
   link: "cli/index.html"
 
