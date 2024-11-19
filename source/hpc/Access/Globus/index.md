@@ -12,7 +12,7 @@ Globus provides a secure, unified interface to your research data. Use Globus to
 
 An endpoint is a server that hosts collections. If you want to be able to access, share, transfer, or manage data using Globus, the first  step is to create an endpoint on the system where the data is (or will be) stored.
 
-[Globus Connect](https://www.globus.org/globus-connect) is used to create endpoints. An endpoint can be a laptop, a personal desktop system, a laboratory server, a campus data storage service, a cloud service, or an HPC cluster. As explained below, it’s easy to set up your own Globus endpoint on a laptop or other personal system using  Globus Connect Personal. Administrators of shared services (like campus  storage servers) can set up multi-user endpoints using Globus Connect Server. You can use endpoints set up by others as long as you’re  authorized by the endpoint administrator or by a collection manager.
+[Globus Connect](https://www.globus.org/globus-connect) is used to create endpoints. An endpoint can be a laptop, a personal desktop system, a laboratory server, a campus data storage service, a cloud service, or an HPC cluster. As explained below, it’s easy to set up your own Globus endpoint on a laptop or other personal system using  Globus Connect Personal. Administrators of shared services (like campus  storage servers) can set up multi-user endpoints using Globus Connect Server. You can use endpoints set up by others as long as you’re  authorized by the endpoint administrator or by a collection manager. 
 
 ### Globus File Transfer Prerequisites
 > Globus Account(s)
