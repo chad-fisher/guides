@@ -35,12 +35,6 @@ subtrees:
                 - hidden: True
                   entries:
                     - glob: hpc/Access/*
-                    - file: hpc/Access/Globus/index.md
-                      title: Globus
-                      subtrees:
-                        - hidden: True
-                        entries:
-                        - glob: hpc/Access/Globus/*
             - file: hpc/Compute/index.md
               title: Computing Resources
               subtrees:
