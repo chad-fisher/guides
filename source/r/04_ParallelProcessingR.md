@@ -4,7 +4,7 @@
 
 **Author:** 
 
-Kyle Monahan 
+Kyle Monahan, Manager, Data Science Services, TTS Research Technology
 
 Shirley Li, Bioinformatician, TTS Research Technology (xue.li37@tufts.edu)
 
