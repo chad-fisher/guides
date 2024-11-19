@@ -9,21 +9,21 @@ Welcome! In this collection, you'll discover a variety of resources and tutorial
 ```{gallery-grid}
 :grid-columns: 1 1 2 3
 
-- header: "{fab}`python;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>Python</span>**"
+- header: "{fab}`python;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#d09042'>Python</span>**"
   content: "Learn more about the programming language Python."
   link: "python/index.html"
 
-- header: "{fab}`r-project;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>R & RStudio</span>**"
+- header: "{fab}`r-project;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#d09042'>R & RStudio</span>**"
   content: "Enhance your R skills from data analysis to visualization."
   link: "r/index.html"
+
+- header: "{fas}`terminal;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>Additional Statistical Software</span>**"
+  content: "Learn the fundamentals of terminal, shell, and Command Prompt to streamline your workflows and automate tasks."
+  link: "cli/index.html"
 
 - header: "{fas}`server;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>High-Performance Computing</span>**"
   content: "Learn the basics of using Tufts HPC Cluster, from compute cores to GPUs."
   link: "hpc/index.html"
-
-- header: "{fas}`terminal;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>Command Line Interfaces</span>**"
-  content: "Learn the fundamentals of terminal, shell, and Command Prompt to streamline your workflows and automate tasks."
-  link: "cli/index.html"
 
 
 - header: "{fas}`dna;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>Bioinformatics</span>**"
