@@ -32,14 +32,15 @@ subtrees:
             - file: hpc/Access/index.md
               title: Using the HPC Cluster
               subtrees:
-              :maxdepth: 1
                 - hidden: True
                   entries:
                     - glob: hpc/Access/*
-                    subtrees:
-                      - hidden: True
-                      entries:
-                      - glob: hpc/Access/Globus/*
+                    - file: hpc/Access/Gloubs/index.md
+                      title: Globus
+                      subtrees:
+                        - hidden: True
+                        entries:
+                        - glob: hpc/Access/Globus/*
             - file: hpc/Compute/index.md
               title: Computing Resources
               subtrees:
