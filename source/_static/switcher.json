@@ -1,0 +1,11 @@
+[
+    {
+        "version": "pub",
+        "url": "/",
+        "preferred": true
+    },
+    {
+        "version": "dev",
+        "url": "/dev/"
+    }
+]
