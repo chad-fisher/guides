@@ -35,7 +35,7 @@ subtrees:
                 - hidden: True
                   entries:
                     - glob: hpc/Access/*
-                    - file: hpc/Access/Gloubs/index.md
+                    - file: hpc/Access/Globus/index.md
                       title: Globus
                       subtrees:
                         - hidden: True
