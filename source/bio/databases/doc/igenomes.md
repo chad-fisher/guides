@@ -1,7 +1,7 @@
 ## iGenomes
 To make the use of reference genomes easier, Illumina has developed a centralized resource called iGenomes. The most commonly used reference genome files are organized in a consistent structure for multiple genomes. 
 
-We have downloaded a copy of iGenomes onto our clusters.
+We have downloaded a copy of iGenomes onto our cluster in `/cluster/tufts/biocontainers/datasets/igenomes`. 
 
 Below is the list of model organisms in iGenomes:
 

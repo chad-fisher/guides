@@ -25,21 +25,5 @@ Tufts Research Technology provides a set of centrally-maintained scientific refe
   link: "doc/metaphlan.html"
 
 - header: "{fas}`dna;pst-color-primary` NCBI nr"
-  content: "NCBI nonredundant comprehensive protein database for blast"
-  link: "doc/nr.html"
-
-- header: "{fas}`dna;pst-color-primary` NCBI nt"
-  content: "NCBI nonredundant comprehensive nucleotide database for blast"
-  link: "doc/nt.html"
-
-- header: "{fas}`dna;pst-color-primary` NCBI refseq_protein"
-  content: "NCBI protein reference sequences"
-  link: "doc/refseq_protein.html"
-
-- header: "{fas}`dna;pst-color-primary` NCBI refseq_rna"
-  content: "NCBI transcript  reference sequences"
-  link: "doc/refseq_rna.html"
-
-- header: "{fas}`dna;pst-color-primary` swissprot"
-  content: "Swiss-Prot sequence database"
-  link: "doc/swissprot.html"
+  content: "NCBI blast databases"
+  link: "doc/ncbi.html"
