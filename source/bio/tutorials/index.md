@@ -42,4 +42,7 @@ Bioinformatics tutorials provided by Tufts Research Technology.
   content: "Parallel Computing in R for Bioinformatics"
   link: "doc/Parallel_Computing_in_R_for_Bioinformatics.html" 
   
-
+- header: "{fas}`book;pst-color-primary` Package installation using container-mod"
+  content: "Creating modulefile for containers"
+  link: "doc/container-mod.html" 
+  
