@@ -66,3 +66,4 @@ module load use.own
 module load pytorch/2.5.1-cuda12.1-cudnn9-runtime-jupyter
 ```
 #### Use pytorch in Jupyter notebook
+![Jupyter kernel](images/jupyter_kernel.png)
