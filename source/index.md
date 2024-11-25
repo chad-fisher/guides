@@ -18,7 +18,7 @@ Welcome! In this collection, you'll discover a variety of resources and tutorial
   link: "r/index.html"
 
 - header: "{fas}`diagram-project;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#d09042'>More Statistical Software</span>**"
-  content: "Learn the fundamentals of terminal, shell, and Command Prompt to streamline your workflows and automate tasks."
+  content: "Dive into statistical software tutorials and guides for Stata, SAS, SPSS, MATLAB, Excel, and more."
   link: "cli/index.html"
 
 - header: "{fas}`server;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>High-Performance Computing</span>**"
