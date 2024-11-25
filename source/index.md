@@ -49,9 +49,6 @@ Welcome! In this collection, you'll discover a variety of resources and tutorial
 ```
 
 
-<img src="https://tufts.box.com/shared/static/2z09fuil5ub4o7rhp62m2yqk1s8nh948.png" alt="Photo of students at computers in the Data Lab." width="98%" class="center"/>
-
-
 ## Key Links
 :::{admonition} Check out these other resources and links below!
 :class: tip  
