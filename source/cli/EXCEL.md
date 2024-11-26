@@ -3,7 +3,7 @@ tags: excel
 ---
 
 
-# 📊 Mastering Excel: External Resources 
+# 📊 Learning Excel: External Resources 
 
 Unlock the full potential of Excel with these curated resources. Whether you're a beginner or a seasoned data analyst, these guides, tutorials, and tools are here to help you take your Excel skills to the next level. 
 
