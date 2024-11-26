@@ -4,7 +4,9 @@ html_theme.sidebar_secondary.remove: False
 
 # TTS Research Technology Guides
 
-Welcome! In this collection, you'll discover a variety of resources and tutorials to enable research. Whether you're a beginner or seeking to deepen your skills, all materials are asynchronous, allowing you to learn  at your own pace.
+Welcome! In this collection, you'll discover a variety of resources and tutorials to enable research and learning.
+
+Whether you're a beginner or seeking to deepen your skills, all materials are asynchronous, allowing you to learn  at your own pace.
 
 ```{gallery-grid}
 :grid-columns: 1 1 2 3
@@ -18,7 +20,7 @@ Welcome! In this collection, you'll discover a variety of resources and tutorial
   link: "r/index.html"
 
 - header: "{fas}`diagram-project;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#d09042'>More Statistical Software</span>**"
-  content: "Dive into statistical software tutorials and guides for Stata, SAS, SPSS, MATLAB, Excel, and more."
+  content: "Dive into statistical software guides for Stata, SAS, SPSS, MATLAB, Excel, and more."
   link: "cli/index.html"
 
 - header: "{fas}`server;pst-color-text-muted` **<span style='font-size: 0.98em ; color:#4295D0'>High-Performance Computing</span>**"
@@ -48,9 +50,8 @@ Welcome! In this collection, you'll discover a variety of resources and tutorial
   link: "tags/index.html"
 ```
 
-
 ## Key Links
-:::{admonition} Check out these other resources and links below!
+:::{admonition} Check out these other resources and links below.
 :class: tip  
 
 👉 [Data Lab](https://sites.tufts.edu/datalab/)  
