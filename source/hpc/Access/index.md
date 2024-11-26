@@ -24,19 +24,19 @@ familiarize themselves.
   content: "How to transfer files or data to the HPC Cluster."
   link: "0040_xfer.html"
 
-- header: "{fas}`book;pst-color-primary` File Transfers with Globus"
+- header: "{fas}`book;pst-color-primary` 05 File Transfers with Globus"
   content: "How to transfer files or data using Globus Connect."
   link: "Globus/index.html"
 
-- header: "{fas}`book;pst-color-primary` 05 Running your software"
+- header: "{fas}`book;pst-color-primary` 06 Running your software"
   content: "Explaination of how to run software on the HPC cluster using OnDemand or Slurm."
   link: "0050_brief_slurm.html"
 
-- header: "{fas}`book;pst-color-primary` 06 Modules"
+- header: "{fas}`book;pst-color-primary` 07 Modules"
   content: "Explaination of the modules system and how to use it to run software."
   link: "0060_modules.html"
 
-- header: "{fas}`book;pst-color-primary` 07 Run Hello World example Job"
+- header: "{fas}`book;pst-color-primary` 08 Run Hello World example Job"
   content: "Simple tutorial to get you started with your first HPC Job"
   link: "../examples/helloworld.html"
 
