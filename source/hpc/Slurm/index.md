@@ -28,7 +28,7 @@ Command Quick Reference
 
 - header: "{fas}`book;pst-color-primary` 03 Partitions"
   content: "How to select where your jobs and the resources available to them."
-  link: "monitor.html"
+  link: "partition.html"
 
 - header: "{fas}`book;pst-color-primary` 04 Job Monitoring and Management Commands"
   content: "How to monitor and manage your active jobs"

@@ -47,11 +47,11 @@ subtrees:
                 - hidden: True
                   entries:
                   - glob: hpc/Compute/*
-            - file: hpc/slurm/index.md
+            - file: hpc/Slurm/index.md
               subtrees:
                 - hidden: True
                   entries:
-                  - glob: hpc/slurm/*
+                  - glob: hpc/Slurm/*
             - file: hpc/Application/index.md
               subtrees:
                 - hidden: True
