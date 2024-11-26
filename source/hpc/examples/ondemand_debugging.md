@@ -25,7 +25,7 @@ If you went through all above steps and still can't access `https://ondemand.pax
 #### Quota Issue:
 
 1. If you are receiving errors regarding your home directory storage `/cluster/home/your_username` out of storage space (quota exceeded), when starting an application. 
-2. You can login to the cluster using "HPC Shell Access" or from a terminal app. Use "hpctools" to check details of your home directory storage usage.
+2. You can login to the cluster using "HPC Shell Access" or from a terminal app. Use [hpctools](hpctools.md) to check details of your home directory storage usage.
 3. Clean up your home directory `/cluster/home/your_username`  and make sure it's under the 30GB home directory storage limit. (DO NOT delete EVERYTHING in your home directory, especially the hidden files)
 4. Once your home directory is cleaned up, try launching the OnDemand Application again.
 
