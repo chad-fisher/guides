@@ -13,7 +13,7 @@ Dive into these highly recommended links for learning and mastering Excel
 :::{admonition} **Explore these Excel Resources!**
 :class: tip  
 
-✧ [Excel Video Training by Microsoft Support](https://support.microsoft.com/en-us/officeexcel-video-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb)  
+✧ [Excel Video Training by Microsoft Support](https://support.microsoft.com/en-us/office/excel-video-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb)  
    A series of official video tutorials from Microsoft, ranging from entry-level to advanced Excel skills, complete with templates and other resources. 
 
 ✧ [Excel courses at Udemy](https://www.udemy.com/courses/search/?src=ukw&q=excel)  
