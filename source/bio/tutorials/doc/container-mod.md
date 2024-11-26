@@ -50,6 +50,18 @@ container-mod -h
 ```
 container-mod pipe -p docker://quay.io/biocontainers/vcftools:0.1.16--h9a82719_5
 ```
+
+```
+Generating executable for vcftools
++-------------------------------------------------+
+| To use this module, load the following modules: |
+|                                                 |
+|     module load use.own                         |
+|     module load vcftools/0.1.16                 |
+|                                                 |
++-------------------------------------------------+
+```
+
 #### Use vcftools
 ```
 module load use.own
@@ -60,6 +72,21 @@ module load vcftools/0.1.16
 ```
 container-mod pipe -p -j docker://tuftsttsrt/pytorch:2.5.1-cuda12.1-cudnn9-runtime-jupyter
 ```
+
+```
++---------------------------------------------------------------+
+| To use this module, load the following modules:               |
+|                                                               |
+|     module load use.own                                       |
+|     module load pytorch/2.5.1-cuda12.1-cudnn9-runtime-jupyter |
+|                                                               |
++---------------------------------------------------------------+
+Generating Jupyter kernel for pytorch version 2.5.1-cuda12.1-cudnn9-runtime-jupyter
+Jupyter kernel created: pytorch-2.5.1-cuda12.1-cudnn9-runtime-jupyter
+You can now launch Jupyter Notebook and select the kernel 'pytorch 2.5.1-cuda12.1-cudnn9-runtime-jupyter'
+If you'd like to edit the kernel, you can find it at: /cluster/home/tutln02/.local/share/jupyter/kernels/pytorch-2.5.1-cuda12.1-cudnn9-runtime-jupyter
+```
+
 #### Use pytorch in a jobscript
 ```
 module load use.own

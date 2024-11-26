@@ -16,7 +16,7 @@ Tufts Research Technology provides a set of centrally-maintained scientific refe
   content: "Reference database for biobakery workflows"
   link: "doc/biobakery.html"
 
-- header: "{fas}`dna;pst-color-primary` igenomes"
+- header: "{fas}`dna;pst-color-primary` iGenomes"
   content: "Ready-to-use reference sequences and annotations from Illumina"
   link: "doc/igenomes.html"
 
@@ -24,6 +24,6 @@ Tufts Research Technology provides a set of centrally-maintained scientific refe
   content: "Metaphlan database files"
   link: "doc/metaphlan.html"
 
-- header: "{fas}`dna;pst-color-primary` NCBI nr"
+- header: "{fas}`dna;pst-color-primary` NCBI Blast"
   content: "NCBI blast databases"
   link: "doc/ncbi.html"
