@@ -9,7 +9,7 @@ The High-Performance Computing (HPC) Cluster is available to researchers, facult
 
 Tufts HPC is located in the Massachusetts Green High Performance Compute Center. The MGHPCC is an intercollegiate high-performance computing facility whose computing and storage resources serve a user community of more than 20,000 faculty and student researchers and educators, supported by on-campus research teams. 
 
-
+## For more information:
 Please visit [Research Technology (RT) Website HPC page](https://it.tufts.edu/high-performance-computing) and [RT Announcements](https://it.tufts.edu/research-technology/announcements) for **important** policy updates.
 
 
