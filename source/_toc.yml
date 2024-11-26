@@ -30,7 +30,7 @@ subtrees:
             - file: hpc/terminology.md
               title: What is HPC
             - file: hpc/Access/index.md
-              title: Using the HPC Cluster
+              title: Accesssing and Using the HPC Cluster
               subtrees:
                 - hidden: True
                   entries:
@@ -48,25 +48,27 @@ subtrees:
                   entries:
                   - glob: hpc/Compute/*
             - file: hpc/Slurm/index.md
+              title: Slurm Job Scheduler
               subtrees:
                 - hidden: True
                   entries:
                   - glob: hpc/Slurm/*
             - file: hpc/Application/index.md
+              title: Software Applications
               subtrees:
                 - hidden: True
                   entries:
                   - glob: hpc/Application/*
             - file: hpc/examples/index.md
-              title: Examples and Tutorials
+              title: HPC Examples and Tutorials
               subtrees:
                 - hidden: True
                   entries:
                   - glob: hpc/examples/*
             - file: hpc/policy.md
-              title: Policy
+              title: HPC Policy
             - file: hpc/help.md
-              title: Help
+              title: HPC Help
 
   - caption: Command Line Interfaces 
     entries:
