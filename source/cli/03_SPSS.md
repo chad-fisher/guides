@@ -4,10 +4,10 @@ tags: SPSS statistics
 
 # Learning SPSS
 
-Unlock the full potential of SPSS with these curated resources. Whether you're new to SPSS or looking to sharpen your expertise, these guides, tutorials, and tools will help enhance your data analysis skills.
+SPSS is a statistical analysis and visualization software developed by IBM. Unlock the full potential of SPSS with these curated resources. Whether you're new to SPSS or looking to sharpen your expertise, these guides, tutorials, and tools will help enhance your data analysis skills.
 
 ## External Resources
-Dive into these highly recommended links for learning and mastering SPSS.
+Dive into these highly recommended links for learning and mastering SPSS:
 
 :::{admonition} **Explore these SPSS Resources!**
 :class: tip  
