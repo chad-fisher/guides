@@ -15,7 +15,7 @@ On your computer, start RStudio by going to the application search (either the W
 
 When you first open RStudio, you will see the **Menu**, the **Console Pane**, the **Environment Pane**, and the **Files (Output) Pane**. To open the **Source Pane**, click on the "+" icon in the top left corner. From the dropdown menu, select **R Script** to create a new script. You should now see the following window structure:
 
-<img src="https://tufts.box.com/shared/static/9x0qbdtd5gnj0illwo6bhaq5drmlzvha.png" alt="RStudio Panes" width="80%"/>
+<img src="https://tufts.box.com/shared/static/7llw2lj2qu2hzk9fxn0ti8uxum6ipkvs.pdf" alt="RStudio Panes" width="100%"/>
 
 ## The Console Pane
 
@@ -27,7 +27,7 @@ The Console Pane is the interface to R. If you opened R directly instead of open
 
 in the command line and press **Enter**. You should see the command you typed, the result of the command, and a new command line.
 
-<img src="https://tufts.box.com/shared/static/g8n8s0xw45k4vp6a4oejm4lg478m57tz.png" alt="console_commandline" width="70%"/>
+<img src="https://tufts.box.com/shared/static/ylhcq5dqxbnpyys987zha9rnja3s6lap.jpg" alt="console_commandline" width="100%"/>
 
 To clear the console, press **Ctrl+L**.
 
