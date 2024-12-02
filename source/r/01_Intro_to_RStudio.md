@@ -15,7 +15,7 @@ On your computer, start RStudio by going to the application search (either the W
 
 When you first open RStudio, you will see the **Menu**, the **Console Pane**, the **Environment Pane**, and the **Files (Output) Pane**. To open the **Source Pane**, click on the "+" icon in the top left corner. From the dropdown menu, select **R Script** to create a new script. You should now see the following window structure:
 
-<img src="https://tufts.box.com/shared/static/gkkd0ljdm693g0oqj8ianz7p5ozrde7x.jpg" alt="rstudio_pane" width="80%"/>
+<img src="https://tufts.box.com/shared/static/gkkd0ljdm693g0oqj8ianz7p5ozrde7x.jpg" alt="rstudio_pane" width="90%"/>
 
 
 ## The Console Pane
@@ -59,7 +59,7 @@ The Environment Pane includes an **Environment** tab and a **History** tab. If y
 
 The **Environment** tab displays any objects that you have created during your R session. For example, in the Example code section, we created three variables: `x`, `y`, and `z`. 
 
-<img src="https://tufts.box.com/shared/static/8ww7mnvobq3koaj2o00abb6w63ujcfpt.png" alt="environment" width="70%"/>
+<img src="https://tufts.box.com/shared/static/8ww7mnvobq3koaj2o00abb6w63ujcfpt.png" alt="environment" width="80%"/>
 
 R stored these variables as objects, and you can see them in the Environment tab. To see a list of all objects in the current session, type:
 
@@ -126,7 +126,7 @@ library(moments)
 Once a package is installed, you do not need to reinstall the package again unless you install a new version of R. If you want to use a package, you have to load it every time you start a new RStudio session. 
 The Packages tab should now show the Moments package. Packages that are loaded in the current R session have a checkmark next to their name. 
 
-<img src="https://tufts.box.com/shared/static/jx2igc0vihlq3l7z25x76ma7jcpv1n28.png" alt="package" width="50%"/>
+<img src="https://tufts.box.com/shared/static/jx2igc0vihlq3l7z25x76ma7jcpv1n28.png" alt="package" width="90%"/>
 
 ### The Help Tab
 
@@ -141,14 +141,14 @@ or:
 ```
 ?mean
 ```
-<img src="https://tufts.box.com/shared/static/t7dcju4iud2op3xw2yyt3225akfya2r3.png" alt="help_function" width="50%"/>
+<img src="https://tufts.box.com/shared/static/t7dcju4iud2op3xw2yyt3225akfya2r3.png" alt="help_function" width="90%"/>
 
 An R documentation file includes:
 - **Header**: Function name, package name, title, and description.
 - **Usage**: Function syntax and required arguments.
 - **Arguments**: Descriptions of function parameters.
 - **Examples**: Sample code demonstrating the function's use.
-<img src="https://tufts.box.com/shared/static/m4tke1dpmxv3d9wsp6n1xx1eyyqqvut1.png" alt="function_doc" width="50%"/>
+<img src="https://tufts.box.com/shared/static/m4tke1dpmxv3d9wsp6n1xx1eyyqqvut1.png" alt="function_doc" width="90%"/>
 
 ### The Viewer Tab
 
