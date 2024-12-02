@@ -15,7 +15,7 @@ On your computer, start RStudio by going to the application search (either the W
 
 When you first open RStudio, you will see the **Menu**, the **Console Pane**, the **Environment Pane**, and the **Files (Output) Pane**. To open the **Source Pane**, click on the "+" icon in the top left corner. From the dropdown menu, select **R Script** to create a new script. You should now see the following window structure:
 
-<img src="https://tufts.box.com/shared/static/gkkd0ljdm693g0oqj8ianz7p5ozrde7x.jpg" alt="console_commandline" width="90%"/>
+<img src="https://tufts.box.com/shared/static/gkkd0ljdm693g0oqj8ianz7p5ozrde7x.jpg" alt="rstudio_pane" width="80%"/>
 
 
 ## The Console Pane
@@ -28,7 +28,7 @@ The Console Pane is the interface to R. If you opened R directly instead of open
 
 in the command line and press **Enter**. You should see the command you typed, the result of the command, and a new command line.
 
-<img src="https://tufts.box.com/shared/static/ylhcq5dqxbnpyys987zha9rnja3s6lap.jpg" alt="console_commandline" width="90%"/>
+<img src="https://tufts.box.com/shared/static/tbbdkd9r5t8u9dg6cpm94lwk9q1265y5.jpg" alt="console_commandline" width="80%"/>
 
 To clear the console, press **Ctrl+L**.
 
@@ -41,7 +41,7 @@ The Source Pane is a text editor where you can type your code before running it.
 Any text shown in green is a comment in the script. You write a comment by adding a `#` at the beginning of a line. Anything to the right of a `#` is considered a comment and is ignored by R when running code. Any text in black or blue is the actual code. Place your cursor anywhere on the first few lines of code and click **Run**. You can also run code by pressing **Ctrl+Enter**.
 
 
-<img src="https://tufts.box.com/shared/static/9wh3ntg37i6eyb4kv5ugan177ozordb6.png" alt="Memory-Storage" width="60%"/>
+<img src="https://tufts.box.com/shared/static/w6sp4ljkgh7kol5tfw7f73hetkccwjy1.png" alt="run_script" width="80%"/>
 
 R will run the line where your cursor is placed. If it is a comment, R will ignore it and run the next line. R will skip all comments until it finds a line of code. 
 
@@ -49,7 +49,7 @@ R will run the line where your cursor is placed. If it is a comment, R will igno
 
 Code sections allow you to break a script into distinct regions. To create a new code section, include at least four dashes, equal signs, or pound signs (`-`, `=`, or `#`) at the end of a comment. You can easily hide and show code sections by clicking the arrow next to the code section line.
 
-<img src="https://tufts.box.com/shared/static/huhaapsm1krz7tim2abmebvte87g1ybe.png" alt="code_section" width="60%"/>
+<img src="https://tufts.box.com/shared/static/9454v9h3xworh6cxx9jeu7oevqdlbejv.png" alt="code_section" width="80%"/>
 
 ## The Environment Pane
 
@@ -59,7 +59,7 @@ The Environment Pane includes an **Environment** tab and a **History** tab. If y
 
 The **Environment** tab displays any objects that you have created during your R session. For example, in the Example code section, we created three variables: `x`, `y`, and `z`. 
 
-<img src="https://tufts.box.com/shared/static/szt6wrzltatcut5ctx11z2ab7x0jeb15.png" alt="Memory-Storage" width="50%"/>
+<img src="https://tufts.box.com/shared/static/8ww7mnvobq3koaj2o00abb6w63ujcfpt.png" alt="environment" width="70%"/>
 
 R stored these variables as objects, and you can see them in the Environment tab. To see a list of all objects in the current session, type:
 
@@ -124,9 +124,9 @@ library(moments)
 ```
 
 Once a package is installed, you do not need to reinstall the package again unless you install a new version of R. If you want to use a package, you have to load it every time you start a new RStudio session. 
-The Packages tab should now show the moments package. Packages that are loaded in the current R session have a check mark next to their name. 
+The Packages tab should now show the Moments package. Packages that are loaded in the current R session have a checkmark next to their name. 
 
-<img src="https://tufts.box.com/shared/static/32m7iyv5hpd53njjnnbl7byafi1ujjkm.png" alt="Memory-Storage" width="50%"/>
+<img src="https://tufts.box.com/shared/static/jx2igc0vihlq3l7z25x76ma7jcpv1n28.png" alt="package" width="50%"/>
 
 ### The Help Tab
 
@@ -141,14 +141,14 @@ or:
 ```
 ?mean
 ```
-<img src="https://tufts.box.com/shared/static/gbwrdt8xzi3w8rdnwh63eksm46c86ps4.png" alt="Memory-Storage" width="50%"/>
+<img src="https://tufts.box.com/shared/static/t7dcju4iud2op3xw2yyt3225akfya2r3.png" alt="help_function" width="50%"/>
 
 An R documentation file includes:
 - **Header**: Function name, package name, title, and description.
 - **Usage**: Function syntax and required arguments.
 - **Arguments**: Descriptions of function parameters.
 - **Examples**: Sample code demonstrating the function's use.
-<img src="https://tufts.box.com/shared/static/43qomrwbnfof0avj3x5vbtqz3o0qwtkw.png" alt="Memory-Storage" width="50%"/>
+<img src="https://tufts.box.com/shared/static/m4tke1dpmxv3d9wsp6n1xx1eyyqqvut1.png" alt="function_doc" width="50%"/>
 
 ### The Viewer Tab
 
