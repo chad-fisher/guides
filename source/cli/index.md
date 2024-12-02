@@ -9,20 +9,21 @@ Discover tutorials and guidance on essential statistical software to enhance you
 
 ```{gallery-grid}
 :grid-columns: 1
-:class-card: "downstream-project-links"
+:grid-rows: 5
 
-- title: EXCEL
-  link: EXCEL.html
+- header: "{fas}`diagram-project;pst-color-primary` **EXCEL**"
+  link: "01_EXCEL.html"
 
-- title: {fas}`diagram-project;pst-color-primary` **SAS**
-  link: tutorials/0001_intro_python.html
+- header: "{fas}`diagram-project;pst-color-primary` **SAS**"
+  link: "02_SAS.html"
 
-- title: {fas}`diagram-project;pst-color-primary` **SPSS**
-  link: tutorials/0002_intro_numpy.html
+- header: "{fas}`diagram-project;pst-color-primary` **SPSS**"
+  link: "tutorials/0002_intro_numpy.html"
 
-- title: {fas}`diagram-project;pst-color-primary` **STATA**
+- header: "{fas}`diagram-project;pst-color-primary` **STATA**"
   link: "tutorials/0003_python-data-analysis.html"
 
 
 ```
+
 
