@@ -9,6 +9,7 @@ Discover tutorials and guidance on essential statistical software to enhance you
 
 ```{gallery-grid}
 :grid-columns: 1
+:class-card: "downstream-project-links"
 
 - header: "{fas}`diagram-project;pst-color-primary` **EXCEL**"
   link: "EXCEL.html"
