@@ -15,7 +15,7 @@ On your computer, start RStudio by going to the application search (either the W
 
 When you first open RStudio, you will see the **Menu**, the **Console Pane**, the **Environment Pane**, and the **Files (Output) Pane**. To open the **Source Pane**, click on the "+" icon in the top left corner. From the dropdown menu, select **R Script** to create a new script. You should now see the following window structure:
 
-<img src="https://tufts.box.com/shared/static/rgsbzl5cyehstqry47azpv5svebg1wrj.jpg" alt="RStudio Panes" width="80%"/>
+<img src="https://tufts.box.com/shared/static/9x0qbdtd5gnj0illwo6bhaq5drmlzvha.png" alt="RStudio Panes" width="80%"/>
 
 ## The Console Pane
 
