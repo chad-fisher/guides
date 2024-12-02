@@ -31,6 +31,6 @@ Welcome to the Tufts RT Guides R tutorial hub! Explore a variety of tutorials de
 
 - header: "{fab}`r-project;pst-color-primary` 06 Accelerating R Code with Fast Loops and Parallel Processing"
   content: "This tutorial introduces parallel processing in R to handle large datasets efficiently. Learn to use different libraries to speed up computations by distributing tasks across multiple cores. Explore practical examples, comparisons, and guidelines for choosing between packages for different use cases."
-  link: "Fast_Loops_and_Parallel_Processing.html.html"
+  link: "Fast_Loops_and_Parallel_Processing.html"
 
 ```
