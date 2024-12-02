@@ -18,10 +18,10 @@ Discover tutorials and guidance on essential statistical software to enhance you
   link: "02_SAS.html"
 
 - header: "{fas}`diagram-project;pst-color-primary` **SPSS**"
-  link: "tutorials/0002_intro_numpy.html"
+  link: "03_SPSS.html"
 
 - header: "{fas}`diagram-project;pst-color-primary` **STATA**"
-  link: "tutorials/0003_python-data-analysis.html"
+  link: "04_STATA.html"
 
 
 ```
